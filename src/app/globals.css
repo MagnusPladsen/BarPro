@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: #0A0A0A;
+  --color-background-card: #141414;
+  --color-background-elevated: #1A1A1A;
+  --color-gold: #C9A84C;
+  --color-gold-hover: #D4AF57;
+  --color-gold-dim: #A08A3C;
+  --color-gold-glow: rgba(201, 168, 76, 0.08);
+  --color-text-primary: #F5F0E8;
+  --color-text-muted: #6B6B6B;
+  --color-border: #1E1E1E;
+  --color-border-gold: rgba(201, 168, 76, 0.15);
+
+  --font-display: "Cormorant Garamond", serif;
+  --font-body: "DM Sans", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background-color: var(--color-gold);
+  color: var(--color-background);
+}
+
+/* Sharp edges globally */
+* {
+  border-radius: 0 !important;
+}

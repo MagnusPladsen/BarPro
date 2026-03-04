@@ -1,0 +1,235 @@
+{
+  "nav": {
+    "home": "Hjem",
+    "services": "Tjenester",
+    "about": "Om oss",
+    "contact": "Kontakt oss"
+  },
+  "hero": {
+    "tagline": "Din anledning. Vår kvalitet.",
+    "subtitle": "Profesjonell bartender- og eventbemanning for bryllup, bedriftsarrangementer og private feiringer i Innlandet og hele Norge.",
+    "cta": "Kontakt oss",
+    "scroll": "Scroll ned"
+  },
+  "intro": {
+    "label": "Velkommen",
+    "heading": "Profesjonell eventbemanning — skreddersydd for din anledning",
+    "text": "BarPro leverer erfarne bartendere og servicepersonell som gjør arrangementet ditt uforglemmelig. Vi tilpasser alt fra drinkmenyer til bemanningsløsninger etter dine ønsker, slik at du kan fokusere på det som betyr mest — å nyte kvelden sammen med gjestene dine."
+  },
+  "services": {
+    "label": "Våre tjenester",
+    "heading": "Alt du trenger for en perfekt kveld",
+    "viewAll": "Se alle tjenester",
+    "items": {
+      "bartenders": {
+        "title": "Bartendere & Servicepersonell",
+        "description": "Erfarne og profesjonelle bartendere som skaper den perfekte stemningen. Vi tilpasser oss ditt arrangement og sørger for at hver gjest blir tatt godt vare på."
+      },
+      "drinks": {
+        "title": "Drinkmenyer & Signaturdrinker",
+        "description": "Skreddersydde drinkmenyer med signaturdrinker designet spesielt for ditt arrangement. Fra klassiske cocktails til kreative nyskapninger."
+      },
+      "fullService": {
+        "title": "Helhetlig Eventbemanning",
+        "description": "Komplett bemanningsløsning for arrangementet ditt — fra planlegging og forberedelse til gjennomføring og opprydding."
+      }
+    }
+  },
+  "occasions": {
+    "label": "Anledninger",
+    "heading": "Skreddersydd for enhver anledning",
+    "items": {
+      "wedding": {
+        "title": "Bryllup",
+        "description": "Gjør den store dagen enda mer spesiell med profesjonell bar-service og skreddersydde drinkmenyer."
+      },
+      "corporate": {
+        "title": "Bedriftsarrangementer",
+        "description": "Imponér kollegaer og kunder med profesjonell service som løfter arrangementet til neste nivå."
+      },
+      "private": {
+        "title": "Private feiringer",
+        "description": "Bursdager, jubileer og andre feiringer fortjener en bartender som tar seg av alt."
+      }
+    }
+  },
+  "process": {
+    "label": "Prosessen",
+    "heading": "Enkel vei til en perfekt kveld",
+    "steps": {
+      "tell": {
+        "number": "01",
+        "title": "Fortell oss",
+        "description": "Del dine ønsker, ideer og detaljer om arrangementet. Vi lytter og forstår dine behov."
+      },
+      "tailor": {
+        "number": "02",
+        "title": "Vi skreddersyr",
+        "description": "Vi setter sammen et skreddersydd opplegg med bemanning, drinkmenyer og alt du trenger."
+      },
+      "deliver": {
+        "number": "03",
+        "title": "Vi leverer",
+        "description": "På den store dagen leverer vi en feilfri opplevelse — slik at du kan nyte kvelden."
+      }
+    }
+  },
+  "quote": {
+    "text": "«BarPro transformerte bryllupet vårt. Fra signaturdrinker til upåklagelig service — alt var perfekt.»",
+    "author": "Fornøyd kunde"
+  },
+  "ctaBanner": {
+    "heading": "Klar for å planlegge?",
+    "text": "Ta kontakt for en uforpliktende prat om ditt arrangement.",
+    "cta": "Kontakt oss"
+  },
+  "servicesPage": {
+    "hero": {
+      "label": "Tjenester",
+      "heading": "Profesjonelle tjenester for uforglemmelige opplevelser",
+      "text": "Vi tilbyr et bredt spekter av tjenester som sikrer at arrangementet ditt blir akkurat slik du ønsker."
+    },
+    "bartenders": {
+      "title": "Bartendere & Servicepersonell",
+      "text": "Våre bartendere er mer enn bare drinkmiksere — de er opplevelsesskapere. Med erfaring fra alt fra intime middager til store festivaler, vet vi hva som skal til for å skape den perfekte stemningen.",
+      "points": [
+        "Erfarne og sertifiserte bartendere",
+        "Profesjonelt og vennlig servicepersonell",
+        "Tilpasset antrekk etter ditt arrangement",
+        "Alkoholansvarlig servering"
+      ]
+    },
+    "drinks": {
+      "title": "Drinkmenyer & Signaturdrinker",
+      "text": "Hver anledning fortjener sin egen signaturdrink. Vi designer unike drinkmenyer som passer perfekt til temaet og stemningen du ønsker å skape.",
+      "points": [
+        "Skreddersydde signaturdrinker",
+        "Klassiske og moderne cocktails",
+        "Alkoholfrie alternativer",
+        "Sesongbaserte ingredienser"
+      ]
+    },
+    "fullService": {
+      "title": "Helhetlig Eventbemanning",
+      "text": "Vi tar ansvar for hele bar-opplevelsen — fra planlegging og innkjøp til opprydding. Du trenger bare å nyte kvelden.",
+      "points": [
+        "Komplett planlegging og rådgivning",
+        "Innkjøp av drikke og utstyr",
+        "Oppsett og nedrigging",
+        "Profesjonell gjennomføring"
+      ]
+    },
+    "pricing": {
+      "label": "Investering",
+      "heading": "Hvert arrangement er unikt — derfor er også våre priser det",
+      "text": "Vi gir deg et skreddersydd tilbud basert på dine spesifikke behov og ønsker. Faktorer som påvirker prisen:",
+      "factors": [
+        "Antall gjester",
+        "Type arrangement",
+        "Varighet",
+        "Drinkmeny og kompleksitet",
+        "Beliggenhet"
+      ],
+      "cta": "Få et tilbud"
+    }
+  },
+  "aboutPage": {
+    "hero": {
+      "label": "Om oss",
+      "heading": "Passion for perfeksjon"
+    },
+    "story": {
+      "text1": "BarPro ble grunnlagt av Emil og Sofie med en enkel visjon: å levere premium bartender- og eventbemanning som overgår forventningene. Med bakgrunn fra noen av Norges beste utesteder og arrangementer, så vi et behov for profesjonell bar-service som kunne tilpasses ethvert arrangement.",
+      "text2": "I dag er vi stolte av å tilby skreddersydde løsninger for bryllup, bedriftsarrangementer og private feiringer i Innlandet og hele Norge. Hvert arrangement vi tar på oss behandles med samme dedikasjon og oppmerksomhet for detaljer."
+    },
+    "team": {
+      "label": "Teamet",
+      "heading": "Møt menneskene bak BarPro",
+      "emil": {
+        "name": "Emil",
+        "role": "Medgründer & Bartender",
+        "bio": "Med flere års erfaring som bartender bringer Emil kreativitet og faglig dyktighet til hvert arrangement. Hans lidenskap for håndverket smitter over på hele teamet."
+      },
+      "sofie": {
+        "name": "Sofie",
+        "role": "Medgründer & Koordinator",
+        "bio": "Sofie er hjernen bak logistikken. Med et øye for detaljer og en genuin glede for å skape gode opplevelser, sørger hun for at alt går knirkefritt."
+      }
+    },
+    "values": {
+      "label": "Våre verdier",
+      "heading": "Det vi står for",
+      "quality": {
+        "title": "Kvalitet",
+        "description": "Vi leverer alltid høyeste kvalitet — fra ingrediensene vi bruker til servicen vi gir."
+      },
+      "customization": {
+        "title": "Tilpasning",
+        "description": "Ingen to arrangementer er like. Vi skreddersyr alt etter dine ønsker og behov."
+      },
+      "presence": {
+        "title": "Tilstedeværelse",
+        "description": "Vi er fullt til stede i hvert arrangement, med genuin omsorg for gjestenes opplevelse."
+      }
+    }
+  },
+  "contactPage": {
+    "hero": {
+      "label": "Kontakt",
+      "heading": "La oss skape noe uforglemmelig sammen"
+    },
+    "form": {
+      "name": "Navn",
+      "namePlaceholder": "Ditt fulle navn",
+      "email": "E-post",
+      "emailPlaceholder": "din@epost.no",
+      "phone": "Telefon (valgfritt)",
+      "phonePlaceholder": "Ditt telefonnummer",
+      "eventType": "Type arrangement",
+      "eventTypePlaceholder": "Velg type",
+      "eventTypes": {
+        "wedding": "Bryllup",
+        "corporate": "Bedriftsarrangement",
+        "private": "Privat feiring",
+        "other": "Annet"
+      },
+      "guests": "Antall gjester",
+      "guestsPlaceholder": "Velg antall",
+      "guestRanges": {
+        "small": "Under 50",
+        "medium": "50–100",
+        "large": "100–200",
+        "xlarge": "Over 200"
+      },
+      "date": "Dato (valgfritt)",
+      "message": "Melding",
+      "messagePlaceholder": "Fortell oss om arrangementet ditt...",
+      "submit": "Send forespørsel",
+      "sending": "Sender...",
+      "success": "Takk! Vi tar kontakt innen 24 timer.",
+      "error": "Noe gikk galt. Prøv igjen eller kontakt oss direkte."
+    },
+    "direct": {
+      "heading": "Kontakt oss direkte",
+      "email": "E-post",
+      "phone": "Telefon",
+      "emilName": "Emil",
+      "sofieName": "Sofie"
+    },
+    "validation": {
+      "nameRequired": "Navn er påkrevd",
+      "emailRequired": "E-post er påkrevd",
+      "emailInvalid": "Ugyldig e-postadresse",
+      "eventTypeRequired": "Velg type arrangement",
+      "guestsRequired": "Velg antall gjester",
+      "messageRequired": "Melding er påkrevd",
+      "messageMin": "Meldingen må være minst 10 tegn"
+    }
+  },
+  "footer": {
+    "tagline": "Profesjonell eventbemanning for uforglemmelige opplevelser",
+    "pages": "Sider",
+    "contactHeading": "Kontakt",
+    "rights": "Alle rettigheter reservert."
+  }
+}
