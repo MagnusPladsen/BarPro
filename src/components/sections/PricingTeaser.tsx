@@ -83,7 +83,7 @@ export function PricingTeaser() {
           className="text-center mt-20"
         >
           <Button href="/priser" variant="outline">
-            {t("cta.button")} &rarr;
+            {t("viewAll")} &rarr;
           </Button>
         </motion.div>
       </div>

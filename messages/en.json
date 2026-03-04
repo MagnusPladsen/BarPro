@@ -231,7 +231,8 @@
       "text": "Get in touch for a no-obligation conversation, and we'll help you find the perfect solution.",
       "button": "Contact us"
     },
-    "note": "All prices exclude VAT and ingredients/beverages unless otherwise agreed."
+    "note": "All prices exclude VAT and ingredients/beverages unless otherwise agreed.",
+    "viewAll": "See all pricing"
   },
   "aboutPage": {
     "hero": {
