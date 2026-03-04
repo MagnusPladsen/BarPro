@@ -49,15 +49,20 @@ export function Intro() {
               transition={{ duration: 0.9, delay: 0.15, ease }}
               className="w-12 h-px bg-gold mb-10"
             />
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.9, delay: 0.2, ease }}
-              className="text-text-muted text-lg leading-relaxed max-w-lg"
-            >
-              {t("text")}
-            </motion.p>
+            <div className="space-y-6 max-w-lg">
+              {(["text1", "text2", "text3", "text4"] as const).map((key, i) => (
+                <motion.p
+                  key={key}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.9, delay: 0.2 + i * 0.08, ease }}
+                  className="text-text-muted text-lg leading-relaxed"
+                >
+                  {t(key)}
+                </motion.p>
+              ))}
+            </div>
           </div>
 
           <motion.div

@@ -3,7 +3,6 @@ import { Intro } from "@/components/sections/Intro";
 import { Services } from "@/components/sections/Services";
 import { Occasions } from "@/components/sections/Occasions";
 import { Process } from "@/components/sections/Process";
-import { Quote } from "@/components/sections/Quote";
 import { CtaBanner } from "@/components/sections/CtaBanner";
 
 export default function HomePage() {
@@ -14,7 +13,6 @@ export default function HomePage() {
       <Services />
       <Occasions />
       <Process />
-      <Quote />
       <CtaBanner />
     </>
   );
