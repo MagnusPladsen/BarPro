@@ -100,7 +100,7 @@ export function Hero() {
           className="font-display font-light text-6xl md:text-8xl xl:text-9xl text-text-primary leading-[1.05] tracking-[-0.02em] mb-8 md:mb-10"
         >
           {words.map((word, i) => (
-            <span key={i} className="inline-block overflow-hidden mr-[0.25em] last:mr-0">
+            <span key={i} className="inline-block overflow-hidden mr-[0.25em] last:mr-0 pb-[0.15em] -mb-[0.15em]">
               <motion.span
                 variants={wordReveal}
                 className="inline-block"
