@@ -1,0 +1,235 @@
+{
+  "nav": {
+    "home": "Home",
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact us"
+  },
+  "hero": {
+    "tagline": "Your occasion. Our quality.",
+    "subtitle": "Professional bartender and event staffing for weddings, corporate events, and private celebrations in Innlandet and all of Norway.",
+    "cta": "Contact us",
+    "scroll": "Scroll down"
+  },
+  "intro": {
+    "label": "Welcome",
+    "heading": "Professional event staffing — tailored to your occasion",
+    "text": "BarPro delivers experienced bartenders and service staff that make your event unforgettable. We customize everything from drink menus to staffing solutions according to your wishes, so you can focus on what matters most — enjoying the evening with your guests."
+  },
+  "services": {
+    "label": "Our services",
+    "heading": "Everything you need for a perfect evening",
+    "viewAll": "View all services",
+    "items": {
+      "bartenders": {
+        "title": "Bartenders & Service Staff",
+        "description": "Experienced and professional bartenders who create the perfect atmosphere. We adapt to your event and ensure every guest is well taken care of."
+      },
+      "drinks": {
+        "title": "Drink Menus & Signature Drinks",
+        "description": "Custom drink menus with signature cocktails designed especially for your event. From classic cocktails to creative innovations."
+      },
+      "fullService": {
+        "title": "Full Event Staffing",
+        "description": "Complete staffing solution for your event — from planning and preparation to execution and cleanup."
+      }
+    }
+  },
+  "occasions": {
+    "label": "Occasions",
+    "heading": "Tailored for every occasion",
+    "items": {
+      "wedding": {
+        "title": "Weddings",
+        "description": "Make the big day even more special with professional bar service and custom drink menus."
+      },
+      "corporate": {
+        "title": "Corporate Events",
+        "description": "Impress colleagues and clients with professional service that elevates your event to the next level."
+      },
+      "private": {
+        "title": "Private Celebrations",
+        "description": "Birthdays, anniversaries, and other celebrations deserve a bartender who takes care of everything."
+      }
+    }
+  },
+  "process": {
+    "label": "The process",
+    "heading": "Simple path to a perfect evening",
+    "steps": {
+      "tell": {
+        "number": "01",
+        "title": "Tell us",
+        "description": "Share your wishes, ideas, and event details. We listen and understand your needs."
+      },
+      "tailor": {
+        "number": "02",
+        "title": "We tailor",
+        "description": "We put together a customized package with staffing, drink menus, and everything you need."
+      },
+      "deliver": {
+        "number": "03",
+        "title": "We deliver",
+        "description": "On the big day, we deliver a flawless experience — so you can enjoy the evening."
+      }
+    }
+  },
+  "quote": {
+    "text": "\"BarPro transformed our wedding. From signature drinks to impeccable service — everything was perfect.\"",
+    "author": "Happy customer"
+  },
+  "ctaBanner": {
+    "heading": "Ready to start planning?",
+    "text": "Get in touch for a no-obligation conversation about your event.",
+    "cta": "Contact us"
+  },
+  "servicesPage": {
+    "hero": {
+      "label": "Services",
+      "heading": "Professional services for unforgettable experiences",
+      "text": "We offer a wide range of services that ensure your event is exactly as you envision it."
+    },
+    "bartenders": {
+      "title": "Bartenders & Service Staff",
+      "text": "Our bartenders are more than just drink mixers — they are experience creators. With experience from everything from intimate dinners to large festivals, we know what it takes to create the perfect atmosphere.",
+      "points": [
+        "Experienced and certified bartenders",
+        "Professional and friendly service staff",
+        "Custom attire for your event",
+        "Responsible alcohol service"
+      ]
+    },
+    "drinks": {
+      "title": "Drink Menus & Signature Drinks",
+      "text": "Every occasion deserves its own signature drink. We design unique drink menus that perfectly match the theme and atmosphere you want to create.",
+      "points": [
+        "Custom signature drinks",
+        "Classic and modern cocktails",
+        "Non-alcoholic alternatives",
+        "Seasonal ingredients"
+      ]
+    },
+    "fullService": {
+      "title": "Full Event Staffing",
+      "text": "We take responsibility for the entire bar experience — from planning and purchasing to cleanup. You just need to enjoy the evening.",
+      "points": [
+        "Complete planning and consulting",
+        "Beverage and equipment purchasing",
+        "Setup and takedown",
+        "Professional execution"
+      ]
+    },
+    "pricing": {
+      "label": "Investment",
+      "heading": "Every event is unique — so are our prices",
+      "text": "We provide a customized quote based on your specific needs and wishes. Factors that affect the price:",
+      "factors": [
+        "Number of guests",
+        "Event type",
+        "Duration",
+        "Drink menu complexity",
+        "Location"
+      ],
+      "cta": "Get a quote"
+    }
+  },
+  "aboutPage": {
+    "hero": {
+      "label": "About us",
+      "heading": "Passion for perfection"
+    },
+    "story": {
+      "text1": "BarPro was founded by Emil and Sofie with a simple vision: to deliver premium bartender and event staffing that exceeds expectations. With backgrounds from some of Norway's best venues and events, we saw a need for professional bar service that could adapt to any occasion.",
+      "text2": "Today, we are proud to offer tailored solutions for weddings, corporate events, and private celebrations in Innlandet and all of Norway. Every event we take on is treated with the same dedication and attention to detail."
+    },
+    "team": {
+      "label": "The team",
+      "heading": "Meet the people behind BarPro",
+      "emil": {
+        "name": "Emil",
+        "role": "Co-founder & Bartender",
+        "bio": "With years of experience as a bartender, Emil brings creativity and expertise to every event. His passion for the craft inspires the entire team."
+      },
+      "sofie": {
+        "name": "Sofie",
+        "role": "Co-founder & Coordinator",
+        "bio": "Sofie is the brain behind the logistics. With an eye for detail and a genuine joy for creating great experiences, she ensures everything runs smoothly."
+      }
+    },
+    "values": {
+      "label": "Our values",
+      "heading": "What we stand for",
+      "quality": {
+        "title": "Quality",
+        "description": "We always deliver the highest quality — from the ingredients we use to the service we provide."
+      },
+      "customization": {
+        "title": "Customization",
+        "description": "No two events are alike. We tailor everything to your wishes and needs."
+      },
+      "presence": {
+        "title": "Presence",
+        "description": "We are fully present at every event, with genuine care for our guests' experience."
+      }
+    }
+  },
+  "contactPage": {
+    "hero": {
+      "label": "Contact",
+      "heading": "Let's create something unforgettable together"
+    },
+    "form": {
+      "name": "Name",
+      "namePlaceholder": "Your full name",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "phone": "Phone (optional)",
+      "phonePlaceholder": "Your phone number",
+      "eventType": "Event type",
+      "eventTypePlaceholder": "Select type",
+      "eventTypes": {
+        "wedding": "Wedding",
+        "corporate": "Corporate event",
+        "private": "Private celebration",
+        "other": "Other"
+      },
+      "guests": "Number of guests",
+      "guestsPlaceholder": "Select number",
+      "guestRanges": {
+        "small": "Under 50",
+        "medium": "50–100",
+        "large": "100–200",
+        "xlarge": "Over 200"
+      },
+      "date": "Date (optional)",
+      "message": "Message",
+      "messagePlaceholder": "Tell us about your event...",
+      "submit": "Send request",
+      "sending": "Sending...",
+      "success": "Thank you! We'll get back to you within 24 hours.",
+      "error": "Something went wrong. Please try again or contact us directly."
+    },
+    "direct": {
+      "heading": "Contact us directly",
+      "email": "Email",
+      "phone": "Phone",
+      "emilName": "Emil",
+      "sofieName": "Sofie"
+    },
+    "validation": {
+      "nameRequired": "Name is required",
+      "emailRequired": "Email is required",
+      "emailInvalid": "Invalid email address",
+      "eventTypeRequired": "Please select an event type",
+      "guestsRequired": "Please select number of guests",
+      "messageRequired": "Message is required",
+      "messageMin": "Message must be at least 10 characters"
+    }
+  },
+  "footer": {
+    "tagline": "Professional event staffing for unforgettable experiences",
+    "pages": "Pages",
+    "contactHeading": "Contact",
+    "rights": "All rights reserved."
+  }
+}
