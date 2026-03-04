@@ -73,8 +73,8 @@ export function Intro() {
               className="absolute inset-0"
             >
               <Image
-                src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=800&q=80"
-                alt={t("heading")}
+                src="/images/barpro-logo.png"
+                alt="BarPro"
                 fill
                 className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
