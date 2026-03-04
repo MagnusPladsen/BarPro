@@ -18,11 +18,8 @@ export function Quote() {
           transition={{ duration: 1, ease }}
         >
           <div className="w-16 h-px bg-gold mx-auto mb-16" />
-          <blockquote className="font-display font-light text-2xl md:text-3xl lg:text-4xl text-text-primary leading-relaxed italic mb-10">
-            &ldquo;{t("text")}&rdquo;
-          </blockquote>
-          <p className="text-[11px] tracking-[0.25em] uppercase text-text-muted">
-            &mdash; {t("author")}
+          <p className="font-display font-light text-2xl md:text-3xl lg:text-4xl text-text-primary leading-relaxed">
+            {t("text")}
           </p>
           <div className="w-16 h-px bg-gold mx-auto mt-16" />
         </motion.div>

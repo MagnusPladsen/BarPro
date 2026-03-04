@@ -3,18 +3,22 @@
     "home": "Home",
     "services": "Services",
     "about": "About",
-    "contact": "Contact us"
+    "contact": "Contact us",
+    "pricing": "Pricing"
   },
   "hero": {
     "tagline": "Your occasion. Our quality.",
-    "subtitle": "Professional bartender and event staffing for weddings, corporate events, and private celebrations in Innlandet and all of Norway.",
+    "subtitle": "Tailored event staffing for weddings, private events, and businesses that expect more.",
     "cta": "Contact us",
     "scroll": "Scroll down"
   },
   "intro": {
-    "label": "Welcome",
-    "heading": "Professional event staffing — tailored to your occasion",
-    "text": "BarPro delivers experienced bartenders and service staff that make your event unforgettable. We customize everything from drink menus to staffing solutions according to your wishes, so you can focus on what matters most — enjoying the evening with your guests."
+    "label": "About us",
+    "heading": "Professional event staffing – tailored to your occasion",
+    "text1": "A successful event is about more than décor and guest lists. It's about flow, atmosphere, and execution. It's about everything working — without you noticing.",
+    "text2": "BarPro delivers complete, professional event staffing for weddings, private celebrations, and corporate events. We adapt to your needs and develop solutions that suit the occasion, whether you want a classic and refined look or a more creative and energetic profile.",
+    "text3": "We provide experienced bartenders and service staff, and create drink menus tailored to your wishes. Signature drinks, themed menus, or timeless classics — we ensure the expression, quality, and details match the level of the rest of your event.",
+    "text4": "Our strength lies in the combination of structure and presence. We work precisely, efficiently, and discreetly, so you can focus on the guests and the experience."
   },
   "services": {
     "label": "Our services",
@@ -75,12 +79,12 @@
     }
   },
   "quote": {
-    "text": "\"BarPro transformed our wedding. From signature drinks to impeccable service — everything was perfect.\"",
-    "author": "Happy customer"
+    "text": "When you choose BarPro, you choose more than staffing. You choose confidence, quality, and an execution that delivers."
   },
   "ctaBanner": {
-    "heading": "Ready to start planning?",
-    "text": "Get in touch for a no-obligation conversation about your event.",
+    "heading": "Tell us what you envision",
+    "text": "Whether you're planning an intimate celebration or a larger event, we're ready to deliver a solution tailored to your needs. Get in touch for a no-obligation conversation — and we'll create the framework together.",
+    "tagline": "With BarPro, you get a partner who understands that the details make all the difference.",
     "cta": "Contact us"
   },
   "servicesPage": {
@@ -130,8 +134,104 @@
         "Drink menu complexity",
         "Location"
       ],
-      "cta": "Get a quote"
+      "cta": "See our pricing"
     }
+  },
+  "pricingPage": {
+    "hero": {
+      "label": "Pricing",
+      "heading": "Clear pricing, no surprises",
+      "text": "We offer flexible packages tailored to different needs and budgets. All prices are indicative — contact us for a customized quote."
+    },
+    "packages": {
+      "label": "Packages",
+      "basis": {
+        "name": "Basic",
+        "price": "from 8,900",
+        "unit": "NOK",
+        "description": "Perfect for smaller, intimate events",
+        "features": [
+          "1 professional bartender",
+          "Up to 4 hours",
+          "Standard drink menu",
+          "Setup and takedown",
+          "Up to 50 guests"
+        ]
+      },
+      "premium": {
+        "name": "Premium",
+        "price": "from 16,900",
+        "unit": "NOK",
+        "popular": "Most popular",
+        "description": "Ideal for weddings and mid-size events",
+        "features": [
+          "2 professional bartenders",
+          "Up to 6 hours",
+          "Custom drink menu",
+          "2 signature drinks included",
+          "Setup and takedown",
+          "Up to 120 guests"
+        ]
+      },
+      "eksklusiv": {
+        "name": "Exclusive",
+        "price": "from 28,900",
+        "unit": "NOK",
+        "description": "Full-service for large events and corporate functions",
+        "features": [
+          "3–4 bartenders and service staff",
+          "Up to 8 hours",
+          "Fully custom drink menu",
+          "Unlimited signature drinks",
+          "Coordination and planning",
+          "Setup, execution and cleanup",
+          "Up to 250+ guests"
+        ]
+      }
+    },
+    "services": {
+      "label": "Individual services",
+      "heading": "Add-on services",
+      "text": "Add individual services on top of packages, or build your own custom solution.",
+      "items": {
+        "bartender": {
+          "name": "Extra bartender",
+          "price": "650 NOK/hour",
+          "description": "Per additional bartender beyond the package"
+        },
+        "signatureDrink": {
+          "name": "Signature drink development",
+          "price": "1,500 NOK",
+          "description": "Development and testing of one unique signature drink"
+        },
+        "extraHour": {
+          "name": "Extra hour",
+          "price": "1,200 NOK/hour",
+          "description": "Extend the event beyond the package duration"
+        },
+        "tasting": {
+          "name": "Tasting session",
+          "price": "2,500 NOK",
+          "description": "Pre-event tasting with up to 5 drinks"
+        },
+        "nonAlcoholic": {
+          "name": "Non-alcoholic menu",
+          "price": "1,200 NOK",
+          "description": "Complete non-alcoholic drink menu as an add-on"
+        },
+        "travel": {
+          "name": "Travel outside Innlandet",
+          "price": "from 2,000 NOK",
+          "description": "Travel costs for events outside the Innlandet region"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Not sure what you need?",
+      "text": "Get in touch for a no-obligation conversation, and we'll help you find the perfect solution.",
+      "button": "Contact us"
+    },
+    "note": "All prices exclude VAT and ingredients/beverages unless otherwise agreed."
   },
   "aboutPage": {
     "hero": {

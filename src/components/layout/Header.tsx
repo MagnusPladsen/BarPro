@@ -8,6 +8,7 @@ import { AnimatePresence, motion } from "framer-motion";
 const navLinks = [
   { href: "/" as const, labelKey: "home" },
   { href: "/tjenester" as const, labelKey: "services" },
+  { href: "/priser" as const, labelKey: "pricing" },
   { href: "/om-oss" as const, labelKey: "about" },
 ] as const;
 

@@ -194,8 +194,8 @@ export default function TjenesterPage() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, delay: 0.5, ease }}
           >
-            <Button href="/kontakt" size="large">
-              {t("servicesPage.pricing.cta")}
+            <Button href="/priser" size="large">
+              {t("servicesPage.pricing.cta")} &rarr;
             </Button>
           </motion.div>
         </div>

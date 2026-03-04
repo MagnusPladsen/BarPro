@@ -3,18 +3,22 @@
     "home": "Hjem",
     "services": "Tjenester",
     "about": "Om oss",
-    "contact": "Kontakt oss"
+    "contact": "Kontakt oss",
+    "pricing": "Priser"
   },
   "hero": {
     "tagline": "Din anledning. Vår kvalitet.",
-    "subtitle": "Profesjonell bartender- og eventbemanning for bryllup, bedriftsarrangementer og private feiringer i Innlandet og hele Norge.",
+    "subtitle": "Skreddersydd eventbemanning for bryllup, private arrangementer og bedrifter som forventer mer.",
     "cta": "Kontakt oss",
     "scroll": "Scroll ned"
   },
   "intro": {
-    "label": "Velkommen",
-    "heading": "Profesjonell eventbemanning — skreddersydd for din anledning",
-    "text": "BarPro leverer erfarne bartendere og servicepersonell som gjør arrangementet ditt uforglemmelig. Vi tilpasser alt fra drinkmenyer til bemanningsløsninger etter dine ønsker, slik at du kan fokusere på det som betyr mest — å nyte kvelden sammen med gjestene dine."
+    "label": "Om oss",
+    "heading": "Profesjonell eventbemanning – skreddersydd for din anledning",
+    "text1": "Et vellykket arrangement handler om mer enn dekor og gjesteliste. Det handler om flyt, stemning og gjennomføring. Det handler om at alt fungerer – uten at du merker det.",
+    "text2": "BarPro leverer helhetlig og profesjonell eventbemanning til bryllup, private feiringer og bedriftsarrangementer. Vi tilpasser oss deres behov og utvikler løsninger som passer anledningen, enten dere ønsker et klassisk og stilrent uttrykk eller en mer kreativ og energisk profil.",
+    "text3": "Vi tilbyr erfarne bartendere og servicepersonell, og utarbeider drinkmenyer etter deres ønsker. Signaturdrinker, tematilpassede menyer eller tidløse klassikere – vi sørger for at uttrykket, kvaliteten og detaljene holder samme nivå som resten av arrangementet.",
+    "text4": "Vår styrke ligger i kombinasjonen av struktur og tilstedeværelse. Vi jobber presist, effektivt og diskret, slik at dere kan fokusere på gjestene og opplevelsen."
   },
   "services": {
     "label": "Våre tjenester",
@@ -75,12 +79,12 @@
     }
   },
   "quote": {
-    "text": "«BarPro transformerte bryllupet vårt. Fra signaturdrinker til upåklagelig service — alt var perfekt.»",
-    "author": "Fornøyd kunde"
+    "text": "Når dere velger BarPro, velger dere mer enn bemanning. Dere velger trygghet, kvalitet og en gjennomføring som sitter."
   },
   "ctaBanner": {
-    "heading": "Klar for å planlegge?",
-    "text": "Ta kontakt for en uforpliktende prat om ditt arrangement.",
+    "heading": "Fortell oss hva dere ser for dere",
+    "text": "Enten dere planlegger en intim feiring eller et større arrangement, står vi klare til å levere en løsning tilpasset deres behov. Ta kontakt for en uforpliktende samtale – så skaper vi rammene sammen.",
+    "tagline": "Med BarPro får dere en samarbeidspartner som forstår at detaljene betyr forskjellen.",
     "cta": "Kontakt oss"
   },
   "servicesPage": {
@@ -130,8 +134,104 @@
         "Drinkmeny og kompleksitet",
         "Beliggenhet"
       ],
-      "cta": "Få et tilbud"
+      "cta": "Se våre priser"
     }
+  },
+  "pricingPage": {
+    "hero": {
+      "label": "Priser",
+      "heading": "Tydelige priser, ingen overraskelser",
+      "text": "Vi tilbyr fleksible pakker tilpasset ulike behov og budsjetter. Alle priser er veiledende — kontakt oss for et skreddersydd tilbud."
+    },
+    "packages": {
+      "label": "Pakker",
+      "basis": {
+        "name": "Basis",
+        "price": "fra 8 900",
+        "unit": "kr",
+        "description": "Perfekt for mindre, intime arrangementer",
+        "features": [
+          "1 profesjonell bartender",
+          "Opptil 4 timer",
+          "Standard drinkmeny",
+          "Oppsett og nedrigging",
+          "Inntil 50 gjester"
+        ]
+      },
+      "premium": {
+        "name": "Premium",
+        "price": "fra 16 900",
+        "unit": "kr",
+        "popular": "Mest populær",
+        "description": "Ideell for bryllup og mellomstore arrangementer",
+        "features": [
+          "2 profesjonelle bartendere",
+          "Opptil 6 timer",
+          "Skreddersydd drinkmeny",
+          "2 signaturdrinker inkludert",
+          "Oppsett og nedrigging",
+          "Inntil 120 gjester"
+        ]
+      },
+      "eksklusiv": {
+        "name": "Eksklusiv",
+        "price": "fra 28 900",
+        "unit": "kr",
+        "description": "Full-service for store arrangementer og bedriftseventer",
+        "features": [
+          "3–4 bartendere og servicepersonell",
+          "Opptil 8 timer",
+          "Komplett skreddersydd drinkmeny",
+          "Ubegrenset signaturdrinker",
+          "Koordinering og planlegging",
+          "Oppsett, gjennomføring og opprydding",
+          "Inntil 250+ gjester"
+        ]
+      }
+    },
+    "services": {
+      "label": "Enkelttjenester",
+      "heading": "Tilleggstjenester",
+      "text": "Legg til enkelttjenester utover pakkene, eller sett sammen din egen løsning.",
+      "items": {
+        "bartender": {
+          "name": "Ekstra bartender",
+          "price": "650 kr/time",
+          "description": "Per ekstra bartender utover pakken"
+        },
+        "signatureDrink": {
+          "name": "Signaturdrink-utvikling",
+          "price": "1 500 kr",
+          "description": "Utvikling og testing av én unik signaturdrink"
+        },
+        "extraHour": {
+          "name": "Ekstra time",
+          "price": "1 200 kr/time",
+          "description": "Forleng arrangementet utover pakketiden"
+        },
+        "tasting": {
+          "name": "Smaksprøve-session",
+          "price": "2 500 kr",
+          "description": "Forhåndssmaksprøve med opptil 5 drinker"
+        },
+        "nonAlcoholic": {
+          "name": "Alkoholfri meny",
+          "price": "1 200 kr",
+          "description": "Komplett alkoholfri drinkmeny som tillegg"
+        },
+        "travel": {
+          "name": "Reise utenfor Innlandet",
+          "price": "fra 2 000 kr",
+          "description": "Reisekostnader for arrangementer utenfor Innlandet"
+        }
+      }
+    },
+    "cta": {
+      "heading": "Usikker på hva du trenger?",
+      "text": "Ta kontakt for en uforpliktende samtale, så hjelper vi deg å finne den perfekte løsningen.",
+      "button": "Kontakt oss"
+    },
+    "note": "Alle priser er ekskl. mva. og ingredienser/drikke med mindre annet er avtalt."
   },
   "aboutPage": {
     "hero": {

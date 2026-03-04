@@ -23,6 +23,10 @@ export const routing = defineRouting({
       no: "/kontakt",
       en: "/contact",
     },
+    "/priser": {
+      no: "/priser",
+      en: "/pricing",
+    },
   },
 });
 

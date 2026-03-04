@@ -27,8 +27,11 @@ export function CtaBanner() {
             <h2 className="font-display font-light text-3xl md:text-4xl lg:text-5xl text-text-primary mb-6 leading-[1.1]">
               {t("heading")}
             </h2>
-            <p className="text-text-muted text-lg mb-12 max-w-xl mx-auto leading-relaxed">
+            <p className="text-text-muted text-lg mb-8 max-w-xl mx-auto leading-relaxed">
               {t("text")}
+            </p>
+            <p className="text-text-muted/70 text-sm italic mb-12 max-w-lg mx-auto">
+              {t("tagline")}
             </p>
             <Button href="/kontakt" size="large">
               {t("cta")} &rarr;
