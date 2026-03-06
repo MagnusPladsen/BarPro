@@ -46,16 +46,20 @@ export function PricingTeaser() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.8, delay: i * 0.1, ease }}
-                className={`relative border p-10 lg:p-12 text-center ${
+                className={`relative border p-10 lg:p-12 text-center transition-all duration-500 ${
                   isPopular
-                    ? "border-gold/40 bg-background-card"
-                    : "border-border bg-background-card/50"
+                    ? "border-gold/40 bg-background-card shadow-[0_0_60px_rgba(201,168,76,0.06)] hover:shadow-[0_0_80px_rgba(201,168,76,0.1)]"
+                    : "border-border bg-background-card/50 hover:border-border-gold"
                 }`}
               >
                 {isPopular && (
-                  <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gold text-background text-[10px] tracking-[0.2em] uppercase font-medium px-4 py-1.5">
-                    {t("packages.premium.popular")}
-                  </span>
+                  <>
+                    <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gold text-background text-[10px] tracking-[0.2em] uppercase font-medium px-5 py-1.5">
+                      {t("packages.premium.popular")}
+                    </span>
+                    {/* Gold top border gradient */}
+                    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
+                  </>
                 )}
 
                 <h3 className="font-display font-light text-2xl text-text-primary mb-2">

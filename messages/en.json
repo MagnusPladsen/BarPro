@@ -147,12 +147,12 @@
       "label": "Packages",
       "basis": {
         "name": "Basic",
-        "price": "from 8,900",
+        "price": "from 7,500",
         "unit": "NOK",
         "description": "Perfect for smaller, intimate events",
         "features": [
           "1 professional bartender",
-          "Up to 4 hours",
+          "Up to 5 hours",
           "Standard drink menu",
           "Setup and takedown",
           "Up to 50 guests"
@@ -160,7 +160,7 @@
       },
       "premium": {
         "name": "Premium",
-        "price": "from 16,900",
+        "price": "from 13,900",
         "unit": "NOK",
         "popular": "Most popular",
         "description": "Ideal for weddings and mid-size events",
@@ -175,7 +175,7 @@
       },
       "eksklusiv": {
         "name": "Exclusive",
-        "price": "from 28,900",
+        "price": "from 22,900",
         "unit": "NOK",
         "description": "Full-service for large events and corporate functions",
         "features": [
@@ -196,7 +196,7 @@
       "items": {
         "bartender": {
           "name": "Extra bartender",
-          "price": "650 NOK/hour",
+          "price": "950 NOK/hour",
           "description": "Per additional bartender beyond the package"
         },
         "signatureDrink": {
@@ -206,7 +206,7 @@
         },
         "extraHour": {
           "name": "Extra hour",
-          "price": "1,200 NOK/hour",
+          "price": "950 NOK/hour",
           "description": "Extend the event beyond the package duration"
         },
         "tasting": {

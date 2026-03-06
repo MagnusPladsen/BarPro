@@ -147,12 +147,12 @@
       "label": "Pakker",
       "basis": {
         "name": "Basis",
-        "price": "fra 8 900",
+        "price": "fra 7 500",
         "unit": "kr",
         "description": "Perfekt for mindre, intime arrangementer",
         "features": [
           "1 profesjonell bartender",
-          "Opptil 4 timer",
+          "Opptil 5 timer",
           "Standard drinkmeny",
           "Oppsett og nedrigging",
           "Inntil 50 gjester"
@@ -160,7 +160,7 @@
       },
       "premium": {
         "name": "Premium",
-        "price": "fra 16 900",
+        "price": "fra 13 900",
         "unit": "kr",
         "popular": "Mest populær",
         "description": "Ideell for bryllup og mellomstore arrangementer",
@@ -175,7 +175,7 @@
       },
       "eksklusiv": {
         "name": "Eksklusiv",
-        "price": "fra 28 900",
+        "price": "fra 22 900",
         "unit": "kr",
         "description": "Full-service for store arrangementer og bedriftseventer",
         "features": [
@@ -196,7 +196,7 @@
       "items": {
         "bartender": {
           "name": "Ekstra bartender",
-          "price": "650 kr/time",
+          "price": "950 kr/time",
           "description": "Per ekstra bartender utover pakken"
         },
         "signatureDrink": {
@@ -206,7 +206,7 @@
         },
         "extraHour": {
           "name": "Ekstra time",
-          "price": "1 200 kr/time",
+          "price": "950 kr/time",
           "description": "Forleng arrangementet utover pakketiden"
         },
         "tasting": {

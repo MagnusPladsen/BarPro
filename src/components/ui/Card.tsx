@@ -22,7 +22,7 @@ export function Card({
       transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
       className={`bg-background-card border border-border overflow-hidden ${
         hover
-          ? "hover:border-border-gold hover:shadow-[0_0_40px_rgba(201,168,76,0.06)] transition-all duration-500"
+          ? "hover:border-border-gold hover:shadow-[0_0_50px_rgba(201,168,76,0.08)] transition-all duration-500"
           : ""
       } ${className}`}
     >
