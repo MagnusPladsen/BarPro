@@ -43,9 +43,13 @@ export function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.8, delay: i * 0.15, ease }}
-              className="group bg-background-card border border-border p-10 hover:border-border-gold transition-all duration-500"
+              className="group relative bg-background-card border border-border p-10 hover:border-border-gold hover:shadow-[0_0_60px_rgba(201,168,76,0.06)] transition-all duration-500"
             >
-              <div className="w-8 h-px bg-gold mb-8" />
+              {/* Step number watermark */}
+              <span className="absolute top-6 right-8 font-display text-5xl text-gold/[0.07] select-none leading-none group-hover:text-gold/[0.12] transition-colors duration-500">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <div className="w-8 h-px bg-gold mb-8 group-hover:w-12 transition-all duration-500" />
               <h3 className="font-display font-light text-2xl text-text-primary mb-5">
                 {t(`items.${key}.title`)}
               </h3>

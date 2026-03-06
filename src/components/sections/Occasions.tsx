@@ -68,9 +68,11 @@ export function Occasions() {
                 className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                 sizes="(max-width: 768px) 100vw, 33vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/50 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent transition-opacity duration-500 group-hover:from-background/95" />
+              {/* Top gold accent line on hover */}
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/0 to-transparent group-hover:via-gold/60 transition-all duration-700" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
-                <div className="w-6 h-px bg-gold mb-4 transition-all duration-500 group-hover:w-10" />
+                <div className="w-6 h-px bg-gold mb-4 transition-all duration-500 group-hover:w-12" />
                 <h3 className="font-display font-light text-2xl md:text-3xl text-text-primary mb-3">
                   {t(`items.${key}.title`)}
                 </h3>

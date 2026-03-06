@@ -17,10 +17,14 @@ export function CtaBanner() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1, ease }}
-          className="relative border border-border bg-background-card p-20 md:p-28 overflow-hidden"
+          className="relative border border-border hover:border-border-gold bg-background-card p-20 md:p-28 overflow-hidden corner-accents transition-colors duration-700"
         >
           {/* Subtle gold glow behind */}
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-gold/[0.04] blur-3xl -translate-y-1/2 pointer-events-none" />
+
+          {/* Ambient gold side glows */}
+          <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-[200px] h-[400px] bg-gold/[0.02] blur-[80px] pointer-events-none" />
+          <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 w-[200px] h-[400px] bg-gold/[0.02] blur-[80px] pointer-events-none" />
 
           <div className="relative z-10">
             <div className="w-16 h-px bg-gold mx-auto mb-12" />

@@ -36,8 +36,8 @@ export function Button({
     "overflow-hidden group",
     size === "large" ? "px-12 py-5" : "px-8 py-4",
     variant === "primary"
-      ? "bg-gold text-background hover:bg-gold-hover"
-      : "bg-transparent border border-gold/40 text-gold hover:border-gold hover:bg-gold/5",
+      ? "bg-gold text-background hover:bg-gold-hover [&:hover_.shimmer]:animate-[shimmer_0.8s_ease-in-out]"
+      : "bg-transparent border border-gold/40 text-gold hover:border-gold hover:bg-gold/5 [&:hover_.shimmer]:animate-[shimmer_0.8s_ease-in-out]",
     className,
   ].join(" ");
 
@@ -51,6 +51,7 @@ export function Button({
       >
         <Link href={href} className={baseStyles}>
           <span className="relative z-10">{children}</span>
+          <span className="shimmer absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full" />
         </Link>
       </motion.div>
     );
@@ -67,6 +68,7 @@ export function Button({
       onClick={onClick}
     >
       <span className="relative z-10">{children}</span>
+      <span className="shimmer absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full" />
     </motion.button>
   );
 }

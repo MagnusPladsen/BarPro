@@ -38,3 +38,44 @@ body {
 * {
   border-radius: 0 !important;
 }
+
+/* Gold shimmer sweep for buttons */
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+/* Subtle pulse glow for featured elements */
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 20px rgba(201, 168, 76, 0.05); }
+  50% { box-shadow: 0 0 40px rgba(201, 168, 76, 0.12); }
+}
+
+/* Decorative corner accents */
+.corner-accents::before,
+.corner-accents::after {
+  content: "";
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-color: var(--color-gold);
+  opacity: 0.3;
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+}
+.corner-accents::before {
+  top: 0;
+  left: 0;
+  border-top: 1px solid;
+  border-left: 1px solid;
+}
+.corner-accents::after {
+  bottom: 0;
+  right: 0;
+  border-bottom: 1px solid;
+  border-right: 1px solid;
+}
+.corner-accents:hover::before,
+.corner-accents:hover::after {
+  opacity: 0.6;
+}

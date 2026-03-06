@@ -35,8 +35,10 @@ export function Process() {
         </div>
 
         <div className="relative grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
-          {/* Gold connecting line (desktop only) */}
-          <div className="hidden md:block absolute top-16 left-[20%] right-[20%] h-px bg-gradient-to-r from-transparent via-gold/30 to-transparent" />
+          {/* Gold connecting line with dots (desktop only) */}
+          <div className="hidden md:block absolute top-16 left-[20%] right-[20%] h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
+          <div className="hidden md:block absolute top-[60px] left-[calc(33.333%-4px)] w-2 h-2 border border-gold/30 bg-background rotate-45" />
+          <div className="hidden md:block absolute top-[60px] left-[calc(66.666%-4px)] w-2 h-2 border border-gold/30 bg-background rotate-45" />
 
           {stepKeys.map((key, i) => (
             <motion.div
@@ -48,9 +50,10 @@ export function Process() {
               className="relative text-center"
             >
               <div className="relative mb-10">
-                <span className="font-display text-6xl md:text-7xl lg:text-8xl text-gold/20 leading-none select-none">
+                <span className="font-display text-6xl md:text-7xl lg:text-8xl text-gold/[0.15] leading-none select-none">
                   {t(`steps.${key}.number`)}
                 </span>
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-px bg-gold/30" />
               </div>
               <h3 className="font-display font-light text-2xl text-text-primary mb-4">
                 {t(`steps.${key}.title`)}
