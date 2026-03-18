@@ -107,7 +107,7 @@ export default function OmOssPage() {
                 className="bg-background-card border border-border overflow-hidden"
               >
                 {/* Photo */}
-                <div className="relative aspect-[3/4] w-full overflow-hidden">
+                <div className="relative aspect-square md:aspect-[3/4] w-full overflow-hidden">
                   <Image
                     src={member === "sofie" ? "/images/barpro-sofie.jpg" : "/images/barpro-emil.jpg"}
                     alt={t(`aboutPage.team.${member}.name`)}
@@ -117,7 +117,7 @@ export default function OmOssPage() {
                   />
                 </div>
 
-                <div className="p-10">
+                <div className="p-6 md:p-10">
                   <h3 className="font-display font-light text-2xl text-text-primary mb-2">
                     {t(`aboutPage.team.${member}.name`)}
                   </h3>
