@@ -110,7 +110,7 @@ export default function OmOssPage() {
                 <div className="relative aspect-[3/4] w-full overflow-hidden">
                   {member === "sofie" ? (
                     <Image
-                      src="/images/BarPro-Sofie.JPG"
+                      src="/images/barpro-sofie.jpg"
                       alt={t(`aboutPage.team.${member}.name`)}
                       fill
                       className="object-cover"
