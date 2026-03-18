@@ -104,27 +104,45 @@ export default function OmOssPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.8, delay: i * 0.15, ease }}
-                className="bg-background-card border border-border p-10"
+                className="bg-background-card border border-border overflow-hidden"
               >
-                {/* Avatar Placeholder */}
-                <div className="w-24 h-24 bg-background border border-border flex items-center justify-center mb-8">
-                  <span className="font-display text-2xl text-gold">
-                    {t(`aboutPage.team.${member}.name`)
-                      .split(" ")
-                      .map((n) => n[0])
-                      .join("")}
-                  </span>
+                {/* Photo */}
+                <div className="relative aspect-[3/4] w-full overflow-hidden">
+                  {member === "sofie" ? (
+                    <Image
+                      src="/images/BarPro-Sofie.JPG"
+                      alt={t(`aboutPage.team.${member}.name`)}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 768px) 100vw, 50vw"
+                    />
+                  ) : (
+                    <div className="absolute inset-0 bg-background-elevated flex items-center justify-center">
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="0.8"
+                        className="w-24 h-24 text-gold/30"
+                      >
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
 
-                <h3 className="font-display font-light text-2xl text-text-primary mb-2">
-                  {t(`aboutPage.team.${member}.name`)}
-                </h3>
-                <p className="text-gold text-[11px] tracking-[0.25em] uppercase mb-6">
-                  {t(`aboutPage.team.${member}.role`)}
-                </p>
-                <p className="text-text-muted leading-relaxed">
-                  {t(`aboutPage.team.${member}.bio`)}
-                </p>
+                <div className="p-10">
+                  <h3 className="font-display font-light text-2xl text-text-primary mb-2">
+                    {t(`aboutPage.team.${member}.name`)}
+                  </h3>
+                  <p className="text-gold text-[11px] tracking-[0.25em] uppercase mb-6">
+                    {t(`aboutPage.team.${member}.role`)}
+                  </p>
+                  <p className="text-text-muted leading-relaxed">
+                    {t(`aboutPage.team.${member}.bio`)}
+                  </p>
+                </div>
               </motion.div>
             ))}
           </div>
