@@ -108,28 +108,13 @@ export default function OmOssPage() {
               >
                 {/* Photo */}
                 <div className="relative aspect-[3/4] w-full overflow-hidden">
-                  {member === "sofie" ? (
-                    <Image
-                      src="/images/barpro-sofie.jpg"
-                      alt={t(`aboutPage.team.${member}.name`)}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 50vw"
-                    />
-                  ) : (
-                    <div className="absolute inset-0 bg-background-elevated flex items-center justify-center">
-                      <svg
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="0.8"
-                        className="w-24 h-24 text-gold/30"
-                      >
-                        <circle cx="12" cy="8" r="4" />
-                        <path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1" />
-                      </svg>
-                    </div>
-                  )}
+                  <Image
+                    src={member === "sofie" ? "/images/barpro-sofie.jpg" : "/images/barpro-emil.jpg"}
+                    alt={t(`aboutPage.team.${member}.name`)}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                  />
                 </div>
 
                 <div className="p-10">
