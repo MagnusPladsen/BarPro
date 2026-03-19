@@ -4,7 +4,8 @@
     "services": "Services",
     "about": "About",
     "contact": "Contact us",
-    "pricing": "Pricing"
+    "pricing": "Pricing",
+    "blog": "Blog"
   },
   "hero": {
     "tagline": "Your occasion. Our quality.",
@@ -329,6 +330,55 @@
       "messageRequired": "Message is required",
       "messageMin": "Message must be at least 10 characters"
     }
+  },
+  "faq": {
+    "label": "Frequently asked questions",
+    "heading": "Have questions?",
+    "items": {
+      "whatIncluded": {
+        "q": "What's included in the packages?",
+        "a": "All packages include professional bartenders, bar, glassware, ice, setup and takedown. Beverages and ingredients are supplied by the client — we're happy to help with recommendations and shopping lists."
+      },
+      "alcohol": {
+        "q": "Do we need a serving license?",
+        "a": "For private events where guests aren't paying for drinks, a serving license is typically not required. We provide guidance tailored to your event."
+      },
+      "howFar": {
+        "q": "How far do you travel?",
+        "a": "We cover Innlandet and gladly take on events across Norway. Travel costs apply for events outside Innlandet."
+      },
+      "howBook": {
+        "q": "How do I book?",
+        "a": "Send us a request through the contact form or reach out directly. We respond within 24 hours with a no-obligation quote."
+      },
+      "cancel": {
+        "q": "What's the cancellation policy?",
+        "a": "We have flexible cancellation terms. Full refund for cancellations more than 30 days before the event. Contact us for full terms."
+      },
+      "nonAlcoholic": {
+        "q": "Do you offer non-alcoholic options?",
+        "a": "Absolutely. We happily create a complete non-alcoholic drink menu with signature drinks that are just as thoughtful and delicious as the alcoholic ones."
+      }
+    }
+  },
+  "blogPage": {
+    "hero": {
+      "label": "Blog",
+      "heading": "Latest from BarPro"
+    },
+    "posts": {
+      "welcome": {
+        "date": "March 2026",
+        "title": "Welcome to BarPro — we're ready for your next celebration",
+        "p1": "We're Emil and Sofie, and together we started BarPro with one clear ambition: to deliver bartender and event staffing that truly makes a difference for your event.",
+        "p2": "After years behind the bar at everything from weddings and birthdays to corporate events and festivals, we saw a need in Innlandet for something more than just 'a bartender'. We wanted to offer a complete experience — from the first conversation to the last glass cleared away.",
+        "p3": "With us, you get experienced bartenders who know their craft, custom drink menus tailored to your occasion, and all the equipment you need. We bring the bar, glassware and ice — you provide the drinks and the guests.",
+        "p4": "Whether you're planning an intimate gathering for 20 or a grand wedding for 200, we adapt to your needs. We believe the best parties happen when the host can relax and enjoy the evening — and that's where we come in.",
+        "p5": "We look forward to getting to know you and your event. Get in touch for a no-obligation chat, and we'll figure out how to make your next celebration something truly special.",
+        "signoff": "— Emil & Sofie, BarPro"
+      }
+    },
+    "cta": "Get in touch"
   },
   "footer": {
     "tagline": "Professional event staffing for unforgettable experiences",

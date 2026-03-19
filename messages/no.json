@@ -4,7 +4,8 @@
     "services": "Tjenester",
     "about": "Om oss",
     "contact": "Kontakt oss",
-    "pricing": "Priser"
+    "pricing": "Priser",
+    "blog": "Blogg"
   },
   "hero": {
     "tagline": "Din anledning. Vår kvalitet.",
@@ -329,6 +330,55 @@
       "messageRequired": "Melding er påkrevd",
       "messageMin": "Meldingen må være minst 10 tegn"
     }
+  },
+  "faq": {
+    "label": "Ofte stilte spørsmål",
+    "heading": "Lurer du på noe?",
+    "items": {
+      "whatIncluded": {
+        "q": "Hva er inkludert i pakkene?",
+        "a": "Alle pakker inkluderer profesjonelle bartendere, bar, glass, is, oppsett og nedrigging. Drikke og ingredienser besørges av kunden — vi hjelper gjerne med anbefalinger og innkjøpsliste."
+      },
+      "alcohol": {
+        "q": "Trenger vi skjenkebevilling?",
+        "a": "Ved private arrangementer der gjestene ikke betaler for drikke, er det normalt ikke behov for skjenkebevilling. Vi gir råd tilpasset ditt arrangement."
+      },
+      "howFar": {
+        "q": "Hvor langt reiser dere?",
+        "a": "Vi dekker Innlandet og tar gjerne oppdrag i resten av Norge. For arrangementer utenfor Innlandet tilkommer reisekostnader."
+      },
+      "howBook": {
+        "q": "Hvordan booker jeg?",
+        "a": "Send oss en forespørsel via kontaktskjemaet eller ta kontakt direkte. Vi svarer innen 24 timer med et uforpliktende tilbud."
+      },
+      "cancel": {
+        "q": "Hva er avbestillingsreglene?",
+        "a": "Vi har fleksible avbestillingsvilkår. Full refusjon ved avbestilling mer enn 30 dager før arrangementet. Ta kontakt for fullstendige vilkår."
+      },
+      "nonAlcoholic": {
+        "q": "Tilbyr dere alkoholfrie alternativer?",
+        "a": "Absolutt. Vi lager gjerne en komplett alkoholfri drinkmeny med signaturdrinker som er like gjennomtenkte og velsmakende som de alkoholholdige."
+      }
+    }
+  },
+  "blogPage": {
+    "hero": {
+      "label": "Blogg",
+      "heading": "Siste nytt fra BarPro"
+    },
+    "posts": {
+      "welcome": {
+        "date": "Mars 2026",
+        "title": "Velkommen til BarPro — vi er klare for din neste feiring",
+        "p1": "Vi er Emil og Sofie, og sammen har vi startet BarPro med én klar ambisjon: å levere bartender- og eventbemanning som faktisk gjør en forskjell for arrangementet ditt.",
+        "p2": "Etter flere år bak baren på alt fra bryllup og bursdager til bedriftsfester og festivaler, så vi et behov i Innlandet for noe mer enn bare «en bartender». Vi ønsket å tilby en helhetlig opplevelse — fra første samtale til siste glass er ryddet bort.",
+        "p3": "Hos oss får du erfarne bartendere som kan faget sitt, skreddersydde drinkmenyer tilpasset din anledning, og alt av utstyr du trenger. Vi tar med bar, glass og is — du sørger for drikke og gjester.",
+        "p4": "Enten du planlegger et intimt selskap for 20 eller et stort bryllup med 200 gjester, tilpasser vi oss dine behov. Vi tror på at de beste festene oppstår når vertskapet kan slappe av og nyte kvelden — og det er der vi kommer inn.",
+        "p5": "Vi gleder oss til å bli kjent med deg og ditt arrangement. Ta kontakt for en uforpliktende prat, så finner vi ut hvordan vi kan gjøre din neste feiring til noe helt spesielt.",
+        "signoff": "— Emil & Sofie, BarPro"
+      }
+    },
+    "cta": "Ta kontakt"
   },
   "footer": {
     "tagline": "Profesjonell eventbemanning for uforglemmelige opplevelser",

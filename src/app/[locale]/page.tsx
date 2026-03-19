@@ -5,6 +5,7 @@ import { PricingTeaser } from "@/components/sections/PricingTeaser";
 import { Occasions } from "@/components/sections/Occasions";
 import { Process } from "@/components/sections/Process";
 import { CtaBanner } from "@/components/sections/CtaBanner";
+import { Faq } from "@/components/sections/Faq";
 
 export default function HomePage() {
   return (
@@ -15,6 +16,7 @@ export default function HomePage() {
       <PricingTeaser />
       <Occasions />
       <Process />
+      <Faq />
       <CtaBanner />
     </>
   );
