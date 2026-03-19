@@ -10,6 +10,7 @@ const navLinks = [
   { href: "/tjenester" as const, labelKey: "services" },
   { href: "/priser" as const, labelKey: "pricing" },
   { href: "/om-oss" as const, labelKey: "about" },
+  { href: "/blogg" as const, labelKey: "blog" },
 ] as const;
 
 export function Header() {

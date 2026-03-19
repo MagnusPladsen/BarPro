@@ -27,6 +27,10 @@ export const routing = defineRouting({
       no: "/priser",
       en: "/pricing",
     },
+    "/blogg": {
+      no: "/blogg",
+      en: "/blog",
+    },
   },
 });
 

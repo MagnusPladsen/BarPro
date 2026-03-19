@@ -6,6 +6,7 @@ const pageLinks = [
   { href: "/tjenester" as const, labelKey: "services" },
   { href: "/om-oss" as const, labelKey: "about" },
   { href: "/kontakt" as const, labelKey: "contact" },
+  { href: "/blogg" as const, labelKey: "blog" },
 ] as const;
 
 export async function Footer() {
