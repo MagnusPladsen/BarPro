@@ -154,6 +154,7 @@
           "1 profesjonell bartender",
           "Opptil 5 timer",
           "Standard drinkmeny",
+          "Bar, glass og is inkludert",
           "Oppsett og nedrigging",
           "Inntil 50 gjester"
         ]
@@ -169,6 +170,7 @@
           "Opptil 6 timer",
           "Skreddersydd drinkmeny",
           "2 signaturdrinker inkludert",
+          "Bar, glass og is inkludert",
           "Oppsett og nedrigging",
           "Inntil 120 gjester"
         ]
@@ -183,6 +185,7 @@
           "Opptil 8 timer",
           "Komplett skreddersydd drinkmeny",
           "Ubegrenset signaturdrinker",
+          "Bar, glass og is inkludert",
           "Koordinering og planlegging",
           "Oppsett, gjennomføring og opprydding",
           "Inntil 250+ gjester"
@@ -231,7 +234,7 @@
       "text": "Ta kontakt for en uforpliktende samtale, så hjelper vi deg å finne den perfekte løsningen.",
       "button": "Kontakt oss"
     },
-    "note": "Alle priser er ekskl. mva. og ingredienser/drikke med mindre annet er avtalt.",
+    "note": "Alle priser er ekskl. mva. Utstyr (bar, glass og is) er inkludert. Drikke og ingredienser besørges av kunden.",
     "viewAll": "Se alle priser"
   },
   "aboutPage": {

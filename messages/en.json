@@ -154,6 +154,7 @@
           "1 professional bartender",
           "Up to 5 hours",
           "Standard drink menu",
+          "Bar, glassware and ice included",
           "Setup and takedown",
           "Up to 50 guests"
         ]
@@ -169,6 +170,7 @@
           "Up to 6 hours",
           "Custom drink menu",
           "2 signature drinks included",
+          "Bar, glassware and ice included",
           "Setup and takedown",
           "Up to 120 guests"
         ]
@@ -183,6 +185,7 @@
           "Up to 8 hours",
           "Fully custom drink menu",
           "Unlimited signature drinks",
+          "Bar, glassware and ice included",
           "Coordination and planning",
           "Setup, execution and cleanup",
           "Up to 250+ guests"
@@ -231,7 +234,7 @@
       "text": "Get in touch for a no-obligation conversation, and we'll help you find the perfect solution.",
       "button": "Contact us"
     },
-    "note": "All prices exclude VAT and ingredients/beverages unless otherwise agreed.",
+    "note": "All prices exclude VAT. Equipment (bar, glassware and ice) is included. Beverages and ingredients are supplied by the client.",
     "viewAll": "See all pricing"
   },
   "aboutPage": {
