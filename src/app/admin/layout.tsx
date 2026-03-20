@@ -12,6 +12,7 @@ const navItems = [
   { href: "/admin/bookinger", label: "Bookinger", icon: "clipboard" },
   { href: "/admin/meldinger", label: "Meldinger", icon: "mail" },
   { href: "/admin/ansatte", label: "Ansatte", icon: "users" },
+  { href: "/admin/timer", label: "Timer", icon: "clock" },
   { href: "/admin/rapporter", label: "Rapporter", icon: "chart" },
 ];
 
@@ -54,6 +55,13 @@ function NavIcon({ icon }: { icon: string }) {
           <path d="M1 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1" />
           <circle cx="19" cy="7" r="3" />
           <path d="M19 14a4 4 0 0 1 4 4v1" />
+        </svg>
+      );
+    case "clock":
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+          <circle cx="12" cy="12" r="10" />
+          <path d="M12 6v6l4 2" />
         </svg>
       );
     case "chart":

@@ -267,6 +267,43 @@ export interface Database {
         };
         Relationships: [];
       };
+      time_entries: {
+        Row: {
+          id: string;
+          employee_id: string;
+          booking_id: string | null;
+          date: string;
+          hours: number;
+          start_time: string | null;
+          end_time: string | null;
+          description: string | null;
+          status: "pending" | "approved" | "rejected";
+          approved_by: string | null;
+          approved_at: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          employee_id: string;
+          booking_id?: string | null;
+          date: string;
+          hours: number;
+          start_time?: string | null;
+          end_time?: string | null;
+          description?: string | null;
+          status?: "pending" | "approved" | "rejected";
+        };
+        Update: {
+          hours?: number;
+          start_time?: string | null;
+          end_time?: string | null;
+          description?: string | null;
+          status?: "pending" | "approved" | "rejected";
+          approved_by?: string | null;
+          approved_at?: string | null;
+        };
+        Relationships: [];
+      };
       contact_messages: {
         Row: {
           id: string;

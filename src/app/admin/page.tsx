@@ -269,7 +269,7 @@ export default function AdminDashboardPage() {
 
         {/* Unread messages */}
         {unreadMessages.length > 0 && (
-          <div className="bg-[#141414] border border-[#1E1E1E] p-6 lg:col-span-2">
+          <div className="bg-[#141414] border border-[#1E1E1E] p-6">
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-sm font-medium">Nye meldinger</h2>
               <Link href="/admin/meldinger" className="text-[11px] text-[#C9A84C] hover:underline">Se alle</Link>
