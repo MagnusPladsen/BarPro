@@ -31,7 +31,8 @@ export default function PortalPage() {
   const [logEnd, setLogEnd] = useState("23:00");
   const [logDesc, setLogDesc] = useState("");
 
-  // Block date form
+  // Block date modal
+  const [blockModal, setBlockModal] = useState<{ dateStr: string; existing: { id: string; reason: string | null } | null } | null>(null);
   const [blockReason, setBlockReason] = useState("");
 
   // Auto-calc hours from time range
@@ -121,20 +122,34 @@ export default function PortalPage() {
     setSaving(false);
   };
 
-  const toggleBlockDate = async (dateStr: string) => {
-    if (!employee) return;
+  const openBlockModal = (dateStr: string) => {
+    const existing = blockedDates.find((d) => d.date === dateStr) ?? null;
+    setBlockReason(existing?.reason ?? "");
+    setBlockModal({ dateStr, existing });
+  };
+
+  const confirmBlock = async () => {
+    if (!employee || !blockModal) return;
     setSaving(true);
-    const existing = blockedDates.find((d) => d.date === dateStr);
-    if (existing) {
-      await supabase.from("employee_blocked_dates").delete().eq("id", existing.id);
-    } else {
-      await supabase.from("employee_blocked_dates").insert({
-        employee_id: employee.id,
-        date: dateStr,
-        reason: blockReason || null,
-      });
-    }
+    await supabase.from("employee_blocked_dates").insert({
+      employee_id: employee.id,
+      date: blockModal.dateStr,
+      reason: blockReason || null,
+    });
+    setBlockModal(null);
     setBlockReason("");
+    notify("success", "Dag markert som utilgjengelig");
+    await fetchData();
+    setSaving(false);
+  };
+
+  const confirmUnblock = async () => {
+    if (!blockModal?.existing) return;
+    setSaving(true);
+    await supabase.from("employee_blocked_dates").delete().eq("id", blockModal.existing.id);
+    setBlockModal(null);
+    setBlockReason("");
+    notify("success", "Dag er nå tilgjengelig");
     await fetchData();
     setSaving(false);
   };
@@ -306,7 +321,7 @@ export default function PortalPage() {
                 return (
                   <button
                     key={day}
-                    onClick={() => !isPast && !dayAssignments.length && toggleBlockDate(dateStr)}
+                    onClick={() => !isPast && !dayAssignments.length && openBlockModal(dateStr)}
                     disabled={isPast || saving}
                     className={`p-2 min-h-[70px] border-b border-r border-[#1E1E1E] text-left transition-colors ${
                       isBlocked ? "bg-red-400/10" : isToday ? "bg-[#C9A84C]/[0.05]" : ""
@@ -338,6 +353,49 @@ export default function PortalPage() {
             <div className="flex items-center gap-2"><div className="w-3 h-1.5 bg-green-400/20" /> Godkjent</div>
             <div className="flex items-center gap-2"><div className="w-3 h-1.5 bg-yellow-400/20" /> Venter</div>
           </div>
+
+          {/* Block date modal */}
+          {blockModal && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={() => setBlockModal(null)}>
+              <div className="bg-[#141414] border border-[#1E1E1E] w-full max-w-sm p-6" onClick={(e) => e.stopPropagation()}>
+                <div className="flex items-center justify-between mb-4">
+                  <h3 className="text-sm font-medium">
+                    {new Date(blockModal.dateStr + "T00:00:00").toLocaleDateString("no-NO", { weekday: "long", day: "numeric", month: "long" })}
+                  </h3>
+                  <button onClick={() => setBlockModal(null)} className="text-[#6B6B6B] hover:text-[#F5F0E8] cursor-pointer">&times;</button>
+                </div>
+
+                {blockModal.existing ? (
+                  <div className="space-y-4">
+                    <div className="bg-red-400/10 border border-red-400/20 p-3">
+                      <p className="text-sm text-red-400">Denne dagen er markert som utilgjengelig</p>
+                      {blockModal.existing.reason && (
+                        <p className="text-[11px] text-[#6B6B6B] mt-1">Grunn: {blockModal.existing.reason}</p>
+                      )}
+                    </div>
+                    <button onClick={confirmUnblock} disabled={saving}
+                      className="w-full border border-[#1E1E1E] py-2 text-xs text-[#6B6B6B] uppercase tracking-wider hover:text-[#F5F0E8] cursor-pointer disabled:opacity-50">
+                      Fjern markering
+                    </button>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    <p className="text-[11px] text-[#6B6B6B]">Marker denne dagen som utilgjengelig. Admin vil se dette når de planlegger oppdrag.</p>
+                    <div>
+                      <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Grunn *</label>
+                      <input value={blockReason} onChange={(e) => setBlockReason(e.target.value)}
+                        placeholder="F.eks. Ferie, Syk, Annet oppdrag"
+                        className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40 placeholder:text-[#6B6B6B]/40" />
+                    </div>
+                    <button onClick={confirmBlock} disabled={saving || !blockReason.trim()}
+                      className="w-full bg-red-400/10 text-red-400 border border-red-400/30 py-2 text-xs uppercase tracking-wider hover:bg-red-400/20 cursor-pointer disabled:opacity-50">
+                      {saving ? "Lagrer..." : "Marker som utilgjengelig"}
+                    </button>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
         </div>
       )}
 
