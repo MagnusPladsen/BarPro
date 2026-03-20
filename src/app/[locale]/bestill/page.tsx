@@ -1,7 +1,6 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import { createClient } from "@/lib/supabase/client";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, useCallback } from "react";
 
@@ -11,7 +10,6 @@ type Step = "date" | "details" | "confirm" | "success";
 
 export default function BookingPage() {
   const t = useTranslations("bookingPage");
-  const supabase = createClient();
 
   const [step, setStep] = useState<Step>("date");
   const [currentMonth, setCurrentMonth] = useState(new Date());
@@ -28,6 +26,7 @@ export default function BookingPage() {
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [wantsCallback, setWantsCallback] = useState(false);
+  const [consentGiven, setConsentGiven] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
@@ -37,23 +36,15 @@ export default function BookingPage() {
     const start = new Date(year, month, 1).toISOString().split("T")[0];
     const end = new Date(year, month + 1, 0).toISOString().split("T")[0];
 
-    const [blockedRes, bookingsRes] = await Promise.all([
-      supabase
-        .from("blocked_dates")
-        .select("date")
-        .gte("date", start)
-        .lte("date", end),
-      supabase
-        .from("bookings")
-        .select("date")
-        .gte("date", start)
-        .lte("date", end)
-        .in("status", ["pending", "confirmed"]),
-    ]);
-
-    setBlockedDates(((blockedRes.data ?? []) as { date: string }[]).map((d) => d.date));
-    setBookedDates(((bookingsRes.data ?? []) as { date: string }[]).map((d) => d.date));
-  }, [supabase, currentMonth]);
+    try {
+      const res = await fetch(`/api/calendar?start=${start}&end=${end}`);
+      const data = await res.json();
+      setBlockedDates(data.blockedDates ?? []);
+      setBookedDates(data.bookedDates ?? []);
+    } catch {
+      // Fail silently — calendar still works, just no blocked/booked indicators
+    }
+  }, [currentMonth]);
 
   useEffect(() => {
     fetchDates();
@@ -116,7 +107,7 @@ export default function BookingPage() {
   ];
 
   const isFormValid =
-    selectedDate && pkg && eventType && guestCount && name && email;
+    selectedDate && pkg && eventType && guestCount && name && email && consentGiven;
 
   return (
     <>
@@ -418,6 +409,22 @@ export default function BookingPage() {
                         </div>
                         <span className="text-sm text-text-muted group-hover:text-text-primary transition-colors">
                           {t("form.callback")}
+                        </span>
+                      </label>
+
+                      {/* GDPR consent */}
+                      <label className="flex items-start gap-3 cursor-pointer group">
+                        <input
+                          type="checkbox"
+                          checked={consentGiven}
+                          onChange={(e) => setConsentGiven(e.target.checked)}
+                          className="sr-only peer"
+                        />
+                        <div className="w-5 h-5 mt-0.5 border border-border peer-checked:border-gold peer-checked:bg-gold/10 flex items-center justify-center transition-colors shrink-0">
+                          {consentGiven && <span className="text-gold text-xs">&#10003;</span>}
+                        </div>
+                        <span className="text-xs text-text-muted leading-relaxed">
+                          {t("form.consent")}
                         </span>
                       </label>
 

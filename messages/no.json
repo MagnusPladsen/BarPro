@@ -332,6 +332,45 @@
       "messageMin": "Meldingen må være minst 10 tegn"
     }
   },
+  "privacyPage": {
+    "label": "Personvern",
+    "heading": "Personvernerklæring",
+    "sections": {
+      "intro": {
+        "title": "Om denne erklæringen",
+        "text": "BarPro tar personvernet ditt på alvor. Denne erklæringen beskriver hvordan vi samler inn, bruker og beskytter dine personopplysninger i henhold til personopplysningsloven og GDPR."
+      },
+      "whatWeCollect": {
+        "title": "Hva vi samler inn",
+        "text": "Når du sender en forespørsel eller booker gjennom nettsiden vår, samler vi inn: navn, e-postadresse, telefonnummer (valgfritt), type arrangement, antall gjester, ønsket dato, og eventuelle meldinger du skriver til oss."
+      },
+      "whyWeCollect": {
+        "title": "Hvorfor vi samler inn data",
+        "text": "Vi bruker informasjonen din utelukkende for å behandle din forespørsel, utarbeide tilbud, gjennomføre avtalt tjeneste, og kommunisere med deg om arrangementet. Vi bruker ikke dataene dine til markedsføring med mindre du gir eksplisitt samtykke."
+      },
+      "storage": {
+        "title": "Lagring og sikkerhet",
+        "text": "Dine data lagres sikkert hos vår dataleverandør (Supabase) med kryptert overføring og tilgangskontroll. Vi beholder dataene så lenge det er nødvendig for å oppfylle formålet, og sletter dem innen 12 måneder etter at arrangementet er gjennomført, med mindre lovpålagte krav tilsier noe annet."
+      },
+      "sharing": {
+        "title": "Deling med tredjeparter",
+        "text": "Vi deler ikke dine personopplysninger med tredjeparter, med unntak av tekniske tjenesteleverandører som er nødvendige for drift av tjenesten (e-postleverandør, databasevert). Disse er underlagt databehandleravtaler."
+      },
+      "rights": {
+        "title": "Dine rettigheter",
+        "text": "Du har rett til innsyn, retting, sletting og dataportabilitet. Du kan når som helst trekke tilbake ditt samtykke. Kontakt oss på Barproda@gmail.com for å utøve dine rettigheter. Vi svarer innen 30 dager."
+      },
+      "cookies": {
+        "title": "Informasjonskapsler",
+        "text": "Vi bruker kun nødvendige informasjonskapsler for at nettsiden skal fungere (autentisering, språkvalg). Vi bruker ingen tredjeparts sporingskapsler eller analyse-verktøy som samler inn persondata."
+      },
+      "contact": {
+        "title": "Kontakt",
+        "text": "Behandlingsansvarlig er BarPro. For spørsmål om personvern, kontakt oss på Barproda@gmail.com."
+      }
+    },
+    "lastUpdated": "Sist oppdatert: Mars 2026"
+  },
   "faq": {
     "label": "Ofte stilte spørsmål",
     "heading": "Lurer du på noe?",
@@ -413,6 +452,7 @@
       "message": "Melding (valgfritt)",
       "messagePlaceholder": "Noe vi bør vite om arrangementet?",
       "callback": "Ønsker å bli ringt opp for mer info",
+      "consent": "Jeg samtykker til at BarPro lagrer mine opplysninger for å behandle denne forespørselen. Les vår personvernerklæring.",
       "back": "Tilbake",
       "next": "Neste steg",
       "submit": "Send forespørsel",
@@ -458,6 +498,7 @@
     "tagline": "Profesjonell eventbemanning for uforglemmelige opplevelser",
     "pages": "Sider",
     "contactHeading": "Kontakt",
-    "rights": "Alle rettigheter reservert."
+    "rights": "Alle rettigheter reservert.",
+    "privacy": "Personvern"
   }
 }
