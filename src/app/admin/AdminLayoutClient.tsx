@@ -86,12 +86,26 @@ export default function AdminLayoutClient({
   const supabase = createClient();
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [badges, setBadges] = useState<Record<string, number>>({});
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
       setUserEmail(user?.email ?? null);
     });
-  }, [supabase.auth]);
+
+    // Fetch badge counts
+    Promise.all([
+      supabase.from("bookings").select("id", { count: "exact", head: true }).in("status", ["pending", "offer_sent"]),
+      supabase.from("contact_messages").select("id", { count: "exact", head: true }).eq("status", "unread"),
+      supabase.from("time_entries").select("id", { count: "exact", head: true }).eq("status", "pending"),
+    ]).then(([bookings, messages, timer]) => {
+      setBadges({
+        "/admin/bookinger": (bookings.count ?? 0),
+        "/admin/meldinger": (messages.count ?? 0),
+        "/admin/timer": (timer.count ?? 0),
+      });
+    });
+  }, [supabase, supabase.auth]);
 
   // Don't wrap login page in admin layout
   if (pathname === "/admin/login") {
@@ -153,7 +167,12 @@ export default function AdminLayoutClient({
                     }`}
                   >
                     <NavIcon icon={item.icon} />
-                    {item.label}
+                    <span className="flex-1">{item.label}</span>
+                    {badges[item.href] > 0 && (
+                      <span className="bg-[#C9A84C] text-[#0A0A0A] text-[10px] font-semibold min-w-[18px] h-[18px] flex items-center justify-center px-1">
+                        {badges[item.href]}
+                      </span>
+                    )}
                   </Link>
                 );
               })}
@@ -164,6 +183,10 @@ export default function AdminLayoutClient({
               {userEmail && (
                 <p className="text-[10px] text-[#6B6B6B] truncate mb-3">{userEmail}</p>
               )}
+              <Link href="/admin/hjelp" onClick={() => setSidebarOpen(false)}
+                className="block text-sm text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors duration-200 mb-2">
+                Hjelp
+              </Link>
               <Link href="/admin/innstillinger" onClick={() => setSidebarOpen(false)}
                 className="block text-sm text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors duration-200 mb-2">
                 Innstillinger

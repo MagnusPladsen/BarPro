@@ -55,6 +55,9 @@ export default function AdminDashboardPage() {
   const [recentBookings, setRecentBookings] = useState<Booking[]>([]);
   const [upcomingBookings, setUpcomingBookings] = useState<Booking[]>([]);
   const [unreadMessages, setUnreadMessages] = useState<Message[]>([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<Booking[]>([]);
+  const [searching, setSearching] = useState(false);
 
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
@@ -138,6 +141,42 @@ export default function AdminDashboardPage() {
         <p className="text-[11px] text-[#6B6B6B] tracking-wider">
           {new Date().toLocaleDateString("no-NO", { month: "long", year: "numeric" })}
         </p>
+      </div>
+
+      {/* Search */}
+      <div className="relative mb-6">
+        <input
+          value={searchQuery}
+          onChange={async (e) => {
+            const q = e.target.value;
+            setSearchQuery(q);
+            if (q.length < 2) { setSearchResults([]); return; }
+            setSearching(true);
+            const { data } = await supabase.from("bookings").select("*").ilike("customer_name", `%${q}%`).limit(5);
+            setSearchResults((data as Booking[]) ?? []);
+            setSearching(false);
+          }}
+          placeholder="Søk etter kunde, booking..."
+          className="w-full bg-[#141414] border border-[#1E1E1E] px-4 py-3 text-sm outline-none focus:border-[#C9A84C]/40 transition-colors placeholder:text-[#6B6B6B]/40"
+        />
+        {searchQuery.length >= 2 && (
+          <div className="absolute top-full left-0 right-0 z-10 bg-[#141414] border border-[#1E1E1E] border-t-0 max-h-[300px] overflow-y-auto">
+            {searching ? (
+              <p className="p-4 text-[#6B6B6B] text-sm">Søker...</p>
+            ) : searchResults.length === 0 ? (
+              <p className="p-4 text-[#6B6B6B] text-sm">Ingen treff</p>
+            ) : searchResults.map((b) => (
+              <Link key={b.id} href="/admin/bookinger" onClick={() => setSearchQuery("")}
+                className="flex items-center justify-between p-3 hover:bg-[#1A1A1A] transition-colors border-b border-[#1E1E1E] last:border-0">
+                <div>
+                  <p className="text-sm">{b.customer_name}</p>
+                  <p className="text-[10px] text-[#6B6B6B]">{formatDate(b.date)} · {packageLabels[b.package]}</p>
+                </div>
+                <span className={`text-[10px] tracking-wider uppercase px-2 py-1 ${statusColors[b.status]}`}>{statusLabels[b.status]}</span>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
 
       {/* KPI Cards — Top Row */}

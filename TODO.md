@@ -1,11 +1,11 @@
 # BarPro — TODO
 
 ## In Progress
-(nothing)
+- [ ] Dark/light mode toggle for admin
+- [ ] Activity log (who did what, when)
+- [ ] Employee photo upload via admin
 
 ## Backlog
-- [ ] Help page for admin panel
-- [ ] Help page for employee portal
 - [ ] Middleware "proxy" convention warning (Next.js 16 deprecation)
 - [ ] Full Google Calendar OAuth sync (currently .ics export only)
 - [ ] Resend domain verification (barpro.pladsen.dev) for email delivery to all addresses
@@ -13,6 +13,11 @@
 - [ ] Production: verify all Supabase RLS policies work with real users
 
 ## Done (today)
+- [x] Notification badges on sidebar (bookings, messages, timer counts)
+- [x] Dashboard search (search bookings by customer name)
+- [x] Booking confirmation email when customer accepts offer
+- [x] Invoice PDF generation (from agreement tab)
+- [x] Help page for admin (/admin/hjelp) with step-by-step guides
 - [x] Admin: change own password (Innstillinger page)
 - [x] Admin: add new admin accounts (Innstillinger page)
 - [x] Employee portal: auto-calc hours from time range

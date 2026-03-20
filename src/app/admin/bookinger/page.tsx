@@ -638,10 +638,37 @@ export default function AdminBookingsPage() {
                           Signert {new Date(a.signed_at).toLocaleDateString("no-NO")}
                         </p>
                       )}
-                      <button onClick={() => setTab("chat")}
-                        className="text-[11px] text-[#C9A84C] hover:underline cursor-pointer">
-                        Gå til meldinger &rarr;
-                      </button>
+                      <div className="flex gap-3">
+                        <button onClick={() => setTab("chat")}
+                          className="text-[11px] text-[#C9A84C] hover:underline cursor-pointer">
+                          Meldinger &rarr;
+                        </button>
+                        <button onClick={async () => {
+                          const res = await fetch(`/api/admin/invoice?bookingId=${selected.id}`);
+                          const data = await res.json();
+                          if (!data.invoice) return;
+                          const inv = data.invoice;
+                          const { default: jsPDF } = await import("jspdf");
+                          const autoTable = (await import("jspdf-autotable")).default;
+                          const doc = new jsPDF();
+                          doc.setFontSize(20); doc.text("FAKTURA", 14, 20);
+                          doc.setFontSize(10);
+                          doc.text(`Nr: ${inv.number}`, 14, 28);
+                          doc.text(`Dato: ${inv.date}`, 14, 34);
+                          doc.text(`Kunde: ${inv.customer.name}`, 14, 44);
+                          doc.text(`E-post: ${inv.customer.email}`, 14, 50);
+                          doc.text(`Arrangement: ${inv.event.date} · ${inv.event.package}`, 14, 60);
+                          autoTable(doc, {
+                            startY: 70, head: [["Beskrivelse", "Beløp"]],
+                            body: inv.items.map((it: { description: string; amount: number }) => [it.description, `${it.amount.toLocaleString("no-NO")} kr`]),
+                            foot: [["Sum ekskl. mva", `${inv.total.toLocaleString("no-NO")} kr`], ["MVA 25%", `${inv.vat.toLocaleString("no-NO")} kr`], ["Total", `${inv.totalWithVat.toLocaleString("no-NO")} kr`]],
+                            theme: "grid", headStyles: { fillColor: [201, 168, 76] },
+                          });
+                          doc.save(`faktura-${inv.number}.pdf`);
+                        }} className="text-[11px] text-[#6B6B6B] hover:text-[#F5F0E8] cursor-pointer">
+                          Faktura PDF
+                        </button>
+                      </div>
                     </div>
                   ))}
                 </div>
