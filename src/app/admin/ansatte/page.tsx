@@ -90,45 +90,45 @@ export default function AnsattePage() {
     setSaving(false);
   };
 
+  const [addError, setAddError] = useState("");
+
   const addEmployee = async () => {
     if (!newName || !newEmail) return;
     setSaving(true);
+    setAddError("");
 
-    // Create Supabase auth user if password provided
-    let authUserId: string | null = null;
-    if (newPassword) {
-      const { data: authData, error: authError } = await supabase.auth.admin.createUser({
-        email: newEmail,
-        password: newPassword,
-        email_confirm: true,
+    try {
+      const res = await fetch("/api/admin/employees", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: newName,
+          email: newEmail,
+          phone: newPhone,
+          role: newRole,
+          hourly_rate: newRate,
+          password: newPassword || undefined,
+        }),
       });
 
-      if (authError) {
-        // Try with service role through API
-        console.error("Auth creation needs service role:", authError);
-      } else {
-        authUserId = authData.user?.id ?? null;
+      if (!res.ok) {
+        const data = await res.json();
+        setAddError(data.error || "Kunne ikke opprette ansatt");
+        setSaving(false);
+        return;
       }
+
+      setShowAddForm(false);
+      setNewName("");
+      setNewEmail("");
+      setNewPhone("");
+      setNewRole("Bartender");
+      setNewRate("275");
+      setNewPassword("");
+      await fetchEmployees();
+    } catch {
+      setAddError("Noe gikk galt");
     }
-
-    await supabase.from("employees").insert({
-      name: newName,
-      email: newEmail,
-      phone: newPhone || null,
-      role: newRole,
-      hourly_rate: parseFloat(newRate) || 0,
-      is_active: false,
-      auth_user_id: authUserId,
-    });
-
-    setShowAddForm(false);
-    setNewName("");
-    setNewEmail("");
-    setNewPhone("");
-    setNewRole("Bartender");
-    setNewRate("275");
-    setNewPassword("");
-    await fetchEmployees();
     setSaving(false);
   };
 
@@ -416,6 +416,7 @@ export default function AnsattePage() {
                 <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Passord (for innlogging)</label>
                 <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="La tom for å opprette uten innlogging" className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40 placeholder:text-[#6B6B6B]/40" />
               </div>
+              {addError && <p className="text-red-400 text-sm">{addError}</p>}
               <div className="flex gap-2 pt-2">
                 <button
                   onClick={addEmployee}
