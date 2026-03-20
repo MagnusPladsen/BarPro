@@ -1,11 +1,21 @@
 import { createServerSupabaseClient, createServiceRoleClient } from "@/lib/supabase/server";
 import { NextResponse } from "next/server";
 
-// Auth check helper
+// Auth check helper — verifies user is an owner/admin
 async function requireAdmin() {
   const supabase = await createServerSupabaseClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return null;
+
+  // Check if user is an owner in the employees table
+  const serviceClient = await createServiceRoleClient();
+  const { data: employee } = await serviceClient
+    .from("employees")
+    .select("is_owner")
+    .eq("email", user.email ?? "")
+    .single();
+
+  if (!employee || !(employee as { is_owner: boolean }).is_owner) return null;
   return user;
 }
 
@@ -24,11 +34,16 @@ export async function GET(request: Request) {
 
   const supabase = await createServiceRoleClient();
 
-  const [blockedRes, bookingsRes, assignmentsRes] = await Promise.all([
+  const [blockedRes, bookingsRes] = await Promise.all([
     supabase.from("blocked_dates").select("*").gte("date", start).lte("date", end),
-    supabase.from("bookings").select("*").gte("date", start).lte("date", end).in("status", ["pending", "confirmed", "completed"]),
-    supabase.from("booking_assignments").select("*, employees(name, role)"),
+    supabase.from("bookings").select("*").gte("date", start).lte("date", end).in("status", ["pending", "offer_sent", "confirmed", "completed"]),
   ]);
+
+  // Only fetch assignments for bookings in this month
+  const bookingIds = ((bookingsRes.data ?? []) as { id: string }[]).map((b) => b.id);
+  const assignmentsRes = bookingIds.length > 0
+    ? await supabase.from("booking_assignments").select("*, employees(name, role)").in("booking_id", bookingIds)
+    : { data: [] };
 
   return NextResponse.json({
     blockedDates: blockedRes.data ?? [],

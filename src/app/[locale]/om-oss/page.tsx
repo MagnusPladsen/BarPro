@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { BookingCallout } from "@/components/sections/BookingCallout";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -179,6 +180,8 @@ export default function OmOssPage() {
           </div>
         </div>
       </section>
+
+      <BookingCallout />
     </>
   );
 }
