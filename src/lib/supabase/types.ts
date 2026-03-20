@@ -8,6 +8,27 @@ export type AgreementStatus = "active" | "completed" | "cancelled";
 export interface Database {
   public: {
     Tables: {
+      activity_log: {
+        Row: {
+          id: string;
+          user_email: string;
+          action: string;
+          entity_type: string;
+          entity_id: string | null;
+          details: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_email: string;
+          action: string;
+          entity_type: string;
+          entity_id?: string | null;
+          details?: string | null;
+        };
+        Update: Record<string, never>;
+        Relationships: [];
+      };
       blocked_dates: {
         Row: {
           id: string;
