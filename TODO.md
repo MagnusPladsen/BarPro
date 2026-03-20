@@ -1,46 +1,39 @@
 # BarPro — TODO
 
-## In Progress
-- [ ] Dark/light mode toggle for admin
-- [ ] Activity log (who did what, when)
-- [ ] Employee photo upload via admin
-
 ## Backlog
+- [ ] Dark/light mode toggle for admin
+- [ ] Employee photo upload via admin
 - [ ] Middleware "proxy" convention warning (Next.js 16 deprecation)
 - [ ] Full Google Calendar OAuth sync (currently .ics export only)
-- [ ] Resend domain verification (barpro.pladsen.dev) for email delivery to all addresses
-- [ ] Add NEXT_PUBLIC_SITE_URL to Vercel env vars for production offer links
-- [ ] Production: verify all Supabase RLS policies work with real users
+- [ ] Resend domain verification (barpro.pladsen.dev) for email delivery
+- [ ] Add NEXT_PUBLIC_SITE_URL to Vercel env vars
+- [ ] Production: verify all Supabase RLS policies
 
 ## Done (today)
-- [x] Notification badges on sidebar (bookings, messages, timer counts)
-- [x] Dashboard search (search bookings by customer name)
-- [x] Booking confirmation email when customer accepts offer
-- [x] Invoice PDF generation (from agreement tab)
-- [x] Help page for admin (/admin/hjelp) with step-by-step guides
-- [x] Admin: change own password (Innstillinger page)
-- [x] Admin: add new admin accounts (Innstillinger page)
-- [x] Employee portal: auto-calc hours from time range
-- [x] Employee portal: nice time picker (same as booking page)
-- [x] Employee portal: calendar with blocked dates (mark unavailable)
-- [x] Admin bookings: show employee availability when assigning staff
-- [x] Admin bookings: auto-exclude unavailable employees
-- [x] Admin account: admin@pladsen.dev setup script
-- [x] Reports export: CSV, Excel, PDF dropdown
+- [x] Activity log page (/admin/aktivitet)
+- [x] Notification badges on sidebar
+- [x] Dashboard search bar
+- [x] Booking confirmation email on offer acceptance
+- [x] Invoice PDF generation
+- [x] Help page (/admin/hjelp)
+- [x] Admin settings (password change + add admin)
+- [x] Employee: auto-calc hours, nice time picker
+- [x] Employee: calendar with blocked dates
+- [x] Admin: employee availability in booking assignments
+- [x] Reports export (CSV, Excel, PDF)
 - [x] Blog post about booking feature
-- [x] Email sending (Resend) for offers and booking notifications
+- [x] Email notifications (Resend)
 - [x] Offer security token
-- [x] Employee RLS for time entries
-- [x] Build fix for Vercel (force-dynamic)
-- [x] Mobile responsive admin sidebar
+- [x] Employee RLS
+- [x] Build fix for Vercel
+- [x] Mobile responsive admin
 - [x] Google Calendar .ics export
-- [x] Dashboard with KPIs and month comparison
-- [x] Password toggle + forgot password on login
+- [x] Dashboard KPIs with month comparison
+- [x] Login: password toggle + forgot password
 - [x] Server-side employee creation
-- [x] Toast notifications (no more alert())
+- [x] Toast notifications
 - [x] Booking callout on all pages
-- [x] Privacy policy + GDPR consent
-- [x] Time entry system with admin approval
-- [x] Offer accept/decline flow with public page
-- [x] Contact us link in hero
-- [x] Documentation (admin guide + update summary)
+- [x] Privacy policy + GDPR
+- [x] Time entry system
+- [x] Offer accept/decline flow
+- [x] Documentation
