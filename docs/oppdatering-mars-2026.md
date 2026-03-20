@@ -122,6 +122,45 @@ Dere kan synce bookingene med Google Calendar:
 
 ---
 
+## Nye funksjoner (oppdatering)
+
+Siden forrige oppdatering har systemet fått en rekke nye funksjoner:
+
+### Aktivitetslogg
+Det finnes nå en logg som viser hvem som har gjort hva og når — for eksempel hvem som godkjente en booking eller endret et tilbud. Nyttig for å holde oversikt.
+
+### Innstillinger
+Under "Innstillinger" i admin-panelet kan dere nå endre passord og legge til nye administratorer.
+
+### Mørk/lys modus
+Admin-panelet støtter nå mørk og lys modus, så dere kan velge det som passer best.
+
+### Last opp ansattbilder
+Dere kan nå laste opp bilder av ansatte direkte i admin-panelet, slik at de vises i systemet.
+
+### Faktura fra avtaler
+Når en kunde har akseptert et tilbud, kan dere generere en faktura som PDF rett fra avtalen. Enkelt å sende videre til kunden.
+
+### Søkefelt på dashboard
+Det er lagt til et søkefelt på dashboardet, slik at dere raskt kan finne bookinger, kunder eller meldinger.
+
+### Varslingsbadges i menyen
+Menyen viser nå antall ventende bookinger, uleste meldinger og timer som venter på godkjenning — så dere ser med en gang om det er noe som trenger oppmerksomhet.
+
+### Hjelpeside for ansatte
+Ansatte har fått en egen hjelpeside på **/portal/hjelp** med svar på vanlige spørsmål om systemet.
+
+### Ansattkalender med "ikke tilgjengelig"
+Ansatte kan nå markere dager de ikke er tilgjengelige i sin egen kalender. Dette tas hensyn til når dere tildeler oppdrag.
+
+### Automatisk beregning av timer
+Når ansatte registrerer start- og sluttidspunkt, beregnes antall timer automatisk. Ingen manuell utregning nødvendig.
+
+### Sikkerhetsforbedringer
+Systemet har fått bedre sikkerhet rundt hvem som har tilgang til hva. Ansatte ser bare sin egen informasjon, og admin-funksjoner er bedre beskyttet.
+
+---
+
 ## Spørsmål?
 
 Ta kontakt med Magnus for teknisk support eller spørsmål om systemet.
