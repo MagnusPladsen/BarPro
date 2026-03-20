@@ -10,18 +10,18 @@ create type package_type as enum ('basis', 'premium', 'eksklusiv');
 create type event_type as enum ('wedding', 'corporate', 'private', 'other');
 create type message_status as enum ('unread', 'read', 'replied');
 
--- Available dates (admin manages which dates are bookable)
-create table available_dates (
+-- Blocked dates (admin marks dates they are NOT available)
+create table blocked_dates (
   id uuid default uuid_generate_v4() primary key,
   date date not null unique,
-  note text,
+  reason text,
   created_at timestamptz default now() not null
 );
 
--- Bookings
+-- Bookings (customers can book any non-blocked date)
 create table bookings (
   id uuid default uuid_generate_v4() primary key,
-  date date not null references available_dates(date) on delete restrict,
+  date date not null,
   status booking_status default 'pending' not null,
   package package_type not null,
   guest_count text not null,
@@ -56,11 +56,11 @@ create table contact_messages (
 create index idx_bookings_date on bookings(date);
 create index idx_bookings_status on bookings(status);
 create index idx_bookings_created_at on bookings(created_at desc);
-create index idx_available_dates_date on available_dates(date);
+create index idx_blocked_dates_date on blocked_dates(date);
 create index idx_contact_messages_status on contact_messages(status);
 create index idx_contact_messages_created_at on contact_messages(created_at desc);
 
--- Only one booking per date
+-- Only one active booking per date
 create unique index idx_bookings_one_per_date
   on bookings(date)
   where status in ('pending', 'confirmed');
@@ -79,18 +79,18 @@ create trigger bookings_updated_at
   for each row execute function update_updated_at();
 
 -- Row Level Security
-alter table available_dates enable row level security;
+alter table blocked_dates enable row level security;
 alter table bookings enable row level security;
 alter table contact_messages enable row level security;
 
--- Public read access for available dates (customers need to see them)
-create policy "Available dates are readable by everyone"
-  on available_dates for select
+-- Public read access for blocked dates (customers need to see them)
+create policy "Blocked dates are readable by everyone"
+  on blocked_dates for select
   using (true);
 
--- Only authenticated users (admins) can manage available dates
-create policy "Admins can manage available dates"
-  on available_dates for all
+-- Only authenticated users (admins) can manage blocked dates
+create policy "Admins can manage blocked dates"
+  on blocked_dates for all
   using (auth.role() = 'authenticated')
   with check (auth.role() = 'authenticated');
 
@@ -99,10 +99,10 @@ create policy "Anyone can create bookings"
   on bookings for insert
   with check (true);
 
--- Public can read their own booking by ID (for confirmation page)
-create policy "Bookings readable by admins"
+-- Public can see which dates have active bookings (no details)
+create policy "Public can see booked dates"
   on bookings for select
-  using (auth.role() = 'authenticated');
+  using (true);
 
 -- Only admins can update bookings
 create policy "Admins can update bookings"

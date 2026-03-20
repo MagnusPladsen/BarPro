@@ -27,14 +27,14 @@ export async function POST(request: Request) {
 
     const supabase = await createServiceRoleClient();
 
-    // Check date is available
-    const { data: availableDate } = await supabase
-      .from("available_dates")
+    // Check date is not blocked by admin
+    const { data: blockedDate } = await supabase
+      .from("blocked_dates")
       .select("id")
       .eq("date", date)
-      .single();
+      .maybeSingle();
 
-    if (!availableDate) {
+    if (blockedDate) {
       return NextResponse.json(
         { error: "Denne datoen er ikke tilgjengelig" },
         { status: 400 },

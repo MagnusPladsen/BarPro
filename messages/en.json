@@ -5,7 +5,8 @@
     "about": "About",
     "contact": "Contact us",
     "pricing": "Pricing",
-    "blog": "Blog"
+    "blog": "Blog",
+    "book": "Book now"
   },
   "hero": {
     "tagline": "Your occasion. Our quality.",
@@ -376,6 +377,7 @@
       "subheading": "Select an available date from the calendar",
       "available": "Available",
       "unavailable": "Not available",
+      "booked": "Booked",
       "next": "Next step"
     },
     "form": {

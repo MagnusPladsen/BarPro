@@ -4,13 +4,13 @@ import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState, useCallback } from "react";
 import type { Database } from "@/lib/supabase/types";
 
-type AvailableDate = Database["public"]["Tables"]["available_dates"]["Row"];
+type BlockedDate = Database["public"]["Tables"]["blocked_dates"]["Row"];
 type Booking = Database["public"]["Tables"]["bookings"]["Row"];
 
 export default function AdminCalendarPage() {
   const supabase = createClient();
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [availableDates, setAvailableDates] = useState<AvailableDate[]>([]);
+  const [blockedDates, setBlockedDates] = useState<BlockedDate[]>([]);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -20,9 +20,9 @@ export default function AdminCalendarPage() {
     const start = new Date(year, month, 1).toISOString().split("T")[0];
     const end = new Date(year, month + 1, 0).toISOString().split("T")[0];
 
-    const [datesRes, bookingsRes] = await Promise.all([
+    const [blockedRes, bookingsRes] = await Promise.all([
       supabase
-        .from("available_dates")
+        .from("blocked_dates")
         .select("*")
         .gte("date", start)
         .lte("date", end),
@@ -34,7 +34,7 @@ export default function AdminCalendarPage() {
         .in("status", ["pending", "confirmed"]),
     ]);
 
-    setAvailableDates((datesRes.data as AvailableDate[]) ?? []);
+    setBlockedDates((blockedRes.data as BlockedDate[]) ?? []);
     setBookings((bookingsRes.data as Booking[]) ?? []);
   }, [supabase, currentMonth]);
 
@@ -42,14 +42,14 @@ export default function AdminCalendarPage() {
     fetchData();
   }, [fetchData]);
 
-  const toggleDate = async (dateStr: string) => {
+  const toggleBlocked = async (dateStr: string) => {
     setLoading(true);
-    const existing = availableDates.find((d) => d.date === dateStr);
+    const existing = blockedDates.find((d) => d.date === dateStr);
 
     if (existing) {
-      await supabase.from("available_dates").delete().eq("id", existing.id);
+      await supabase.from("blocked_dates").delete().eq("id", existing.id);
     } else {
-      await supabase.from("available_dates").insert({ date: dateStr });
+      await supabase.from("blocked_dates").insert({ date: dateStr });
     }
 
     await fetchData();
@@ -59,7 +59,7 @@ export default function AdminCalendarPage() {
   const year = currentMonth.getFullYear();
   const month = currentMonth.getMonth();
   const daysInMonth = new Date(year, month + 1, 0).getDate();
-  const firstDayOfWeek = (new Date(year, month, 1).getDay() + 6) % 7; // Monday = 0
+  const firstDayOfWeek = (new Date(year, month, 1).getDay() + 6) % 7;
   const today = new Date().toISOString().split("T")[0];
 
   const days: (number | null)[] = [
@@ -71,8 +71,8 @@ export default function AdminCalendarPage() {
     return `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
   };
 
-  const isAvailable = (day: number): boolean => {
-    return availableDates.some((d) => d.date === getDateStr(day));
+  const isBlocked = (day: number): boolean => {
+    return blockedDates.some((d) => d.date === getDateStr(day));
   };
 
   const getBooking = (day: number): Booking | undefined => {
@@ -95,7 +95,7 @@ export default function AdminCalendarPage() {
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-semibold">Kalender</h1>
         <p className="text-[11px] text-[#6B6B6B] tracking-wider">
-          Klikk på en dato for å endre tilgjengelighet
+          Klikk for å blokkere/åpne dager
         </p>
       </div>
 
@@ -121,16 +121,16 @@ export default function AdminCalendarPage() {
       {/* Legend */}
       <div className="flex items-center gap-6 mb-6 text-[11px] text-[#6B6B6B]">
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 bg-[#1E1E1E]" /> Utilgjengelig
+          <div className="w-3 h-3 bg-transparent border border-[#1E1E1E]" /> Ledig
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 bg-[#C9A84C]/30 border border-[#C9A84C]/50" /> Tilgjengelig
+          <div className="w-3 h-3 bg-red-400/20 border border-red-400/40" /> Blokkert
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 bg-yellow-400/30 border border-yellow-400/50" /> Ventende
+          <div className="w-3 h-3 bg-yellow-400/20 border border-yellow-400/40" /> Ventende
         </div>
         <div className="flex items-center gap-2">
-          <div className="w-3 h-3 bg-green-400/30 border border-green-400/50" /> Bekreftet
+          <div className="w-3 h-3 bg-green-400/20 border border-green-400/40" /> Bekreftet
         </div>
       </div>
 
@@ -154,23 +154,23 @@ export default function AdminCalendarPage() {
 
             const dateStr = getDateStr(day);
             const isPast = dateStr < today;
-            const available = isAvailable(day);
+            const blocked = isBlocked(day);
             const booking = getBooking(day);
             const isBooked = !!booking;
 
             let bgClass = "bg-transparent";
-            if (isBooked && booking.status === "confirmed") {
+            if (blocked) {
+              bgClass = "bg-red-400/10";
+            } else if (isBooked && booking.status === "confirmed") {
               bgClass = "bg-green-400/10";
             } else if (isBooked && booking.status === "pending") {
               bgClass = "bg-yellow-400/10";
-            } else if (available) {
-              bgClass = "bg-[#C9A84C]/10";
             }
 
             return (
               <button
                 key={day}
-                onClick={() => !isPast && !isBooked && toggleDate(dateStr)}
+                onClick={() => !isPast && !isBooked && toggleBlocked(dateStr)}
                 disabled={isPast || loading}
                 className={`p-3 min-h-[80px] border-b border-r border-[#1E1E1E] text-left transition-colors duration-200 ${bgClass} ${
                   isPast
@@ -183,17 +183,17 @@ export default function AdminCalendarPage() {
                 <span className={`text-sm ${dateStr === today ? "text-[#C9A84C] font-semibold" : ""}`}>
                   {day}
                 </span>
+                {blocked && !isBooked && (
+                  <div className="mt-1">
+                    <span className="text-[10px] text-red-400">Blokkert</span>
+                  </div>
+                )}
                 {isBooked && (
                   <div className="mt-1">
                     <p className={`text-[10px] truncate ${booking.status === "pending" ? "text-yellow-400" : "text-green-400"}`}>
                       {booking.customer_name}
                     </p>
                     <p className="text-[9px] text-[#6B6B6B]">{packageLabels[booking.package]}</p>
-                  </div>
-                )}
-                {available && !isBooked && (
-                  <div className="mt-1">
-                    <div className="w-2 h-2 bg-[#C9A84C]/50" />
                   </div>
                 )}
               </button>
