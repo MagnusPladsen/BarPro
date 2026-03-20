@@ -425,11 +425,17 @@ export default function AdminBookingsPage() {
                         </div>
                       </div>
 
-                      {/* Accept button */}
-                      <button onClick={acceptAndOffer} disabled={updating || selectedEmployees.length === 0}
-                        className="w-full bg-green-400/10 text-green-400 border border-green-400/30 py-3 text-xs uppercase tracking-wider hover:bg-green-400/20 transition-colors cursor-pointer disabled:opacity-50">
-                        {updating ? "Behandler..." : "Godkjenn & send tilbud"}
-                      </button>
+                      {/* Action buttons */}
+                      <div className="flex gap-3">
+                        <button onClick={saveNotes} disabled={updating}
+                          className="flex-1 border border-[#1E1E1E] py-3 text-xs text-[#6B6B6B] uppercase tracking-wider hover:text-[#F5F0E8] hover:border-[#C9A84C]/20 transition-colors cursor-pointer disabled:opacity-50">
+                          Lagre utkast
+                        </button>
+                        <button onClick={acceptAndOffer} disabled={updating || selectedEmployees.length === 0}
+                          className="flex-1 bg-green-400/10 text-green-400 border border-green-400/30 py-3 text-xs uppercase tracking-wider hover:bg-green-400/20 transition-colors cursor-pointer disabled:opacity-50">
+                          {updating ? "Behandler..." : "Godkjenn & send tilbud"}
+                        </button>
+                      </div>
                     </div>
                   )}
 
@@ -452,8 +458,6 @@ export default function AdminBookingsPage() {
                     <textarea value={adminNotes} onChange={(e) => setAdminNotes(e.target.value)} rows={2}
                       className="w-full bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40 resize-none"
                       placeholder="Notater..." />
-                    <button onClick={saveNotes} disabled={updating}
-                      className="mt-2 text-[11px] text-[#C9A84C] hover:underline cursor-pointer disabled:opacity-50">Lagre</button>
                   </div>
 
                   {/* Status actions for non-pending */}
