@@ -18,6 +18,7 @@ export default function AnsattePage() {
   const [editing, setEditing] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
   const [saving, setSaving] = useState(false);
+  const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(null);
 
   // Edit form state
   const [editName, setEditName] = useState("");
@@ -151,6 +152,17 @@ export default function AnsattePage() {
 
   return (
     <div>
+      {/* Toast notification */}
+      {notification && (
+        <div className={`fixed top-4 right-4 z-50 px-5 py-3 border text-sm animate-[fadeIn_0.3s] ${
+          notification.type === "success"
+            ? "bg-green-400/10 border-green-400/30 text-green-400"
+            : "bg-red-400/10 border-red-400/30 text-red-400"
+        }`}>
+          {notification.message}
+        </div>
+      )}
+
       <h1 className="text-2xl font-semibold mb-8">Ansatte</h1>
 
       {/* Tabs */}
@@ -368,12 +380,15 @@ export default function AnsattePage() {
                   </button>
                   <button
                     onClick={async () => {
-                      const { error } = await supabase.auth.resetPasswordForEmail(selected.email);
+                      const { error } = await supabase.auth.resetPasswordForEmail(selected.email, {
+                        redirectTo: `${window.location.origin}/login`,
+                      });
                       if (error) {
-                        alert("Kunne ikke sende reset-lenke: " + error.message);
+                        setNotification({ type: "error", message: "Kunne ikke sende reset-lenke: " + error.message });
                       } else {
-                        alert("Passord-reset sendt til " + selected.email);
+                        setNotification({ type: "success", message: "Passord-reset sendt til " + selected.email });
                       }
+                      setTimeout(() => setNotification(null), 5000);
                     }}
                     className="flex-1 border border-[#1E1E1E] text-[#6B6B6B] py-2 text-xs uppercase tracking-wider hover:text-[#F5F0E8] hover:border-[#C9A84C]/20 cursor-pointer"
                   >
