@@ -1,12 +1,11 @@
-import { createServerSupabaseClient, createServiceRoleClient } from "@/lib/supabase/server";
+import { createServiceRoleClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/auth";
 import { sendOfferEmail } from "@/lib/email";
 import { NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-  // Verify admin
-  const authClient = await createServerSupabaseClient();
-  const { data: { user } } = await authClient.auth.getUser();
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  const user = await requireAdmin();
+  if (!user) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
   const { offerId, bookingId } = await request.json();
   if (!offerId || !bookingId) return NextResponse.json({ error: "Missing data" }, { status: 400 });

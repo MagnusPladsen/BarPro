@@ -34,7 +34,8 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "Maks 5MB" }, { status: 400 });
   }
 
-  const ext = file.name.split(".").pop()?.toLowerCase() || "jpg";
+  const mimeToExt: Record<string, string> = { "image/jpeg": "jpg", "image/png": "png", "image/webp": "webp" };
+  const ext = mimeToExt[file.type] ?? "jpg";
   const filename = `employee-${employeeId}.${ext}`;
   const uploadDir = path.join(process.cwd(), "public", "images", "employees");
   const filePath = path.join(uploadDir, filename);
