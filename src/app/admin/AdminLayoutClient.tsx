@@ -164,6 +164,10 @@ export default function AdminLayoutClient({
               {userEmail && (
                 <p className="text-[10px] text-[#6B6B6B] truncate mb-3">{userEmail}</p>
               )}
+              <Link href="/admin/innstillinger" onClick={() => setSidebarOpen(false)}
+                className="block text-sm text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors duration-200 mb-2">
+                Innstillinger
+              </Link>
               <button
                 onClick={handleLogout}
                 className="w-full text-left text-sm text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors duration-200 cursor-pointer"

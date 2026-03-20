@@ -1,9 +1,11 @@
 # BarPro — TODO
 
 ## In Progress
-- [ ] Admin: change own password + add new admin accounts
+(nothing)
 
 ## Backlog
+- [ ] Help page for admin panel
+- [ ] Help page for employee portal
 - [ ] Middleware "proxy" convention warning (Next.js 16 deprecation)
 - [ ] Full Google Calendar OAuth sync (currently .ics export only)
 - [ ] Resend domain verification (barpro.pladsen.dev) for email delivery to all addresses
@@ -11,6 +13,8 @@
 - [ ] Production: verify all Supabase RLS policies work with real users
 
 ## Done (today)
+- [x] Admin: change own password (Innstillinger page)
+- [x] Admin: add new admin accounts (Innstillinger page)
 - [x] Employee portal: auto-calc hours from time range
 - [x] Employee portal: nice time picker (same as booking page)
 - [x] Employee portal: calendar with blocked dates (mark unavailable)
