@@ -313,11 +313,24 @@ export default function AnsattePage() {
                               {a.bookings?.date ? new Date(a.bookings.date + "T00:00:00").toLocaleDateString("no-NO", { day: "numeric", month: "short" }) : ""}
                             </p>
                           </div>
-                          <div className="text-right">
-                            <p>{a.hours_worked ?? "—"} t</p>
-                            <p className={a.approved ? "text-green-400" : "text-yellow-400"}>
-                              {a.approved ? "Godkjent" : "Venter"}
-                            </p>
+                          <div className="flex items-center gap-2">
+                            <div className="text-right">
+                              <p>{a.hours_worked ?? "—"} t</p>
+                              <p className={a.approved ? "text-green-400" : "text-yellow-400"}>
+                                {a.approved ? "Godkjent" : "Venter"}
+                              </p>
+                            </div>
+                            {a.hours_worked && !a.approved && (
+                              <button
+                                onClick={async () => {
+                                  await supabase.from("booking_assignments").update({ approved: true }).eq("id", a.id);
+                                  if (selected) selectEmployee(selected);
+                                }}
+                                className="text-[9px] bg-green-400/10 text-green-400 border border-green-400/30 px-2 py-1 hover:bg-green-400/20 cursor-pointer"
+                              >
+                                Godkjenn
+                              </button>
+                            )}
                           </div>
                         </div>
                       ))}

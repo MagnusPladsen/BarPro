@@ -8,8 +8,8 @@ const intlMiddleware = createIntlMiddleware(routing);
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Admin routes — handle auth, skip i18n
-  if (pathname.startsWith("/admin")) {
+  // Admin + Portal routes — handle auth, skip i18n
+  if (pathname.startsWith("/admin") || pathname.startsWith("/portal")) {
     // Allow login page without auth
     if (pathname === "/admin/login") {
       return NextResponse.next();
@@ -64,5 +64,6 @@ export const config = {
     "/",
     "/(no|en)/:path*",
     "/admin/:path*",
+    "/portal/:path*",
     "/((?!api|_next|_vercel|.*\\..*).*)"],
 };
