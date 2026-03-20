@@ -429,6 +429,9 @@
       "unavailable": "Ikke tilgjengelig",
       "booked": "Opptatt",
       "multiDay": "Flere dager",
+      "time": "Tidspunkt",
+      "from": "Fra",
+      "to": "Til",
       "next": "Neste steg"
     },
     "form": {

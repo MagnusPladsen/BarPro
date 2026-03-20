@@ -22,7 +22,7 @@ export default function PortalPage() {
 
   const fetchData = useCallback(async () => {
     const { data: { user } } = await supabase.auth.getUser();
-    if (!user) { router.push("/admin/login"); return; }
+    if (!user) { router.push("/login"); return; }
 
     const { data: emp } = await supabase
       .from("employees")
@@ -30,7 +30,7 @@ export default function PortalPage() {
       .eq("auth_user_id", user.id)
       .single();
 
-    if (!emp) { router.push("/admin/login"); return; }
+    if (!emp) { router.push("/login"); return; }
     const employee = emp as Employee;
     setEmployee(employee);
     setEditPhone(employee.phone ?? "");

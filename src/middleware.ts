@@ -8,12 +8,18 @@ const intlMiddleware = createIntlMiddleware(routing);
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Login page — no auth needed, skip i18n
+  if (pathname === "/login") {
+    return NextResponse.next();
+  }
+
+  // Old admin login — redirect to /login
+  if (pathname === "/admin/login") {
+    return NextResponse.redirect(new URL("/login", request.url));
+  }
+
   // Admin + Portal routes — handle auth, skip i18n
   if (pathname.startsWith("/admin") || pathname.startsWith("/portal")) {
-    // Allow login page without auth
-    if (pathname === "/admin/login") {
-      return NextResponse.next();
-    }
 
     // Check Supabase auth
     let response = NextResponse.next({
@@ -48,8 +54,7 @@ export async function middleware(request: NextRequest) {
     } = await supabase.auth.getUser();
 
     if (!user) {
-      const loginUrl = new URL("/admin/login", request.url);
-      return NextResponse.redirect(loginUrl);
+      return NextResponse.redirect(new URL("/login", request.url));
     }
 
     return response;
@@ -63,6 +68,7 @@ export const config = {
   matcher: [
     "/",
     "/(no|en)/:path*",
+    "/login",
     "/admin/:path*",
     "/portal/:path*",
     "/((?!api|_next|_vercel|.*\\..*).*)"],
