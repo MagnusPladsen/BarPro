@@ -4,12 +4,15 @@ import { usePathname, useRouter } from "next/navigation";
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import "../globals.css";
 
 const navItems = [
   { href: "/admin", label: "Dashboard", icon: "grid" },
   { href: "/admin/kalender", label: "Kalender", icon: "calendar" },
   { href: "/admin/bookinger", label: "Bookinger", icon: "clipboard" },
   { href: "/admin/meldinger", label: "Meldinger", icon: "mail" },
+  { href: "/admin/ansatte", label: "Ansatte", icon: "users" },
+  { href: "/admin/rapporter", label: "Rapporter", icon: "chart" },
 ];
 
 function NavIcon({ icon }: { icon: string }) {
@@ -42,6 +45,22 @@ function NavIcon({ icon }: { icon: string }) {
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
           <rect x="2" y="4" width="20" height="16" rx="2" />
           <path d="M22 7l-10 7L2 7" />
+        </svg>
+      );
+    case "users":
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+          <circle cx="9" cy="7" r="4" />
+          <path d="M1 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1" />
+          <circle cx="19" cy="7" r="3" />
+          <path d="M19 14a4 4 0 0 1 4 4v1" />
+        </svg>
+      );
+    case "chart":
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+          <path d="M3 3v18h18" />
+          <path d="M7 16l4-6 4 4 5-8" />
         </svg>
       );
     default:

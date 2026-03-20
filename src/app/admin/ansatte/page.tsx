@@ -1,0 +1,388 @@
+"use client";
+
+import { createClient } from "@/lib/supabase/client";
+import { useEffect, useState, useCallback } from "react";
+import Image from "next/image";
+import type { Database } from "@/lib/supabase/types";
+
+type Employee = Database["public"]["Tables"]["employees"]["Row"];
+type Assignment = Database["public"]["Tables"]["booking_assignments"]["Row"] & {
+  bookings?: { date: string; customer_name: string; package: string; status: string } | null;
+};
+
+export default function AnsattePage() {
+  const supabase = createClient();
+  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [selected, setSelected] = useState<Employee | null>(null);
+  const [assignments, setAssignments] = useState<Assignment[]>([]);
+  const [showInactive, setShowInactive] = useState(false);
+  const [editing, setEditing] = useState(false);
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [saving, setSaving] = useState(false);
+
+  // Edit form state
+  const [editName, setEditName] = useState("");
+  const [editEmail, setEditEmail] = useState("");
+  const [editPhone, setEditPhone] = useState("");
+  const [editRole, setEditRole] = useState("");
+  const [editRate, setEditRate] = useState("");
+  const [editActive, setEditActive] = useState(false);
+
+  // Add form state
+  const [newName, setNewName] = useState("");
+  const [newEmail, setNewEmail] = useState("");
+  const [newPhone, setNewPhone] = useState("");
+  const [newRole, setNewRole] = useState("Bartender");
+  const [newRate, setNewRate] = useState("275");
+  const [newPassword, setNewPassword] = useState("");
+
+  const fetchEmployees = useCallback(async () => {
+    const { data } = await supabase
+      .from("employees")
+      .select("*")
+      .order("is_owner", { ascending: false })
+      .order("is_active", { ascending: false })
+      .order("name");
+
+    setEmployees((data as Employee[]) ?? []);
+  }, [supabase]);
+
+  useEffect(() => {
+    fetchEmployees();
+  }, [fetchEmployees]);
+
+  const selectEmployee = async (emp: Employee) => {
+    setSelected(emp);
+    setEditing(false);
+    setEditName(emp.name);
+    setEditEmail(emp.email);
+    setEditPhone(emp.phone ?? "");
+    setEditRole(emp.role);
+    setEditRate(String(emp.hourly_rate));
+    setEditActive(emp.is_active);
+
+    // Fetch assignments with booking info
+    const { data } = await supabase
+      .from("booking_assignments")
+      .select("*, bookings(date, customer_name, package, status)")
+      .eq("employee_id", emp.id)
+      .order("created_at", { ascending: false })
+      .limit(20);
+
+    setAssignments((data as Assignment[]) ?? []);
+  };
+
+  const saveEmployee = async () => {
+    if (!selected) return;
+    setSaving(true);
+
+    await supabase.from("employees").update({
+      name: editName,
+      email: editEmail,
+      phone: editPhone || null,
+      role: editRole,
+      hourly_rate: parseFloat(editRate) || 0,
+      is_active: editActive,
+    }).eq("id", selected.id);
+
+    await fetchEmployees();
+    setSelected({ ...selected, name: editName, email: editEmail, phone: editPhone, role: editRole, hourly_rate: parseFloat(editRate) || 0, is_active: editActive });
+    setEditing(false);
+    setSaving(false);
+  };
+
+  const addEmployee = async () => {
+    if (!newName || !newEmail) return;
+    setSaving(true);
+
+    // Create Supabase auth user if password provided
+    let authUserId: string | null = null;
+    if (newPassword) {
+      const { data: authData, error: authError } = await supabase.auth.admin.createUser({
+        email: newEmail,
+        password: newPassword,
+        email_confirm: true,
+      });
+
+      if (authError) {
+        // Try with service role through API
+        console.error("Auth creation needs service role:", authError);
+      } else {
+        authUserId = authData.user?.id ?? null;
+      }
+    }
+
+    await supabase.from("employees").insert({
+      name: newName,
+      email: newEmail,
+      phone: newPhone || null,
+      role: newRole,
+      hourly_rate: parseFloat(newRate) || 0,
+      is_active: false,
+      auth_user_id: authUserId,
+    });
+
+    setShowAddForm(false);
+    setNewName("");
+    setNewEmail("");
+    setNewPhone("");
+    setNewRole("Bartender");
+    setNewRate("275");
+    setNewPassword("");
+    await fetchEmployees();
+    setSaving(false);
+  };
+
+  const totalHours = assignments.reduce((sum, a) => sum + (a.hours_worked ?? 0), 0);
+  const approvedHours = assignments.filter((a) => a.approved).reduce((sum, a) => sum + (a.hours_worked ?? 0), 0);
+
+  const displayed = showInactive ? employees : employees.filter((e) => e.is_active);
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-8">
+        <h1 className="text-2xl font-semibold">Ansatte</h1>
+        <div className="flex items-center gap-4">
+          <label className="flex items-center gap-2 text-[11px] text-[#6B6B6B] cursor-pointer">
+            <input
+              type="checkbox"
+              checked={showInactive}
+              onChange={(e) => setShowInactive(e.target.checked)}
+              className="accent-[#C9A84C]"
+            />
+            Vis inaktive
+          </label>
+          <button
+            onClick={() => setShowAddForm(true)}
+            className="bg-[#C9A84C] text-[#0A0A0A] px-4 py-2 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4AF57] transition-colors cursor-pointer"
+          >
+            + Legg til
+          </button>
+        </div>
+      </div>
+
+      <div className="flex gap-6">
+        {/* Employee list */}
+        <div className={`${selected ? "w-1/2" : "w-full"} space-y-2`}>
+          {displayed.map((emp) => (
+            <button
+              key={emp.id}
+              onClick={() => selectEmployee(emp)}
+              className={`w-full text-left flex items-center gap-4 bg-[#141414] border p-4 transition-colors cursor-pointer ${
+                selected?.id === emp.id
+                  ? "border-[#C9A84C]/40"
+                  : "border-[#1E1E1E] hover:border-[#C9A84C]/20"
+              }`}
+            >
+              {/* Avatar */}
+              <div className="w-12 h-12 bg-[#1A1A1A] border border-[#1E1E1E] overflow-hidden shrink-0 relative">
+                {emp.photo_url ? (
+                  <Image src={emp.photo_url} alt={emp.name} fill className="object-cover" sizes="48px" />
+                ) : (
+                  <div className="w-full h-full flex items-center justify-center text-[#C9A84C] text-sm font-medium">
+                    {emp.name.split(" ").map((n) => n[0]).join("")}
+                  </div>
+                )}
+              </div>
+
+              <div className="flex-1 min-w-0">
+                <div className="flex items-center gap-2">
+                  <p className="text-sm font-medium truncate">{emp.name}</p>
+                  {emp.is_owner && (
+                    <span className="text-[9px] tracking-wider uppercase px-1.5 py-0.5 bg-[#C9A84C]/10 text-[#C9A84C]">
+                      Eier
+                    </span>
+                  )}
+                </div>
+                <p className="text-[11px] text-[#6B6B6B]">{emp.role}</p>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <span className="text-[11px] text-[#6B6B6B]">{emp.hourly_rate} kr/t</span>
+                <div className={`w-2 h-2 ${emp.is_active ? "bg-green-400" : "bg-[#6B6B6B]/30"}`} />
+              </div>
+            </button>
+          ))}
+        </div>
+
+        {/* Detail panel */}
+        {selected && (
+          <div className="w-1/2 bg-[#141414] border border-[#1E1E1E] p-6 sticky top-8 self-start max-h-[calc(100vh-6rem)] overflow-y-auto">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-4">
+                <div className="w-16 h-16 bg-[#1A1A1A] border border-[#1E1E1E] overflow-hidden relative shrink-0">
+                  {selected.photo_url ? (
+                    <Image src={selected.photo_url} alt={selected.name} fill className="object-cover" sizes="64px" />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-[#C9A84C] text-lg font-medium">
+                      {selected.name.split(" ").map((n) => n[0]).join("")}
+                    </div>
+                  )}
+                </div>
+                <div>
+                  <h2 className="text-lg font-medium">{selected.name}</h2>
+                  <p className="text-[11px] text-[#C9A84C]">{selected.role}</p>
+                </div>
+              </div>
+              <button onClick={() => setSelected(null)} className="text-[#6B6B6B] hover:text-[#F5F0E8] cursor-pointer">&times;</button>
+            </div>
+
+            {editing ? (
+              <div className="space-y-4 text-sm">
+                <div>
+                  <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Navn</label>
+                  <input value={editName} onChange={(e) => setEditName(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+                </div>
+                <div>
+                  <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">E-post</label>
+                  <input value={editEmail} onChange={(e) => setEditEmail(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+                </div>
+                <div>
+                  <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Telefon</label>
+                  <input value={editPhone} onChange={(e) => setEditPhone(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+                </div>
+                <div>
+                  <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Rolle</label>
+                  <input value={editRole} onChange={(e) => setEditRole(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+                </div>
+                <div>
+                  <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Timelønn (kr)</label>
+                  <input type="number" value={editRate} onChange={(e) => setEditRate(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+                </div>
+                <label className="flex items-center gap-2 cursor-pointer">
+                  <input type="checkbox" checked={editActive} onChange={(e) => setEditActive(e.target.checked)} className="accent-[#C9A84C]" />
+                  <span className="text-sm">Aktiv</span>
+                </label>
+                <div className="flex gap-2 pt-2">
+                  <button onClick={saveEmployee} disabled={saving} className="flex-1 bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C9A84C]/20 cursor-pointer disabled:opacity-50">
+                    Lagre
+                  </button>
+                  <button onClick={() => setEditing(false)} className="flex-1 border border-[#1E1E1E] py-2 text-xs text-[#6B6B6B] uppercase tracking-wider hover:text-[#F5F0E8] cursor-pointer">
+                    Avbryt
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <div className="space-y-4 text-sm">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">E-post</p>
+                    <a href={`mailto:${selected.email}`} className="text-[#C9A84C] hover:underline text-sm">{selected.email}</a>
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Telefon</p>
+                    <p>{selected.phone || "—"}</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Timelønn</p>
+                    <p>{selected.hourly_rate} kr/t</p>
+                  </div>
+                  <div>
+                    <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Status</p>
+                    <p className={selected.is_active ? "text-green-400" : "text-[#6B6B6B]"}>
+                      {selected.is_active ? "Aktiv" : "Inaktiv"}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Hours summary */}
+                <div className="border-t border-[#1E1E1E] pt-4">
+                  <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-3">Timer</p>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div className="bg-[#0A0A0A] border border-[#1E1E1E] p-3">
+                      <p className="text-2xl font-semibold">{totalHours}</p>
+                      <p className="text-[10px] text-[#6B6B6B]">Totalt registrert</p>
+                    </div>
+                    <div className="bg-[#0A0A0A] border border-[#1E1E1E] p-3">
+                      <p className="text-2xl font-semibold text-green-400">{approvedHours}</p>
+                      <p className="text-[10px] text-[#6B6B6B]">Godkjent</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Assignments */}
+                {assignments.length > 0 && (
+                  <div className="border-t border-[#1E1E1E] pt-4">
+                    <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-3">Oppdrag</p>
+                    <div className="space-y-2 max-h-[200px] overflow-y-auto">
+                      {assignments.map((a) => (
+                        <div key={a.id} className="flex items-center justify-between py-2 border-b border-[#1E1E1E] last:border-0 text-[11px]">
+                          <div>
+                            <p className="text-[#F5F0E8]">{a.bookings?.customer_name ?? "Ukjent"}</p>
+                            <p className="text-[#6B6B6B]">
+                              {a.bookings?.date ? new Date(a.bookings.date + "T00:00:00").toLocaleDateString("no-NO", { day: "numeric", month: "short" }) : ""}
+                            </p>
+                          </div>
+                          <div className="text-right">
+                            <p>{a.hours_worked ?? "—"} t</p>
+                            <p className={a.approved ? "text-green-400" : "text-yellow-400"}>
+                              {a.approved ? "Godkjent" : "Venter"}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                <button
+                  onClick={() => setEditing(true)}
+                  className="w-full mt-4 bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C9A84C]/20 cursor-pointer"
+                >
+                  Rediger
+                </button>
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Add employee modal */}
+      {showAddForm && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={() => setShowAddForm(false)}>
+          <div className="bg-[#141414] border border-[#1E1E1E] p-8 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
+            <h2 className="text-lg font-medium mb-6">Legg til ansatt</h2>
+            <div className="space-y-4">
+              <div>
+                <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Navn *</label>
+                <input value={newName} onChange={(e) => setNewName(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+              </div>
+              <div>
+                <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">E-post *</label>
+                <input type="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+              </div>
+              <div>
+                <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Telefon</label>
+                <input value={newPhone} onChange={(e) => setNewPhone(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+              </div>
+              <div>
+                <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Rolle</label>
+                <input value={newRole} onChange={(e) => setNewRole(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+              </div>
+              <div>
+                <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Timelønn (kr)</label>
+                <input type="number" value={newRate} onChange={(e) => setNewRate(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+              </div>
+              <div>
+                <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Passord (for innlogging)</label>
+                <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="La tom for å opprette uten innlogging" className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40 placeholder:text-[#6B6B6B]/40" />
+              </div>
+              <div className="flex gap-2 pt-2">
+                <button
+                  onClick={addEmployee}
+                  disabled={saving || !newName || !newEmail}
+                  className="flex-1 bg-[#C9A84C] text-[#0A0A0A] py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#D4AF57] cursor-pointer disabled:opacity-50"
+                >
+                  {saving ? "Lagrer..." : "Legg til"}
+                </button>
+                <button onClick={() => setShowAddForm(false)} className="flex-1 border border-[#1E1E1E] py-2 text-xs text-[#6B6B6B] uppercase tracking-wider hover:text-[#F5F0E8] cursor-pointer">
+                  Avbryt
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
