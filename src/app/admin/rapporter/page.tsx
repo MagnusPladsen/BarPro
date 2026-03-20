@@ -89,31 +89,105 @@ export default function RapporterPage() {
     return { ...emp, hours, salary, jobCount: empAssignments.length };
   }).filter((e) => e.jobCount > 0);
 
+  const [showExportMenu, setShowExportMenu] = useState(false);
+
+  const reportData = () => ({
+    headers: ["Ansatt", "Rolle", "Timer", "Timelønn (kr)", "Total lønn (kr)", "Oppdrag"],
+    rows: employeeStats.map((e) => [e.name, e.role, e.hours, e.hourly_rate, e.salary, e.jobCount]),
+    summary: { revenue: totalRevenue, labourCost: totalLabourCost, margin: totalRevenue - totalLabourCost, bookings: confirmedBookings.length },
+  });
+
   const exportCSV = () => {
-    const headers = ["Ansatt", "Rolle", "Timer", "Timelønn", "Ekstra", "Total lønn", "Antall oppdrag"];
-    const rows = employeeStats.map((e) => [
-      e.name, e.role, e.hours, e.hourly_rate, 0, e.salary, e.jobCount,
-    ]);
-    const csv = [headers.join(","), ...rows.map((r) => r.join(","))].join("\n");
-    const blob = new Blob([csv], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
+    const { headers, rows, summary } = reportData();
+    const lines = [
+      `BarPro Rapport ${startDate} - ${endDate}`,
+      "",
+      `Inntekt,${summary.revenue}`,
+      `Lønnskostnad,${summary.labourCost}`,
+      `Margin,${summary.margin}`,
+      `Bookinger,${summary.bookings}`,
+      "",
+      headers.join(","),
+      ...rows.map((r) => r.join(",")),
+    ];
+    const blob = new Blob([lines.join("\n")], { type: "text/csv" });
     const a = document.createElement("a");
-    a.href = url;
+    a.href = URL.createObjectURL(blob);
     a.download = `barpro-rapport-${startDate}-${endDate}.csv`;
     a.click();
-    URL.revokeObjectURL(url);
+  };
+
+  const exportExcel = async () => {
+    const XLSX = await import("xlsx");
+    const { headers, rows, summary } = reportData();
+    const wb = XLSX.utils.book_new();
+
+    // Summary sheet
+    const summaryData = [
+      ["BarPro Rapport", `${startDate} - ${endDate}`],
+      [], ["Inntekt", summary.revenue], ["Lønnskostnad", summary.labourCost],
+      ["Margin", summary.margin], ["Bookinger", summary.bookings],
+    ];
+    const ws1 = XLSX.utils.aoa_to_sheet(summaryData);
+    XLSX.utils.book_append_sheet(wb, ws1, "Oversikt");
+
+    // Employee sheet
+    const ws2 = XLSX.utils.aoa_to_sheet([headers, ...rows]);
+    XLSX.utils.book_append_sheet(wb, ws2, "Ansatte");
+
+    XLSX.writeFile(wb, `barpro-rapport-${startDate}-${endDate}.xlsx`);
+  };
+
+  const exportPDF = async () => {
+    const { default: jsPDF } = await import("jspdf");
+    const autoTable = (await import("jspdf-autotable")).default;
+    const { headers, rows, summary } = reportData();
+
+    const doc = new jsPDF();
+    doc.setFontSize(18);
+    doc.text("BarPro Rapport", 14, 20);
+    doc.setFontSize(10);
+    doc.text(`${startDate} — ${endDate}`, 14, 28);
+
+    doc.setFontSize(11);
+    doc.text(`Inntekt: ${summary.revenue.toLocaleString("no-NO")} kr`, 14, 40);
+    doc.text(`Lønnskostnad: ${summary.labourCost.toLocaleString("no-NO")} kr`, 14, 47);
+    doc.text(`Margin: ${summary.margin.toLocaleString("no-NO")} kr`, 14, 54);
+    doc.text(`Bookinger: ${summary.bookings}`, 14, 61);
+
+    autoTable(doc, {
+      startY: 70,
+      head: [headers],
+      body: rows.map((r) => r.map(String)),
+      theme: "grid",
+      headStyles: { fillColor: [201, 168, 76] },
+    });
+
+    doc.save(`barpro-rapport-${startDate}-${endDate}.pdf`);
   };
 
   return (
     <div>
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-semibold">Rapporter</h1>
-        <button
-          onClick={exportCSV}
-          className="border border-[#C9A84C]/30 text-[#C9A84C] px-4 py-2 text-xs tracking-wider uppercase hover:bg-[#C9A84C]/10 transition-colors cursor-pointer"
-        >
-          Eksporter CSV
-        </button>
+        <div className="relative">
+          <button
+            onClick={() => setShowExportMenu(!showExportMenu)}
+            className="border border-[#C9A84C]/30 text-[#C9A84C] px-4 py-2 text-xs tracking-wider uppercase hover:bg-[#C9A84C]/10 transition-colors cursor-pointer"
+          >
+            Eksporter &darr;
+          </button>
+          {showExportMenu && (
+            <div className="absolute right-0 mt-1 bg-[#141414] border border-[#1E1E1E] z-10 min-w-[140px]">
+              <button onClick={() => { exportCSV(); setShowExportMenu(false); }}
+                className="w-full text-left px-4 py-2.5 text-xs text-[#6B6B6B] hover:text-[#F5F0E8] hover:bg-[#1A1A1A] cursor-pointer">CSV</button>
+              <button onClick={() => { exportExcel(); setShowExportMenu(false); }}
+                className="w-full text-left px-4 py-2.5 text-xs text-[#6B6B6B] hover:text-[#F5F0E8] hover:bg-[#1A1A1A] cursor-pointer">Excel</button>
+              <button onClick={() => { exportPDF(); setShowExportMenu(false); }}
+                className="w-full text-left px-4 py-2.5 text-xs text-[#6B6B6B] hover:text-[#F5F0E8] hover:bg-[#1A1A1A] cursor-pointer">PDF</button>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Period selector */}

@@ -7,16 +7,25 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> },
 ) {
   const { id } = await params;
+  const { searchParams } = new URL(_request.url);
+  const token = searchParams.get("token");
+
   const supabase = await createServiceRoleClient();
 
   const { data: offer } = await supabase
     .from("offers")
-    .select("id, offered_price, estimated_cost, notes, status, booking_id")
+    .select("id, offered_price, estimated_cost, notes, status, booking_id, customer_token")
     .eq("id", id)
     .single();
 
   if (!offer) {
     return NextResponse.json({ offer: null }, { status: 404 });
+  }
+
+  // Validate token
+  const typedWithToken = offer as { customer_token: string | null };
+  if (typedWithToken.customer_token && typedWithToken.customer_token !== token) {
+    return NextResponse.json({ offer: null, error: "Invalid token" }, { status: 403 });
   }
 
   // Fetch booking details (only what's needed for the offer page, no PII beyond name)
@@ -41,19 +50,25 @@ export async function POST(
 ) {
   const { id } = await params;
   const body = await request.json();
-  const { action, rejection_reason, wants_new_offer } = body;
+  const { action, rejection_reason, wants_new_offer, token } = body;
 
   const supabase = await createServiceRoleClient();
 
   // Fetch the offer
   const { data: offer } = await supabase
     .from("offers")
-    .select("id, status, booking_id, offered_price")
+    .select("id, status, booking_id, offered_price, customer_token")
     .eq("id", id)
     .single();
 
   if (!offer || (offer as { status: string }).status !== "sent") {
     return NextResponse.json({ error: "Tilbudet er ikke tilgjengelig" }, { status: 400 });
+  }
+
+  // Validate token
+  const offerToken = (offer as { customer_token: string | null }).customer_token;
+  if (offerToken && offerToken !== token) {
+    return NextResponse.json({ error: "Ugyldig tilgang" }, { status: 403 });
   }
 
   const typedOffer = offer as { id: string; booking_id: string; offered_price: number };

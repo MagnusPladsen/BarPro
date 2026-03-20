@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import "../../../app/globals.css";
 
 interface OfferData {
@@ -23,7 +23,9 @@ interface OfferData {
 
 export default function OfferPage() {
   const params = useParams();
+  const searchParams = useSearchParams();
   const offerId = params.id as string;
+  const token = searchParams.get("token") ?? "";
 
   const [offer, setOffer] = useState<OfferData | null>(null);
   const [loading, setLoading] = useState(true);
@@ -36,7 +38,7 @@ export default function OfferPage() {
   const [wantsNewOffer, setWantsNewOffer] = useState(false);
 
   useEffect(() => {
-    fetch(`/api/offer/${offerId}`)
+    fetch(`/api/offer/${offerId}?token=${token}`)
       .then((r) => r.json())
       .then((data) => {
         setOffer(data.offer ?? null);
@@ -50,7 +52,7 @@ export default function OfferPage() {
     const res = await fetch(`/api/offer/${offerId}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ action: "accept" }),
+      body: JSON.stringify({ action: "accept", token }),
     });
     if (res.ok) setDone("accepted");
     setResponding(false);
@@ -63,6 +65,7 @@ export default function OfferPage() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         action: "decline",
+        token,
         rejection_reason: rejectReason,
         wants_new_offer: wantsNewOffer,
       }),
