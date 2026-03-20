@@ -156,6 +156,16 @@ export function Hero() {
               {t("ctaPricing")}
             </Button>
           </div>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.6, delay: CTA_DELAY + 0.5 }}
+            className="mt-8"
+          >
+            <a href="/kontakt" className="text-text-muted text-sm hover:text-gold transition-colors duration-300">
+              {t("cta")} &rarr;
+            </a>
+          </motion.div>
         </motion.div>
       </motion.div>
 
