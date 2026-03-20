@@ -19,12 +19,21 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
         return;
       }
 
-      // Check if user is an employee
-      const { data: employee } = await supabase
+      // Check if user is an employee (by auth_user_id or email)
+      let { data: employee } = await supabase
         .from("employees")
         .select("name")
         .eq("auth_user_id", user.id)
         .single();
+
+      if (!employee) {
+        const { data: empByEmail } = await supabase
+          .from("employees")
+          .select("name")
+          .eq("email", user.email ?? "")
+          .single();
+        employee = empByEmail;
+      }
 
       if (employee) {
         setUserName((employee as { name: string }).name);

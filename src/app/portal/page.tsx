@@ -24,11 +24,21 @@ export default function PortalPage() {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) { router.push("/login"); return; }
 
-    const { data: emp } = await supabase
+    // Try auth_user_id first, fallback to email
+    let { data: emp } = await supabase
       .from("employees")
       .select("*")
       .eq("auth_user_id", user.id)
       .single();
+
+    if (!emp) {
+      const { data: empByEmail } = await supabase
+        .from("employees")
+        .select("*")
+        .eq("email", user.email ?? "")
+        .single();
+      emp = empByEmail;
+    }
 
     if (!emp) { router.push("/login"); return; }
     const employee = emp as Employee;
