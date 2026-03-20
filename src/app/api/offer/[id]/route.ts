@@ -22,9 +22,9 @@ export async function GET(
     return NextResponse.json({ offer: null }, { status: 404 });
   }
 
-  // Validate token
+  // Validate token — reject if missing or mismatched
   const typedWithToken = offer as { customer_token: string | null };
-  if (typedWithToken.customer_token && typedWithToken.customer_token !== token) {
+  if (!typedWithToken.customer_token || typedWithToken.customer_token !== token) {
     return NextResponse.json({ offer: null, error: "Invalid token" }, { status: 403 });
   }
 
@@ -67,7 +67,7 @@ export async function POST(
 
   // Validate token
   const offerToken = (offer as { customer_token: string | null }).customer_token;
-  if (offerToken && offerToken !== token) {
+  if (!offerToken || offerToken !== token) {
     return NextResponse.json({ error: "Ugyldig tilgang" }, { status: 403 });
   }
 

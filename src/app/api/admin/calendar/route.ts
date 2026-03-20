@@ -1,23 +1,6 @@
-import { createServerSupabaseClient, createServiceRoleClient } from "@/lib/supabase/server";
+import { createServiceRoleClient } from "@/lib/supabase/server";
+import { requireAdmin } from "@/lib/auth";
 import { NextResponse } from "next/server";
-
-// Auth check helper — verifies user is an owner/admin
-async function requireAdmin() {
-  const supabase = await createServerSupabaseClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return null;
-
-  // Check if user is an owner in the employees table
-  const serviceClient = await createServiceRoleClient();
-  const { data: employee } = await serviceClient
-    .from("employees")
-    .select("is_owner")
-    .eq("email", user.email ?? "")
-    .single();
-
-  if (!employee || !(employee as { is_owner: boolean }).is_owner) return null;
-  return user;
-}
 
 // GET: fetch blocked dates and bookings for a month
 export async function GET(request: Request) {
