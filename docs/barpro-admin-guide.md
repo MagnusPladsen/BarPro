@@ -128,6 +128,7 @@ Når admin sender et tilbud, får kunden en e-post med en sikker lenke. Der kan 
 Logg inn på /login med admin-konto (eier-konto).
 
 ### Dashboard
+- **Søkefelt** øverst — søk etter bookinger, kunder eller ansatte rett fra dashboardet
 - **Inntekt denne måneden** med sammenligning mot forrige måned (grønn/rød %)
 - **Margin** (inntekt minus lønnskostnad)
 - **Antall bookinger** denne måneden
@@ -137,6 +138,9 @@ Logg inn på /login med admin-konto (eier-konto).
 - **Uleste meldinger** fra kontaktskjemaet
 - **Aktive ansatte** med timer denne måneden
 - Liste over kommende arrangementer og siste aktivitet
+
+### Varslingsbadges i sidemenyen
+Sidemenyen viser gullfarget tall-badge ved siden av menyvalg som har noe som trenger oppmerksomhet. For eksempel ser du antall ventende forespørsler ved "Bookinger", uleste meldinger ved "Meldinger", og ventende timer ved "Timer". Tallene oppdateres automatisk.
 
 ### Kalender (/admin/kalender)
 - Månedvisning med fargekoder:
@@ -179,6 +183,7 @@ Logg inn på /login med admin-konto (eier-konto).
 **Avtaler-fane:**
 - Aktive avtaler med endelig pris
 - Signeringsdato
+- **Last ned faktura** — trykk på PDF-ikonet for å laste ned faktura som PDF-fil
 
 ### Booking-flyt (statuser)
 ```
@@ -203,6 +208,7 @@ Forespørsel → Admin behandler → Tilbud sendt → Kunde aksepterer → Bekre
 - **Rediger** — navn, e-post, telefon, rolle, timelønn, aktiv/inaktiv
 - **Reset passord** — sender tilbakestillingslenke til ansatt sin e-post
 - **Legg til ansatt** — navn, e-post, telefon, rolle, timelønn, passord for innlogging
+- **Ansatt-bilde** — hold musepekeren over avataren til en ansatt for å se en opplastingsknapp. Klikk for å laste opp bilde. Bildet vises i ansattlisten og i portalen
 
 ### Timer (/admin/timer)
 - Alle timeregistreringer fra ansatte
@@ -211,6 +217,19 @@ Forespørsel → Admin behandler → Tilbud sendt → Kunde aksepterer → Bekre
 - **Godkjenn** eller **Avvis** enkeltregistreringer
 - **"Godkjenn alle"** for rask behandling
 - Viser ansattnavn, dato, timer, timelønn og beregnet kostnad
+
+### Aktivitetslogg (/admin/aktivitet)
+- Viser en oversikt over alt som har skjedd i systemet
+- Du ser hvem som gjorde hva, og når det skjedde
+- Eksempler: "Magnus godkjente timer for Sofie", "Nytt tilbud sendt til kunde"
+- Nyttig for å holde oversikt når flere jobber i admin-panelet
+
+### Innstillinger (/admin/innstillinger)
+- **Endre passord** — oppdater passordet til din admin-konto
+- **Legg til ny admin** — opprett flere admin-kontoer slik at andre eiere også kan logge inn
+
+### Mørk/lys modus
+Nederst i sidemenyen finner du en bryter for å veksle mellom mørkt og lyst tema. Valget ditt huskes til neste gang du logger inn.
 
 ### Rapporter (/admin/rapporter)
 - Periodevalg: Denne uken, Denne måneden, Egendefinert datoperiode
@@ -244,6 +263,11 @@ Ansatte logger inn på /login og blir sendt til portalen.
 - Velg dato, fra/til klokkeslett, timer, beskrivelse
 - Se alle registreringer med status (Venter/Godkjent/Avvist)
 - Timer trenger ikke å være knyttet til et oppdrag
+
+### Hjelp (/portal/hjelp)
+- Vanlige spørsmål og svar om portalen
+- Forklarer hvordan man registrerer timer, ser oppdrag og oppdaterer profilen
+- Kontaktinfo til admin hvis man trenger mer hjelp
 
 ### Profil
 - Se og rediger telefonnummer
