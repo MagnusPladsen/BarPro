@@ -3,6 +3,8 @@
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState, useCallback } from "react";
 import type { Database, BookingStatus } from "@/lib/supabase/types";
+import { ListItemSkeleton } from "@/components/ui/LoadingState";
+import { ButtonSpinner } from "@/components/ui/Skeleton";
 
 type Booking = Database["public"]["Tables"]["bookings"]["Row"];
 type Employee = Database["public"]["Tables"]["employees"]["Row"];
@@ -38,12 +40,14 @@ export default function AdminBookingsPage() {
   const [chatInput, setChatInput] = useState("");
   const [updating, setUpdating] = useState(false);
   const [showPriceWarning, setShowPriceWarning] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchBookings = useCallback(async () => {
     let query = supabase.from("bookings").select("*").order("created_at", { ascending: false });
     if (filter !== "all") query = query.eq("status", filter);
     const { data } = await query;
     setBookings((data as Booking[]) ?? []);
+    setLoading(false);
   }, [supabase, filter]);
 
   useEffect(() => { fetchBookings(); }, [fetchBookings]);
@@ -270,7 +274,15 @@ export default function AdminBookingsPage() {
       <div className="flex gap-6">
         {/* List */}
         <div className={`${selected ? "w-2/5" : "w-full"} space-y-2 transition-all`}>
-          {bookings.length === 0 ? (
+          {loading ? (
+            <>
+              <ListItemSkeleton />
+              <ListItemSkeleton />
+              <ListItemSkeleton />
+              <ListItemSkeleton />
+              <ListItemSkeleton />
+            </>
+          ) : bookings.length === 0 ? (
             <div className="bg-[#141414] border border-[#1E1E1E] p-10 text-center text-[#6B6B6B] text-sm">Ingen bookinger</div>
           ) : bookings.map((b) => (
             <button key={b.id} onClick={() => selectBooking(b)}
@@ -484,7 +496,7 @@ export default function AdminBookingsPage() {
                         </button>
                         <button onClick={acceptAndOffer} disabled={updating || selectedEmployees.length === 0}
                           className="flex-1 bg-green-400/10 text-green-400 border border-green-400/30 py-3 text-xs uppercase tracking-wider hover:bg-green-400/20 transition-colors cursor-pointer disabled:opacity-50">
-                          {updating ? "Behandler..." : "Godkjenn & send tilbud"}
+                          {updating ? <><ButtonSpinner className="inline mr-1.5" />Behandler...</> : "Godkjenn & send tilbud"}
                         </button>
                       </div>
                     </div>
@@ -691,7 +703,7 @@ export default function AdminBookingsPage() {
               <button onClick={() => processAcceptance(parseFloat(offerPrice) || defaultOfferPrice(), totalEstimatedCost())}
                 disabled={updating}
                 className="flex-1 bg-red-400/10 text-red-400 border border-red-400/30 py-2 text-xs uppercase tracking-wider hover:bg-red-400/20 cursor-pointer disabled:opacity-50">
-                {updating ? "Sender..." : "Ja, send likevel"}
+                {updating ? <><ButtonSpinner className="inline mr-1.5" />Sender...</> : "Ja, send likevel"}
               </button>
               <button onClick={() => setShowPriceWarning(false)}
                 className="flex-1 border border-[#1E1E1E] py-2 text-xs text-[#6B6B6B] uppercase tracking-wider hover:text-[#F5F0E8] cursor-pointer">

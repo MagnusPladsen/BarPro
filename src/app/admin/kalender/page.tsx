@@ -3,6 +3,8 @@
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import type { Database } from "@/lib/supabase/types";
+import { CalendarGridSkeleton } from "@/components/ui/LoadingState";
+import { ButtonSpinner } from "@/components/ui/Skeleton";
 
 type BlockedDate = Database["public"]["Tables"]["blocked_dates"]["Row"];
 type Booking = Database["public"]["Tables"]["bookings"]["Row"];
@@ -26,6 +28,7 @@ export default function AdminCalendarPage() {
   const [modal, setModal] = useState<DayModal | null>(null);
   const [blockReason, setBlockReason] = useState("");
   const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchData = useCallback(async () => {
     const year = currentMonth.getFullYear();
@@ -39,6 +42,7 @@ export default function AdminCalendarPage() {
       setBlockedDates((data.blockedDates as BlockedDate[]) ?? []);
       setBookings((data.bookings as Booking[]) ?? []);
       setAllAssignments((data.assignments as Assignment[]) ?? []);
+      setLoading(false);
     } catch (err) {
       console.error("Failed to fetch calendar data:", err);
     }
@@ -137,6 +141,9 @@ export default function AdminCalendarPage() {
       </div>
 
       {/* Calendar */}
+      {loading ? (
+        <CalendarGridSkeleton />
+      ) : (
       <div className="bg-[#141414] border border-[#1E1E1E]">
         <div className="grid grid-cols-7 border-b border-[#1E1E1E]">
           {["Man","Tir","Ons","Tor","Fre","Lør","Søn"].map((d) => (
@@ -179,6 +186,7 @@ export default function AdminCalendarPage() {
           })}
         </div>
       </div>
+      )}
 
       {/* Day modal */}
       {modal && (
@@ -289,7 +297,7 @@ export default function AdminCalendarPage() {
                       className="w-full bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40 placeholder:text-[#6B6B6B]/40" />
                     <button onClick={blockDate} disabled={saving}
                       className="w-full bg-red-400/10 text-red-400 border border-red-400/30 py-2 text-xs uppercase tracking-wider hover:bg-red-400/20 transition-colors cursor-pointer disabled:opacity-50">
-                      {saving ? "Lagrer..." : "Blokker denne dagen"}
+                      {saving ? <span className="flex items-center justify-center gap-1.5"><ButtonSpinner />Lagrer...</span> : "Blokker denne dagen"}
                     </button>
                   </div>
                 )}

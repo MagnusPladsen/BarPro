@@ -3,6 +3,7 @@
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState, useCallback } from "react";
 import type { Database } from "@/lib/supabase/types";
+import { KPICardSkeleton, ReportCardSkeleton } from "@/components/ui/LoadingState";
 
 type Booking = Database["public"]["Tables"]["bookings"]["Row"];
 type Employee = Database["public"]["Tables"]["employees"]["Row"];
@@ -20,6 +21,7 @@ export default function RapporterPage() {
   const [period, setPeriod] = useState<Period>("month");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
+  const [loading, setLoading] = useState(true);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -60,6 +62,7 @@ export default function RapporterPage() {
     setEmployees((employeesRes.data as Employee[]) ?? []);
     setOffers((offersRes.data as Offer[]) ?? []);
     setAgreements((agreementsRes.data as Agreement[]) ?? []);
+    setLoading(false);
   }, [supabase, startDate, endDate]);
 
   useEffect(() => {
@@ -228,27 +231,45 @@ export default function RapporterPage() {
 
       {/* Summary cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-        <div className="bg-[#141414] border border-[#1E1E1E] p-5">
-          <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Inntekt</p>
-          <p className="text-2xl font-semibold text-green-400">{totalRevenue.toLocaleString("no-NO")} kr</p>
-        </div>
-        <div className="bg-[#141414] border border-[#1E1E1E] p-5">
-          <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Lønnskostnad</p>
-          <p className="text-2xl font-semibold text-red-400">{totalLabourCost.toLocaleString("no-NO")} kr</p>
-        </div>
-        <div className="bg-[#141414] border border-[#1E1E1E] p-5">
-          <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Margin</p>
-          <p className={`text-2xl font-semibold ${totalRevenue - totalLabourCost >= 0 ? "text-green-400" : "text-red-400"}`}>
-            {(totalRevenue - totalLabourCost).toLocaleString("no-NO")} kr
-          </p>
-        </div>
-        <div className="bg-[#141414] border border-[#1E1E1E] p-5">
-          <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Ventende tilbud</p>
-          <p className="text-2xl font-semibold text-[#C9A84C]">{pendingOffers.toLocaleString("no-NO")} kr</p>
-        </div>
+        {loading ? (
+          <>
+            <KPICardSkeleton />
+            <KPICardSkeleton />
+            <KPICardSkeleton />
+            <KPICardSkeleton />
+          </>
+        ) : (
+          <>
+            <div className="bg-[#141414] border border-[#1E1E1E] p-5">
+              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Inntekt</p>
+              <p className="text-2xl font-semibold text-green-400">{totalRevenue.toLocaleString("no-NO")} kr</p>
+            </div>
+            <div className="bg-[#141414] border border-[#1E1E1E] p-5">
+              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Lønnskostnad</p>
+              <p className="text-2xl font-semibold text-red-400">{totalLabourCost.toLocaleString("no-NO")} kr</p>
+            </div>
+            <div className="bg-[#141414] border border-[#1E1E1E] p-5">
+              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Margin</p>
+              <p className={`text-2xl font-semibold ${totalRevenue - totalLabourCost >= 0 ? "text-green-400" : "text-red-400"}`}>
+                {(totalRevenue - totalLabourCost).toLocaleString("no-NO")} kr
+              </p>
+            </div>
+            <div className="bg-[#141414] border border-[#1E1E1E] p-5">
+              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Ventende tilbud</p>
+              <p className="text-2xl font-semibold text-[#C9A84C]">{pendingOffers.toLocaleString("no-NO")} kr</p>
+            </div>
+          </>
+        )}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        {loading ? (
+          <>
+            <ReportCardSkeleton />
+            <ReportCardSkeleton />
+          </>
+        ) : (
+          <>
         {/* Booking overview */}
         <div className="bg-[#141414] border border-[#1E1E1E] p-6">
           <h2 className="text-sm font-medium mb-4">Bookinger</h2>
@@ -299,6 +320,8 @@ export default function RapporterPage() {
             </div>
           )}
         </div>
+          </>
+        )}
       </div>
     </div>
   );

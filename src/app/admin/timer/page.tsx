@@ -3,6 +3,8 @@
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState, useCallback } from "react";
 import type { Database } from "@/lib/supabase/types";
+import { TableSkeleton, KPICardSkeleton } from "@/components/ui/LoadingState";
+import { ButtonSpinner } from "@/components/ui/Skeleton";
 
 type TimeEntry = Database["public"]["Tables"]["time_entries"]["Row"] & {
   employees?: { name: string; role: string; hourly_rate: number } | null;
@@ -16,6 +18,7 @@ export default function AdminTimerPage() {
   const [filter, setFilter] = useState<Filter>("pending");
   const [updating, setUpdating] = useState(false);
   const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(null);
+  const [loading, setLoading] = useState(true);
 
   const fetchEntries = useCallback(async () => {
     let query = supabase
@@ -27,6 +30,7 @@ export default function AdminTimerPage() {
 
     const { data } = await query;
     setEntries((data as TimeEntry[]) ?? []);
+    setLoading(false);
   }, [supabase, filter]);
 
   useEffect(() => { fetchEntries(); }, [fetchEntries]);
@@ -79,13 +83,19 @@ export default function AdminTimerPage() {
         {filter === "pending" && pendingCount > 0 && (
           <button onClick={approveAll} disabled={updating}
             className="bg-green-400/10 text-green-400 border border-green-400/30 px-4 py-2 text-xs uppercase tracking-wider hover:bg-green-400/20 cursor-pointer disabled:opacity-50">
-            Godkjenn alle ({pendingCount})
+            {updating ? <span className="flex items-center gap-1.5"><ButtonSpinner />Godkjenner...</span> : `Godkjenn alle (${pendingCount})`}
           </button>
         )}
       </div>
 
       {/* Summary for pending */}
-      {filter === "pending" && pendingCount > 0 && (
+      {loading && filter === "pending" ? (
+        <div className="grid grid-cols-3 gap-4 mb-6">
+          <KPICardSkeleton />
+          <KPICardSkeleton />
+          <KPICardSkeleton />
+        </div>
+      ) : filter === "pending" && pendingCount > 0 && (
         <div className="grid grid-cols-3 gap-4 mb-6">
           <div className="bg-[#141414] border border-[#1E1E1E] p-4">
             <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Ventende</p>
@@ -113,7 +123,9 @@ export default function AdminTimerPage() {
         ))}
       </div>
 
-      {entries.length === 0 ? (
+      {loading ? (
+        <TableSkeleton rows={5} />
+      ) : entries.length === 0 ? (
         <div className="bg-[#141414] border border-[#1E1E1E] p-10 text-center text-[#6B6B6B] text-sm">
           Ingen registreringer
         </div>
