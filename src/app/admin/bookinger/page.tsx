@@ -419,9 +419,32 @@ export default function AdminBookingsPage() {
                               className="w-40 bg-[#0A0A0A] border border-[#C9A84C]/30 px-4 py-3 text-2xl font-semibold text-[#C9A84C] text-center outline-none focus:border-[#C9A84C]/60" />
                             <span className="text-lg text-[#C9A84C]">kr</span>
                           </div>
-                          <p className="text-[11px] text-[#6B6B6B]">
-                            {Math.round((((parseFloat(offerPrice) || defaultOfferPrice()) - totalEstimatedCost()) / totalEstimatedCost()) * 100)}% margin · Kostnad: {totalEstimatedCost().toLocaleString("no-NO")} kr
-                          </p>
+                          {(() => {
+                            const price = parseFloat(offerPrice) || defaultOfferPrice();
+                            const cost = totalEstimatedCost();
+                            const profit = price - cost;
+                            const margin = cost > 0 ? Math.round((profit / cost) * 100) : 0;
+                            return (
+                              <div className="mt-3 space-y-1 text-[12px]">
+                                <div className="flex justify-between">
+                                  <span className="text-[#6B6B6B]">Kostnad</span>
+                                  <span className="text-[#F5F0E8]">{cost.toLocaleString("no-NO")} kr</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-[#6B6B6B]">Inntekt</span>
+                                  <span className={profit >= 0 ? "text-green-400/80" : "text-red-400/80"}>
+                                    {profit >= 0 ? "+" : ""}{profit.toLocaleString("no-NO")} kr
+                                  </span>
+                                </div>
+                                <div className="flex justify-between border-t border-[#1E1E1E] pt-1">
+                                  <span className="text-[#6B6B6B]">Margin</span>
+                                  <span className={margin >= 0 ? "text-green-400/80" : "text-red-400/80"}>
+                                    {margin}%
+                                  </span>
+                                </div>
+                              </div>
+                            );
+                          })()}
                         </div>
                       </div>
 
