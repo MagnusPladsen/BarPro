@@ -70,6 +70,9 @@ export default function PortalLayoutClient({ children }: { children: React.React
             </Link>
             <div className="flex items-center gap-6">
               {userName && <span className="text-sm text-[#6B6B6B]">{userName}</span>}
+              <Link href="/portal/hjelp" className="text-sm text-[#6B6B6B] hover:text-[#C9A84C] transition-colors">
+                Hjelp
+              </Link>
               <button onClick={handleLogout} className="text-sm text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors cursor-pointer">
                 Logg ut
               </button>

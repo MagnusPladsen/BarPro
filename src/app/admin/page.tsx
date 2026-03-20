@@ -147,14 +147,18 @@ export default function AdminDashboardPage() {
       <div className="relative mb-6">
         <input
           value={searchQuery}
-          onChange={async (e) => {
+          onChange={(e) => {
             const q = e.target.value;
             setSearchQuery(q);
             if (q.length < 2) { setSearchResults([]); return; }
-            setSearching(true);
-            const { data } = await supabase.from("bookings").select("*").ilike("customer_name", `%${q}%`).limit(5);
-            setSearchResults((data as Booking[]) ?? []);
-            setSearching(false);
+            // Debounce search
+            clearTimeout((window as unknown as { _searchTimer?: ReturnType<typeof setTimeout> })._searchTimer);
+            (window as unknown as { _searchTimer?: ReturnType<typeof setTimeout> })._searchTimer = setTimeout(async () => {
+              setSearching(true);
+              const { data } = await supabase.from("bookings").select("*").ilike("customer_name", `%${q}%`).limit(5);
+              setSearchResults((data as Booking[]) ?? []);
+              setSearching(false);
+            }, 300);
           }}
           placeholder="Søk etter kunde, booking..."
           className="w-full bg-[#141414] border border-[#1E1E1E] px-4 py-3 text-sm outline-none focus:border-[#C9A84C]/40 transition-colors placeholder:text-[#6B6B6B]/40"

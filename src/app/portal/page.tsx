@@ -163,7 +163,15 @@ export default function PortalPage() {
     setSaving(false);
   };
 
-  if (!employee) return <div className="text-center py-20 text-[#6B6B6B]">Laster...</div>;
+  if (!employee) return (
+    <div className="space-y-4">
+      <div className="h-8 w-48 bg-[#141414] animate-pulse" />
+      <div className="grid grid-cols-3 gap-4">
+        {[1,2,3].map((i) => <div key={i} className="h-24 bg-[#141414] animate-pulse" />)}
+      </div>
+      <div className="h-48 bg-[#141414] animate-pulse" />
+    </div>
+  );
 
   const today = new Date().toISOString().split("T")[0];
   const upcoming = assignments.filter((a) => a.bookings && a.bookings.date >= today && a.bookings.status !== "cancelled");
