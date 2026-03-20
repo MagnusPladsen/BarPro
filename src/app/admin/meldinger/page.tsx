@@ -3,6 +3,8 @@
 import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState, useCallback } from "react";
 import type { Database, MessageStatus } from "@/lib/supabase/types";
+import { MessageListItemSkeleton } from "@/components/ui/LoadingState";
+import { ButtonSpinner } from "@/components/ui/Skeleton";
 
 type Message = Database["public"]["Tables"]["contact_messages"]["Row"];
 
@@ -13,6 +15,7 @@ export default function AdminMessagesPage() {
   const [selected, setSelected] = useState<Message | null>(null);
   const [adminNotes, setAdminNotes] = useState("");
   const [updating, setUpdating] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   const fetchMessages = useCallback(async () => {
     let query = supabase
@@ -26,6 +29,7 @@ export default function AdminMessagesPage() {
 
     const { data } = await query;
     setMessages((data as Message[]) ?? []);
+    setLoading(false);
   }, [supabase, filter]);
 
   useEffect(() => {
@@ -102,7 +106,15 @@ export default function AdminMessagesPage() {
       <div className="flex gap-6">
         {/* List */}
         <div className={`${selected ? "w-1/2" : "w-full"} space-y-2 transition-all`}>
-          {messages.length === 0 ? (
+          {loading ? (
+            <>
+              <MessageListItemSkeleton />
+              <MessageListItemSkeleton />
+              <MessageListItemSkeleton />
+              <MessageListItemSkeleton />
+              <MessageListItemSkeleton />
+            </>
+          ) : messages.length === 0 ? (
             <div className="bg-[#141414] border border-[#1E1E1E] p-10 text-center text-[#6B6B6B] text-sm">
               Ingen meldinger
             </div>
@@ -233,7 +245,7 @@ export default function AdminMessagesPage() {
                     disabled={updating}
                     className="flex-1 bg-green-400/10 text-green-400 border border-green-400/30 py-2 text-xs uppercase tracking-wider hover:bg-green-400/20 transition-colors cursor-pointer disabled:opacity-50"
                   >
-                    Marker som besvart
+                    {updating ? <span className="flex items-center justify-center gap-1.5"><ButtonSpinner />Behandler...</span> : "Marker som besvart"}
                   </button>
                 )}
                 <a

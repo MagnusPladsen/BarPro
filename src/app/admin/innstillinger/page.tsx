@@ -2,6 +2,7 @@
 
 import { createClient } from "@/lib/supabase/client";
 import { useState } from "react";
+import { ButtonSpinner } from "@/components/ui/Skeleton";
 
 export default function AdminSettingsPage() {
   const supabase = createClient();
@@ -111,7 +112,7 @@ export default function AdminSettingsPage() {
             </div>
             <button onClick={changePassword} disabled={saving || !newPassword}
               className="bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 px-4 py-2 text-xs uppercase tracking-wider hover:bg-[#C9A84C]/20 cursor-pointer disabled:opacity-50">
-              {saving ? "Lagrer..." : "Endre passord"}
+              {saving ? <span className="flex items-center gap-1.5"><ButtonSpinner />Lagrer...</span> : "Endre passord"}
             </button>
           </div>
         </div>
@@ -139,7 +140,7 @@ export default function AdminSettingsPage() {
             </div>
             <button onClick={addAdmin} disabled={saving || !adminName || !adminEmail || !adminPassword}
               className="bg-[#C9A84C] text-[#0A0A0A] px-4 py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#D4AF57] cursor-pointer disabled:opacity-50">
-              {saving ? "Oppretter..." : "Opprett admin"}
+              {saving ? <span className="flex items-center gap-1.5"><ButtonSpinner />Oppretter...</span> : "Opprett admin"}
             </button>
           </div>
         </div>

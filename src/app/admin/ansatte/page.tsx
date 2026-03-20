@@ -4,6 +4,8 @@ import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState, useCallback } from "react";
 import Image from "next/image";
 import type { Database } from "@/lib/supabase/types";
+import { EmployeeListItemSkeleton } from "@/components/ui/LoadingState";
+import { ButtonSpinner } from "@/components/ui/Skeleton";
 
 type Employee = Database["public"]["Tables"]["employees"]["Row"];
 type Assignment = Database["public"]["Tables"]["booking_assignments"]["Row"] & {
@@ -19,6 +21,7 @@ export default function AnsattePage() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [saving, setSaving] = useState(false);
   const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(null);
+  const [loading, setLoading] = useState(true);
 
   // Edit form state
   const [editName, setEditName] = useState("");
@@ -45,6 +48,7 @@ export default function AnsattePage() {
       .order("name");
 
     setEmployees((data as Employee[]) ?? []);
+    setLoading(false);
   }, [supabase]);
 
   useEffect(() => {
@@ -180,45 +184,56 @@ export default function AnsattePage() {
       <div className="flex gap-6">
         {/* Employee list */}
         <div className={`${selected ? "w-1/2" : "w-full"} space-y-2`}>
-          {displayed.map((emp) => (
-            <button
-              key={emp.id}
-              onClick={() => selectEmployee(emp)}
-              className={`w-full text-left flex items-center gap-4 bg-[#141414] border p-4 transition-colors cursor-pointer ${
-                selected?.id === emp.id
-                  ? "border-[#C9A84C]/40"
-                  : "border-[#1E1E1E] hover:border-[#C9A84C]/20"
-              }`}
-            >
-              {/* Avatar */}
-              <div className="w-12 h-12 bg-[#1A1A1A] border border-[#1E1E1E] overflow-hidden shrink-0 relative">
-                {emp.photo_url ? (
-                  <Image src={emp.photo_url} alt={emp.name} fill className="object-cover" sizes="48px" />
-                ) : (
-                  <div className="w-full h-full flex items-center justify-center text-[#C9A84C] text-sm font-medium">
-                    {emp.name.split(" ").map((n) => n[0]).join("")}
+          {loading ? (
+            <>
+              <EmployeeListItemSkeleton />
+              <EmployeeListItemSkeleton />
+              <EmployeeListItemSkeleton />
+              <EmployeeListItemSkeleton />
+            </>
+          ) : (
+            <>
+              {displayed.map((emp) => (
+                <button
+                  key={emp.id}
+                  onClick={() => selectEmployee(emp)}
+                  className={`w-full text-left flex items-center gap-4 bg-[#141414] border p-4 transition-colors cursor-pointer ${
+                    selected?.id === emp.id
+                      ? "border-[#C9A84C]/40"
+                      : "border-[#1E1E1E] hover:border-[#C9A84C]/20"
+                  }`}
+                >
+                  {/* Avatar */}
+                  <div className="w-12 h-12 bg-[#1A1A1A] border border-[#1E1E1E] overflow-hidden shrink-0 relative">
+                    {emp.photo_url ? (
+                      <Image src={emp.photo_url} alt={emp.name} fill className="object-cover" sizes="48px" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-[#C9A84C] text-sm font-medium">
+                        {emp.name.split(" ").map((n) => n[0]).join("")}
+                      </div>
+                    )}
                   </div>
-                )}
-              </div>
 
-              <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2">
-                  <p className="text-sm font-medium truncate">{emp.name}</p>
-                  {emp.is_owner && (
-                    <span className="text-[9px] tracking-wider uppercase px-1.5 py-0.5 bg-[#C9A84C]/10 text-[#C9A84C]">
-                      Eier
-                    </span>
-                  )}
-                </div>
-                <p className="text-[11px] text-[#6B6B6B]">{emp.role}</p>
-              </div>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-center gap-2">
+                      <p className="text-sm font-medium truncate">{emp.name}</p>
+                      {emp.is_owner && (
+                        <span className="text-[9px] tracking-wider uppercase px-1.5 py-0.5 bg-[#C9A84C]/10 text-[#C9A84C]">
+                          Eier
+                        </span>
+                      )}
+                    </div>
+                    <p className="text-[11px] text-[#6B6B6B]">{emp.role}</p>
+                  </div>
 
-              <div className="flex items-center gap-2">
-                <span className="text-[11px] text-[#6B6B6B]">{emp.hourly_rate} kr/t</span>
-                <div className={`w-2 h-2 ${emp.is_active ? "bg-green-400" : "bg-[#6B6B6B]/30"}`} />
-              </div>
-            </button>
-          ))}
+                  <div className="flex items-center gap-2">
+                    <span className="text-[11px] text-[#6B6B6B]">{emp.hourly_rate} kr/t</span>
+                    <div className={`w-2 h-2 ${emp.is_active ? "bg-green-400" : "bg-[#6B6B6B]/30"}`} />
+                  </div>
+                </button>
+              ))}
+            </>
+          )}
 
           {/* Pagination */}
           {totalPages > 1 && (
@@ -463,7 +478,7 @@ export default function AnsattePage() {
                   disabled={saving || !newName || !newEmail}
                   className="flex-1 bg-[#C9A84C] text-[#0A0A0A] py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#D4AF57] cursor-pointer disabled:opacity-50"
                 >
-                  {saving ? "Lagrer..." : "Legg til"}
+                  {saving ? <span className="flex items-center justify-center gap-1.5"><ButtonSpinner />Lagrer...</span> : "Legg til"}
                 </button>
                 <button onClick={() => setShowAddForm(false)} className="flex-1 border border-[#1E1E1E] py-2 text-xs text-[#6B6B6B] uppercase tracking-wider hover:text-[#F5F0E8] cursor-pointer">
                   Avbryt

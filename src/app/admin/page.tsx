@@ -4,6 +4,7 @@ import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import type { Database } from "@/lib/supabase/types";
+import { KPICardSkeleton, DashboardListSkeleton } from "@/components/ui/LoadingState";
 
 type Booking = Database["public"]["Tables"]["bookings"]["Row"];
 type Message = Database["public"]["Tables"]["contact_messages"]["Row"];
@@ -58,6 +59,7 @@ export default function AdminDashboardPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState<Booking[]>([]);
   const [searching, setSearching] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const today = new Date().toISOString().split("T")[0];
@@ -89,37 +91,29 @@ export default function AdminDashboardPage() {
       };
     }
 
-    // Fetch both months
-    Promise.all([fetchMonthStats(thisRange), fetchMonthStats(lastRange)]).then(([t, l]) => {
+    // Fetch all data in parallel
+    Promise.all([
+      fetchMonthStats(thisRange),
+      fetchMonthStats(lastRange),
+      supabase.from("bookings").select("id", { count: "exact", head: true }).eq("status", "pending"),
+      supabase.from("bookings").select("id", { count: "exact", head: true }).eq("status", "offer_sent"),
+      supabase.from("contact_messages").select("*").eq("status", "unread").order("created_at", { ascending: false }).limit(5),
+      supabase.from("employees").select("id", { count: "exact", head: true }).eq("is_active", true),
+      supabase.from("bookings").select("*").order("created_at", { ascending: false }).limit(5),
+      supabase.from("bookings").select("*").eq("status", "confirmed").gte("date", today).order("date").limit(5),
+    ]).then(([t, l, pendingRes, offerRes, msgRes, empRes, recentRes, upcomingRes]) => {
       setThisMonth(t);
       setLastMonth(l);
+      setPendingCount(pendingRes.count ?? 0);
+      setOfferSentCount(offerRes.count ?? 0);
+      const msgs = (msgRes.data as Message[]) ?? [];
+      setUnreadMessages(msgs);
+      setUnreadCount(msgs.length);
+      setActiveEmployees(empRes.count ?? 0);
+      setRecentBookings((recentRes.data as Booking[]) ?? []);
+      setUpcomingBookings((upcomingRes.data as Booking[]) ?? []);
+      setLoading(false);
     });
-
-    // Pending + offer_sent counts
-    supabase.from("bookings").select("id", { count: "exact", head: true }).eq("status", "pending")
-      .then(({ count }) => setPendingCount(count ?? 0));
-    supabase.from("bookings").select("id", { count: "exact", head: true }).eq("status", "offer_sent")
-      .then(({ count }) => setOfferSentCount(count ?? 0));
-
-    // Unread messages
-    supabase.from("contact_messages").select("*").eq("status", "unread").order("created_at", { ascending: false }).limit(5)
-      .then(({ data }) => {
-        const msgs = (data as Message[]) ?? [];
-        setUnreadMessages(msgs);
-        setUnreadCount(msgs.length);
-      });
-
-    // Active employees
-    supabase.from("employees").select("id", { count: "exact", head: true }).eq("is_active", true)
-      .then(({ count }) => setActiveEmployees(count ?? 0));
-
-    // Recent bookings
-    supabase.from("bookings").select("*").order("created_at", { ascending: false }).limit(5)
-      .then(({ data }) => setRecentBookings((data as Booking[]) ?? []));
-
-    // Upcoming confirmed
-    supabase.from("bookings").select("*").eq("status", "confirmed").gte("date", today).order("date").limit(5)
-      .then(({ data }) => setUpcomingBookings((data as Booking[]) ?? []));
   }, [supabase]);
 
   const formatDate = (d: string): string =>
@@ -185,74 +179,96 @@ export default function AdminDashboardPage() {
 
       {/* KPI Cards — Top Row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        {/* Revenue */}
-        <div className="bg-[#141414] border border-[#1E1E1E] p-5">
-          <div className="flex items-center justify-between mb-1">
-            <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Inntekt</p>
-            <ChangeIndicator current={thisMonth.revenue} previous={lastMonth.revenue} suffix=" vs forrige" />
-          </div>
-          <p className="text-2xl font-semibold text-green-400">{formatMoney(thisMonth.revenue)} kr</p>
-          <p className="text-[10px] text-[#6B6B6B] mt-1">Forrige: {formatMoney(lastMonth.revenue)} kr</p>
-        </div>
+        {loading ? (
+          <>
+            <KPICardSkeleton />
+            <KPICardSkeleton />
+            <KPICardSkeleton />
+            <KPICardSkeleton />
+          </>
+        ) : (
+          <>
+            {/* Revenue */}
+            <div className="bg-[#141414] border border-[#1E1E1E] p-5">
+              <div className="flex items-center justify-between mb-1">
+                <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Inntekt</p>
+                <ChangeIndicator current={thisMonth.revenue} previous={lastMonth.revenue} suffix=" vs forrige" />
+              </div>
+              <p className="text-2xl font-semibold text-green-400">{formatMoney(thisMonth.revenue)} kr</p>
+              <p className="text-[10px] text-[#6B6B6B] mt-1">Forrige: {formatMoney(lastMonth.revenue)} kr</p>
+            </div>
 
-        {/* Margin */}
-        <div className="bg-[#141414] border border-[#1E1E1E] p-5">
-          <div className="flex items-center justify-between mb-1">
-            <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Margin</p>
-            <ChangeIndicator current={margin} previous={lastMargin} />
-          </div>
-          <p className={`text-2xl font-semibold ${margin >= 0 ? "text-green-400" : "text-red-400"}`}>
-            {formatMoney(margin)} kr
-          </p>
-          <p className="text-[10px] text-[#6B6B6B] mt-1">Kostnad: {formatMoney(thisMonth.labourCost)} kr</p>
-        </div>
+            {/* Margin */}
+            <div className="bg-[#141414] border border-[#1E1E1E] p-5">
+              <div className="flex items-center justify-between mb-1">
+                <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Margin</p>
+                <ChangeIndicator current={margin} previous={lastMargin} />
+              </div>
+              <p className={`text-2xl font-semibold ${margin >= 0 ? "text-green-400" : "text-red-400"}`}>
+                {formatMoney(margin)} kr
+              </p>
+              <p className="text-[10px] text-[#6B6B6B] mt-1">Kostnad: {formatMoney(thisMonth.labourCost)} kr</p>
+            </div>
 
-        {/* Bookings */}
-        <div className="bg-[#141414] border border-[#1E1E1E] p-5">
-          <div className="flex items-center justify-between mb-1">
-            <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Bookinger</p>
-            <ChangeIndicator current={thisMonth.bookings} previous={lastMonth.bookings} />
-          </div>
-          <p className="text-2xl font-semibold">{thisMonth.bookings}</p>
-          <p className="text-[10px] text-[#6B6B6B] mt-1">Forrige: {lastMonth.bookings}</p>
-        </div>
+            {/* Bookings */}
+            <div className="bg-[#141414] border border-[#1E1E1E] p-5">
+              <div className="flex items-center justify-between mb-1">
+                <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Bookinger</p>
+                <ChangeIndicator current={thisMonth.bookings} previous={lastMonth.bookings} />
+              </div>
+              <p className="text-2xl font-semibold">{thisMonth.bookings}</p>
+              <p className="text-[10px] text-[#6B6B6B] mt-1">Forrige: {lastMonth.bookings}</p>
+            </div>
 
-        {/* Avg value */}
-        <div className="bg-[#141414] border border-[#1E1E1E] p-5">
-          <div className="flex items-center justify-between mb-1">
-            <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Snittverdi</p>
-            <ChangeIndicator current={thisMonth.avgValue} previous={lastMonth.avgValue} />
-          </div>
-          <p className="text-2xl font-semibold">{formatMoney(thisMonth.avgValue)} kr</p>
-          <p className="text-[10px] text-[#6B6B6B] mt-1">Per booking</p>
-        </div>
+            {/* Avg value */}
+            <div className="bg-[#141414] border border-[#1E1E1E] p-5">
+              <div className="flex items-center justify-between mb-1">
+                <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Snittverdi</p>
+                <ChangeIndicator current={thisMonth.avgValue} previous={lastMonth.avgValue} />
+              </div>
+              <p className="text-2xl font-semibold">{formatMoney(thisMonth.avgValue)} kr</p>
+              <p className="text-[10px] text-[#6B6B6B] mt-1">Per booking</p>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Action Cards — Second Row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <Link href="/admin/bookinger" className="bg-[#141414] border border-[#1E1E1E] p-5 hover:border-yellow-400/30 transition-colors">
-          <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Forespørsler</p>
-          <p className="text-2xl font-semibold text-yellow-400">{pendingCount}</p>
-          <p className="text-[10px] text-[#6B6B6B] mt-1">Venter på behandling</p>
-        </Link>
+        {loading ? (
+          <>
+            <KPICardSkeleton />
+            <KPICardSkeleton />
+            <KPICardSkeleton />
+            <KPICardSkeleton />
+          </>
+        ) : (
+          <>
+            <Link href="/admin/bookinger" className="bg-[#141414] border border-[#1E1E1E] p-5 hover:border-yellow-400/30 transition-colors">
+              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Forespørsler</p>
+              <p className="text-2xl font-semibold text-yellow-400">{pendingCount}</p>
+              <p className="text-[10px] text-[#6B6B6B] mt-1">Venter på behandling</p>
+            </Link>
 
-        <Link href="/admin/bookinger" className="bg-[#141414] border border-[#1E1E1E] p-5 hover:border-blue-400/30 transition-colors">
-          <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Tilbud sendt</p>
-          <p className="text-2xl font-semibold text-blue-400">{offerSentCount}</p>
-          <p className="text-[10px] text-[#6B6B6B] mt-1">Venter på kundesvar</p>
-        </Link>
+            <Link href="/admin/bookinger" className="bg-[#141414] border border-[#1E1E1E] p-5 hover:border-blue-400/30 transition-colors">
+              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Tilbud sendt</p>
+              <p className="text-2xl font-semibold text-blue-400">{offerSentCount}</p>
+              <p className="text-[10px] text-[#6B6B6B] mt-1">Venter på kundesvar</p>
+            </Link>
 
-        <Link href="/admin/meldinger" className="bg-[#141414] border border-[#1E1E1E] p-5 hover:border-[#C9A84C]/30 transition-colors">
-          <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Uleste meldinger</p>
-          <p className="text-2xl font-semibold text-[#C9A84C]">{unreadCount}</p>
-          <p className="text-[10px] text-[#6B6B6B] mt-1">Fra kontaktskjema</p>
-        </Link>
+            <Link href="/admin/meldinger" className="bg-[#141414] border border-[#1E1E1E] p-5 hover:border-[#C9A84C]/30 transition-colors">
+              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Uleste meldinger</p>
+              <p className="text-2xl font-semibold text-[#C9A84C]">{unreadCount}</p>
+              <p className="text-[10px] text-[#6B6B6B] mt-1">Fra kontaktskjema</p>
+            </Link>
 
-        <Link href="/admin/ansatte" className="bg-[#141414] border border-[#1E1E1E] p-5 hover:border-[#C9A84C]/30 transition-colors">
-          <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Aktive ansatte</p>
-          <p className="text-2xl font-semibold">{activeEmployees}</p>
-          <p className="text-[10px] text-[#6B6B6B] mt-1">Timer: {thisMonth.hours} t denne mnd</p>
-        </Link>
+            <Link href="/admin/ansatte" className="bg-[#141414] border border-[#1E1E1E] p-5 hover:border-[#C9A84C]/30 transition-colors">
+              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Aktive ansatte</p>
+              <p className="text-2xl font-semibold">{activeEmployees}</p>
+              <p className="text-[10px] text-[#6B6B6B] mt-1">Timer: {thisMonth.hours} t denne mnd</p>
+            </Link>
+          </>
+        )}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -265,7 +281,9 @@ export default function AdminDashboardPage() {
               <Link href="/admin/kalender" className="text-[11px] text-[#C9A84C] hover:underline">Kalender</Link>
             </div>
           </div>
-          {upcomingBookings.length === 0 ? (
+          {loading ? (
+            <DashboardListSkeleton />
+          ) : upcomingBookings.length === 0 ? (
             <p className="text-[#6B6B6B] text-sm py-4">Ingen kommende arrangementer</p>
           ) : (
             <div className="space-y-0">
@@ -293,7 +311,9 @@ export default function AdminDashboardPage() {
             <h2 className="text-sm font-medium">Siste aktivitet</h2>
             <Link href="/admin/bookinger" className="text-[11px] text-[#C9A84C] hover:underline">Se alle</Link>
           </div>
-          {recentBookings.length === 0 ? (
+          {loading ? (
+            <DashboardListSkeleton />
+          ) : recentBookings.length === 0 ? (
             <p className="text-[#6B6B6B] text-sm py-4">Ingen bookinger ennå</p>
           ) : (
             <div className="space-y-0">
