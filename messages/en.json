@@ -8,11 +8,22 @@
     "blog": "Blog",
     "book": "Book now"
   },
+  "announcement": {
+    "text": "New BarPro — Professional bartender service in Innlandet",
+    "textShort": "New bartender service in Innlandet",
+    "cta": "Learn more"
+  },
   "hero": {
     "tagline": "Your occasion. Our quality.",
     "subtitle": "Tailored event staffing for weddings, private events, and businesses that expect more.",
     "cta": "Contact us",
+    "ctaBook": "Book now",
     "scroll": "Scroll down"
+  },
+  "bookingCallout": {
+    "heading": "Ready to book?",
+    "text": "Choose a date, pick your package and send a request — we reply within 24 hours.",
+    "cta": "Book now"
   },
   "intro": {
     "label": "About us",
@@ -417,6 +428,7 @@
       "available": "Available",
       "unavailable": "Not available",
       "booked": "Booked",
+      "multiDay": "Multiple days",
       "next": "Next step"
     },
     "form": {

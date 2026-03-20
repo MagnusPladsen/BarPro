@@ -8,11 +8,22 @@
     "blog": "Blogg",
     "book": "Bestill nå"
   },
+  "announcement": {
+    "text": "Nye BarPro — Profesjonell bartender-service i Innlandet",
+    "textShort": "Ny bartender-service i Innlandet",
+    "cta": "Les mer"
+  },
   "hero": {
     "tagline": "Din anledning. Vår kvalitet.",
     "subtitle": "Skreddersydd eventbemanning for bryllup, private arrangementer og bedrifter som forventer mer.",
     "cta": "Kontakt oss",
+    "ctaBook": "Bestill nå",
     "scroll": "Scroll ned"
+  },
+  "bookingCallout": {
+    "heading": "Klar for å booke?",
+    "text": "Velg dato, pakke og send forespørsel — vi svarer innen 24 timer.",
+    "cta": "Bestill nå"
   },
   "intro": {
     "label": "Om oss",
@@ -417,6 +428,7 @@
       "available": "Tilgjengelig",
       "unavailable": "Ikke tilgjengelig",
       "booked": "Opptatt",
+      "multiDay": "Flere dager",
       "next": "Neste steg"
     },
     "form": {
