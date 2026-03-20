@@ -85,6 +85,7 @@ export default function AdminLayoutClient({
   const router = useRouter();
   const supabase = createClient();
   const [userEmail, setUserEmail] = useState<string | null>(null);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -106,8 +107,25 @@ export default function AdminLayoutClient({
     <html lang="no">
       <body className="bg-[#0A0A0A] text-[#F5F0E8] font-sans antialiased">
         <div className="flex min-h-screen">
+          {/* Mobile header */}
+          <div className="fixed top-0 left-0 right-0 z-50 h-14 bg-[#111] border-b border-[#1E1E1E] flex items-center justify-between px-4 lg:hidden">
+            <Link href="/admin" className="text-sm tracking-[0.15em] uppercase font-semibold">
+              BarPro <span className="text-[#C9A84C] text-xs font-normal ml-1">Admin</span>
+            </Link>
+            <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-[#6B6B6B] hover:text-[#F5F0E8] cursor-pointer">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6">
+                {sidebarOpen ? <path d="M18 6L6 18M6 6l12 12" /> : <path d="M3 12h18M3 6h18M3 18h18" />}
+              </svg>
+            </button>
+          </div>
+
+          {/* Sidebar overlay (mobile) */}
+          {sidebarOpen && (
+            <div className="fixed inset-0 z-40 bg-black/50 lg:hidden" onClick={() => setSidebarOpen(false)} />
+          )}
+
           {/* Sidebar */}
-          <aside className="fixed top-0 left-0 bottom-0 w-64 bg-[#111] border-r border-[#1E1E1E] flex flex-col">
+          <aside className={`fixed top-0 left-0 bottom-0 w-64 bg-[#111] border-r border-[#1E1E1E] flex flex-col z-50 transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}>
             {/* Logo */}
             <div className="p-6 border-b border-[#1E1E1E]">
               <Link href="/admin" className="text-lg tracking-[0.15em] uppercase font-semibold">
@@ -127,6 +145,7 @@ export default function AdminLayoutClient({
                   <Link
                     key={item.href}
                     href={item.href}
+                    onClick={() => setSidebarOpen(false)}
                     className={`flex items-center gap-3 px-4 py-3 text-sm transition-colors duration-200 ${
                       isActive
                         ? "text-[#C9A84C] bg-[#C9A84C]/10"
@@ -155,7 +174,7 @@ export default function AdminLayoutClient({
           </aside>
 
           {/* Main content */}
-          <main className="flex-1 ml-64 p-8">{children}</main>
+          <main className="flex-1 lg:ml-64 p-4 pt-18 lg:p-8 lg:pt-8">{children}</main>
         </div>
       </body>
     </html>
