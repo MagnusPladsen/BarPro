@@ -409,17 +409,19 @@ export default function AdminBookingsPage() {
                         ))}
                       </div>
 
-                      {/* Offer price */}
-                      <div className="border-t border-[#1E1E1E] pt-4">
-                        <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-2">Tilbudspris til kunde</p>
-                        <div className="flex items-center gap-3">
-                          <input type="number" value={offerPrice || String(defaultOfferPrice())}
-                            onChange={(e) => setOfferPrice(e.target.value)}
-                            className="w-32 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
-                          <span className="text-sm text-[#6B6B6B]">kr</span>
-                          <span className="text-[10px] text-[#6B6B6B]">
-                            ({Math.round((((parseFloat(offerPrice) || defaultOfferPrice()) - totalEstimatedCost()) / totalEstimatedCost()) * 100)}% margin)
-                          </span>
+                      {/* Offer price — prominent */}
+                      <div className="border-t border-[#1E1E1E] pt-6">
+                        <div className="bg-[#C9A84C]/[0.06] border border-[#C9A84C]/20 p-6 text-center">
+                          <p className="text-[10px] text-[#6B6B6B] uppercase tracking-[0.25em] mb-3">Tilbudspris til kunde</p>
+                          <div className="flex items-center justify-center gap-2 mb-2">
+                            <input type="number" value={offerPrice || String(defaultOfferPrice())}
+                              onChange={(e) => setOfferPrice(e.target.value)}
+                              className="w-40 bg-[#0A0A0A] border border-[#C9A84C]/30 px-4 py-3 text-2xl font-semibold text-[#C9A84C] text-center outline-none focus:border-[#C9A84C]/60" />
+                            <span className="text-lg text-[#C9A84C]">kr</span>
+                          </div>
+                          <p className="text-[11px] text-[#6B6B6B]">
+                            {Math.round((((parseFloat(offerPrice) || defaultOfferPrice()) - totalEstimatedCost()) / totalEstimatedCost()) * 100)}% margin · Kostnad: {totalEstimatedCost().toLocaleString("no-NO")} kr
+                          </p>
                         </div>
                       </div>
 
