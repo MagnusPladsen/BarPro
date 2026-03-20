@@ -94,6 +94,11 @@ export default function AdminLayoutClient({
   const [userEmail, setUserEmail] = useState<string | null>(null);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [badges, setBadges] = useState<Record<string, number>>({});
+  const [lightMode, setLightMode] = useState(false);
+
+  useEffect(() => {
+    setLightMode(localStorage.getItem("admin-theme") === "light");
+  }, []);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user } }) => {
@@ -126,7 +131,7 @@ export default function AdminLayoutClient({
 
   return (
     <html lang="no">
-      <body className="bg-[#0A0A0A] text-[#F5F0E8] font-sans antialiased">
+      <body className={`font-sans antialiased transition-colors duration-300 ${lightMode ? "bg-[#F5F0E8] text-[#1A1A1A]" : "bg-[#0A0A0A] text-[#F5F0E8]"}`}>
         <div className="flex min-h-screen">
           {/* Mobile header */}
           <div className="fixed top-0 left-0 right-0 z-50 h-14 bg-[#111] border-b border-[#1E1E1E] flex items-center justify-between px-4 lg:hidden">
@@ -146,7 +151,7 @@ export default function AdminLayoutClient({
           )}
 
           {/* Sidebar */}
-          <aside className={`fixed top-0 left-0 bottom-0 w-64 bg-[#111] border-r border-[#1E1E1E] flex flex-col z-50 transition-transform duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0`}>
+          <aside className={`fixed top-0 left-0 bottom-0 w-64 border-r flex flex-col z-50 transition-all duration-300 ${sidebarOpen ? "translate-x-0" : "-translate-x-full"} lg:translate-x-0 ${lightMode ? "bg-white border-gray-200" : "bg-[#111] border-[#1E1E1E]"}`}>
             {/* Logo */}
             <div className="p-6 border-b border-[#1E1E1E]">
               <Link href="/admin" className="text-lg tracking-[0.15em] uppercase font-semibold">
@@ -190,10 +195,23 @@ export default function AdminLayoutClient({
               {userEmail && (
                 <p className="text-[10px] text-[#6B6B6B] truncate mb-3">{userEmail}</p>
               )}
-              <Link href="/admin/hjelp" onClick={() => setSidebarOpen(false)}
-                className="block text-sm text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors duration-200 mb-2">
-                Hjelp
-              </Link>
+              <div className="flex items-center justify-between mb-2">
+                <Link href="/admin/hjelp" onClick={() => setSidebarOpen(false)}
+                  className="text-sm text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors duration-200">
+                  Hjelp
+                </Link>
+                <button onClick={() => {
+                  const next = !lightMode;
+                  setLightMode(next);
+                  localStorage.setItem("admin-theme", next ? "light" : "dark");
+                }} className="text-[#6B6B6B] hover:text-[#C9A84C] transition-colors cursor-pointer" title={lightMode ? "Mørk modus" : "Lys modus"}>
+                  {lightMode ? (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" /></svg>
+                  ) : (
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4"><circle cx="12" cy="12" r="5" /><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" /></svg>
+                  )}
+                </button>
+              </div>
               <Link href="/admin/innstillinger" onClick={() => setSidebarOpen(false)}
                 className="block text-sm text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors duration-200 mb-2">
                 Innstillinger

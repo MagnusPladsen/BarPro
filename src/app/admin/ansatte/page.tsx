@@ -243,7 +243,7 @@ export default function AnsattePage() {
           <div className="w-1/2 bg-[#141414] border border-[#1E1E1E] p-6 sticky top-8 self-start max-h-[calc(100vh-6rem)] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-4">
-                <div className="w-16 h-16 bg-[#1A1A1A] border border-[#1E1E1E] overflow-hidden relative shrink-0">
+                <label className="w-16 h-16 bg-[#1A1A1A] border border-[#1E1E1E] overflow-hidden relative shrink-0 cursor-pointer group">
                   {selected.photo_url ? (
                     <Image src={selected.photo_url} alt={selected.name} fill className="object-cover" sizes="64px" />
                   ) : (
@@ -251,7 +251,32 @@ export default function AnsattePage() {
                       {selected.name.split(" ").map((n) => n[0]).join("")}
                     </div>
                   )}
-                </div>
+                  <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="1.5" className="w-5 h-5">
+                      <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" />
+                      <circle cx="12" cy="13" r="4" />
+                    </svg>
+                  </div>
+                  <input type="file" accept="image/jpeg,image/png,image/webp" className="hidden" onChange={async (e) => {
+                    const file = e.target.files?.[0];
+                    if (!file || !selected) return;
+                    setSaving(true);
+                    const formData = new FormData();
+                    formData.append("file", file);
+                    formData.append("employeeId", selected.id);
+                    const res = await fetch("/api/admin/upload", { method: "POST", body: formData });
+                    if (res.ok) {
+                      const { url } = await res.json();
+                      setSelected({ ...selected, photo_url: url });
+                      setNotification({ type: "success", message: "Bilde oppdatert" }); setTimeout(() => setNotification(null), 4000);
+                      await fetchEmployees();
+                    } else {
+                      const data = await res.json();
+                      setNotification({ type: "error", message: data.error || "Opplasting feilet" }); setTimeout(() => setNotification(null), 4000);
+                    }
+                    setSaving(false);
+                  }} />
+                </label>
                 <div>
                   <h2 className="text-lg font-medium">{selected.name}</h2>
                   <p className="text-[11px] text-[#C9A84C]">{selected.role}</p>
