@@ -136,29 +136,34 @@ export default function AnsattePage() {
   const totalHours = assignments.reduce((sum, a) => sum + (a.hours_worked ?? 0), 0);
   const approvedHours = assignments.filter((a) => a.approved).reduce((sum, a) => sum + (a.hours_worked ?? 0), 0);
 
-  const displayed = showInactive ? employees : employees.filter((e) => e.is_active);
+  const [filter, setFilter] = useState<"active" | "inactive" | "all">("active");
+  const [page, setPage] = useState(0);
+  const PAGE_SIZE = 10;
+
+  const filtered = filter === "all" ? employees : employees.filter((e) => filter === "active" ? e.is_active : !e.is_active);
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+  const displayed = filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
+
+  const filters: { value: "active" | "inactive" | "all"; label: string }[] = [
+    { value: "active", label: "Aktive" },
+    { value: "inactive", label: "Inaktive" },
+    { value: "all", label: "Alle" },
+  ];
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-8">
-        <h1 className="text-2xl font-semibold">Ansatte</h1>
-        <div className="flex items-center gap-4">
-          <label className="flex items-center gap-2 text-[11px] text-[#6B6B6B] cursor-pointer">
-            <input
-              type="checkbox"
-              checked={showInactive}
-              onChange={(e) => setShowInactive(e.target.checked)}
-              className="accent-[#C9A84C]"
-            />
-            Vis inaktive
-          </label>
-          <button
-            onClick={() => setShowAddForm(true)}
-            className="bg-[#C9A84C] text-[#0A0A0A] px-4 py-2 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4AF57] transition-colors cursor-pointer"
-          >
-            + Legg til
-          </button>
-        </div>
+      <h1 className="text-2xl font-semibold mb-8">Ansatte</h1>
+
+      {/* Tabs */}
+      <div className="flex items-center gap-2 mb-6">
+        {filters.map((f) => (
+          <button key={f.value} onClick={() => { setFilter(f.value); setPage(0); }}
+            className={`px-4 py-2 text-xs tracking-wider uppercase transition-colors cursor-pointer ${
+              filter === f.value
+                ? "bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30"
+                : "text-[#6B6B6B] border border-[#1E1E1E] hover:text-[#F5F0E8]"
+            }`}>{f.label} ({filter === "all" ? employees.length : employees.filter((e) => f.value === "active" ? e.is_active : f.value === "inactive" ? !e.is_active : true).length})</button>
+        ))}
       </div>
 
       <div className="flex gap-6">
@@ -203,6 +208,23 @@ export default function AnsattePage() {
               </div>
             </button>
           ))}
+
+          {/* Pagination */}
+          {totalPages > 1 && (
+            <div className="flex items-center justify-center gap-2 pt-4">
+              <button onClick={() => setPage(Math.max(0, page - 1))} disabled={page === 0}
+                className="px-3 py-1.5 text-xs text-[#6B6B6B] border border-[#1E1E1E] hover:text-[#F5F0E8] cursor-pointer disabled:opacity-30">&larr;</button>
+              <span className="text-[11px] text-[#6B6B6B]">{page + 1} / {totalPages}</span>
+              <button onClick={() => setPage(Math.min(totalPages - 1, page + 1))} disabled={page >= totalPages - 1}
+                className="px-3 py-1.5 text-xs text-[#6B6B6B] border border-[#1E1E1E] hover:text-[#F5F0E8] cursor-pointer disabled:opacity-30">&rarr;</button>
+            </div>
+          )}
+
+          {/* Add employee button */}
+          <button onClick={() => setShowAddForm(true)}
+            className="w-full mt-4 border border-dashed border-[#1E1E1E] py-4 text-xs text-[#6B6B6B] uppercase tracking-wider hover:text-[#C9A84C] hover:border-[#C9A84C]/30 transition-colors cursor-pointer">
+            + Legg til ansatt
+          </button>
         </div>
 
         {/* Detail panel */}
@@ -338,12 +360,27 @@ export default function AnsattePage() {
                   </div>
                 )}
 
-                <button
-                  onClick={() => setEditing(true)}
-                  className="w-full mt-4 bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C9A84C]/20 cursor-pointer"
-                >
-                  Rediger
-                </button>
+                <div className="flex gap-2 mt-4">
+                  <button
+                    onClick={() => setEditing(true)}
+                    className="flex-1 bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C9A84C]/20 cursor-pointer"
+                  >
+                    Rediger
+                  </button>
+                  <button
+                    onClick={async () => {
+                      const { error } = await supabase.auth.resetPasswordForEmail(selected.email);
+                      if (error) {
+                        alert("Kunne ikke sende reset-lenke: " + error.message);
+                      } else {
+                        alert("Passord-reset sendt til " + selected.email);
+                      }
+                    }}
+                    className="flex-1 border border-[#1E1E1E] text-[#6B6B6B] py-2 text-xs uppercase tracking-wider hover:text-[#F5F0E8] hover:border-[#C9A84C]/20 cursor-pointer"
+                  >
+                    Reset passord
+                  </button>
+                </div>
               </div>
             )}
           </div>
