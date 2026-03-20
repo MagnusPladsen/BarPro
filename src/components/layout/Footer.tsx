@@ -91,6 +91,10 @@ export async function Footer() {
         <div className="relative mt-20 border-t border-border pt-8 text-center text-[11px] tracking-[0.15em] uppercase text-text-muted/50">
           <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-px bg-gold/30" />
           &copy; 2026 BarPro. {tFooter("rights")}
+          <span className="mx-2">·</span>
+          <Link href="/personvern" className="hover:text-text-primary transition-colors">
+            {tFooter("privacy")}
+          </Link>
         </div>
       </div>
     </footer>

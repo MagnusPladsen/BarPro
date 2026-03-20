@@ -332,6 +332,45 @@
       "messageMin": "Message must be at least 10 characters"
     }
   },
+  "privacyPage": {
+    "label": "Privacy",
+    "heading": "Privacy Policy",
+    "sections": {
+      "intro": {
+        "title": "About this policy",
+        "text": "BarPro takes your privacy seriously. This policy describes how we collect, use, and protect your personal data in accordance with the Norwegian Personal Data Act and GDPR."
+      },
+      "whatWeCollect": {
+        "title": "What we collect",
+        "text": "When you submit a request or book through our website, we collect: name, email address, phone number (optional), event type, number of guests, preferred date, and any messages you write to us."
+      },
+      "whyWeCollect": {
+        "title": "Why we collect data",
+        "text": "We use your information solely to process your request, prepare offers, deliver agreed services, and communicate with you about the event. We do not use your data for marketing unless you give explicit consent."
+      },
+      "storage": {
+        "title": "Storage and security",
+        "text": "Your data is securely stored with our data provider (Supabase) with encrypted transfer and access control. We retain data as long as necessary to fulfill its purpose, and delete it within 12 months after the event is completed, unless legal requirements dictate otherwise."
+      },
+      "sharing": {
+        "title": "Third-party sharing",
+        "text": "We do not share your personal data with third parties, except for technical service providers necessary for operating the service (email provider, database host). These are subject to data processing agreements."
+      },
+      "rights": {
+        "title": "Your rights",
+        "text": "You have the right to access, correct, delete, and port your data. You can withdraw your consent at any time. Contact us at Barproda@gmail.com to exercise your rights. We respond within 30 days."
+      },
+      "cookies": {
+        "title": "Cookies",
+        "text": "We only use necessary cookies for the website to function (authentication, language selection). We do not use third-party tracking cookies or analytics tools that collect personal data."
+      },
+      "contact": {
+        "title": "Contact",
+        "text": "The data controller is BarPro. For privacy questions, contact us at Barproda@gmail.com."
+      }
+    },
+    "lastUpdated": "Last updated: March 2026"
+  },
   "faq": {
     "label": "Frequently asked questions",
     "heading": "Have questions?",
@@ -413,6 +452,7 @@
       "message": "Message (optional)",
       "messagePlaceholder": "Anything we should know about the event?",
       "callback": "I'd like to be called for more info",
+      "consent": "I consent to BarPro storing my information to process this request. Read our privacy policy.",
       "back": "Back",
       "next": "Next step",
       "submit": "Send request",
@@ -458,6 +498,7 @@
     "tagline": "Professional event staffing for unforgettable experiences",
     "pages": "Pages",
     "contactHeading": "Contact",
-    "rights": "All rights reserved."
+    "rights": "All rights reserved.",
+    "privacy": "Privacy Policy"
   }
 }
