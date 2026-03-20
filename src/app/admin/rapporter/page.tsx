@@ -82,7 +82,7 @@ export default function RapporterPage() {
   // Per-employee breakdown
   const employeeStats = employees.map((emp) => {
     const empAssignments = assignments.filter((a) => {
-      return a.employees?.name === emp.name;
+      return (a as unknown as { employee_id: string }).employee_id === emp.id;
     });
     const hours = empAssignments.filter((a) => a.approved).reduce((s, a) => s + (a.hours_worked ?? 0), 0);
     const salary = hours * emp.hourly_rate + empAssignments.reduce((s, a) => s + (a.extra_pay ?? 0), 0);

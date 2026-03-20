@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
+import { BookingCallout } from "@/components/sections/BookingCallout";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -228,6 +229,8 @@ export default function PriserPage() {
           </motion.div>
         </div>
       </section>
+
+      <BookingCallout />
     </>
   );
 }

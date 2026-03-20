@@ -634,8 +634,9 @@ export default function AdminBookingsPage() {
             <p className="text-sm text-[#6B6B6B] mb-6">Er du sikker på at du vil sende dette tilbudet?</p>
             <div className="flex gap-2">
               <button onClick={() => processAcceptance(parseFloat(offerPrice) || defaultOfferPrice(), totalEstimatedCost())}
-                className="flex-1 bg-red-400/10 text-red-400 border border-red-400/30 py-2 text-xs uppercase tracking-wider hover:bg-red-400/20 cursor-pointer">
-                Ja, send likevel
+                disabled={updating}
+                className="flex-1 bg-red-400/10 text-red-400 border border-red-400/30 py-2 text-xs uppercase tracking-wider hover:bg-red-400/20 cursor-pointer disabled:opacity-50">
+                {updating ? "Sender..." : "Ja, send likevel"}
               </button>
               <button onClick={() => setShowPriceWarning(false)}
                 className="flex-1 border border-[#1E1E1E] py-2 text-xs text-[#6B6B6B] uppercase tracking-wider hover:text-[#F5F0E8] cursor-pointer">

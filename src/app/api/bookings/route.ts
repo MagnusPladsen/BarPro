@@ -41,22 +41,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Check no existing active booking on this date
-    const { data: existingBooking } = await supabase
-      .from("bookings")
-      .select("id")
-      .eq("date", date)
-      .in("status", ["pending", "confirmed"])
-      .maybeSingle();
-
-    if (existingBooking) {
-      return NextResponse.json(
-        { error: "Denne datoen er allerede booket" },
-        { status: 400 },
-      );
-    }
-
-    // Create booking
+    // Create booking (unique index prevents duplicates atomically)
     const { data, error } = await supabase
       .from("bookings")
       .insert({
@@ -74,6 +59,13 @@ export async function POST(request: Request) {
       .single();
 
     if (error) {
+      // Unique constraint violation = date already booked
+      if (error.code === "23505") {
+        return NextResponse.json(
+          { error: "Denne datoen er allerede booket" },
+          { status: 400 },
+        );
+      }
       console.error("Booking insert error:", error);
       return NextResponse.json(
         { error: "Kunne ikke opprette booking" },

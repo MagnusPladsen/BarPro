@@ -15,7 +15,6 @@ export default function AnsattePage() {
   const [employees, setEmployees] = useState<Employee[]>([]);
   const [selected, setSelected] = useState<Employee | null>(null);
   const [assignments, setAssignments] = useState<Assignment[]>([]);
-  const [showInactive, setShowInactive] = useState(false);
   const [editing, setEditing] = useState(false);
   const [showAddForm, setShowAddForm] = useState(false);
   const [saving, setSaving] = useState(false);

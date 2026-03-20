@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { BookingCallout } from "@/components/sections/BookingCallout";
 import { Button } from "@/components/ui/Button";
 
 const serviceBlocks = [
@@ -200,6 +201,8 @@ export default function TjenesterPage() {
           </motion.div>
         </div>
       </section>
+
+      <BookingCallout />
     </>
   );
 }
