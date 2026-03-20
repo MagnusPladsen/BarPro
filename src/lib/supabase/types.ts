@@ -1,4 +1,4 @@
-export type BookingStatus = "pending" | "confirmed" | "cancelled" | "completed";
+export type BookingStatus = "pending" | "offer_sent" | "confirmed" | "cancelled" | "completed";
 export type PackageType = "basis" | "premium" | "eksklusiv";
 export type EventType = "wedding" | "corporate" | "private" | "other";
 export type MessageStatus = "unread" | "read" | "replied";
@@ -183,6 +183,8 @@ export interface Database {
           notes: string | null;
           sent_at: string | null;
           responded_at: string | null;
+          rejection_reason: string | null;
+          wants_new_offer: boolean;
           created_at: string;
           updated_at: string;
         };
@@ -195,6 +197,8 @@ export interface Database {
           status?: OfferStatus;
           notes?: string | null;
           sent_at?: string | null;
+          rejection_reason?: string | null;
+          wants_new_offer?: boolean;
         };
         Update: {
           estimated_cost?: number;
@@ -204,6 +208,8 @@ export interface Database {
           notes?: string | null;
           sent_at?: string | null;
           responded_at?: string | null;
+          rejection_reason?: string | null;
+          wants_new_offer?: boolean;
         };
         Relationships: [];
       };

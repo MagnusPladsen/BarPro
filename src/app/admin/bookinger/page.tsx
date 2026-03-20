@@ -134,7 +134,7 @@ export default function AdminBookingsPage() {
 
     // Update booking with time info
     await supabase.from("bookings").update({
-      status: "confirmed" as BookingStatus,
+      status: "offer_sent" as BookingStatus,
       start_time: startTime,
       end_time: endTime,
       estimated_hours: hours,
@@ -183,7 +183,7 @@ export default function AdminBookingsPage() {
       message_type: "offer",
     });
 
-    setSelected({ ...selected, status: "confirmed", start_time: startTime, end_time: endTime, estimated_hours: hours });
+    setSelected({ ...selected, status: "offer_sent", start_time: startTime, end_time: endTime, estimated_hours: hours });
     setExtraCosts([]);
     await fetchBookings();
     await loadBookingData(selected.id);
@@ -225,13 +225,13 @@ export default function AdminBookingsPage() {
 
   const packageLabels: Record<string, string> = { basis: "Basis", premium: "Premium", eksklusiv: "Eksklusiv" };
   const eventLabels: Record<string, string> = { wedding: "Bryllup", corporate: "Bedrift", private: "Privat", other: "Annet" };
-  const statusLabels: Record<string, string> = { pending: "Ventende", confirmed: "Bekreftet", cancelled: "Avlyst", completed: "Fullført" };
-  const statusColors: Record<string, string> = { pending: "text-yellow-400 bg-yellow-400/10", confirmed: "text-green-400 bg-green-400/10", cancelled: "text-red-400 bg-red-400/10", completed: "text-[#6B6B6B] bg-[#6B6B6B]/10" };
+  const statusLabels: Record<string, string> = { pending: "Forespørsel", offer_sent: "Tilbud sendt", confirmed: "Bekreftet", cancelled: "Avlyst", completed: "Fullført" };
+  const statusColors: Record<string, string> = { pending: "text-yellow-400 bg-yellow-400/10", offer_sent: "text-blue-400 bg-blue-400/10", confirmed: "text-green-400 bg-green-400/10", cancelled: "text-red-400 bg-red-400/10", completed: "text-[#6B6B6B] bg-[#6B6B6B]/10" };
 
   const filters: { value: BookingStatus | "all"; label: string }[] = [
-    { value: "all", label: "Alle" }, { value: "pending", label: "Ventende" },
-    { value: "confirmed", label: "Bekreftet" }, { value: "completed", label: "Fullført" },
-    { value: "cancelled", label: "Avlyst" },
+    { value: "all", label: "Alle" }, { value: "pending", label: "Forespørsler" },
+    { value: "offer_sent", label: "Tilbud sendt" }, { value: "confirmed", label: "Bekreftet" },
+    { value: "completed", label: "Fullført" }, { value: "cancelled", label: "Avlyst" },
   ];
 
   return (
@@ -483,7 +483,12 @@ export default function AdminBookingsPage() {
                       placeholder="Notater..." />
                   </div>
 
-                  {/* Status actions for non-pending */}
+                  {/* Status actions */}
+                  {selected.status === "offer_sent" && (
+                    <div className="border-t border-[#1E1E1E] pt-4">
+                      <p className="text-[11px] text-blue-400 mb-2">Venter på svar fra kunde</p>
+                    </div>
+                  )}
                   {selected.status === "confirmed" && (
                     <button onClick={() => updateStatus(selected.id, "completed")} disabled={updating}
                       className="w-full bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C9A84C]/20 cursor-pointer disabled:opacity-50">
