@@ -103,6 +103,24 @@ export async function POST(
       message_type: "system",
     });
 
+    // Send confirmation email
+    try {
+      const { data: booking } = await supabase
+        .from("bookings")
+        .select("customer_email, customer_name, date, package")
+        .eq("id", typedOffer.booking_id)
+        .single();
+
+      if (booking) {
+        const b = booking as { customer_email: string; customer_name: string; date: string; package: string };
+        const pkgLabels: Record<string, string> = { basis: "Basis", premium: "Premium", eksklusiv: "Eksklusiv" };
+        const { sendBookingConfirmation } = await import("@/lib/email");
+        await sendBookingConfirmation(b.customer_email, b.customer_name, b.date, pkgLabels[b.package] ?? b.package, typedOffer.offered_price);
+      }
+    } catch (emailErr) {
+      console.error("Failed to send confirmation email:", emailErr);
+    }
+
     return NextResponse.json({ success: true });
   }
 

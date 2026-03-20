@@ -72,6 +72,29 @@ BarPro`,
   });
 }
 
+export async function sendBookingConfirmation(customerEmail: string, customerName: string, date: string, packageName: string, price: number) {
+  const resend = getResendClient();
+
+  return resend.emails.send({
+    from: "BarPro <noreply@barpro.pladsen.dev>",
+    to: customerEmail,
+    subject: "Booking bekreftet — BarPro",
+    text: `Hei ${customerName},
+
+Flott nyheter! Din booking er nå bekreftet.
+
+Dato: ${date}
+Pakke: ${packageName}
+Pris: ${price.toLocaleString("no-NO")} kr (ekskl. mva)
+
+Vi gleder oss til arrangementet ditt! Ta kontakt hvis du har spørsmål.
+
+Med vennlig hilsen,
+Emil & Sofie
+BarPro`,
+  });
+}
+
 export async function sendBookingNotification(customerName: string, date: string, packageName: string) {
   const resend = getResendClient();
 
