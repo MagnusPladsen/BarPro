@@ -8,8 +8,8 @@ const intlMiddleware = createIntlMiddleware(routing);
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Login page — no auth needed, skip i18n
-  if (pathname === "/login") {
+  // Login page and offer pages — no auth needed, skip i18n
+  if (pathname === "/login" || pathname.startsWith("/offer")) {
     return NextResponse.next();
   }
 

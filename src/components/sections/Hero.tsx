@@ -148,9 +148,14 @@ export function Hero() {
             ease: [0.25, 0.1, 0.25, 1],
           }}
         >
-          <Button href="/bestill" size="large">
-            {t("ctaBook")} →
-          </Button>
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Button href="/tjenester" size="large">
+              {t("ctaServices")}
+            </Button>
+            <Button href="/priser" variant="outline" size="large">
+              {t("ctaPricing")}
+            </Button>
+          </div>
         </motion.div>
       </motion.div>
 
