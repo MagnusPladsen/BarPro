@@ -1,8 +1,6 @@
 # BarPro — TODO
 
 ## Backlog
-- [ ] Dark/light mode toggle for admin
-- [ ] Employee photo upload via admin
 - [ ] Middleware "proxy" convention warning (Next.js 16 deprecation)
 - [ ] Full Google Calendar OAuth sync (currently .ics export only)
 - [ ] Resend domain verification (barpro.pladsen.dev) for email delivery
@@ -10,6 +8,8 @@
 - [ ] Production: verify all Supabase RLS policies
 
 ## Done (today)
+- [x] Dark/light mode toggle for admin (persisted in localStorage)
+- [x] Employee photo upload via admin (hover avatar → click to upload)
 - [x] Activity log page (/admin/aktivitet)
 - [x] Notification badges on sidebar
 - [x] Dashboard search bar
