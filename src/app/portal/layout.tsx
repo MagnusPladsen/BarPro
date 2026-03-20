@@ -15,7 +15,7 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
   useEffect(() => {
     supabase.auth.getUser().then(async ({ data: { user } }) => {
       if (!user) {
-        router.push("/admin/login");
+        router.push("/login");
         return;
       }
 

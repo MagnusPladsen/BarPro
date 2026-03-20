@@ -27,6 +27,8 @@ export default function BookingPage() {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
+  const [startTime, setStartTime] = useState("18:00");
+  const [endTime, setEndTime] = useState("23:00");
   const [wantsCallback, setWantsCallback] = useState(false);
   const [consentGiven, setConsentGiven] = useState(false);
   const [submitting, setSubmitting] = useState(false);
@@ -63,6 +65,8 @@ export default function BookingPage() {
         body: JSON.stringify({
           date: selectedDate,
           end_date: selectedEndDate,
+          start_time: startTime,
+          end_time: endTime,
           package: pkg,
           guest_count: guestCount,
           event_type: eventType,
@@ -299,12 +303,31 @@ export default function BookingPage() {
                       </div>
 
                       {selectedDate && (
-                        <button
-                          onClick={() => setStep("details")}
-                          className="w-full mt-8 bg-gold text-background py-4 text-xs font-medium tracking-[0.15em] uppercase hover:bg-gold-hover transition-colors cursor-pointer"
-                        >
-                          {t("calendar.next")} &rarr;
-                        </button>
+                        <div className="mt-8 space-y-4">
+                          {/* Time range */}
+                          <div>
+                            <p className="text-[11px] tracking-[0.2em] uppercase text-text-muted mb-2">{t("calendar.time")}</p>
+                            <div className="grid grid-cols-2 gap-3">
+                              <div>
+                                <label className="text-[10px] text-text-muted">{t("calendar.from")}</label>
+                                <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)}
+                                  className="w-full mt-1 bg-background border border-border px-3 py-2.5 text-sm text-text-primary outline-none focus:border-border-gold transition-colors" />
+                              </div>
+                              <div>
+                                <label className="text-[10px] text-text-muted">{t("calendar.to")}</label>
+                                <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)}
+                                  className="w-full mt-1 bg-background border border-border px-3 py-2.5 text-sm text-text-primary outline-none focus:border-border-gold transition-colors" />
+                              </div>
+                            </div>
+                          </div>
+
+                          <button
+                            onClick={() => setStep("details")}
+                            className="w-full bg-gold text-background py-4 text-xs font-medium tracking-[0.15em] uppercase hover:bg-gold-hover transition-colors cursor-pointer"
+                          >
+                            {t("calendar.next")} &rarr;
+                          </button>
+                        </div>
                       )}
                     </div>
                   )}

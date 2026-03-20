@@ -429,6 +429,9 @@
       "unavailable": "Not available",
       "booked": "Booked",
       "multiDay": "Multiple days",
+      "time": "Time",
+      "from": "From",
+      "to": "To",
       "next": "Next step"
     },
     "form": {
