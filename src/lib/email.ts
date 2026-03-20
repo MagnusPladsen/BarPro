@@ -38,7 +38,7 @@ ${message}
   const resend = getResendClient();
 
   return resend.emails.send({
-    from: "BarPro <onboarding@resend.dev>",
+    from: "BarPro <noreply@barpro.pladsen.dev>",
     to: "Barproda@gmail.com",
     replyTo: email,
     subject: `Ny forespørsel: ${eventType} — ${name}`,
@@ -52,7 +52,7 @@ export async function sendOfferEmail(customerEmail: string, customerName: string
   const offerUrl = `${baseUrl}/offer/${offerId}${customerToken ? `?token=${customerToken}` : ""}`;
 
   return resend.emails.send({
-    from: "BarPro <onboarding@resend.dev>",
+    from: "BarPro <noreply@barpro.pladsen.dev>",
     to: customerEmail,
     subject: `Tilbud fra BarPro — ${price.toLocaleString("no-NO")} kr`,
     text: `Hei ${customerName},
@@ -76,7 +76,7 @@ export async function sendBookingNotification(customerName: string, date: string
   const resend = getResendClient();
 
   return resend.emails.send({
-    from: "BarPro <onboarding@resend.dev>",
+    from: "BarPro <noreply@barpro.pladsen.dev>",
     to: "Barproda@gmail.com",
     subject: `Ny forespørsel: ${customerName} — ${date}`,
     text: `Ny forespørsel mottatt:
