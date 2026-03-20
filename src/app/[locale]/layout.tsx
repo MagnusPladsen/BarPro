@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import "../globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 
 export const metadata: Metadata = {
   title: {
@@ -78,6 +79,7 @@ export default async function LocaleLayout({
     <html lang={locale} className={`${cormorant.variable} ${dmSans.variable}`}>
       <body className="bg-background text-text-primary font-body antialiased">
         <NextIntlClientProvider messages={messages}>
+          <AnnouncementBar />
           <Header />
           <main>{children}</main>
           <Footer />

@@ -16,9 +16,11 @@ export default function BookingPage() {
   const [blockedDates, setBlockedDates] = useState<string[]>([]);
   const [bookedDates, setBookedDates] = useState<string[]>([]);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
+  const [selectedEndDate, setSelectedEndDate] = useState<string | null>(null);
+  const [rangeMode, setRangeMode] = useState(false);
 
   // Form state
-  const [pkg, setPkg] = useState<string>("");
+  const [pkg, setPkg] = useState<string>("premium");
   const [eventType, setEventType] = useState<string>("");
   const [guestCount, setGuestCount] = useState<string>("");
   const [name, setName] = useState("");
@@ -60,6 +62,7 @@ export default function BookingPage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           date: selectedDate,
+          end_date: selectedEndDate,
           package: pkg,
           guest_count: guestCount,
           event_type: eventType,
@@ -231,16 +234,39 @@ export default function BookingPage() {
                             const isBooked = bookedDates.includes(dateStr);
                             const isAvailable = !isPast && !isBlocked && !isBooked;
                             const isSelected = selectedDate === dateStr;
+                            const isEndSelected = selectedEndDate === dateStr;
+                            const isInRange = rangeMode && selectedDate && selectedEndDate &&
+                              dateStr > selectedDate && dateStr < selectedEndDate;
+
+                            const handleDateClick = () => {
+                              if (!isAvailable) return;
+                              if (rangeMode) {
+                                if (!selectedDate || (selectedDate && selectedEndDate)) {
+                                  setSelectedDate(dateStr);
+                                  setSelectedEndDate(null);
+                                } else if (dateStr > selectedDate) {
+                                  setSelectedEndDate(dateStr);
+                                } else {
+                                  setSelectedDate(dateStr);
+                                  setSelectedEndDate(null);
+                                }
+                              } else {
+                                setSelectedDate(dateStr);
+                                setSelectedEndDate(null);
+                              }
+                            };
 
                             return (
                               <button
                                 key={day}
-                                onClick={() => isAvailable && setSelectedDate(dateStr)}
+                                onClick={handleDateClick}
                                 disabled={!isAvailable}
                                 className={`p-3 min-h-[48px] text-center text-sm transition-all ${
-                                  isSelected
+                                  isSelected || isEndSelected
                                     ? "bg-gold text-background font-medium cursor-pointer"
-                                    : isBooked
+                                    : isInRange
+                                      ? "bg-gold/20 text-gold cursor-pointer"
+                                      : isBooked
                                       ? "text-text-muted/50 cursor-not-allowed bg-text-muted/[0.03]"
                                       : isAvailable
                                         ? "text-text-primary hover:bg-gold/10 cursor-pointer"
@@ -257,13 +283,19 @@ export default function BookingPage() {
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-6 mt-4 text-[11px] text-text-muted">
-                        <div className="flex items-center gap-2">
-                          <div className="w-3 h-3 border border-border" /> {t("calendar.available")}
+                      <div className="flex items-center justify-between mt-4">
+                        <div className="flex items-center gap-6 text-[11px] text-text-muted">
+                          <div className="flex items-center gap-2">
+                            <div className="w-3 h-3 border border-border" /> {t("calendar.available")}
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <div className="w-1.5 h-1.5 bg-text-muted/30 mx-0.5" /> {t("calendar.booked")}
+                          </div>
                         </div>
-                        <div className="flex items-center gap-2">
-                          <div className="w-1.5 h-1.5 bg-text-muted/30 mx-0.5" /> {t("calendar.booked")}
-                        </div>
+                        <label className="flex items-center gap-2 text-[11px] text-text-muted cursor-pointer">
+                          <input type="checkbox" checked={rangeMode} onChange={(e) => { setRangeMode(e.target.checked); setSelectedEndDate(null); }} className="accent-[#C9A84C]" />
+                          {t("calendar.multiDay")}
+                        </label>
                       </div>
 
                       {selectedDate && (
