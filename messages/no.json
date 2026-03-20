@@ -5,7 +5,8 @@
     "about": "Om oss",
     "contact": "Kontakt oss",
     "pricing": "Priser",
-    "blog": "Blogg"
+    "blog": "Blogg",
+    "book": "Bestill nå"
   },
   "hero": {
     "tagline": "Din anledning. Vår kvalitet.",
@@ -376,6 +377,7 @@
       "subheading": "Velg en tilgjengelig dato fra kalenderen",
       "available": "Tilgjengelig",
       "unavailable": "Ikke tilgjengelig",
+      "booked": "Opptatt",
       "next": "Neste steg"
     },
     "form": {

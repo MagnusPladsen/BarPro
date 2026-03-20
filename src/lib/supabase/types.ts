@@ -6,23 +6,23 @@ export type MessageStatus = "unread" | "read" | "replied";
 export interface Database {
   public: {
     Tables: {
-      available_dates: {
+      blocked_dates: {
         Row: {
           id: string;
           date: string;
-          note: string | null;
+          reason: string | null;
           created_at: string;
         };
         Insert: {
           id?: string;
           date: string;
-          note?: string | null;
+          reason?: string | null;
           created_at?: string;
         };
         Update: {
           id?: string;
           date?: string;
-          note?: string | null;
+          reason?: string | null;
           created_at?: string;
         };
         Relationships: [];
@@ -79,15 +79,7 @@ export interface Database {
           created_at?: string;
           updated_at?: string;
         };
-        Relationships: [
-          {
-            foreignKeyName: "bookings_date_fkey";
-            columns: ["date"];
-            isOneToOne: false;
-            referencedRelation: "available_dates";
-            referencedColumns: ["date"];
-          },
-        ];
+        Relationships: [];
       };
       contact_messages: {
         Row: {

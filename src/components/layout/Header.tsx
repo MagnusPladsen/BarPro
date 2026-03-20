@@ -109,10 +109,10 @@ export function Header() {
 
               {/* CTA */}
               <Link
-                href="/kontakt"
-                className="border border-gold/40 px-6 py-2.5 text-[11px] font-medium tracking-[0.2em] uppercase text-gold transition-all duration-300 hover:bg-gold hover:text-background"
+                href="/bestill"
+                className="bg-gold px-6 py-2.5 text-[11px] font-medium tracking-[0.2em] uppercase text-background transition-all duration-300 hover:bg-gold-hover"
               >
-                {t("contact")}
+                {t("book")}
               </Link>
             </div>
 
@@ -180,11 +180,11 @@ export function Header() {
                 transition={{ delay: 0.34, duration: 0.5 }}
               >
                 <Link
-                  href="/kontakt"
+                  href="/bestill"
                   onClick={() => setMobileMenuOpen(false)}
                   className="font-display text-4xl font-light tracking-wide text-gold"
                 >
-                  {t("contact")}
+                  {t("book")}
                 </Link>
               </motion.div>
 

@@ -15,7 +15,7 @@ export default function BookingPage() {
 
   const [step, setStep] = useState<Step>("date");
   const [currentMonth, setCurrentMonth] = useState(new Date());
-  const [availableDates, setAvailableDates] = useState<string[]>([]);
+  const [blockedDates, setBlockedDates] = useState<string[]>([]);
   const [bookedDates, setBookedDates] = useState<string[]>([]);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
 
@@ -37,9 +37,9 @@ export default function BookingPage() {
     const start = new Date(year, month, 1).toISOString().split("T")[0];
     const end = new Date(year, month + 1, 0).toISOString().split("T")[0];
 
-    const [datesRes, bookingsRes] = await Promise.all([
+    const [blockedRes, bookingsRes] = await Promise.all([
       supabase
-        .from("available_dates")
+        .from("blocked_dates")
         .select("date")
         .gte("date", start)
         .lte("date", end),
@@ -51,7 +51,7 @@ export default function BookingPage() {
         .in("status", ["pending", "confirmed"]),
     ]);
 
-    setAvailableDates(((datesRes.data ?? []) as { date: string }[]).map((d) => d.date));
+    setBlockedDates(((blockedRes.data ?? []) as { date: string }[]).map((d) => d.date));
     setBookedDates(((bookingsRes.data ?? []) as { date: string }[]).map((d) => d.date));
   }, [supabase, currentMonth]);
 
@@ -236,35 +236,42 @@ export default function BookingPage() {
 
                             const dateStr = getDateStr(day);
                             const isPast = dateStr < today;
-                            const isAvailable = availableDates.includes(dateStr) && !bookedDates.includes(dateStr);
+                            const isBlocked = blockedDates.includes(dateStr);
+                            const isBooked = bookedDates.includes(dateStr);
+                            const isAvailable = !isPast && !isBlocked && !isBooked;
                             const isSelected = selectedDate === dateStr;
 
                             return (
                               <button
                                 key={day}
                                 onClick={() => isAvailable && setSelectedDate(dateStr)}
-                                disabled={!isAvailable || isPast}
-                                className={`p-3 min-h-[48px] text-center text-sm transition-all cursor-pointer ${
+                                disabled={!isAvailable}
+                                className={`p-3 min-h-[48px] text-center text-sm transition-all ${
                                   isSelected
-                                    ? "bg-gold text-background font-medium"
-                                    : isAvailable
-                                      ? "text-text-primary hover:bg-gold/10"
-                                      : "text-text-muted/30 cursor-not-allowed"
+                                    ? "bg-gold text-background font-medium cursor-pointer"
+                                    : isBooked
+                                      ? "text-text-muted/50 cursor-not-allowed bg-text-muted/[0.03]"
+                                      : isAvailable
+                                        ? "text-text-primary hover:bg-gold/10 cursor-pointer"
+                                        : "text-text-muted/30 cursor-not-allowed"
                                 }`}
                               >
-                                {day}
+                                <span>{day}</span>
+                                {isBooked && (
+                                  <div className="w-1.5 h-1.5 bg-text-muted/30 mx-auto mt-1" />
+                                )}
                               </button>
                             );
                           })}
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-4 mt-4 text-[11px] text-text-muted">
+                      <div className="flex items-center gap-6 mt-4 text-[11px] text-text-muted">
                         <div className="flex items-center gap-2">
-                          <div className="w-3 h-3 bg-gold/20" /> {t("calendar.available")}
+                          <div className="w-3 h-3 border border-border" /> {t("calendar.available")}
                         </div>
                         <div className="flex items-center gap-2">
-                          <div className="w-3 h-3 bg-text-muted/10" /> {t("calendar.unavailable")}
+                          <div className="w-1.5 h-1.5 bg-text-muted/30 mx-0.5" /> {t("calendar.booked")}
                         </div>
                       </div>
 
@@ -291,7 +298,7 @@ export default function BookingPage() {
                         <label className="block text-[11px] tracking-[0.2em] uppercase text-text-muted mb-3">
                           {t("form.package")}
                         </label>
-                        <div className="grid grid-cols-3 gap-3">
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
                           {(["basis", "premium", "eksklusiv"] as const).map((p) => (
                             <button
                               key={p}
