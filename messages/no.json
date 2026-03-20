@@ -468,6 +468,11 @@
       "messagePlaceholder": "Noe vi bør vite om arrangementet?",
       "callback": "Ønsker å bli ringt opp for mer info",
       "consent": "Jeg samtykker til at BarPro lagrer mine opplysninger for å behandle denne forespørselen. Les vår personvernerklæring.",
+      "validation": {
+        "name": "Navn må være minst 2 tegn",
+        "email": "Ugyldig e-postadresse",
+        "phone": "Ugyldig telefonnummer (8 siffer)"
+      },
       "back": "Tilbake",
       "next": "Neste steg",
       "submit": "Send forespørsel",

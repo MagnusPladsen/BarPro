@@ -17,7 +17,6 @@ export default function BookingPage() {
   const [bookedDates, setBookedDates] = useState<string[]>([]);
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const [selectedEndDate, setSelectedEndDate] = useState<string | null>(null);
-  const [rangeMode, setRangeMode] = useState(false);
 
   // Form state
   const [pkg, setPkg] = useState<string>("premium");
@@ -113,8 +112,13 @@ export default function BookingPage() {
     "Juli", "August", "September", "Oktober", "November", "Desember",
   ];
 
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const phoneRegex = /^(\+47)?[\s-]?\d{8}$/;
+  const isEmailValid = emailRegex.test(email);
+  const isPhoneValid = !phone || phoneRegex.test(phone.replace(/\s/g, ""));
   const isFormValid =
-    selectedDate && pkg && eventType && guestCount && name && email && consentGiven;
+    selectedDate && pkg && eventType && guestCount && name.trim().length >= 2 && isEmailValid && isPhoneValid && consentGiven;
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
 
   return (
     <>
@@ -239,21 +243,16 @@ export default function BookingPage() {
                             const isAvailable = !isPast && !isBlocked && !isBooked;
                             const isSelected = selectedDate === dateStr;
                             const isEndSelected = selectedEndDate === dateStr;
-                            const isInRange = rangeMode && selectedDate && selectedEndDate &&
+                            const isInRange = selectedDate && selectedEndDate &&
                               dateStr > selectedDate && dateStr < selectedEndDate;
 
                             const handleDateClick = () => {
                               if (!isAvailable) return;
-                              if (rangeMode) {
-                                if (!selectedDate || (selectedDate && selectedEndDate)) {
-                                  setSelectedDate(dateStr);
-                                  setSelectedEndDate(null);
-                                } else if (dateStr > selectedDate) {
-                                  setSelectedEndDate(dateStr);
-                                } else {
-                                  setSelectedDate(dateStr);
-                                  setSelectedEndDate(null);
-                                }
+                              if (!selectedDate || (selectedDate && selectedEndDate)) {
+                                setSelectedDate(dateStr);
+                                setSelectedEndDate(null);
+                              } else if (dateStr > selectedDate) {
+                                setSelectedEndDate(dateStr);
                               } else {
                                 setSelectedDate(dateStr);
                                 setSelectedEndDate(null);
@@ -296,27 +295,34 @@ export default function BookingPage() {
                             <div className="w-1.5 h-1.5 bg-text-muted/30 mx-0.5" /> {t("calendar.booked")}
                           </div>
                         </div>
-                        <label className="flex items-center gap-2 text-[11px] text-text-muted cursor-pointer">
-                          <input type="checkbox" checked={rangeMode} onChange={(e) => { setRangeMode(e.target.checked); setSelectedEndDate(null); }} className="accent-[#C9A84C]" />
-                          {t("calendar.multiDay")}
-                        </label>
                       </div>
 
                       {selectedDate && (
                         <div className="mt-8 space-y-4">
                           {/* Time range */}
                           <div>
-                            <p className="text-[11px] tracking-[0.2em] uppercase text-text-muted mb-2">{t("calendar.time")}</p>
-                            <div className="grid grid-cols-2 gap-3">
-                              <div>
-                                <label className="text-[10px] text-text-muted">{t("calendar.from")}</label>
-                                <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)}
-                                  className="w-full mt-1 bg-background border border-border px-3 py-2.5 text-sm text-text-primary outline-none focus:border-border-gold transition-colors" />
+                            <p className="text-[11px] tracking-[0.2em] uppercase text-text-muted mb-3">{t("calendar.time")}</p>
+                            <div className="flex items-end gap-3">
+                              <div className="flex-1">
+                                <label className="text-[10px] text-text-muted mb-1.5 block">{t("calendar.from")}</label>
+                                <input
+                                  type="time"
+                                  value={startTime}
+                                  onChange={(e) => setStartTime(e.target.value)}
+                                  step="900"
+                                  className="w-full bg-background border border-border px-4 py-3 text-lg text-text-primary text-center font-display outline-none focus:border-border-gold transition-colors"
+                                />
                               </div>
-                              <div>
-                                <label className="text-[10px] text-text-muted">{t("calendar.to")}</label>
-                                <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)}
-                                  className="w-full mt-1 bg-background border border-border px-3 py-2.5 text-sm text-text-primary outline-none focus:border-border-gold transition-colors" />
+                              <span className="text-text-muted text-lg pb-3">—</span>
+                              <div className="flex-1">
+                                <label className="text-[10px] text-text-muted mb-1.5 block">{t("calendar.to")}</label>
+                                <input
+                                  type="time"
+                                  value={endTime}
+                                  onChange={(e) => setEndTime(e.target.value)}
+                                  step="900"
+                                  className="w-full bg-background border border-border px-4 py-3 text-lg text-text-primary text-center font-display outline-none focus:border-border-gold transition-colors"
+                                />
                               </div>
                             </div>
                           </div>
@@ -407,9 +413,13 @@ export default function BookingPage() {
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            className="w-full bg-background border border-border px-4 py-3 text-sm text-text-primary outline-none focus:border-border-gold transition-colors"
+                            onBlur={() => setTouched({ ...touched, name: true })}
+                            className={`w-full bg-background border px-4 py-3 text-sm text-text-primary outline-none transition-colors ${touched.name && name.trim().length < 2 ? "border-red-400/50" : "border-border focus:border-border-gold"}`}
                             placeholder={t("form.namePlaceholder")}
                           />
+                          {touched.name && name.trim().length < 2 && (
+                            <p className="text-red-400/70 text-[10px] mt-1">{t("form.validation.name")}</p>
+                          )}
                         </div>
                         <div>
                           <label className="block text-[11px] tracking-[0.2em] uppercase text-text-muted mb-2">
@@ -419,9 +429,13 @@ export default function BookingPage() {
                             type="email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            className="w-full bg-background border border-border px-4 py-3 text-sm text-text-primary outline-none focus:border-border-gold transition-colors"
+                            onBlur={() => setTouched({ ...touched, email: true })}
+                            className={`w-full bg-background border px-4 py-3 text-sm text-text-primary outline-none transition-colors ${touched.email && !isEmailValid ? "border-red-400/50" : "border-border focus:border-border-gold"}`}
                             placeholder={t("form.emailPlaceholder")}
                           />
+                          {touched.email && !isEmailValid && (
+                            <p className="text-red-400/70 text-[10px] mt-1">{t("form.validation.email")}</p>
+                          )}
                         </div>
                       </div>
 
@@ -433,9 +447,13 @@ export default function BookingPage() {
                           type="tel"
                           value={phone}
                           onChange={(e) => setPhone(e.target.value)}
-                          className="w-full bg-background border border-border px-4 py-3 text-sm text-text-primary outline-none focus:border-border-gold transition-colors"
+                          onBlur={() => setTouched({ ...touched, phone: true })}
+                          className={`w-full bg-background border px-4 py-3 text-sm text-text-primary outline-none transition-colors ${touched.phone && !isPhoneValid ? "border-red-400/50" : "border-border focus:border-border-gold"}`}
                           placeholder={t("form.phonePlaceholder")}
                         />
+                        {touched.phone && !isPhoneValid && (
+                          <p className="text-red-400/70 text-[10px] mt-1">{t("form.validation.phone")}</p>
+                        )}
                       </div>
 
                       <div>

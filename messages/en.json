@@ -468,6 +468,11 @@
       "messagePlaceholder": "Anything we should know about the event?",
       "callback": "I'd like to be called for more info",
       "consent": "I consent to BarPro storing my information to process this request. Read our privacy policy.",
+      "validation": {
+        "name": "Name must be at least 2 characters",
+        "email": "Invalid email address",
+        "phone": "Invalid phone number (8 digits)"
+      },
       "back": "Back",
       "next": "Next step",
       "submit": "Send request",
