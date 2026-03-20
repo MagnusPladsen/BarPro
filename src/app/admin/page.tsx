@@ -217,7 +217,10 @@ export default function AdminDashboardPage() {
         <div className="bg-[#141414] border border-[#1E1E1E] p-6">
           <div className="flex items-center justify-between mb-5">
             <h2 className="text-sm font-medium">Kommende arrangementer</h2>
-            <Link href="/admin/kalender" className="text-[11px] text-[#C9A84C] hover:underline">Kalender</Link>
+            <div className="flex items-center gap-3">
+              <a href="/api/admin/google-calendar" className="text-[10px] text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors">.ics</a>
+              <Link href="/admin/kalender" className="text-[11px] text-[#C9A84C] hover:underline">Kalender</Link>
+            </div>
           </div>
           {upcomingBookings.length === 0 ? (
             <p className="text-[#6B6B6B] text-sm py-4">Ingen kommende arrangementer</p>
