@@ -1,8 +1,106 @@
 # BarPro — Administrasjonspanel og Bookingsystem
 
-## Oversikt over hva som er bygget
+BarPro har nå et komplett bookingsystem med admin-panel, ansattportal, og forespørselsside for kunder.
 
-BarPro har nå et komplett bookingsystem med admin-panel, ansattportal, og kundefacing forespørselsside. Alt er bygget med mørkt design i BarPro sin gull + svart profil.
+---
+
+## Kom i gang — De viktigste tingene du trenger å vite
+
+### Hvordan behandle en forespørsel og sende tilbud
+
+Når en kunde sender en forespørsel via nettsiden, skjer dette:
+
+1. Du får en **e-post** om at det har kommet en ny forespørsel
+2. Logg inn på admin-panelet (/login)
+3. Du ser forespørselen på **Dashboard** under "Forespørsler" (gul farge)
+4. Klikk på den, eller gå til **Bookinger** i menyen til venstre
+5. Klikk på forespørselen i listen
+
+Nå åpner seg et detaljpanel til høyre. Her gjør du følgende:
+
+**Steg 1 — Sett tidspunkt:**
+- Velg "Fra" og "Til" klokkeslett (f.eks. 18:00 til 23:00)
+- Systemet beregner antall timer automatisk
+
+**Steg 2 — Velg hvem som jobber:**
+- Alle aktive ansatte er forhåndsvalgt
+- Fjern haken på de som ikke skal jobbe denne dagen
+- Du ser timelønn for hver ansatt til høyre
+
+**Steg 3 — Se kostnad:**
+- Systemet beregner lønn automatisk (ansatte × timer × timelønn)
+- Du kan legge til ekstra kostnader (f.eks. transport, utstyrsleie)
+- Alt summeres til en total estimert kostnad
+
+**Steg 4 — Sett pris:**
+- Systemet foreslår en pris som er 20% over kostnaden
+- Du kan endre prisen selv
+- Under prisen ser du: kostnad, inntekt (det du tjener) og margin i prosent
+- Hvis du setter prisen lavere enn kostnaden, får du en advarsel
+
+**Steg 5 — Send tilbudet:**
+- Trykk **"Godkjenn & send tilbud"**
+- Kunden får en e-post med en lenke til tilbudet
+- På lenken ser kunden dato, pakke, pris og detaljer
+- Kunden kan **akseptere** eller **avslå** tilbudet direkte der
+- Hvis kunden avslår, kan de skrive hvorfor og be om nytt tilbud
+
+Du kan også trykke **"Lagre utkast"** hvis du vil lagre uten å sende ennå.
+
+### Hvordan legge til en ny ansatt
+
+1. Gå til **Ansatte** i menyen
+2. Trykk **"+ Legg til ansatt"** (knappen er under listen)
+3. Fyll inn:
+   - **Navn** — fullt navn
+   - **E-post** — e-postadressen de vil bruke for å logge inn
+   - **Telefon** — valgfritt
+   - **Rolle** — f.eks. "Bartender" eller "Servicepersonell"
+   - **Timelønn** — hva de tjener per time (f.eks. 275 kr)
+   - **Passord** — et passord de kan bruke for å logge inn (kan endres senere)
+4. Trykk **"Legg til"**
+
+Den ansatte er nå opprettet, men er **inaktiv** som standard. For å aktivere:
+1. Klikk på den ansatte i listen
+2. Trykk **"Rediger"**
+3. Huk av **"Aktiv"**
+4. Trykk **"Lagre"**
+
+Når den ansatte er aktiv, vil de:
+- Dukke opp som valg når du tildeler folk til bookinger
+- Kunne logge inn på /login og se sin egen portal
+
+### Hvordan blokkere dager dere ikke kan jobbe
+
+1. Gå til **Kalender** i menyen
+2. Klikk på dagen du vil blokkere
+3. Skriv inn en grunn (f.eks. "Ferie" eller "Opptatt") — valgfritt
+4. Trykk **"Blokker denne dagen"**
+
+Blokkerte dager vises som røde i kalenderen. Kunder kan ikke velge disse dagene når de sender forespørsel.
+
+For å fjerne blokkeringen: klikk på dagen igjen og trykk "Fjern blokkering".
+
+### Hvordan godkjenne timer
+
+Ansatte registrerer timer i sin portal. Du godkjenner dem slik:
+
+1. Gå til **Timer** i menyen
+2. Du ser alle ventende registreringer med ansattnavn, dato, timer og kostnad
+3. Trykk **"Godkjenn"** eller **"Avvis"** for hver registrering
+4. Eller trykk **"Godkjenn alle"** øverst til høyre for å godkjenne alt på en gang
+
+Godkjente timer teller med i rapporter og lønnsberegning.
+
+### Hvordan eksportere rapporter
+
+1. Gå til **Rapporter** i menyen
+2. Velg periode: denne uken, denne måneden, eller egendefinert
+3. Se oversikt over inntekt, kostnad, margin og ansatt-timer
+4. Trykk **"Eksporter"** og velg format:
+   - **CSV** — for regneark (enkel)
+   - **Excel** — for Excel med flere ark (oversikt + ansatte)
+   - **PDF** — for utskrift eller deling
 
 ---
 
