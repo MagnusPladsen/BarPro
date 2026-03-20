@@ -1,6 +1,5 @@
 "use client";
 
-import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState, useCallback } from "react";
 import type { Database } from "@/lib/supabase/types";
 import { TableSkeleton, KPICardSkeleton } from "@/components/ui/LoadingState";
@@ -13,7 +12,6 @@ type TimeEntry = Database["public"]["Tables"]["time_entries"]["Row"] & {
 type Filter = "pending" | "approved" | "rejected" | "all";
 
 export default function AdminTimerPage() {
-  const supabase = createClient();
   const [entries, setEntries] = useState<TimeEntry[]>([]);
   const [filter, setFilter] = useState<Filter>("pending");
   const [updating, setUpdating] = useState(false);
@@ -21,26 +19,23 @@ export default function AdminTimerPage() {
   const [loading, setLoading] = useState(true);
 
   const fetchEntries = useCallback(async () => {
-    let query = supabase
-      .from("time_entries")
-      .select("*, employees(name, role, hourly_rate)")
-      .order("date", { ascending: false });
-
-    if (filter !== "all") query = query.eq("status", filter);
-
-    const { data } = await query;
-    setEntries((data as TimeEntry[]) ?? []);
+    try {
+      const res = await fetch(`/api/admin/timer?status=${filter}`);
+      const data = await res.json();
+      setEntries((data.entries as TimeEntry[]) ?? []);
+    } catch { /* fail silently */ }
     setLoading(false);
-  }, [supabase, filter]);
+  }, [filter]);
 
   useEffect(() => { fetchEntries(); }, [fetchEntries]);
 
   const updateEntry = async (id: string, status: "approved" | "rejected") => {
     setUpdating(true);
-    await supabase.from("time_entries").update({
-      status,
-      approved_at: new Date().toISOString(),
-    }).eq("id", id);
+    await fetch("/api/admin/timer", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ id, status }),
+    });
     await fetchEntries();
     setNotification({ type: "success", message: status === "approved" ? "Timer godkjent" : "Timer avvist" });
     setTimeout(() => setNotification(null), 3000);
@@ -50,9 +45,11 @@ export default function AdminTimerPage() {
   const approveAll = async () => {
     setUpdating(true);
     const pendingIds = entries.filter((e) => e.status === "pending").map((e) => e.id);
-    for (const id of pendingIds) {
-      await supabase.from("time_entries").update({ status: "approved", approved_at: new Date().toISOString() }).eq("id", id);
-    }
+    await fetch("/api/admin/timer", {
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ids: pendingIds, status: "approved" }),
+    });
     await fetchEntries();
     setNotification({ type: "success", message: `${pendingIds.length} registreringer godkjent` });
     setTimeout(() => setNotification(null), 3000);
