@@ -19,6 +19,7 @@ export default function PortalPage() {
   const [employee, setEmployee] = useState<Employee | null>(null);
   const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [timeEntries, setTimeEntries] = useState<TimeEntry[]>([]);
+  const [blockedDates, setBlockedDates] = useState<{ id: string; date: string; reason: string | null }[]>([]);
   const [tab, setTab] = useState<Tab>("oversikt");
   const [calMonth, setCalMonth] = useState(new Date());
   const [saving, setSaving] = useState(false);
@@ -26,10 +27,22 @@ export default function PortalPage() {
 
   // Hour registration form
   const [logDate, setLogDate] = useState(new Date().toISOString().split("T")[0]);
-  const [logHours, setLogHours] = useState("");
   const [logStart, setLogStart] = useState("18:00");
   const [logEnd, setLogEnd] = useState("23:00");
   const [logDesc, setLogDesc] = useState("");
+
+  // Block date form
+  const [blockReason, setBlockReason] = useState("");
+
+  // Auto-calc hours from time range
+  const calcLogHours = (): number => {
+    const [sh, sm] = logStart.split(":").map(Number);
+    const [eh, em] = logEnd.split(":").map(Number);
+    let start = sh + sm / 60;
+    let end = eh + em / 60;
+    if (end <= start) end += 24;
+    return Math.round((end - start) * 100) / 100;
+  };
 
   // Password form
   const [newPassword, setNewPassword] = useState("");
@@ -75,17 +88,25 @@ export default function PortalPage() {
       .eq("employee_id", employee.id)
       .order("date", { ascending: false });
     setTimeEntries((entries as TimeEntry[]) ?? []);
+
+    // Fetch blocked dates
+    const { data: blocked } = await supabase
+      .from("employee_blocked_dates")
+      .select("id, date, reason")
+      .eq("employee_id", employee.id);
+    setBlockedDates((blocked as { id: string; date: string; reason: string | null }[]) ?? []);
   }, [supabase, router]);
 
   useEffect(() => { fetchData(); }, [fetchData]);
 
   const submitHours = async () => {
-    if (!employee || !logHours || parseFloat(logHours) <= 0) return;
+    const hours = calcLogHours();
+    if (!employee || hours <= 0) return;
     setSaving(true);
     const { error } = await supabase.from("time_entries").insert({
       employee_id: employee.id,
       date: logDate,
-      hours: parseFloat(logHours),
+      hours,
       start_time: logStart || null,
       end_time: logEnd || null,
       description: logDesc || null,
@@ -93,11 +114,28 @@ export default function PortalPage() {
     if (error) {
       notify("error", "Kunne ikke registrere timer");
     } else {
-      notify("success", "Timer registrert");
-      setLogHours("");
+      notify("success", `${hours} timer registrert`);
       setLogDesc("");
       await fetchData();
     }
+    setSaving(false);
+  };
+
+  const toggleBlockDate = async (dateStr: string) => {
+    if (!employee) return;
+    setSaving(true);
+    const existing = blockedDates.find((d) => d.date === dateStr);
+    if (existing) {
+      await supabase.from("employee_blocked_dates").delete().eq("id", existing.id);
+    } else {
+      await supabase.from("employee_blocked_dates").insert({
+        employee_id: employee.id,
+        date: dateStr,
+        reason: blockReason || null,
+      });
+    }
+    setBlockReason("");
+    await fetchData();
     setSaving(false);
   };
 
@@ -239,6 +277,8 @@ export default function PortalPage() {
             <button onClick={() => setCalMonth(new Date(calYear, calMo + 1))} className="text-[#6B6B6B] hover:text-[#F5F0E8] cursor-pointer px-3 py-1">&rarr;</button>
           </div>
 
+          <p className="text-[11px] text-[#6B6B6B] mb-4">Klikk på en dag for å markere at du ikke er tilgjengelig</p>
+
           <div className="bg-[#141414] border border-[#1E1E1E]">
             <div className="grid grid-cols-7 border-b border-[#1E1E1E]">
               {["Man","Tir","Ons","Tor","Fre","Lør","Søn"].map((d) => (
@@ -251,11 +291,21 @@ export default function PortalPage() {
                 const dateStr = getDateStr(day);
                 const dayAssignments = assignments.filter((a) => a.bookings?.date === dateStr);
                 const dayEntries = timeEntries.filter((e) => e.date === dateStr);
+                const isBlocked = blockedDates.some((d) => d.date === dateStr);
                 const isToday = dateStr === today;
+                const isPast = dateStr < today;
 
                 return (
-                  <div key={day} className={`p-2 min-h-[70px] border-b border-r border-[#1E1E1E] ${isToday ? "bg-[#C9A84C]/[0.05]" : ""}`}>
-                    <span className={`text-[11px] ${isToday ? "text-[#C9A84C] font-semibold" : "text-[#6B6B6B]"}`}>{day}</span>
+                  <button
+                    key={day}
+                    onClick={() => !isPast && !dayAssignments.length && toggleBlockDate(dateStr)}
+                    disabled={isPast || saving}
+                    className={`p-2 min-h-[70px] border-b border-r border-[#1E1E1E] text-left transition-colors ${
+                      isBlocked ? "bg-red-400/10" : isToday ? "bg-[#C9A84C]/[0.05]" : ""
+                    } ${isPast ? "opacity-40" : "cursor-pointer hover:bg-[#1A1A1A]"}`}
+                  >
+                    <span className={`text-[11px] ${isToday ? "text-[#C9A84C] font-semibold" : isBlocked ? "text-red-400" : "text-[#6B6B6B]"}`}>{day}</span>
+                    {isBlocked && <div className="mt-1 text-[9px] text-red-400">Ikke tilgjengelig</div>}
                     {dayAssignments.map((a) => (
                       <div key={a.id} className="mt-1 px-1 py-0.5 bg-[#C9A84C]/10 text-[9px] text-[#C9A84C] truncate">
                         {a.bookings?.start_time && `${a.bookings.start_time} `}{a.bookings?.customer_name}
@@ -268,13 +318,14 @@ export default function PortalPage() {
                         {e.hours}t {e.description && `· ${e.description}`}
                       </div>
                     ))}
-                  </div>
+                  </button>
                 );
               })}
             </div>
           </div>
 
           <div className="flex items-center gap-6 mt-4 text-[10px] text-[#6B6B6B]">
+            <div className="flex items-center gap-2"><div className="w-3 h-1.5 bg-red-400/20" /> Ikke tilgjengelig</div>
             <div className="flex items-center gap-2"><div className="w-3 h-1.5 bg-[#C9A84C]/20" /> Oppdrag</div>
             <div className="flex items-center gap-2"><div className="w-3 h-1.5 bg-green-400/20" /> Godkjent</div>
             <div className="flex items-center gap-2"><div className="w-3 h-1.5 bg-yellow-400/20" /> Venter</div>
@@ -294,22 +345,26 @@ export default function PortalPage() {
                 className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
             </div>
 
-            <div className="grid grid-cols-3 gap-3">
-              <div>
-                <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Fra</label>
-                <input type="time" value={logStart} onChange={(e) => setLogStart(e.target.value)}
-                  className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+            {/* Time picker — same style as booking page */}
+            <div>
+              <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-2 block">Tidspunkt</label>
+              <div className="flex items-end gap-3">
+                <div className="flex-1">
+                  <label className="text-[10px] text-[#6B6B6B] mb-1.5 block">Fra</label>
+                  <input type="time" value={logStart} onChange={(e) => setLogStart(e.target.value)} step="900"
+                    className="w-full bg-[#0A0A0A] border border-[#1E1E1E] px-4 py-3 text-lg text-center outline-none focus:border-[#C9A84C]/40" />
+                </div>
+                <span className="text-[#6B6B6B] text-lg pb-3">—</span>
+                <div className="flex-1">
+                  <label className="text-[10px] text-[#6B6B6B] mb-1.5 block">Til</label>
+                  <input type="time" value={logEnd} onChange={(e) => setLogEnd(e.target.value)} step="900"
+                    className="w-full bg-[#0A0A0A] border border-[#1E1E1E] px-4 py-3 text-lg text-center outline-none focus:border-[#C9A84C]/40" />
+                </div>
               </div>
-              <div>
-                <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Til</label>
-                <input type="time" value={logEnd} onChange={(e) => setLogEnd(e.target.value)}
-                  className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
-              </div>
-              <div>
-                <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Timer</label>
-                <input type="number" step="0.5" value={logHours} onChange={(e) => setLogHours(e.target.value)}
-                  placeholder="0"
-                  className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+              {/* Auto-calculated hours */}
+              <div className="mt-3 bg-[#C9A84C]/[0.06] border border-[#C9A84C]/20 px-4 py-3 text-center">
+                <span className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Timer: </span>
+                <span className="text-lg font-semibold text-[#C9A84C]">{calcLogHours()} t</span>
               </div>
             </div>
 
@@ -320,9 +375,9 @@ export default function PortalPage() {
                 className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40 placeholder:text-[#6B6B6B]/40" />
             </div>
 
-            <button onClick={submitHours} disabled={saving || !logHours}
+            <button onClick={submitHours} disabled={saving || calcLogHours() <= 0}
               className="w-full bg-[#C9A84C] text-[#0A0A0A] py-3 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4AF57] cursor-pointer disabled:opacity-50">
-              {saving ? "Lagrer..." : "Registrer timer"}
+              {saving ? "Lagrer..." : `Registrer ${calcLogHours()} timer`}
             </button>
           </div>
 

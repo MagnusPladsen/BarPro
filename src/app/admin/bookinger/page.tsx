@@ -21,6 +21,7 @@ export default function AdminBookingsPage() {
 
   // Related data for selected booking
   const [employees, setEmployees] = useState<Employee[]>([]);
+  const [employeeBlockedDates, setEmployeeBlockedDates] = useState<{ employee_id: string; date: string }[]>([]);
   const [assignments, setAssignments] = useState<Assignment[]>([]);
   const [costs, setCosts] = useState<Cost[]>([]);
   const [offers, setOffers] = useState<Offer[]>([]);
@@ -47,14 +48,17 @@ export default function AdminBookingsPage() {
 
   useEffect(() => { fetchBookings(); }, [fetchBookings]);
 
-  const loadBookingData = useCallback(async (bookingId: string) => {
-    const [empRes, assignRes, costRes, offerRes, agreeRes, chatRes] = await Promise.all([
+  const loadBookingData = useCallback(async (bookingId: string, bookingDate?: string) => {
+    const [empRes, assignRes, costRes, offerRes, agreeRes, chatRes, blockedRes] = await Promise.all([
       supabase.from("employees").select("*").eq("is_active", true).order("name"),
       supabase.from("booking_assignments").select("*").eq("booking_id", bookingId),
       supabase.from("booking_costs").select("*").eq("booking_id", bookingId),
       supabase.from("offers").select("*").eq("booking_id", bookingId).order("created_at", { ascending: false }),
       supabase.from("agreements").select("*").eq("booking_id", bookingId),
       supabase.from("chat_messages").select("*").eq("booking_id", bookingId).order("created_at"),
+      bookingDate
+        ? supabase.from("employee_blocked_dates").select("employee_id, date").eq("date", bookingDate)
+        : Promise.resolve({ data: [] }),
     ]);
     setEmployees((empRes.data as Employee[]) ?? []);
     setAssignments((assignRes.data as Assignment[]) ?? []);
@@ -62,13 +66,16 @@ export default function AdminBookingsPage() {
     setOffers((offerRes.data as Offer[]) ?? []);
     setAgreements((agreeRes.data as Agreement[]) ?? []);
     setChatMessages((chatRes.data as ChatMessage[]) ?? []);
+    setEmployeeBlockedDates((blockedRes.data as { employee_id: string; date: string }[]) ?? []);
 
-    // Pre-select all active employees
+    // Pre-select all active employees (excluding unavailable)
+    const blocked = (blockedRes.data as { employee_id: string }[]) ?? [];
+    const blockedIds = new Set(blocked.map((d) => d.employee_id));
     const assignedIds = ((assignRes.data as Assignment[]) ?? []).map((a) => a.employee_id);
     if (assignedIds.length > 0) {
-      setSelectedEmployees(assignedIds);
+      setSelectedEmployees(assignedIds.filter((id) => !blockedIds.has(id)));
     } else {
-      setSelectedEmployees(((empRes.data as Employee[]) ?? []).map((e) => e.id));
+      setSelectedEmployees(((empRes.data as Employee[]) ?? []).filter((e) => !blockedIds.has(e.id)).map((e) => e.id));
     }
   }, [supabase]);
 
@@ -78,7 +85,7 @@ export default function AdminBookingsPage() {
     setAdminNotes(b.admin_notes ?? "");
     setStartTime(b.start_time ?? "18:00");
     setEndTime(b.end_time ?? "23:00");
-    await loadBookingData(b.id);
+    await loadBookingData(b.id, b.date);
   };
 
   // Calculate hours from time range
@@ -364,19 +371,27 @@ export default function AdminBookingsPage() {
                       <div>
                         <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-2">Ansatte ({selectedEmployees.length})</p>
                         <div className="space-y-1">
-                          {employees.map((emp) => (
-                            <label key={emp.id} className="flex items-center gap-3 py-1.5 px-2 hover:bg-[#1A1A1A] cursor-pointer transition-colors">
-                              <input type="checkbox" checked={selectedEmployees.includes(emp.id)}
-                                onChange={(e) => {
-                                  setSelectedEmployees(e.target.checked
-                                    ? [...selectedEmployees, emp.id]
-                                    : selectedEmployees.filter((id) => id !== emp.id));
-                                }}
-                                className="accent-[#C9A84C]" />
-                              <span className="flex-1 text-sm">{emp.name}</span>
-                              <span className="text-[10px] text-[#6B6B6B]">{emp.hourly_rate} kr/t</span>
-                            </label>
-                          ))}
+                          {employees.map((emp) => {
+                            const isUnavailable = employeeBlockedDates.some((d) => d.employee_id === emp.id);
+                            return (
+                              <label key={emp.id} className={`flex items-center gap-3 py-1.5 px-2 transition-colors ${isUnavailable ? "opacity-50" : "hover:bg-[#1A1A1A] cursor-pointer"}`}>
+                                <input type="checkbox" checked={selectedEmployees.includes(emp.id)}
+                                  disabled={isUnavailable}
+                                  onChange={(e) => {
+                                    setSelectedEmployees(e.target.checked
+                                      ? [...selectedEmployees, emp.id]
+                                      : selectedEmployees.filter((id) => id !== emp.id));
+                                  }}
+                                  className="accent-[#C9A84C]" />
+                                <span className="flex-1 text-sm">{emp.name}</span>
+                                {isUnavailable ? (
+                                  <span className="text-[10px] text-red-400">Ikke tilgjengelig</span>
+                                ) : (
+                                  <span className="text-[10px] text-[#6B6B6B]">{emp.hourly_rate} kr/t</span>
+                                )}
+                              </label>
+                            );
+                          })}
                         </div>
                       </div>
                     </div>

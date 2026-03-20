@@ -268,6 +268,25 @@ export interface Database {
         };
         Relationships: [];
       };
+      employee_blocked_dates: {
+        Row: {
+          id: string;
+          employee_id: string;
+          date: string;
+          reason: string | null;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          employee_id: string;
+          date: string;
+          reason?: string | null;
+        };
+        Update: {
+          reason?: string | null;
+        };
+        Relationships: [];
+      };
       time_entries: {
         Row: {
           id: string;
