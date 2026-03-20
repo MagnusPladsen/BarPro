@@ -1,6 +1,5 @@
 "use client";
 
-import { createClient } from "@/lib/supabase/client";
 import { useEffect, useState, useCallback } from "react";
 import Link from "next/link";
 import type { Database } from "@/lib/supabase/types";
@@ -20,7 +19,6 @@ interface DayModal {
 }
 
 export default function AdminCalendarPage() {
-  const supabase = createClient();
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [blockedDates, setBlockedDates] = useState<BlockedDate[]>([]);
   const [bookings, setBookings] = useState<Booking[]>([]);
@@ -35,16 +33,16 @@ export default function AdminCalendarPage() {
     const start = new Date(year, month, 1).toISOString().split("T")[0];
     const end = new Date(year, month + 1, 0).toISOString().split("T")[0];
 
-    const [blockedRes, bookingsRes, assignmentsRes] = await Promise.all([
-      supabase.from("blocked_dates").select("*").gte("date", start).lte("date", end),
-      supabase.from("bookings").select("*").gte("date", start).lte("date", end).in("status", ["pending", "confirmed", "completed"]),
-      supabase.from("booking_assignments").select("*, employees(name, role)"),
-    ]);
-
-    setBlockedDates((blockedRes.data as BlockedDate[]) ?? []);
-    setBookings((bookingsRes.data as Booking[]) ?? []);
-    setAllAssignments((assignmentsRes.data as Assignment[]) ?? []);
-  }, [supabase, currentMonth]);
+    try {
+      const res = await fetch(`/api/admin/calendar?start=${start}&end=${end}`);
+      const data = await res.json();
+      setBlockedDates((data.blockedDates as BlockedDate[]) ?? []);
+      setBookings((data.bookings as Booking[]) ?? []);
+      setAllAssignments((data.assignments as Assignment[]) ?? []);
+    } catch (err) {
+      console.error("Failed to fetch calendar data:", err);
+    }
+  }, [currentMonth]);
 
   useEffect(() => { fetchData(); }, [fetchData]);
 
@@ -63,19 +61,37 @@ export default function AdminCalendarPage() {
   const blockDate = async () => {
     if (!modal) return;
     setSaving(true);
-    await supabase.from("blocked_dates").insert({ date: modal.dateStr, reason: blockReason || null });
-    await fetchData();
-    setModal({ ...modal, blocked: { id: "new", date: modal.dateStr, reason: blockReason, created_at: "" } });
+    try {
+      await fetch("/api/admin/calendar", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ date: modal.dateStr, reason: blockReason || null }),
+      });
+      await fetchData();
+      // Update modal with new blocked state
+      const updated = blockedDates.find((d) => d.date === modal.dateStr);
+      setModal({ ...modal, blocked: updated ?? { id: "new", date: modal.dateStr, reason: blockReason, created_at: "" } });
+    } catch (err) {
+      console.error("Failed to block date:", err);
+    }
     setSaving(false);
   };
 
   const unblockDate = async () => {
     if (!modal?.blocked) return;
     setSaving(true);
-    await supabase.from("blocked_dates").delete().eq("id", modal.blocked.id);
-    await fetchData();
-    setModal({ ...modal, blocked: null });
-    setBlockReason("");
+    try {
+      await fetch("/api/admin/calendar", {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id: modal.blocked.id }),
+      });
+      await fetchData();
+      setModal({ ...modal, blocked: null });
+      setBlockReason("");
+    } catch (err) {
+      console.error("Failed to unblock date:", err);
+    }
     setSaving(false);
   };
 
