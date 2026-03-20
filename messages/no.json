@@ -511,9 +511,19 @@
         "p4": "Enten du planlegger et intimt selskap for 20 eller et stort bryllup med 200 gjester, tilpasser vi oss dine behov. Vi tror på at de beste festene oppstår når vertskapet kan slappe av og nyte kvelden — og det er der vi kommer inn.",
         "p5": "Vi gleder oss til å bli kjent med deg og ditt arrangement. Ta kontakt for en uforpliktende prat, så finner vi ut hvordan vi kan gjøre din neste feiring til noe helt spesielt.",
         "signoff": "— Emil & Sofie, BarPro"
+      },
+      "booking": {
+        "date": "Mars 2026",
+        "title": "Nå kan du sende forespørsel direkte på nettsiden",
+        "p1": "Vi har nettopp lansert en ny funksjon som gjør det enklere enn noen gang å komme i gang med å planlegge arrangementet ditt med BarPro.",
+        "p2": "På vår nye forespørselsside kan du velge dato, tidspunkt og pakke — og sende forespørselen direkte til oss. Vi går gjennom den, setter sammen et skreddersydd tilbud med pris, og sender det tilbake til deg.",
+        "p3": "Du kan godta eller avslå tilbudet med ett klikk. Ønsker du justeringer? Bare gi oss beskjed, så lager vi et nytt tilbud. Alt skjer digitalt og raskt — ingen unødvendig venting.",
+        "p4": "Vi ønsket å gjøre prosessen så enkel og transparent som mulig. Du ser alltid hva som er inkludert, hva det koster, og hva neste steg er.",
+        "p5": "Prøv det selv — klikk «Send forespørsel» i menyen, og vi tar det derfra.",
+        "signoff": "— Emil & Sofie, BarPro"
       }
     },
-    "cta": "Ta kontakt"
+    "cta": "Send forespørsel"
   },
   "footer": {
     "tagline": "Profesjonell eventbemanning for uforglemmelige opplevelser",

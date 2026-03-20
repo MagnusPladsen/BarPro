@@ -45,3 +45,46 @@ ${message}
     text: emailContent,
   });
 }
+
+export async function sendOfferEmail(customerEmail: string, customerName: string, offerId: string, price: number, date: string, packageName: string, customerToken?: string) {
+  const resend = getResendClient();
+  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
+  const offerUrl = `${baseUrl}/offer/${offerId}${customerToken ? `?token=${customerToken}` : ""}`;
+
+  return resend.emails.send({
+    from: "BarPro <onboarding@resend.dev>",
+    to: customerEmail,
+    subject: `Tilbud fra BarPro — ${price.toLocaleString("no-NO")} kr`,
+    text: `Hei ${customerName},
+
+Takk for din forespørsel! Vi har satt sammen et tilbud til deg:
+
+Dato: ${date}
+Pakke: ${packageName}
+Pris: ${price.toLocaleString("no-NO")} kr (ekskl. mva)
+
+Se og godta tilbudet her:
+${offerUrl}
+
+Med vennlig hilsen,
+Emil & Sofie
+BarPro`,
+  });
+}
+
+export async function sendBookingNotification(customerName: string, date: string, packageName: string) {
+  const resend = getResendClient();
+
+  return resend.emails.send({
+    from: "BarPro <onboarding@resend.dev>",
+    to: "Barproda@gmail.com",
+    subject: `Ny forespørsel: ${customerName} — ${date}`,
+    text: `Ny forespørsel mottatt:
+
+Kunde: ${customerName}
+Dato: ${date}
+Pakke: ${packageName}
+
+Logg inn for å behandle forespørselen.`,
+  });
+}

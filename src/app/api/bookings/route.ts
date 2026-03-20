@@ -73,7 +73,13 @@ export async function POST(request: Request) {
       );
     }
 
-    // TODO: Send email notification to admin (Resend)
+    // Notify admin via email
+    try {
+      const { sendBookingNotification } = await import("@/lib/email");
+      await sendBookingNotification(customer_name, date, pkg);
+    } catch (emailErr) {
+      console.error("Failed to send booking notification:", emailErr);
+    }
 
     return NextResponse.json({ booking: data }, { status: 201 });
   } catch {

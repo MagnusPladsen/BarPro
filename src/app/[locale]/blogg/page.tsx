@@ -34,8 +34,39 @@ export default function BloggPage() {
         </div>
       </section>
 
-      {/* First Post */}
-      <section className="pb-40 px-6">
+      {/* Posts */}
+      <section className="pb-40 px-6 space-y-16">
+        {/* Booking post */}
+        <motion.article
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.8, ease }}
+          className="max-w-3xl mx-auto"
+        >
+          <div className="border border-border bg-background-card p-10 md:p-16">
+            <div className="flex items-center gap-4 mb-10">
+              <div className="w-10 h-px bg-gold" />
+              <span className="text-[11px] tracking-[0.25em] uppercase text-text-muted">
+                {t("posts.booking.date")}
+              </span>
+            </div>
+            <h2 className="font-display font-light text-3xl md:text-4xl text-text-primary mb-8 leading-[1.15]">
+              {t("posts.booking.title")}
+            </h2>
+            <div className="space-y-6 text-text-muted text-lg leading-relaxed">
+              <p>{t("posts.booking.p1")}</p>
+              <p>{t("posts.booking.p2")}</p>
+              <p>{t("posts.booking.p3")}</p>
+              <p>{t("posts.booking.p4")}</p>
+              <p>{t("posts.booking.p5")}</p>
+            </div>
+            <div className="w-12 h-px bg-gold mt-12 mb-10" />
+            <p className="text-text-muted italic">{t("posts.booking.signoff")}</p>
+          </div>
+        </motion.article>
+
+        {/* Welcome post */}
         <motion.article
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -70,12 +101,13 @@ export default function BloggPage() {
             </p>
           </div>
 
-          <div className="text-center mt-16">
-            <Button href="/kontakt" variant="outline">
-              {t("cta")} &rarr;
-            </Button>
-          </div>
         </motion.article>
+
+        <div className="text-center">
+          <Button href="/bestill" variant="outline">
+            {t("cta")} &rarr;
+          </Button>
+        </div>
       </section>
 
       <BookingCallout />

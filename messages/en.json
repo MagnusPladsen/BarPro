@@ -511,9 +511,19 @@
         "p4": "Whether you're planning an intimate gathering for 20 or a grand wedding for 200, we adapt to your needs. We believe the best parties happen when the host can relax and enjoy the evening — and that's where we come in.",
         "p5": "We look forward to getting to know you and your event. Get in touch for a no-obligation chat, and we'll figure out how to make your next celebration something truly special.",
         "signoff": "— Emil & Sofie, BarPro"
+      },
+      "booking": {
+        "date": "March 2026",
+        "title": "You can now send requests directly on our website",
+        "p1": "We've just launched a new feature that makes it easier than ever to start planning your event with BarPro.",
+        "p2": "On our new request page, you can choose a date, time, and package — and send your request directly to us. We'll review it, put together a tailored offer with pricing, and send it back to you.",
+        "p3": "You can accept or decline the offer with one click. Want adjustments? Just let us know and we'll make a new offer. Everything happens digitally and quickly — no unnecessary waiting.",
+        "p4": "We wanted to make the process as simple and transparent as possible. You always see what's included, what it costs, and what the next step is.",
+        "p5": "Try it yourself — click 'Send request' in the menu, and we'll take it from there.",
+        "signoff": "— Emil & Sofie, BarPro"
       }
     },
-    "cta": "Get in touch"
+    "cta": "Send request"
   },
   "footer": {
     "tagline": "Professional event staffing for unforgettable experiences",

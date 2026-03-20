@@ -185,6 +185,7 @@ export interface Database {
           responded_at: string | null;
           rejection_reason: string | null;
           wants_new_offer: boolean;
+          customer_token: string | null;
           created_at: string;
           updated_at: string;
         };

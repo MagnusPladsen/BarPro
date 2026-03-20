@@ -165,14 +165,14 @@ export default function AdminBookingsPage() {
     }
 
     // Create offer
-    await supabase.from("offers").insert({
+    const { data: offerData } = await supabase.from("offers").insert({
       booking_id: selected.id,
       estimated_cost: cost,
       offered_price: price,
       markup_percent: Math.round(((price - cost) / cost) * 100 * 100) / 100,
       status: "sent",
       sent_at: new Date().toISOString(),
-    });
+    }).select("id").single();
 
     // Add chat messages
     await supabase.from("chat_messages").insert({
@@ -182,6 +182,19 @@ export default function AdminBookingsPage() {
       message: `Tilbud sendt: ${price.toLocaleString("no-NO")} kr`,
       message_type: "offer",
     });
+
+    // Send offer email to customer
+    if (offerData) {
+      try {
+        await fetch("/api/admin/send-offer", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ offerId: (offerData as { id: string }).id, bookingId: selected.id }),
+        });
+      } catch (err) {
+        console.error("Failed to send offer email:", err);
+      }
+    }
 
     setSelected({ ...selected, status: "offer_sent", start_time: startTime, end_time: endTime, estimated_hours: hours });
     setExtraCosts([]);
