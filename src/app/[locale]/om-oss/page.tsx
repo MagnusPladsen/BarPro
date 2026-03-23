@@ -52,8 +52,12 @@ export default function OmOssPage() {
             <p className="text-text-muted text-lg leading-relaxed mb-6">
               {t("aboutPage.story.text1")}
             </p>
-            <p className="text-text-muted text-lg leading-relaxed">
+            <p className="text-text-muted text-lg leading-relaxed mb-8">
               {t("aboutPage.story.text2")}
+            </p>
+            <div className="w-10 h-px bg-gold mb-4" />
+            <p className="text-text-muted/60 text-sm">
+              {t("aboutPage.story.company")}
             </p>
           </motion.div>
 
