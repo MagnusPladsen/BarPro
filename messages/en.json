@@ -258,7 +258,8 @@
     },
     "story": {
       "text1": "BarPro was founded by Emil and Sofie with a simple vision: to deliver premium bartender and event staffing that exceeds expectations. With backgrounds from some of Norway's best venues and events, we saw a need for professional bar service that could adapt to any occasion.",
-      "text2": "Today, we are proud to offer tailored solutions for weddings, corporate events, and private celebrations in Innlandet and all of Norway. Every event we take on is treated with the same dedication and attention to detail."
+      "text2": "Today, we are proud to offer tailored solutions for weddings, corporate events, and private celebrations in Innlandet and all of Norway. Every event we take on is treated with the same dedication and attention to detail.",
+      "company": "Barpro DA · Org no: 937 367 031 · Lillehammer"
     },
     "team": {
       "label": "The team",
@@ -529,6 +530,10 @@
     "tagline": "Professional event staffing for unforgettable experiences",
     "pages": "Pages",
     "contactHeading": "Contact",
+    "companyHeading": "Company",
+    "companyName": "Barpro DA",
+    "orgNumber": "Org no: 937 367 031",
+    "location": "Lillehammer",
     "rights": "All rights reserved.",
     "privacy": "Privacy Policy"
   }
