@@ -10,7 +10,7 @@ export function ScrollBackground() {
   const { scrollYProgress } = useScroll();
   const rotate = useTransform(scrollYProgress, [0, 1], [0, 90]);
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.08, 1]);
-  const patternOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.06, 0.12, 0.09, 0.05]);
+  const patternOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.04, 0.08, 0.06, 0.03]);
   const orbX = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
   const orbY = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
 
