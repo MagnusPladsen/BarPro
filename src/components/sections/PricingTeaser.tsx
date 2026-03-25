@@ -42,10 +42,10 @@ export function PricingTeaser() {
             return (
               <motion.div
                 key={key}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.8, delay: i * 0.1, ease }}
+                initial={{ opacity: 0, x: 40, y: 20 }}
+                whileInView={{ opacity: 1, x: 0, y: 0 }}
+                viewport={{ once: true, amount: 0.15 }}
+                transition={{ duration: 0.9, delay: i * 0.15, ease }}
                 className={`relative border p-10 lg:p-12 text-center transition-all duration-500 ${
                   isPopular
                     ? "border-accent/40 bg-background-card shadow-[0_0_60px_rgba(201,168,76,0.06)] hover:shadow-[0_0_80px_rgba(201,168,76,0.1)]"

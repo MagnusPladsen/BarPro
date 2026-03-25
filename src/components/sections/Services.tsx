@@ -39,11 +39,11 @@ export function Services() {
           {serviceKeys.map((key, i) => (
             <motion.div
               key={key}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8, delay: i * 0.15, ease }}
-              className="group relative bg-background-card border border-border border-l-2 border-l-accent p-10 hover:border-border-accent hover:shadow-[0_0_60px_rgba(201,168,76,0.06)] transition-all duration-500"
+              initial={{ opacity: 0, x: -40, y: 20 }}
+              whileInView={{ opacity: 1, x: 0, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.9, delay: i * 0.2, ease }}
+              className="group relative bg-background-card border border-border border-l-2 border-l-accent p-10 hover:border-border-accent hover:shadow-[0_0_60px_rgba(184,142,100,0.06)] transition-all duration-500"
             >
               {/* Step number watermark */}
               <span className="absolute top-6 right-8 font-display text-5xl text-accent/[0.07] select-none leading-none group-hover:text-accent/[0.12] transition-colors duration-500">

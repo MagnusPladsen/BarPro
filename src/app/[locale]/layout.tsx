@@ -9,6 +9,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
 import { FloatingParticles } from "@/components/ui/FloatingParticles";
+import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 
 export const metadata: Metadata = {
   title: {
@@ -120,6 +121,7 @@ export default async function LocaleLayout({
       <body className="bg-background text-text-primary font-body antialiased">
         <NextIntlClientProvider messages={messages}>
           <FloatingParticles />
+          <ScrollProgressBar />
           <AnnouncementBar />
           <Header />
           <main>{children}</main>
