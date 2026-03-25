@@ -58,7 +58,7 @@ export function ContactForm() {
   };
 
   const inputClasses =
-    "w-full bg-background border border-border px-4 py-4 text-text-primary placeholder:text-text-muted/40 focus:outline-none focus:border-gold/40 transition-colors duration-300";
+    "w-full bg-background border border-border px-4 py-4 text-text-primary placeholder:text-text-muted/40 focus:outline-none focus:border-accent/40 transition-colors duration-300";
   const labelClasses =
     "block text-[11px] tracking-[0.15em] uppercase text-text-muted mb-3";
   const errorClasses = "text-red-400/80 text-xs mt-2";
@@ -71,8 +71,8 @@ export function ContactForm() {
         transition={{ duration: 0.8, ease }}
         className="py-16 text-center"
       >
-        <div className="w-16 h-16 border border-gold/30 flex items-center justify-center mx-auto mb-8">
-          <span className="text-gold text-2xl">&#10003;</span>
+        <div className="w-16 h-16 border border-accent/30 flex items-center justify-center mx-auto mb-8">
+          <span className="text-accent text-2xl">&#10003;</span>
         </div>
         <p className="font-display font-light text-2xl text-text-primary">
           {t("success")}
@@ -237,7 +237,7 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={status === "sending"}
-          className="w-full bg-gold text-background font-body font-medium tracking-[0.15em] uppercase text-xs px-8 py-5 hover:bg-gold-hover transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-accent text-background font-body font-medium tracking-[0.15em] uppercase text-xs px-8 py-5 hover:bg-accent-hover transition-colors duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {status === "sending" ? t("sending") : t("submit")}
         </button>

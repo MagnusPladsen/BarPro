@@ -17,11 +17,11 @@ export function Quote() {
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1, ease }}
         >
-          <div className="w-16 h-px bg-gold mx-auto mb-16" />
+          <div className="w-16 h-px bg-accent mx-auto mb-16" />
           <p className="font-display font-light text-2xl md:text-3xl lg:text-4xl text-text-primary leading-relaxed">
             {t("text")}
           </p>
-          <div className="w-16 h-px bg-gold mx-auto mt-16" />
+          <div className="w-16 h-px bg-accent mx-auto mt-16" />
         </motion.div>
       </div>
     </section>

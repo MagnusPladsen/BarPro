@@ -12,11 +12,11 @@ export function AnnouncementBar() {
       initial={{ y: -40, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, delay: 2.5, ease: [0.25, 0.1, 0.25, 1] }}
-      className="fixed top-0 left-0 right-0 z-[60] bg-gold text-background"
+      className="fixed top-0 left-0 right-0 z-[60] bg-accent text-background"
     >
       <Link
         href="/blogg"
-        className="flex items-center justify-center gap-3 px-4 py-2.5 text-[11px] font-medium tracking-[0.2em] uppercase hover:bg-gold-hover transition-colors cursor-pointer"
+        className="flex items-center justify-center gap-3 px-4 py-2.5 text-[11px] font-medium tracking-[0.2em] uppercase hover:bg-accent-hover transition-colors cursor-pointer"
       >
         <span className="hidden md:inline">{t("text")}</span>
         <span className="md:hidden">{t("textShort")}</span>

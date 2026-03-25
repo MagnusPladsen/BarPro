@@ -29,7 +29,7 @@ export function Intro() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.9, ease }}
-              className="text-[11px] tracking-[0.25em] uppercase text-gold font-body font-medium mb-6"
+              className="text-[11px] tracking-[0.25em] uppercase text-accent font-body font-medium mb-6"
             >
               {t("label")}
             </motion.p>
@@ -38,7 +38,7 @@ export function Intro() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.9, delay: 0.1, ease }}
-              className="font-display font-light text-4xl md:text-5xl lg:text-6xl text-text-primary mb-10 leading-[1.1]"
+              className="font-display italic font-light text-4xl md:text-5xl lg:text-6xl text-text-primary mb-10 leading-[1.1]"
             >
               {t("heading")}
             </motion.h2>
@@ -47,7 +47,7 @@ export function Intro() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.9, delay: 0.15, ease }}
-              className="w-12 h-px bg-gold mb-10"
+              className="w-12 h-px bg-accent mb-10"
             />
             <div className="space-y-6 max-w-lg">
               {(["text1", "text2", "text3", "text4"] as const).map((key, i) => (

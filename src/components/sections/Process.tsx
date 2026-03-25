@@ -19,7 +19,7 @@ export function Process() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, ease }}
-            className="text-[11px] tracking-[0.25em] uppercase text-gold font-body font-medium mb-6"
+            className="text-[11px] tracking-[0.25em] uppercase text-accent font-body font-medium mb-6"
           >
             {t("label")}
           </motion.p>
@@ -28,7 +28,7 @@ export function Process() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, delay: 0.1, ease }}
-            className="font-display font-light text-4xl md:text-5xl lg:text-6xl text-text-primary"
+            className="font-display italic font-light text-4xl md:text-5xl lg:text-6xl text-text-primary"
           >
             {t("heading")}
           </motion.h2>
@@ -36,9 +36,9 @@ export function Process() {
 
         <div className="relative grid grid-cols-1 md:grid-cols-3 gap-16 md:gap-8">
           {/* Gold connecting line with dots (desktop only) */}
-          <div className="hidden md:block absolute top-16 left-[20%] right-[20%] h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
-          <div className="hidden md:block absolute top-[60px] left-[calc(33.333%-4px)] w-2 h-2 border border-gold/30 bg-background rotate-45" />
-          <div className="hidden md:block absolute top-[60px] left-[calc(66.666%-4px)] w-2 h-2 border border-gold/30 bg-background rotate-45" />
+          <div className="hidden md:block absolute top-16 left-[20%] right-[20%] h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
+          <div className="hidden md:block absolute top-[60px] left-[calc(33.333%-4px)] w-2 h-2 border border-accent/30 bg-background rotate-45" />
+          <div className="hidden md:block absolute top-[60px] left-[calc(66.666%-4px)] w-2 h-2 border border-accent/30 bg-background rotate-45" />
 
           {stepKeys.map((key, i) => (
             <motion.div
@@ -50,10 +50,10 @@ export function Process() {
               className="relative text-center"
             >
               <div className="relative mb-10">
-                <span className="font-display text-6xl md:text-7xl lg:text-8xl text-gold/[0.15] leading-none select-none">
+                <span className="font-display text-6xl md:text-7xl lg:text-8xl text-accent/[0.15] leading-none select-none">
                   {t(`steps.${key}.number`)}
                 </span>
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-px bg-gold/30" />
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-8 h-px bg-accent/30" />
               </div>
               <h3 className="font-display font-light text-2xl text-text-primary mb-4">
                 {t(`steps.${key}.title`)}

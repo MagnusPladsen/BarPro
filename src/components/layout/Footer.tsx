@@ -16,14 +16,14 @@ export async function Footer() {
   return (
     <footer className="relative border-t border-border bg-background">
       {/* Gold gradient top line */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/20 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent" />
       <div className="mx-auto max-w-7xl px-6 py-20 lg:px-8">
         <div className="grid grid-cols-1 gap-16 md:grid-cols-4">
           {/* Column 1: Logo & Tagline */}
           <div>
             <Link
               href="/"
-              className="font-display text-lg tracking-[0.15em] uppercase text-text-primary hover:text-gold transition-colors duration-300"
+              className="font-display text-lg tracking-[0.15em] uppercase text-text-primary hover:text-accent transition-colors duration-300"
             >
               BarPro
             </Link>
@@ -101,7 +101,7 @@ export async function Footer() {
 
         {/* Bottom Bar */}
         <div className="relative mt-20 border-t border-border pt-8 text-center text-[11px] tracking-[0.15em] uppercase text-text-muted/50">
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-px bg-gold/30" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-px bg-accent/30" />
           &copy; 2026 Barpro DA. {tFooter("rights")}
           <span className="mx-2">·</span>
           <Link href="/personvern" className="hover:text-text-primary transition-colors">
