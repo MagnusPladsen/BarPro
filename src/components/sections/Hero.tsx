@@ -127,6 +127,46 @@ export function Hero() {
             style={{ opacity: 0.12 }}
           />
         </motion.div>
+
+        {/* Copper fill — bottom-left corner */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2.5, delay: 0.4 }}
+          className="absolute bottom-[5%] left-[10%] -translate-x-1/2"
+        >
+          <motion.div
+            animate={{
+              x: [0, 30, -20, 15, 0],
+              y: [0, -20, 15, -10, 0],
+              scale: [1, 1.1, 0.95, 1.05, 1],
+              opacity: [0.1, 0.15, 0.08, 0.12, 0.1],
+            }}
+            transition={{ duration: 17, repeat: Infinity, ease: "easeInOut" }}
+            className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#B88E64] blur-[100px]"
+            style={{ opacity: 0.1 }}
+          />
+        </motion.div>
+
+        {/* Copper fill — top-right corner */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2.5, delay: 0.7 }}
+          className="absolute top-[8%] right-[5%]"
+        >
+          <motion.div
+            animate={{
+              x: [0, -25, 20, -15, 0],
+              y: [0, 15, -20, 10, 0],
+              scale: [1, 1.15, 0.9, 1.08, 1],
+              opacity: [0.08, 0.13, 0.06, 0.1, 0.08],
+            }}
+            transition={{ duration: 19, repeat: Infinity, ease: "easeInOut" }}
+            className="w-[250px] h-[250px] md:w-[450px] md:h-[450px] bg-[#B88E64] blur-[90px]"
+            style={{ opacity: 0.08 }}
+          />
+        </motion.div>
       </motion.div>
 
       {/* Decorative corner frame */}
