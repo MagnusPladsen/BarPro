@@ -36,7 +36,7 @@ export function PricingTeaser() {
           </motion.h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-6 items-center">
           {packageKeys.map((key, i) => {
             const isPopular = key === "premium";
 
@@ -49,7 +49,7 @@ export function PricingTeaser() {
                 transition={{ duration: 0.9, delay: i * 0.15, ease }}
                 className={`relative border text-center transition-all duration-500 overflow-hidden ${
                   isPopular
-                    ? "border-accent/40 bg-background-card shadow-[0_0_80px_rgba(184,142,100,0.1)] hover:shadow-[0_0_100px_rgba(184,142,100,0.15)] p-12 lg:p-16 scale-[1.05] z-10"
+                    ? "border-accent/40 bg-background-card shadow-[0_0_80px_rgba(184,142,100,0.1)] hover:shadow-[0_0_100px_rgba(184,142,100,0.15)] p-10 lg:p-14 md:-my-6"
                     : "border-border bg-background-card/50 hover:border-border-accent p-10 lg:p-12"
                 }`}
               >
@@ -70,12 +70,14 @@ export function PricingTeaser() {
                 <p className="text-text-muted text-sm mb-6 relative z-10">
                   {t(`packages.${key}.description`)}
                 </p>
-                <span className={`font-display font-light text-text-primary relative z-10 ${isPopular ? "text-4xl lg:text-5xl text-accent" : "text-3xl lg:text-4xl"}`}>
-                  {t(`packages.${key}.price`)}
-                </span>
-                <span className="text-text-muted text-sm ml-2 relative z-10">
-                  {t(`packages.${key}.unit`)}
-                </span>
+                <div className="relative z-10">
+                  <span className={`font-display font-light ${isPopular ? "text-5xl lg:text-6xl text-accent" : "text-3xl lg:text-4xl text-text-primary"}`}>
+                    {t(`packages.${key}.price`)}
+                  </span>
+                  <span className={`text-sm ml-2 ${isPopular ? "text-accent/60" : "text-text-muted"}`}>
+                    {t(`packages.${key}.unit`)}
+                  </span>
+                </div>
               </motion.div>
             );
           })}
