@@ -17,6 +17,9 @@ export default function AdminTimerPage() {
   const [updating, setUpdating] = useState(false);
   const [notification, setNotification] = useState<{ type: "success" | "error"; message: string } | null>(null);
   const [loading, setLoading] = useState(true);
+  const [timerSearch, setTimerSearch] = useState("");
+  const [timerSort, setTimerSort] = useState<"date" | "hours">("date");
+  const [timerSortDir, setTimerSortDir] = useState<"asc" | "desc">("desc");
 
   const fetchEntries = useCallback(async () => {
     try {
@@ -120,15 +123,37 @@ export default function AdminTimerPage() {
         ))}
       </div>
 
-      {loading ? (
+      <div className="flex items-center gap-3 mb-6">
+        <input value={timerSearch} onChange={(e) => setTimerSearch(e.target.value)}
+          placeholder="Søk etter ansatt..."
+          className="flex-1 bg-[#1A1410] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 placeholder:text-[#6B5D52]/40" />
+        <select value={timerSort} onChange={(e) => setTimerSort(e.target.value as "date" | "hours")}
+          className="bg-[#1A1410] border border-[#1A1410] px-3 py-2 text-xs text-[#6B5D52] cursor-pointer">
+          <option value="date">Dato</option>
+          <option value="hours">Timer</option>
+        </select>
+        <button onClick={() => setTimerSortDir(timerSortDir === "desc" ? "asc" : "desc")}
+          className="border border-[#1A1410] px-3 py-2 text-xs text-[#6B5D52] hover:text-[#E8DDD4] cursor-pointer">
+          {timerSortDir === "desc" ? "↓ Nyest" : "↑ Eldst"}
+        </button>
+      </div>
+
+      {(() => {
+        const sorted = entries
+          .filter((e) => timerSearch.length < 2 || (e.employees?.name ?? "").toLowerCase().includes(timerSearch.toLowerCase()))
+          .sort((a, b) => {
+            const val = timerSort === "date" ? a.date.localeCompare(b.date) : a.hours - b.hours;
+            return timerSortDir === "asc" ? val : -val;
+          });
+        return loading ? (
         <TableSkeleton rows={5} />
-      ) : entries.length === 0 ? (
+      ) : sorted.length === 0 ? (
         <div className="bg-[#1A1410] border border-[#1A1410] p-10 text-center text-[#6B5D52] text-sm">
           Ingen registreringer
         </div>
       ) : (
         <div className="space-y-2">
-          {entries.map((e) => (
+          {sorted.map((e) => (
             <div key={e.id} className="bg-[#1A1410] border border-[#1A1410] p-4 flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div>
@@ -172,7 +197,8 @@ export default function AdminTimerPage() {
             </div>
           ))}
         </div>
-      )}
+      );
+      })()}
     </div>
   );
 }

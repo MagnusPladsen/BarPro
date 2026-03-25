@@ -142,9 +142,17 @@ export default function AnsattePage() {
 
   const [filter, setFilter] = useState<"active" | "inactive" | "all">("active");
   const [page, setPage] = useState(0);
+  const [empSearch, setEmpSearch] = useState("");
+  const [empSort, setEmpSort] = useState<"name" | "hourly_rate">("name");
+  const [empSortDir, setEmpSortDir] = useState<"asc" | "desc">("asc");
   const PAGE_SIZE = 10;
 
-  const filtered = filter === "all" ? employees : employees.filter((e) => filter === "active" ? e.is_active : !e.is_active);
+  const filtered = (filter === "all" ? employees : employees.filter((e) => filter === "active" ? e.is_active : !e.is_active))
+    .filter((e) => empSearch.length < 2 || e.name.toLowerCase().includes(empSearch.toLowerCase()) || e.email.toLowerCase().includes(empSearch.toLowerCase()))
+    .sort((a, b) => {
+      const val = empSort === "name" ? a.name.localeCompare(b.name) : a.hourly_rate - b.hourly_rate;
+      return empSortDir === "asc" ? val : -val;
+    });
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
   const displayed = filtered.slice(page * PAGE_SIZE, (page + 1) * PAGE_SIZE);
 
@@ -179,6 +187,21 @@ export default function AnsattePage() {
                 : "text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4]"
             }`}>{f.label} ({filter === "all" ? employees.length : employees.filter((e) => f.value === "active" ? e.is_active : f.value === "inactive" ? !e.is_active : true).length})</button>
         ))}
+      </div>
+
+      <div className="flex items-center gap-3 mb-6">
+        <input value={empSearch} onChange={(e) => { setEmpSearch(e.target.value); setPage(0); }}
+          placeholder="Søk etter ansatt..."
+          className="flex-1 bg-[#1A1410] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 placeholder:text-[#6B5D52]/40" />
+        <select value={empSort} onChange={(e) => setEmpSort(e.target.value as "name" | "hourly_rate")}
+          className="bg-[#1A1410] border border-[#1A1410] px-3 py-2 text-xs text-[#6B5D52] cursor-pointer">
+          <option value="name">Navn</option>
+          <option value="hourly_rate">Timelønn</option>
+        </select>
+        <button onClick={() => setEmpSortDir(empSortDir === "asc" ? "desc" : "asc")}
+          className="border border-[#1A1410] px-3 py-2 text-xs text-[#6B5D52] hover:text-[#E8DDD4] cursor-pointer">
+          {empSortDir === "asc" ? "↑ A-Å" : "↓ Å-A"}
+        </button>
       </div>
 
       <div className="flex gap-6">
