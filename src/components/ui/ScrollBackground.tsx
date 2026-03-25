@@ -1,78 +1,64 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
 
 /**
- * Blurred gradient orbs that parallax on scroll.
- * Uses absolute positioning inside body-level wrapper instead of fixed,
- * which avoids browser rendering issues with fixed + blur + transform.
+ * 3 color orbs (copper, teal, burgundy) matching the hero — smaller,
+ * drift left-to-right on scroll, always gently animated.
  */
 export function ScrollBackground() {
-  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
 
-  // Different speeds create parallax depth
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -800]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -1200]);
-  const y3 = useTransform(scrollYProgress, [0, 1], [0, -600]);
-  const y4 = useTransform(scrollYProgress, [0, 1], [0, -1000]);
-  const scale1 = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.5, 0.8]);
-  const scale2 = useTransform(scrollYProgress, [0, 0.5, 1], [1.2, 0.7, 1.4]);
+  const x1 = useTransform(scrollYProgress, [0, 1], ["-15vw", "25vw"]);
+  const x2 = useTransform(scrollYProgress, [0, 1], ["10vw", "-20vw"]);
+  const x3 = useTransform(scrollYProgress, [0, 1], ["-10vw", "30vw"]);
 
   return (
     <div
-      ref={ref}
       className="absolute top-0 left-0 w-full pointer-events-none overflow-hidden"
       style={{ height: "500vh", zIndex: 1 }}
       aria-hidden="true"
     >
-      {/* Copper glow — right */}
-      <motion.div
-        style={{ y: y1, scale: scale1 }}
-        className="absolute top-[15%] right-[-5%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px]"
-      >
-        <div className="w-full h-full bg-[#B88E64] opacity-[0.07] blur-[120px]" />
+      {/* Copper — drifts right */}
+      <motion.div style={{ x: x1 }} className="absolute top-[25%] left-[50%]">
+        <motion.div
+          animate={{
+            scale: [1, 1.2, 0.9, 1.15, 1],
+            opacity: [0.07, 0.12, 0.06, 0.1, 0.07],
+            y: [0, -30, 20, -15, 0],
+          }}
+          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
+          className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#B88E64] blur-[100px]"
+          style={{ opacity: 0.07 }}
+        />
       </motion.div>
 
-      {/* Dark espresso — left */}
-      <motion.div
-        style={{ y: y2, scale: scale2 }}
-        className="absolute top-[25%] left-[-8%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px]"
-      >
-        <div className="w-full h-full bg-[#2A211A] opacity-[0.25] blur-[100px]" />
+      {/* Teal — drifts left (counter) */}
+      <motion.div style={{ x: x2 }} className="absolute top-[50%] left-[20%]">
+        <motion.div
+          animate={{
+            scale: [1, 0.85, 1.15, 0.95, 1],
+            opacity: [0.06, 0.1, 0.05, 0.09, 0.06],
+            y: [0, 25, -20, 10, 0],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+          className="w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#3A6B6B] blur-[90px]"
+          style={{ opacity: 0.06 }}
+        />
       </motion.div>
 
-      {/* Bright copper — center right */}
-      <motion.div
-        style={{ y: y4 }}
-        className="absolute top-[40%] right-[10%] w-[35vw] h-[35vw] max-w-[450px] max-h-[450px]"
-      >
-        <div className="w-full h-full bg-[#B88E64] opacity-[0.09] blur-[90px]" />
-      </motion.div>
-
-      {/* Warm deep — left mid */}
-      <motion.div
-        style={{ y: y3 }}
-        className="absolute top-[55%] left-[5%] w-[45vw] h-[45vw] max-w-[500px] max-h-[500px]"
-      >
-        <div className="w-full h-full bg-[#1A1410] opacity-[0.3] blur-[110px]" />
-      </motion.div>
-
-      {/* Copper accent — far right */}
-      <motion.div
-        style={{ y: y1, scale: scale2 }}
-        className="absolute top-[70%] right-[0%] w-[30vw] h-[30vw] max-w-[400px] max-h-[400px]"
-      >
-        <div className="w-full h-full bg-[#B88E64] opacity-[0.06] blur-[100px]" />
-      </motion.div>
-
-      {/* Deep warm — bottom */}
-      <motion.div
-        style={{ y: y2 }}
-        className="absolute top-[85%] left-[25%] w-[45vw] h-[45vw] max-w-[550px] max-h-[550px]"
-      >
-        <div className="w-full h-full bg-[#2A211A] opacity-[0.18] blur-[100px]" />
+      {/* Burgundy — drifts right */}
+      <motion.div style={{ x: x3 }} className="absolute top-[75%] left-[65%]">
+        <motion.div
+          animate={{
+            scale: [1, 1.1, 0.9, 1.2, 1],
+            opacity: [0.06, 0.1, 0.05, 0.08, 0.06],
+            y: [0, -20, 15, -10, 0],
+          }}
+          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+          className="w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#6B2A35] blur-[85px]"
+          style={{ opacity: 0.06 }}
+        />
       </motion.div>
     </div>
   );
