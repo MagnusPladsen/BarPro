@@ -3,63 +3,62 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 
 /**
- * Animated background shapes that parallax on scroll.
- * More visible than before — creates real depth.
+ * Blurred gradient orbs that parallax on scroll — like the hero orbs
+ * but throughout the entire page. Creates a living, breathing background.
  */
 export function ScrollBackground() {
   const { scrollYProgress } = useScroll();
 
   const y1 = useTransform(scrollYProgress, [0, 1], [0, -400]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [0, -600]);
-  const y3 = useTransform(scrollYProgress, [0, 1], [0, -250]);
-  const y4 = useTransform(scrollYProgress, [0, 1], [100, -350]);
-  const rotate1 = useTransform(scrollYProgress, [0, 1], [0, 60]);
-  const rotate2 = useTransform(scrollYProgress, [0, 1], [15, -45]);
-  const scale1 = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.3, 0.9]);
-  const opacity1 = useTransform(scrollYProgress, [0, 0.3, 0.7, 1], [0.08, 0.15, 0.12, 0.06]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [100, -600]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [50, -300]);
+  const y4 = useTransform(scrollYProgress, [0, 1], [200, -500]);
+  const y5 = useTransform(scrollYProgress, [0, 1], [-50, -350]);
+  const scale1 = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.3, 0.8]);
+  const scale2 = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 0.8, 1.2]);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-      {/* Large rotating diamond */}
+      {/* Large copper orb — right side, slow drift */}
       <motion.div
-        style={{ y: y1, rotate: rotate1, scale: scale1, opacity: opacity1 }}
-        className="absolute top-[15%] right-[-8%] w-[250px] h-[250px] md:w-[500px] md:h-[500px] border border-accent/30"
+        style={{ y: y1, scale: scale1 }}
+        className="absolute top-[30%] right-[-10%] w-[350px] h-[350px] md:w-[600px] md:h-[600px] bg-accent/[0.06] blur-[120px]"
       />
 
-      {/* Counter-rotating rectangle */}
+      {/* Warm espresso orb — left side, counter-drift */}
       <motion.div
-        style={{ y: y2, rotate: rotate2 }}
-        className="absolute top-[50%] left-[-5%] w-[180px] h-[120px] md:w-[350px] md:h-[220px] border border-accent/10"
+        style={{ y: y2, scale: scale2 }}
+        className="absolute top-[60%] left-[-10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#2A211A]/30 blur-[100px]"
       />
 
-      {/* Small square — fastest parallax */}
-      <motion.div
-        style={{ y: y2, rotate: rotate1 }}
-        className="absolute top-[75%] right-[10%] w-[80px] h-[80px] md:w-[150px] md:h-[150px] border border-accent/15"
-      />
-
-      {/* Horizontal accent line */}
-      <motion.div
-        style={{ y: y3 }}
-        className="absolute top-[35%] left-[5%] right-[5%] h-px bg-gradient-to-r from-transparent via-accent/10 to-transparent"
-      />
-
-      {/* Second horizontal line — different speed */}
+      {/* Bright copper accent — center-right, fastest parallax */}
       <motion.div
         style={{ y: y4 }}
-        className="absolute top-[65%] left-[15%] right-[15%] h-px bg-gradient-to-r from-transparent via-accent/8 to-transparent"
+        className="absolute top-[90%] right-[20%] w-[250px] h-[250px] md:w-[450px] md:h-[450px] bg-accent/[0.08] blur-[90px]"
       />
 
-      {/* Large glow orb — drifts with scroll */}
+      {/* Deep warm tone — left, medium speed */}
+      <motion.div
+        style={{ y: y3 }}
+        className="absolute top-[120%] left-[10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#1A1410]/40 blur-[110px]"
+      />
+
+      {/* Small bright copper — far down the page */}
+      <motion.div
+        style={{ y: y5, scale: scale1 }}
+        className="absolute top-[160%] right-[5%] w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-accent/[0.07] blur-[80px]"
+      />
+
+      {/* Very deep orb — darkest, adds contrast */}
       <motion.div
         style={{ y: y2 }}
-        className="absolute top-[70%] right-[10%] w-[250px] h-[250px] md:w-[500px] md:h-[500px] bg-accent/[0.04] blur-[120px]"
+        className="absolute top-[200%] left-[30%] w-[350px] h-[350px] md:w-[550px] md:h-[550px] bg-[#2A211A]/25 blur-[100px]"
       />
 
-      {/* Second glow orb — left side */}
+      {/* Bottom copper glow */}
       <motion.div
-        style={{ y: y1 }}
-        className="absolute top-[40%] left-[5%] w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-[#2A211A]/30 blur-[100px]"
+        style={{ y: y4, scale: scale2 }}
+        className="absolute top-[250%] right-[15%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-accent/[0.05] blur-[120px]"
       />
     </div>
   );
