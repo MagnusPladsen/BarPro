@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { ColorOrbs } from "@/components/ui/ColorOrbs";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { BookingCallout } from "@/components/sections/BookingCallout";
@@ -23,7 +24,7 @@ export default function PriserPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-48 pb-24 px-6">
+      <section className="relative pt-48 pb-24 px-6 overflow-hidden"><ColorOrbs size="small" intensity={0.5} />
         <div className="max-w-4xl mx-auto text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}

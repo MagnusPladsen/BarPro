@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
+import { ColorOrbs } from "@/components/ui/ColorOrbs";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -19,12 +20,7 @@ export function CtaBanner() {
           transition={{ duration: 1, ease }}
           className="relative border border-border hover:border-border-accent bg-background-card p-20 md:p-28 overflow-hidden corner-accents transition-colors duration-700"
         >
-          {/* Subtle gold glow behind */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-accent/[0.04] blur-3xl -translate-y-1/2 pointer-events-none" />
-
-          {/* Ambient gold side glows */}
-          <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-[200px] h-[400px] bg-accent/[0.02] blur-[80px] pointer-events-none" />
-          <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 w-[200px] h-[400px] bg-accent/[0.02] blur-[80px] pointer-events-none" />
+          <ColorOrbs size="medium" intensity={0.6} />
 
           <div className="relative z-10">
             <div className="w-16 h-px bg-accent mx-auto mb-12" />
