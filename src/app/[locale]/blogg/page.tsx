@@ -36,7 +36,7 @@ export default function BloggPage() {
       </section>
 
       {/* Posts — no boxes, clean editorial style */}
-      <section className="pb-40 px-6 space-y-24">
+      <section className="pb-40 px-6 space-y-24 mt-16">
         {/* Booking post */}
         <motion.article
           initial={{ opacity: 0, y: 40 }}

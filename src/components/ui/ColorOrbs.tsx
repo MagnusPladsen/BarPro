@@ -17,7 +17,13 @@ export function ColorOrbs({ size = "full", intensity = 1 }: { size?: "full" | "m
   const baseOpacity = 0.1 * intensity;
 
   return (
-    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+    <div
+      className="absolute inset-0 pointer-events-none overflow-hidden"
+      style={{
+        maskImage: "radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 100%)",
+        WebkitMaskImage: "radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 100%)",
+      }}
+    >
       {/* Copper */}
       <motion.div
         animate={{

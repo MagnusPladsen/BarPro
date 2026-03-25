@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { ContactForm } from "@/components/contact/ContactForm";
+import { ColorOrbs } from "@/components/ui/ColorOrbs";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -12,8 +13,9 @@ export default function ContactPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-48 pb-16 px-6">
-        <div className="max-w-7xl mx-auto text-center">
+      <section className="relative pt-48 pb-16 px-6 overflow-hidden">
+        <ColorOrbs size="medium" intensity={0.7} />
+        <div className="relative z-10 max-w-7xl mx-auto text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
