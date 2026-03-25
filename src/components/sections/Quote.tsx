@@ -2,6 +2,7 @@
 
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
+import { ColorOrbs } from "@/components/ui/ColorOrbs";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -9,7 +10,8 @@ export function Quote() {
   const t = useTranslations("quote");
 
   return (
-    <section className="py-40 px-6 bg-background-card/30">
+    <section className="relative py-40 px-6 bg-background-card/30 overflow-hidden">
+      <ColorOrbs size="medium" intensity={0.4} />
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
