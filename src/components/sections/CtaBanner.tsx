@@ -13,9 +13,9 @@ export function CtaBanner() {
     <section className="py-40 px-6">
       <div className="max-w-4xl mx-auto text-center">
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
+          initial={{ opacity: 0, scale: 0.95, y: 20 }}
+          whileInView={{ opacity: 1, scale: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 1, ease }}
           className="relative border border-border hover:border-border-accent bg-background-card p-20 md:p-28 overflow-hidden corner-accents transition-colors duration-700"
         >

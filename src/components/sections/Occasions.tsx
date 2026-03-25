@@ -55,10 +55,10 @@ export function Occasions() {
           {occasionData.map(({ key, image }, i) => (
             <motion.div
               key={key}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.8, delay: i * 0.15, ease }}
+              initial={{ opacity: 0, scale: 0.92, y: 30 }}
+              whileInView={{ opacity: 1, scale: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.9, delay: i * 0.2, ease }}
               className="group relative aspect-[3/4] overflow-hidden cursor-pointer"
             >
               <Image
