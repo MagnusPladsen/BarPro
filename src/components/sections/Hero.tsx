@@ -157,12 +157,12 @@ export function Hero() {
           />
         </motion.div>
 
-        {/* Sixth orb — top left, warm tone */}
+        {/* Sixth orb — top left, deep teal for contrast */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2.5, delay: 0.5 }}
-          className="absolute top-[15%] left-[20%] -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-[12%] left-[18%] -translate-x-1/2 -translate-y-1/2"
         >
           <motion.div
             animate={{
@@ -171,7 +171,7 @@ export function Hero() {
               scale: [1, 1.3, 0.8, 1.1, 0.9, 1],
             }}
             transition={{ duration: 19, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#8A6B4A]/20 blur-[90px]"
+            className="w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#3A6B6B]/15 blur-[90px]"
           />
         </motion.div>
       </motion.div>
