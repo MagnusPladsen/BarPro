@@ -110,8 +110,9 @@ export default function OmOssPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.8, delay: i * 0.15, ease }}
-                className="bg-background-card border border-border overflow-hidden"
+                className="relative bg-background-card border border-border overflow-hidden"
               >
+                <ColorOrbs size="small" intensity={0.3} />
                 {/* Photo */}
                 <div className="relative aspect-square md:aspect-[3/4] w-full overflow-hidden">
                   <Image
@@ -169,8 +170,9 @@ export default function OmOssPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.8, delay: i * 0.12, ease }}
-                className="bg-background-card border border-border p-10"
+                className="relative overflow-hidden bg-background-card border border-border p-10"
               >
+                <ColorOrbs size="small" intensity={0.3} />
                 {/* Gold accent line */}
                 <div className="w-10 h-px bg-gold mb-8" />
 

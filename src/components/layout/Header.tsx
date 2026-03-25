@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { AnimatePresence, motion } from "framer-motion";
+import { ColorOrbs } from "@/components/ui/ColorOrbs";
 
 const navLinks = [
   { href: "/" as const, labelKey: "home" },
@@ -49,10 +50,11 @@ export function Header() {
       <header
         className={`fixed top-[38px] left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "backdrop-blur-xl bg-background/80 border-b border-border shadow-[0_1px_0_rgba(201,168,76,0.08)]"
+            ? "overflow-hidden backdrop-blur-xl bg-background/80 border-b border-border shadow-[0_1px_0_rgba(201,168,76,0.08)]"
             : "bg-transparent"
         }`}
       >
+        {scrolled && <ColorOrbs size="small" intensity={0.2} />}
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="flex h-20 items-center justify-between">
             {/* Logo */}

@@ -80,12 +80,13 @@ export default function PriserPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.8, delay: i * 0.1, ease }}
-                  className={`relative border p-10 lg:p-12 flex flex-col ${
+                  className={`relative overflow-hidden border p-10 lg:p-12 flex flex-col ${
                     isPopular
                       ? "border-gold/40 bg-background-card"
                       : "border-border bg-background-card/50"
                   }`}
                 >
+                  <ColorOrbs size="small" intensity={0.3} />
                   {isPopular && (
                     <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gold text-background text-[10px] tracking-[0.2em] uppercase font-medium px-4 py-1.5">
                       {t("packages.premium.popular")}
@@ -175,8 +176,9 @@ export default function PriserPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: i * 0.06, ease }}
-                className="flex items-start justify-between gap-8 py-6 border-b border-border first:border-t"
+                className="relative overflow-hidden flex items-start justify-between gap-8 py-6 border-b border-border first:border-t"
               >
+                <ColorOrbs size="small" intensity={0.3} />
                 <div>
                   <h3 className="text-text-primary font-medium text-base mb-1">
                     {t(`services.items.${key}.name`)}
