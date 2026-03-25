@@ -53,8 +53,6 @@ export function Hero() {
   const textY = useTransform(scrollYProgress, [0, 1], [0, -150]);
   const textOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
-  const tagline = t("tagline");
-  const words = tagline.split(" ");
 
   return (
     <section
@@ -76,7 +74,7 @@ export function Hero() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ duration: 2.5, delay: 0.5, ease: "easeOut" }}
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[900px] md:h-[900px] bg-gold/[0.03] blur-[120px]"
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] md:w-[900px] md:h-[900px] bg-accent/[0.03] blur-[120px]"
       />
 
       {/* Secondary smaller glow, slightly offset */}
@@ -84,7 +82,7 @@ export function Hero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 3, delay: 1 }}
-        className="absolute top-[40%] left-[45%] -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-gold/[0.02] blur-[100px]"
+        className="absolute top-[40%] left-[45%] -translate-x-1/2 -translate-y-1/2 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-accent/[0.02] blur-[100px]"
       />
 
       {/* Decorative corner frame */}
@@ -94,10 +92,10 @@ export function Hero() {
         transition={{ duration: 1.5, delay: 2.2 }}
         className="absolute inset-12 md:inset-20 lg:inset-28 z-10 pointer-events-none"
       >
-        <div className="absolute top-0 left-0 w-12 h-12 md:w-16 md:h-16 border-t border-l border-gold/20" />
-        <div className="absolute top-0 right-0 w-12 h-12 md:w-16 md:h-16 border-t border-r border-gold/20" />
-        <div className="absolute bottom-0 left-0 w-12 h-12 md:w-16 md:h-16 border-b border-l border-gold/20" />
-        <div className="absolute bottom-0 right-0 w-12 h-12 md:w-16 md:h-16 border-b border-r border-gold/20" />
+        <div className="absolute top-0 left-0 w-12 h-12 md:w-16 md:h-16 border-t border-l border-accent/20" />
+        <div className="absolute top-0 right-0 w-12 h-12 md:w-16 md:h-16 border-t border-r border-accent/20" />
+        <div className="absolute bottom-0 left-0 w-12 h-12 md:w-16 md:h-16 border-b border-l border-accent/20" />
+        <div className="absolute bottom-0 right-0 w-12 h-12 md:w-16 md:h-16 border-b border-r border-accent/20" />
       </motion.div>
 
       {/* Main content with parallax */}
@@ -105,23 +103,41 @@ export function Hero() {
         style={{ y: textY, opacity: textOpacity }}
         className="relative z-10 max-w-5xl mx-auto px-6 text-center"
       >
-        {/* Tagline — staggered word reveal */}
+        {/* Heritage badge */}
+        <motion.p
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+          className="text-accent/40 text-[9px] md:text-[11px] tracking-[0.25em] uppercase font-body font-medium mb-6 md:mb-8"
+        >
+          {t("heritage")}
+        </motion.p>
+
+        {/* Tagline — contrast typography */}
         <motion.h1
           variants={taglineContainer}
           initial="hidden"
           animate="visible"
-          className="font-display font-light text-6xl md:text-8xl xl:text-9xl text-text-primary leading-[1.05] tracking-[-0.02em] mb-8 md:mb-10"
+          className="mb-8 md:mb-10"
         >
-          {words.map((word, i) => (
-            <span key={i} className="inline-block overflow-hidden mr-[0.25em] last:mr-0 pb-[0.15em] -mb-[0.15em]">
-              <motion.span
-                variants={wordReveal}
-                className="inline-block"
-              >
-                {word}
-              </motion.span>
-            </span>
-          ))}
+          {/* Line 1: Italic serif */}
+          <span className="block overflow-hidden">
+            <motion.span
+              variants={wordReveal}
+              className="block font-display italic font-normal text-5xl md:text-7xl xl:text-8xl text-text-primary leading-[1.05]"
+            >
+              {t("tagline1")}
+            </motion.span>
+          </span>
+          {/* Line 2: Uppercase sans */}
+          <span className="block overflow-hidden">
+            <motion.span
+              variants={wordReveal}
+              className="block font-body font-extralight text-4xl md:text-6xl xl:text-7xl text-text-primary leading-[1.05] tracking-[0.05em] uppercase"
+            >
+              {t("tagline2")}
+            </motion.span>
+          </span>
         </motion.h1>
 
         {/* Subtitle — fades in after tagline */}
@@ -162,7 +178,7 @@ export function Hero() {
             transition={{ duration: 0.6, delay: CTA_DELAY + 0.5 }}
             className="mt-8"
           >
-            <a href="/kontakt" className="text-text-muted text-sm hover:text-gold transition-colors duration-300">
+            <a href="/kontakt" className="text-text-muted text-sm hover:text-accent transition-colors duration-300">
               {t("cta")} &rarr;
             </a>
           </motion.div>
@@ -192,9 +208,9 @@ export function Hero() {
               ease: "easeInOut",
               repeatDelay: 0.3,
             }}
-            className="absolute inset-x-0 h-full bg-gradient-to-b from-transparent via-gold to-transparent"
+            className="absolute inset-x-0 h-full bg-gradient-to-b from-transparent via-accent to-transparent"
           />
-          <div className="absolute inset-0 bg-gold/10" />
+          <div className="absolute inset-0 bg-accent/10" />
         </div>
       </motion.div>
 
@@ -216,7 +232,7 @@ export function Hero() {
             repeat: Infinity,
             ease: "easeInOut",
           }}
-          className="h-px w-full bg-gradient-to-r from-transparent via-gold/50 to-transparent"
+          className="h-px w-full bg-gradient-to-r from-transparent via-accent/50 to-transparent"
         />
       </motion.div>
     </section>
