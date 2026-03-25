@@ -47,13 +47,13 @@ export function PricingTeaser() {
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.9, delay: i * 0.15, ease }}
-                className={`relative border text-center transition-all duration-500 overflow-hidden ${
+                className={`relative border text-center transition-all duration-500 ${
                   isPopular
                     ? "border-accent/40 bg-background-card shadow-[0_0_80px_rgba(184,142,100,0.1)] hover:shadow-[0_0_100px_rgba(184,142,100,0.15)] p-10 lg:p-14 md:-my-6"
                     : "border-border bg-background-card/50 hover:border-border-accent p-10 lg:p-12"
                 }`}
               >
-                <ColorOrbs size="small" intensity={isPopular ? 0.5 : 0.2} />
+                <div className="absolute inset-0 overflow-hidden"><ColorOrbs size="small" intensity={isPopular ? 0.5 : 0.2} /></div>
                 {isPopular && (
                   <>
                     <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent text-background text-[10px] tracking-[0.2em] uppercase font-medium px-6 py-2">

@@ -41,14 +41,21 @@ export default function AdminBookingsPage() {
   const [updating, setUpdating] = useState(false);
   const [showPriceWarning, setShowPriceWarning] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [sortBy, setSortBy] = useState<"created_at" | "date">("created_at");
+  const [sortDir, setSortDir] = useState<"asc" | "desc">("desc");
 
   const fetchBookings = useCallback(async () => {
-    let query = supabase.from("bookings").select("*").order("created_at", { ascending: false });
+    let query = supabase.from("bookings").select("*").order(sortBy, { ascending: sortDir === "asc" });
     if (filter !== "all") query = query.eq("status", filter);
     const { data } = await query;
     setBookings((data as Booking[]) ?? []);
     setLoading(false);
-  }, [supabase, filter]);
+  }, [supabase, filter, sortBy, sortDir]);
+
+  const filteredBookings = searchQuery.length >= 2
+    ? bookings.filter((b) => b.customer_name.toLowerCase().includes(searchQuery.toLowerCase()) || b.customer_email.toLowerCase().includes(searchQuery.toLowerCase()))
+    : bookings;
 
   useEffect(() => { fetchBookings(); }, [fetchBookings]);
 
@@ -262,13 +269,31 @@ export default function AdminBookingsPage() {
     <div>
       <h1 className="text-2xl font-semibold mb-8">Bookinger</h1>
 
-      <div className="flex items-center gap-2 mb-6">
+      <div className="flex flex-wrap items-center gap-2 mb-4">
         {filters.map((f) => (
           <button key={f.value} onClick={() => setFilter(f.value)}
             className={`px-4 py-2 text-xs tracking-wider uppercase transition-colors cursor-pointer ${
               filter === f.value ? "bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30" : "text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4]"
             }`}>{f.label}</button>
         ))}
+      </div>
+
+      <div className="flex items-center gap-3 mb-6">
+        <input
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          placeholder="Søk etter kunde..."
+          className="flex-1 bg-[#1A1410] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 placeholder:text-[#6B5D52]/40"
+        />
+        <select value={sortBy} onChange={(e) => setSortBy(e.target.value as "created_at" | "date")}
+          className="bg-[#1A1410] border border-[#1A1410] px-3 py-2 text-xs text-[#6B5D52] cursor-pointer">
+          <option value="created_at">Sendt dato</option>
+          <option value="date">Event dato</option>
+        </select>
+        <button onClick={() => setSortDir(sortDir === "desc" ? "asc" : "desc")}
+          className="border border-[#1A1410] px-3 py-2 text-xs text-[#6B5D52] hover:text-[#E8DDD4] cursor-pointer">
+          {sortDir === "desc" ? "↓ Nyest" : "↑ Eldst"}
+        </button>
       </div>
 
       <div className="flex gap-6">
@@ -282,9 +307,9 @@ export default function AdminBookingsPage() {
               <ListItemSkeleton />
               <ListItemSkeleton />
             </>
-          ) : bookings.length === 0 ? (
-            <div className="bg-[#1A1410] border border-[#1A1410] p-10 text-center text-[#6B5D52] text-sm">Ingen bookinger</div>
-          ) : bookings.map((b) => (
+          ) : filteredBookings.length === 0 ? (
+            <div className="bg-[#1A1410] border border-[#1A1410] p-10 text-center text-[#6B5D52] text-sm">{searchQuery ? "Ingen treff" : "Ingen bookinger"}</div>
+          ) : filteredBookings.map((b) => (
             <button key={b.id} onClick={() => selectBooking(b)}
               className={`w-full text-left bg-[#1A1410] border p-4 transition-colors cursor-pointer ${
                 selected?.id === b.id ? "border-[#B88E64]/40" : "border-[#1A1410] hover:border-[#B88E64]/20"
@@ -293,7 +318,7 @@ export default function AdminBookingsPage() {
                 <p className="text-sm font-medium">{b.customer_name}</p>
                 <span className={`text-[10px] tracking-wider uppercase px-2 py-1 ${statusColors[b.status]}`}>{statusLabels[b.status]}</span>
               </div>
-              <p className="text-[11px] text-[#6B5D52] mt-1">{formatDate(b.date)} · {packageLabels[b.package]} · {b.guest_count}</p>
+              <p className="text-[11px] text-[#6B5D52] mt-1">{formatDate(b.date)} · {packageLabels[b.package]} · {b.guest_count} · Sendt {new Date(b.created_at).toLocaleDateString("no-NO", { day: "numeric", month: "short" })}</p>
             </button>
           ))}
         </div>
