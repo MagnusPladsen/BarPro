@@ -40,8 +40,8 @@ export default function TjenesterPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-48 pb-24 px-6 overflow-hidden"><ColorOrbs size="small" intensity={0.5} />
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="relative pt-48 pb-24 px-6 overflow-hidden"><ColorOrbs size="medium" intensity={0.7} />
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -136,7 +136,7 @@ export default function TjenesterPage() {
 
       {/* Pricing Section */}
       <section className="py-40 px-6">
-        <div className="max-w-4xl mx-auto text-center">
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
           <motion.p
             {...fadeUp}
             className="text-[11px] tracking-[0.25em] uppercase text-gold mb-6"

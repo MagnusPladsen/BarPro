@@ -24,8 +24,8 @@ export default function OmOssPage() {
   return (
     <>
       {/* Hero */}
-      <section className="relative pt-48 pb-24 px-6 overflow-hidden"><ColorOrbs size="small" intensity={0.5} />
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="relative pt-48 pb-24 px-6 overflow-hidden"><ColorOrbs size="medium" intensity={0.7} />
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
