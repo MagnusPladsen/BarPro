@@ -1,58 +1,79 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 
 /**
- * Blurred gradient orbs that move with scroll parallax.
- * Each orb is absolutely positioned and transforms on scroll.
+ * Blurred gradient orbs that parallax on scroll.
+ * Uses absolute positioning inside body-level wrapper instead of fixed,
+ * which avoids browser rendering issues with fixed + blur + transform.
  */
 export function ScrollBackground() {
+  const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll();
 
-  const y1 = useTransform(scrollYProgress, [0, 1], ["0vh", "-60vh"]);
-  const y2 = useTransform(scrollYProgress, [0, 1], ["0vh", "-90vh"]);
-  const y3 = useTransform(scrollYProgress, [0, 1], ["0vh", "-45vh"]);
-  const y4 = useTransform(scrollYProgress, [0, 1], ["0vh", "-75vh"]);
-  const scale1 = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.4, 0.8]);
-  const scale2 = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 0.7, 1.3]);
+  // Different speeds create parallax depth
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, -800]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -1200]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [0, -600]);
+  const y4 = useTransform(scrollYProgress, [0, 1], [0, -1000]);
+  const scale1 = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.5, 0.8]);
+  const scale2 = useTransform(scrollYProgress, [0, 0.5, 1], [1.2, 0.7, 1.4]);
 
   return (
-    <div className="fixed inset-0 pointer-events-none z-[5] overflow-hidden" aria-hidden="true">
-      {/* Copper orb — right side */}
+    <div
+      ref={ref}
+      className="absolute top-0 left-0 w-full pointer-events-none overflow-hidden"
+      style={{ height: "500vh", zIndex: 1 }}
+      aria-hidden="true"
+    >
+      {/* Copper glow — right */}
       <motion.div
         style={{ y: y1, scale: scale1 }}
-        className="absolute top-[40vh] right-[-5vw] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-[#B88E64] opacity-[0.07] blur-[120px]"
-      />
+        className="absolute top-[15%] right-[-5%] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px]"
+      >
+        <div className="w-full h-full bg-[#B88E64] opacity-[0.07] blur-[120px]" />
+      </motion.div>
 
-      {/* Dark warm orb — left side */}
+      {/* Dark espresso — left */}
       <motion.div
         style={{ y: y2, scale: scale2 }}
-        className="absolute top-[80vh] left-[-8vw] w-[45vw] h-[45vw] max-w-[500px] max-h-[500px] bg-[#2A211A] opacity-[0.2] blur-[100px]"
-      />
+        className="absolute top-[25%] left-[-8%] w-[40vw] h-[40vw] max-w-[500px] max-h-[500px]"
+      >
+        <div className="w-full h-full bg-[#2A211A] opacity-[0.25] blur-[100px]" />
+      </motion.div>
 
-      {/* Bright copper — center-right, deeper */}
+      {/* Bright copper — center right */}
       <motion.div
         style={{ y: y4 }}
-        className="absolute top-[130vh] right-[10vw] w-[40vw] h-[40vw] max-w-[450px] max-h-[450px] bg-[#B88E64] opacity-[0.09] blur-[90px]"
-      />
+        className="absolute top-[40%] right-[10%] w-[35vw] h-[35vw] max-w-[450px] max-h-[450px]"
+      >
+        <div className="w-full h-full bg-[#B88E64] opacity-[0.09] blur-[90px]" />
+      </motion.div>
 
-      {/* Espresso glow — left, mid-page */}
+      {/* Warm deep — left mid */}
       <motion.div
         style={{ y: y3 }}
-        className="absolute top-[180vh] left-[5vw] w-[45vw] h-[45vw] max-w-[500px] max-h-[500px] bg-[#1A1410] opacity-[0.25] blur-[110px]"
-      />
+        className="absolute top-[55%] left-[5%] w-[45vw] h-[45vw] max-w-[500px] max-h-[500px]"
+      >
+        <div className="w-full h-full bg-[#1A1410] opacity-[0.3] blur-[110px]" />
+      </motion.div>
 
-      {/* Small copper accent — far down right */}
+      {/* Copper accent — far right */}
       <motion.div
         style={{ y: y1, scale: scale2 }}
-        className="absolute top-[240vh] right-[0vw] w-[35vw] h-[35vw] max-w-[400px] max-h-[400px] bg-[#B88E64] opacity-[0.06] blur-[100px]"
-      />
+        className="absolute top-[70%] right-[0%] w-[30vw] h-[30vw] max-w-[400px] max-h-[400px]"
+      >
+        <div className="w-full h-full bg-[#B88E64] opacity-[0.06] blur-[100px]" />
+      </motion.div>
 
-      {/* Deep warm — bottom left */}
+      {/* Deep warm — bottom */}
       <motion.div
         style={{ y: y2 }}
-        className="absolute top-[300vh] left-[20vw] w-[50vw] h-[50vw] max-w-[550px] max-h-[550px] bg-[#2A211A] opacity-[0.15] blur-[100px]"
-      />
+        className="absolute top-[85%] left-[25%] w-[45vw] h-[45vw] max-w-[550px] max-h-[550px]"
+      >
+        <div className="w-full h-full bg-[#2A211A] opacity-[0.18] blur-[100px]" />
+      </motion.div>
     </div>
   );
 }
