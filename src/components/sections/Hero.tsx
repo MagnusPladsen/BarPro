@@ -65,173 +65,66 @@ export function Hero() {
         }}
       />
 
-      {/* Animated gradient mesh orbs */}
+      {/* 3 always-visible color orbs — copper, teal, burgundy */}
       <motion.div style={{ y: orbY, scale: orbScale }} className="absolute inset-0 pointer-events-none">
-        {/* Primary large orb — copper, shifts to warm gold */}
+
+        {/* COPPER — center, largest, always visible */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.5 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 2, delay: 0.3, ease: "easeOut" }}
-          className="absolute top-[35%] left-[50%] -translate-x-1/2 -translate-y-1/2"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2, delay: 0.3 }}
+          className="absolute top-[40%] left-[55%] -translate-x-1/2 -translate-y-1/2"
         >
           <motion.div
             animate={{
-              x: [0, 80, -60, 40, -30, 0],
-              y: [0, -50, 40, -30, 20, 0],
-              scale: [1, 1.25, 0.85, 1.15, 0.95, 1],
-              background: [
-                "rgba(184, 142, 100, 0.12)",
-                "rgba(212, 168, 118, 0.14)",
-                "rgba(160, 120, 80, 0.10)",
-                "rgba(184, 142, 100, 0.12)",
-              ],
+              x: [0, 60, -40, 30, -50, 0],
+              y: [0, -35, 25, -20, 15, 0],
+              scale: [1, 1.15, 0.9, 1.1, 0.95, 1],
+              opacity: [0.14, 0.2, 0.1, 0.18, 0.12, 0.14],
             }}
-            transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[400px] h-[400px] md:w-[700px] md:h-[700px] blur-[100px]"
+            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+            className="w-[450px] h-[450px] md:w-[750px] md:h-[750px] bg-[#B88E64] blur-[110px]"
+            style={{ opacity: 0.14 }}
           />
         </motion.div>
 
-        {/* Secondary orb — espresso, shifts darker/lighter */}
+        {/* TEAL — top-left, always visible */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 0.6 }}
-          className="absolute top-[55%] left-[25%] -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-[20%] left-[20%] -translate-x-1/2 -translate-y-1/2"
         >
           <motion.div
             animate={{
-              x: [0, -70, 50, -30, 60, 0],
-              y: [0, 50, -40, 30, -20, 0],
-              scale: [1, 0.8, 1.3, 0.9, 1.1, 1],
-              background: [
-                "rgba(42, 33, 26, 0.50)",
-                "rgba(60, 45, 30, 0.40)",
-                "rgba(30, 22, 18, 0.55)",
-                "rgba(42, 33, 26, 0.50)",
-              ],
+              x: [0, -40, 50, -30, 20, 0],
+              y: [0, 30, -25, 40, -15, 0],
+              scale: [1, 1.2, 0.85, 1.1, 0.95, 1],
+              opacity: [0.12, 0.18, 0.08, 0.15, 0.1, 0.12],
             }}
             transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[350px] h-[350px] md:w-[550px] md:h-[550px] blur-[90px]"
+            className="w-[350px] h-[350px] md:w-[550px] md:h-[550px] bg-[#3A6B6B] blur-[100px]"
+            style={{ opacity: 0.12 }}
           />
         </motion.div>
 
-        {/* Tertiary orb — copper, shifts to bright amber */}
+        {/* BURGUNDY — bottom-right, always visible */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 2, delay: 1 }}
-          className="absolute top-[25%] left-[70%] -translate-x-1/2 -translate-y-1/2"
-        >
-          <motion.div
-            animate={{
-              x: [0, 60, -80, 40, -50, 0],
-              y: [0, -70, 30, -50, 20, 0],
-              scale: [1, 1.4, 0.7, 1.2, 0.9, 1],
-              background: [
-                "rgba(184, 142, 100, 0.15)",
-                "rgba(200, 155, 90, 0.18)",
-                "rgba(170, 130, 90, 0.12)",
-                "rgba(184, 142, 100, 0.15)",
-              ],
-            }}
-            transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[250px] h-[250px] md:w-[400px] md:h-[400px] blur-[80px]"
-          />
-        </motion.div>
-
-        {/* Deep warm orb — plum, shifts to espresso */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 3, delay: 1.3 }}
+          transition={{ duration: 2, delay: 0.9 }}
           className="absolute top-[65%] left-[75%] -translate-x-1/2 -translate-y-1/2"
         >
           <motion.div
             animate={{
-              x: [0, -50, 70, -30, 40, 0],
-              y: [0, 40, -60, 30, -20, 0],
-              scale: [1, 1.3, 0.85, 1.15, 0.9, 1],
-              background: [
-                "rgba(26, 16, 24, 0.40)",
-                "rgba(42, 33, 26, 0.35)",
-                "rgba(20, 12, 20, 0.45)",
-                "rgba(26, 16, 24, 0.40)",
-              ],
+              x: [0, 35, -55, 45, -20, 0],
+              y: [0, -25, 35, -30, 20, 0],
+              scale: [1, 1.1, 0.9, 1.2, 0.85, 1],
+              opacity: [0.12, 0.17, 0.09, 0.14, 0.1, 0.12],
             }}
             transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[300px] h-[300px] md:w-[450px] md:h-[450px] blur-[80px]"
-          />
-        </motion.div>
-
-        {/* Fifth orb — copper, shifts warm */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2, delay: 1.6 }}
-          className="absolute top-[40%] left-[15%] -translate-x-1/2 -translate-y-1/2"
-        >
-          <motion.div
-            animate={{
-              x: [0, 100, -40, 70, -60, 0],
-              y: [0, -30, 50, -40, 20, 0],
-              scale: [0.8, 1.2, 0.7, 1.3, 0.9, 0.8],
-              background: [
-                "rgba(184, 142, 100, 0.10)",
-                "rgba(138, 107, 74, 0.12)",
-                "rgba(212, 168, 118, 0.08)",
-                "rgba(184, 142, 100, 0.10)",
-              ],
-            }}
-            transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] blur-[100px]"
-          />
-        </motion.div>
-
-        {/* Sixth orb — teal, shifts to cooler tone */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2.5, delay: 0.5 }}
-          className="absolute top-[12%] left-[18%] -translate-x-1/2 -translate-y-1/2"
-        >
-          <motion.div
-            animate={{
-              x: [0, -50, 30, -70, 40, 0],
-              y: [0, 40, -30, 20, -50, 0],
-              scale: [1, 1.3, 0.8, 1.1, 0.9, 1],
-              background: [
-                "rgba(58, 107, 107, 0.15)",
-                "rgba(48, 90, 90, 0.12)",
-                "rgba(70, 120, 115, 0.18)",
-                "rgba(58, 107, 107, 0.15)",
-              ],
-            }}
-            transition={{ duration: 19, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[250px] h-[250px] md:w-[400px] md:h-[400px] blur-[90px]"
-          />
-        </motion.div>
-
-        {/* Seventh orb — deep burgundy/wine, bottom-right */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2, delay: 1 }}
-          className="absolute top-[70%] left-[40%] -translate-x-1/2 -translate-y-1/2"
-        >
-          <motion.div
-            animate={{
-              x: [0, 40, -60, 50, -30, 0],
-              y: [0, -35, 45, -25, 30, 0],
-              scale: [1, 1.2, 0.85, 1.15, 0.9, 1],
-              background: [
-                "rgba(90, 35, 45, 0.15)",
-                "rgba(110, 40, 50, 0.12)",
-                "rgba(75, 28, 38, 0.18)",
-                "rgba(90, 35, 45, 0.15)",
-              ],
-            }}
-            transition={{ duration: 21, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[280px] h-[280px] md:w-[420px] md:h-[420px] blur-[85px]"
+            className="w-[350px] h-[350px] md:w-[500px] md:h-[500px] bg-[#6B2A35] blur-[95px]"
+            style={{ opacity: 0.12 }}
           />
         </motion.div>
       </motion.div>
