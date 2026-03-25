@@ -3,62 +3,77 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 
 /**
- * 3 color orbs (copper, teal, burgundy) matching the hero — smaller,
- * drift left-to-right on scroll, always gently animated.
+ * Sticky background with a subtle luxury geometric pattern
+ * that slowly rotates as user scrolls. Think high-end hotel wallpaper.
  */
 export function ScrollBackground() {
   const { scrollYProgress } = useScroll();
-
-  const x1 = useTransform(scrollYProgress, [0, 1], ["-15vw", "25vw"]);
-  const x2 = useTransform(scrollYProgress, [0, 1], ["10vw", "-20vw"]);
-  const x3 = useTransform(scrollYProgress, [0, 1], ["-10vw", "30vw"]);
+  const rotate = useTransform(scrollYProgress, [0, 1], [0, 90]);
+  const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1.08, 1]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0.03, 0.045, 0.04, 0.02]);
 
   return (
-    <div
-      className="absolute top-0 left-0 w-full pointer-events-none overflow-hidden"
-      style={{ height: "500vh", zIndex: 1 }}
-      aria-hidden="true"
-    >
-      {/* Copper — drifts right */}
-      <motion.div style={{ x: x1 }} className="absolute top-[25%] left-[50%]">
-        <motion.div
-          animate={{
-            scale: [1, 1.2, 0.9, 1.15, 1],
-            opacity: [0.07, 0.12, 0.06, 0.1, 0.07],
-            y: [0, -30, 20, -15, 0],
-          }}
-          transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
-          className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#B88E64] blur-[100px]"
-          style={{ opacity: 0.07 }}
-        />
-      </motion.div>
+    <div className="fixed inset-0 pointer-events-none z-[1] overflow-hidden" aria-hidden="true">
+      <motion.div
+        style={{ rotate, scale, opacity }}
+        className="absolute inset-[-50%] flex items-center justify-center"
+      >
+        <svg
+          viewBox="0 0 800 800"
+          className="w-[200vw] h-[200vh] text-accent"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="0.3"
+        >
+          {/* Concentric diamonds */}
+          {[100, 160, 220, 280, 340, 400].map((size, i) => (
+            <rect
+              key={`d-${i}`}
+              x={400 - size / 2}
+              y={400 - size / 2}
+              width={size}
+              height={size}
+              transform={`rotate(45 400 400)`}
+              opacity={0.4 + i * 0.1}
+            />
+          ))}
 
-      {/* Teal — drifts left (counter) */}
-      <motion.div style={{ x: x2 }} className="absolute top-[50%] left-[20%]">
-        <motion.div
-          animate={{
-            scale: [1, 0.85, 1.15, 0.95, 1],
-            opacity: [0.06, 0.1, 0.05, 0.09, 0.06],
-            y: [0, 25, -20, 10, 0],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-          className="w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#3A6B6B] blur-[90px]"
-          style={{ opacity: 0.06 }}
-        />
-      </motion.div>
+          {/* Crossing lines */}
+          <line x1="0" y1="400" x2="800" y2="400" opacity="0.2" />
+          <line x1="400" y1="0" x2="400" y2="800" opacity="0.2" />
+          <line x1="0" y1="0" x2="800" y2="800" opacity="0.15" />
+          <line x1="800" y1="0" x2="0" y2="800" opacity="0.15" />
 
-      {/* Burgundy — drifts right */}
-      <motion.div style={{ x: x3 }} className="absolute top-[75%] left-[65%]">
-        <motion.div
-          animate={{
-            scale: [1, 1.1, 0.9, 1.2, 1],
-            opacity: [0.06, 0.1, 0.05, 0.08, 0.06],
-            y: [0, -20, 15, -10, 0],
-          }}
-          transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-          className="w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#6B2A35] blur-[85px]"
-          style={{ opacity: 0.06 }}
-        />
+          {/* Corner accents */}
+          {[
+            "M 100 100 L 150 100 L 100 150",
+            "M 700 100 L 650 100 L 700 150",
+            "M 100 700 L 150 700 L 100 650",
+            "M 700 700 L 650 700 L 700 650",
+          ].map((d, i) => (
+            <path key={`c-${i}`} d={d} opacity="0.3" />
+          ))}
+
+          {/* Inner circle */}
+          <circle cx="400" cy="400" r="80" opacity="0.25" />
+          <circle cx="400" cy="400" r="120" opacity="0.15" strokeDasharray="4 8" />
+
+          {/* Radial dots */}
+          {Array.from({ length: 12 }, (_, i) => {
+            const angle = (i * 30 * Math.PI) / 180;
+            const r = 200;
+            return (
+              <circle
+                key={`dot-${i}`}
+                cx={400 + Math.cos(angle) * r}
+                cy={400 + Math.sin(angle) * r}
+                r="2"
+                fill="currentColor"
+                opacity="0.2"
+              />
+            );
+          })}
+        </svg>
       </motion.div>
     </div>
   );

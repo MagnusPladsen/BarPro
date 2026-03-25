@@ -121,11 +121,11 @@ export default async function LocaleLayout({
       </head>
       <body className="bg-background text-text-primary font-body antialiased relative">
         <NextIntlClientProvider messages={messages}>
+          <ScrollBackground />
           <FloatingParticles />
           <ScrollProgressBar />
           <AnnouncementBar />
           <Header />
-          <ScrollBackground />
           <main className="relative z-[2]">{children}</main>
           <Footer />
         </NextIntlClientProvider>
