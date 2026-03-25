@@ -114,7 +114,7 @@ export default function AdminTimerPage() {
           <button key={f.value} onClick={() => setFilter(f.value)}
             className={`px-4 py-2 text-xs tracking-wider uppercase transition-colors cursor-pointer ${
               filter === f.value
-                ? "bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30"
+                ? "bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30"
                 : "text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4]"
             }`}>{f.label}</button>
         ))}

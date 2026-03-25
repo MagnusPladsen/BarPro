@@ -226,7 +226,7 @@ export default function PortalPage() {
         {tabs.map((t) => (
           <button key={t.key} onClick={() => setTab(t.key)}
             className={`px-4 py-2 text-xs tracking-wider uppercase transition-colors cursor-pointer whitespace-nowrap ${
-              tab === t.key ? "bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30" : "text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4]"
+              tab === t.key ? "bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30" : "text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4]"
             }`}>{t.label}</button>
         ))}
       </div>
@@ -237,7 +237,7 @@ export default function PortalPage() {
           <div className="grid grid-cols-3 gap-4">
             <div className="bg-[#1A1410] border border-[#1A1410] p-5">
               <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Kommende</p>
-              <p className="text-2xl font-semibold text-[#C4907A]">{upcoming.length}</p>
+              <p className="text-2xl font-semibold text-[#B88E64]">{upcoming.length}</p>
             </div>
             <div className="bg-[#1A1410] border border-[#1A1410] p-5">
               <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Godkjente timer</p>
@@ -263,7 +263,7 @@ export default function PortalPage() {
                     {a.bookings?.start_time && ` · ${a.bookings.start_time}–${a.bookings.end_time}`}
                   </p>
                 </div>
-                <span className="text-[11px] text-[#C4907A]">{packageLabels[a.bookings?.package ?? ""]}</span>
+                <span className="text-[11px] text-[#B88E64]">{packageLabels[a.bookings?.package ?? ""]}</span>
               </div>
             ))}
           </div>
@@ -324,13 +324,13 @@ export default function PortalPage() {
                     onClick={() => !isPast && !dayAssignments.length && openBlockModal(dateStr)}
                     disabled={isPast || saving}
                     className={`p-2 min-h-[70px] border-b border-r border-[#1A1410] text-left transition-colors ${
-                      isBlocked ? "bg-red-400/10" : isToday ? "bg-[#C4907A]/[0.05]" : ""
+                      isBlocked ? "bg-red-400/10" : isToday ? "bg-[#B88E64]/[0.05]" : ""
                     } ${isPast ? "opacity-40" : "cursor-pointer hover:bg-[#2A211A]"}`}
                   >
-                    <span className={`text-[11px] ${isToday ? "text-[#C4907A] font-semibold" : isBlocked ? "text-red-400" : "text-[#6B5D52]"}`}>{day}</span>
+                    <span className={`text-[11px] ${isToday ? "text-[#B88E64] font-semibold" : isBlocked ? "text-red-400" : "text-[#6B5D52]"}`}>{day}</span>
                     {isBlocked && <div className="mt-1 text-[9px] text-red-400">Ikke tilgjengelig</div>}
                     {dayAssignments.map((a) => (
-                      <div key={a.id} className="mt-1 px-1 py-0.5 bg-[#C4907A]/10 text-[9px] text-[#C4907A] truncate">
+                      <div key={a.id} className="mt-1 px-1 py-0.5 bg-[#B88E64]/10 text-[9px] text-[#B88E64] truncate">
                         {a.bookings?.start_time && `${a.bookings.start_time} `}{a.bookings?.customer_name}
                       </div>
                     ))}
@@ -349,7 +349,7 @@ export default function PortalPage() {
 
           <div className="flex items-center gap-6 mt-4 text-[10px] text-[#6B5D52]">
             <div className="flex items-center gap-2"><div className="w-3 h-1.5 bg-red-400/20" /> Ikke tilgjengelig</div>
-            <div className="flex items-center gap-2"><div className="w-3 h-1.5 bg-[#C4907A]/20" /> Oppdrag</div>
+            <div className="flex items-center gap-2"><div className="w-3 h-1.5 bg-[#B88E64]/20" /> Oppdrag</div>
             <div className="flex items-center gap-2"><div className="w-3 h-1.5 bg-green-400/20" /> Godkjent</div>
             <div className="flex items-center gap-2"><div className="w-3 h-1.5 bg-yellow-400/20" /> Venter</div>
           </div>
@@ -385,7 +385,7 @@ export default function PortalPage() {
                       <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Grunn *</label>
                       <input value={blockReason} onChange={(e) => setBlockReason(e.target.value)}
                         placeholder="F.eks. Ferie, Syk, Annet oppdrag"
-                        className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40 placeholder:text-[#6B5D52]/40" />
+                        className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 placeholder:text-[#6B5D52]/40" />
                     </div>
                     <button onClick={confirmBlock} disabled={saving || !blockReason.trim()}
                       className="w-full bg-red-400/10 text-red-400 border border-red-400/30 py-2 text-xs uppercase tracking-wider hover:bg-red-400/20 cursor-pointer disabled:opacity-50">
@@ -408,7 +408,7 @@ export default function PortalPage() {
             <div>
               <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Dato</label>
               <input type="date" value={logDate} onChange={(e) => setLogDate(e.target.value)}
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
             </div>
 
             {/* Time picker — same style as booking page */}
@@ -418,19 +418,19 @@ export default function PortalPage() {
                 <div className="flex-1">
                   <label className="text-[10px] text-[#6B5D52] mb-1.5 block">Fra</label>
                   <input type="time" value={logStart} onChange={(e) => setLogStart(e.target.value)} step="900"
-                    className="w-full bg-[#0D0A08] border border-[#1A1410] px-4 py-3 text-lg text-center outline-none focus:border-[#C4907A]/40" />
+                    className="w-full bg-[#0D0A08] border border-[#1A1410] px-4 py-3 text-lg text-center outline-none focus:border-[#B88E64]/40" />
                 </div>
                 <span className="text-[#6B5D52] text-lg pb-3">—</span>
                 <div className="flex-1">
                   <label className="text-[10px] text-[#6B5D52] mb-1.5 block">Til</label>
                   <input type="time" value={logEnd} onChange={(e) => setLogEnd(e.target.value)} step="900"
-                    className="w-full bg-[#0D0A08] border border-[#1A1410] px-4 py-3 text-lg text-center outline-none focus:border-[#C4907A]/40" />
+                    className="w-full bg-[#0D0A08] border border-[#1A1410] px-4 py-3 text-lg text-center outline-none focus:border-[#B88E64]/40" />
                 </div>
               </div>
               {/* Auto-calculated hours */}
-              <div className="mt-3 bg-[#C4907A]/[0.06] border border-[#C4907A]/20 px-4 py-3 text-center">
+              <div className="mt-3 bg-[#B88E64]/[0.06] border border-[#B88E64]/20 px-4 py-3 text-center">
                 <span className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Timer: </span>
-                <span className="text-lg font-semibold text-[#C4907A]">{calcLogHours()} t</span>
+                <span className="text-lg font-semibold text-[#B88E64]">{calcLogHours()} t</span>
               </div>
             </div>
 
@@ -438,11 +438,11 @@ export default function PortalPage() {
               <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Beskrivelse</label>
               <input value={logDesc} onChange={(e) => setLogDesc(e.target.value)}
                 placeholder="Hva jobbet du med?"
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40 placeholder:text-[#6B5D52]/40" />
+                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 placeholder:text-[#6B5D52]/40" />
             </div>
 
             <button onClick={submitHours} disabled={saving || calcLogHours() <= 0}
-              className="w-full bg-[#C4907A] text-[#0D0A08] py-3 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4A08A] cursor-pointer disabled:opacity-50">
+              className="w-full bg-[#B88E64] text-[#0D0A08] py-3 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4A876] cursor-pointer disabled:opacity-50">
               {saving ? "Lagrer..." : `Registrer ${calcLogHours()} timer`}
             </button>
           </div>
@@ -480,10 +480,10 @@ export default function PortalPage() {
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h2 className="text-lg font-semibold">{employee.name}</h2>
-                <p className="text-[11px] text-[#C4907A] tracking-wider uppercase">{employee.role}</p>
+                <p className="text-[11px] text-[#B88E64] tracking-wider uppercase">{employee.role}</p>
               </div>
               <button onClick={() => setEditingProfile(!editingProfile)}
-                className="text-[11px] text-[#C4907A] hover:underline cursor-pointer">
+                className="text-[11px] text-[#B88E64] hover:underline cursor-pointer">
                 {editingProfile ? "Avbryt" : "Rediger"}
               </button>
             </div>
@@ -493,10 +493,10 @@ export default function PortalPage() {
                 <div>
                   <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Telefon</label>
                   <input value={editPhone} onChange={(e) => setEditPhone(e.target.value)}
-                    className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                    className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
                 </div>
                 <button onClick={saveProfile} disabled={saving}
-                  className="bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30 px-4 py-2 text-xs uppercase tracking-wider hover:bg-[#C4907A]/20 cursor-pointer disabled:opacity-50">
+                  className="bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30 px-4 py-2 text-xs uppercase tracking-wider hover:bg-[#B88E64]/20 cursor-pointer disabled:opacity-50">
                   Lagre
                 </button>
               </div>
@@ -526,15 +526,15 @@ export default function PortalPage() {
                 <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Nytt passord</label>
                 <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}
                   placeholder="Minst 6 tegn"
-                  className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40 placeholder:text-[#6B5D52]/40" />
+                  className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 placeholder:text-[#6B5D52]/40" />
               </div>
               <div>
                 <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Bekreft passord</label>
                 <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
-                  className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                  className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
               </div>
               <button onClick={changePassword} disabled={saving || !newPassword}
-                className="bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30 px-4 py-2 text-xs uppercase tracking-wider hover:bg-[#C4907A]/20 cursor-pointer disabled:opacity-50">
+                className="bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30 px-4 py-2 text-xs uppercase tracking-wider hover:bg-[#B88E64]/20 cursor-pointer disabled:opacity-50">
                 {saving ? "Lagrer..." : "Endre passord"}
               </button>
             </div>

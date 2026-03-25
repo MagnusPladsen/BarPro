@@ -66,11 +66,11 @@ export default function PortalLayoutClient({ children }: { children: React.React
         <header className="border-b border-[#1A1410] bg-[#120E0B]">
           <div className="max-w-5xl mx-auto px-6 flex items-center justify-between h-16">
             <Link href="/portal" className="text-lg tracking-[0.15em] uppercase font-semibold">
-              BarPro <span className="text-[#C4907A] text-xs font-normal ml-1">Portal</span>
+              BarPro <span className="text-[#B88E64] text-xs font-normal ml-1">Portal</span>
             </Link>
             <div className="flex items-center gap-6">
               {userName && <span className="text-sm text-[#6B5D52]">{userName}</span>}
-              <Link href="/portal/hjelp" className="text-sm text-[#6B5D52] hover:text-[#C4907A] transition-colors">
+              <Link href="/portal/hjelp" className="text-sm text-[#6B5D52] hover:text-[#B88E64] transition-colors">
                 Hjelp
               </Link>
               <button onClick={handleLogout} className="text-sm text-[#6B5D52] hover:text-[#E8DDD4] transition-colors cursor-pointer">

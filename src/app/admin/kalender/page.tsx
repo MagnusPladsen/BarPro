@@ -171,7 +171,7 @@ export default function AdminCalendarPage() {
             return (
               <button key={day} onClick={() => openDayModal(day)}
                 className={`p-3 min-h-[80px] border-b border-r border-[#1A1410] text-left transition-colors duration-200 cursor-pointer hover:bg-[#2A211A] ${bgClass} ${isPast ? "opacity-40" : ""}`}>
-                <span className={`text-sm ${dateStr === today ? "text-[#C4907A] font-semibold" : ""}`}>{day}</span>
+                <span className={`text-sm ${dateStr === today ? "text-[#B88E64] font-semibold" : ""}`}>{day}</span>
                 {blocked && !isBooked && <p className="text-[9px] text-red-400 mt-1">Blokkert</p>}
                 {isBooked && (
                   <div className="mt-1">
@@ -223,7 +223,7 @@ export default function AdminCalendarPage() {
                   <div className="bg-[#0D0A08] border border-[#1A1410] p-4 space-y-3">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-medium">{modal.booking.customer_name}</p>
-                      <p className="text-[11px] text-[#C4907A]">{packageLabels[modal.booking.package]}</p>
+                      <p className="text-[11px] text-[#B88E64]">{packageLabels[modal.booking.package]}</p>
                     </div>
                     <div className="grid grid-cols-2 gap-3 text-[11px]">
                       <div>
@@ -265,7 +265,7 @@ export default function AdminCalendarPage() {
                   )}
 
                   <Link href={`/admin/bookinger?id=${modal.booking.id}`} onClick={() => setModal(null)}
-                    className="block w-full text-center bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C4907A]/20 transition-colors">
+                    className="block w-full text-center bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#B88E64]/20 transition-colors">
                     Åpne booking &rarr;
                   </Link>
                 </div>
@@ -294,7 +294,7 @@ export default function AdminCalendarPage() {
                   <div className="space-y-3">
                     <input value={blockReason} onChange={(e) => setBlockReason(e.target.value)}
                       placeholder="Grunn (valgfritt, f.eks. 'Ferie', 'Opptatt')"
-                      className="w-full bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40 placeholder:text-[#6B5D52]/40" />
+                      className="w-full bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 placeholder:text-[#6B5D52]/40" />
                     <button onClick={blockDate} disabled={saving}
                       className="w-full bg-red-400/10 text-red-400 border border-red-400/30 py-2 text-xs uppercase tracking-wider hover:bg-red-400/20 transition-colors cursor-pointer disabled:opacity-50">
                       {saving ? <span className="flex items-center justify-center gap-1.5"><ButtonSpinner />Lagrer...</span> : "Blokker denne dagen"}

@@ -4,21 +4,21 @@
   --color-background: #0D0A08;
   --color-background-card: #1A1410;
   --color-background-elevated: #2A211A;
-  --color-accent: #C4907A;
-  --color-accent-hover: #D4A08A;
-  --color-accent-dim: #9A6F5C;
-  --color-accent-glow: rgba(196, 144, 122, 0.08);
+  --color-accent: #B88E64;
+  --color-accent-hover: #D4A876;
+  --color-accent-dim: #8A6B4A;
+  --color-accent-glow: rgba(184, 142, 100, 0.08);
   --color-text-primary: #E8DDD4;
   --color-text-muted: #6B5D52;
-  --color-border: rgba(196, 144, 122, 0.08);
-  --color-border-accent: #C4907A;
+  --color-border: rgba(184, 142, 100, 0.08);
+  --color-border-accent: #B88E64;
 
   /* Legacy aliases for gradual migration */
-  --color-gold: #C4907A;
-  --color-gold-hover: #D4A08A;
-  --color-gold-dim: #9A6F5C;
-  --color-gold-glow: rgba(196, 144, 122, 0.08);
-  --color-border-gold: rgba(196, 144, 122, 0.15);
+  --color-gold: #B88E64;
+  --color-gold-hover: #D4A876;
+  --color-gold-dim: #8A6B4A;
+  --color-gold-glow: rgba(184, 142, 100, 0.08);
+  --color-border-gold: rgba(184, 142, 100, 0.15);
 
   --font-display: "Cormorant", serif;
   --font-body: "Space Grotesk", sans-serif;
@@ -46,16 +46,37 @@ body {
   border-radius: 0 !important;
 }
 
-/* Rose gold shimmer sweep for buttons */
+/* Copper shimmer sweep for buttons */
 @keyframes shimmer {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
 
+/* Floating particles animation */
+@keyframes float-up {
+  0% { transform: translateY(100vh) scale(0); opacity: 0; }
+  10% { opacity: 0.6; }
+  90% { opacity: 0.6; }
+  100% { transform: translateY(-10vh) scale(1); opacity: 0; }
+}
+
+/* Gentle sway */
+@keyframes sway {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(20px); }
+}
+
+/* Smooth gradient shift */
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 /* Subtle pulse glow for featured elements */
 @keyframes pulse-accent {
-  0%, 100% { box-shadow: 0 0 20px rgba(196, 144, 122, 0.05); }
-  50% { box-shadow: 0 0 40px rgba(196, 144, 122, 0.12); }
+  0%, 100% { box-shadow: 0 0 20px rgba(184, 142, 100, 0.05); }
+  50% { box-shadow: 0 0 40px rgba(184, 142, 100, 0.12); }
 }
 
 /* Decorative corner accents */

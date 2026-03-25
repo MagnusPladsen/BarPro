@@ -106,7 +106,7 @@ export default function OfferPage() {
       <html lang="no">
         <body className="bg-[#0D0A08] text-[#E8DDD4] font-sans antialiased min-h-screen flex items-center justify-center px-6">
           <div className="text-center max-w-md">
-            <h1 className="text-2xl tracking-[0.15em] uppercase font-semibold mb-8">Bar<span className="text-[#C4907A]">Pro</span></h1>
+            <h1 className="text-2xl tracking-[0.15em] uppercase font-semibold mb-8">Bar<span className="text-[#B88E64]">Pro</span></h1>
             <p className="text-[#6B5D52]">{statusText}</p>
           </div>
         </body>
@@ -120,12 +120,12 @@ export default function OfferPage() {
         <div className="w-full max-w-lg">
           {/* Logo */}
           <div className="text-center mb-10">
-            <h1 className="text-2xl tracking-[0.15em] uppercase font-semibold">Bar<span className="text-[#C4907A]">Pro</span></h1>
+            <h1 className="text-2xl tracking-[0.15em] uppercase font-semibold">Bar<span className="text-[#B88E64]">Pro</span></h1>
           </div>
 
           {done ? (
             <div className="border border-[#1A1410] bg-[#1A1410] p-10 text-center">
-              <div className="w-12 h-px bg-[#C4907A] mx-auto mb-8" />
+              <div className="w-12 h-px bg-[#B88E64] mx-auto mb-8" />
               {done === "accepted" ? (
                 <>
                   <h2 className="text-2xl font-semibold text-green-400 mb-4">Tilbud akseptert!</h2>
@@ -186,9 +186,9 @@ export default function OfferPage() {
               </div>
 
               {/* Price */}
-              <div className="border-t border-[#1A1410] p-8 text-center bg-[#C4907A]/[0.04]">
+              <div className="border-t border-[#1A1410] p-8 text-center bg-[#B88E64]/[0.04]">
                 <p className="text-[10px] text-[#6B5D52] uppercase tracking-[0.25em] mb-2">Totalpris</p>
-                <p className="text-4xl font-semibold text-[#C4907A]">{offer.offered_price.toLocaleString("no-NO")} kr</p>
+                <p className="text-4xl font-semibold text-[#B88E64]">{offer.offered_price.toLocaleString("no-NO")} kr</p>
                 <p className="text-[11px] text-[#6B5D52] mt-1">Ekskl. mva</p>
               </div>
 
@@ -201,11 +201,11 @@ export default function OfferPage() {
                       value={rejectReason}
                       onChange={(e) => setRejectReason(e.target.value)}
                       rows={3}
-                      className="w-full bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40 resize-none"
+                      className="w-full bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 resize-none"
                       placeholder="Valgfritt — fortell oss gjerne hvorfor..."
                     />
                     <label className="flex items-center gap-3 cursor-pointer">
-                      <input type="checkbox" checked={wantsNewOffer} onChange={(e) => setWantsNewOffer(e.target.checked)} className="accent-[#C4907A]" />
+                      <input type="checkbox" checked={wantsNewOffer} onChange={(e) => setWantsNewOffer(e.target.checked)} className="accent-[#B88E64]" />
                       <span className="text-sm text-[#6B5D52]">Jeg ønsker et nytt tilbud</span>
                     </label>
                     <div className="flex gap-3">
@@ -226,7 +226,7 @@ export default function OfferPage() {
                       Avslå
                     </button>
                     <button onClick={acceptOffer} disabled={responding}
-                      className="flex-1 bg-[#C4907A] text-[#0D0A08] py-3 text-xs font-medium uppercase tracking-wider hover:bg-[#D4A08A] cursor-pointer disabled:opacity-50">
+                      className="flex-1 bg-[#B88E64] text-[#0D0A08] py-3 text-xs font-medium uppercase tracking-wider hover:bg-[#D4A876] cursor-pointer disabled:opacity-50">
                       {responding ? "Behandler..." : "Aksepter tilbud"}
                     </button>
                   </div>

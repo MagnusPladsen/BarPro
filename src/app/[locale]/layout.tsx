@@ -8,6 +8,7 @@ import "../globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
+import { FloatingParticles } from "@/components/ui/FloatingParticles";
 
 export const metadata: Metadata = {
   title: {
@@ -118,6 +119,7 @@ export default async function LocaleLayout({
       </head>
       <body className="bg-background text-text-primary font-body antialiased">
         <NextIntlClientProvider messages={messages}>
+          <FloatingParticles />
           <AnnouncementBar />
           <Header />
           <main>{children}</main>

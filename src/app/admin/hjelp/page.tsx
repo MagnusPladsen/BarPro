@@ -102,17 +102,17 @@ export default function AdminHelpPage() {
               onClick={() => setOpen(open === i ? null : i)}
               className="w-full flex items-center justify-between py-5 text-left cursor-pointer group"
             >
-              <span className="text-sm font-medium group-hover:text-[#C4907A] transition-colors">
+              <span className="text-sm font-medium group-hover:text-[#B88E64] transition-colors">
                 {section.title}
               </span>
-              <span className={`text-[#C4907A] text-lg transition-transform ${open === i ? "rotate-45" : ""}`}>+</span>
+              <span className={`text-[#B88E64] text-lg transition-transform ${open === i ? "rotate-45" : ""}`}>+</span>
             </button>
             {open === i && (
               <div className="pb-5">
                 <ol className="space-y-2 ml-4">
                   {section.steps.map((step, j) => (
                     <li key={j} className="flex items-start gap-3 text-sm text-[#6B5D52]">
-                      <span className="text-[#C4907A] text-[10px] font-semibold mt-1 shrink-0">{j + 1}</span>
+                      <span className="text-[#B88E64] text-[10px] font-semibold mt-1 shrink-0">{j + 1}</span>
                       {step}
                     </li>
                   ))}

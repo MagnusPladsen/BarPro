@@ -64,7 +64,7 @@ export default function AdminMessagesPage() {
   };
 
   const statusColors: Record<string, string> = {
-    unread: "text-[#C4907A] bg-[#C4907A]/10",
+    unread: "text-[#B88E64] bg-[#B88E64]/10",
     read: "text-[#6B5D52] bg-[#6B5D52]/10",
     replied: "text-green-400 bg-green-400/10",
   };
@@ -94,7 +94,7 @@ export default function AdminMessagesPage() {
             onClick={() => setFilter(f.value)}
             className={`px-4 py-2 text-xs tracking-wider uppercase transition-colors cursor-pointer ${
               filter === f.value
-                ? "bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30"
+                ? "bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30"
                 : "text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4]"
             }`}
           >
@@ -125,8 +125,8 @@ export default function AdminMessagesPage() {
                 onClick={() => selectMessage(m)}
                 className={`w-full text-left bg-[#1A1410] border p-4 transition-colors cursor-pointer ${
                   selected?.id === m.id
-                    ? "border-[#C4907A]/40"
-                    : "border-[#1A1410] hover:border-[#C4907A]/20"
+                    ? "border-[#B88E64]/40"
+                    : "border-[#1A1410] hover:border-[#B88E64]/20"
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -168,7 +168,7 @@ export default function AdminMessagesPage() {
             <div className="space-y-4 text-sm">
               <div>
                 <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">E-post</p>
-                <a href={`mailto:${selected.email}`} className="text-[#C4907A] hover:underline">
+                <a href={`mailto:${selected.email}`} className="text-[#B88E64] hover:underline">
                   {selected.email}
                 </a>
               </div>
@@ -176,7 +176,7 @@ export default function AdminMessagesPage() {
               {selected.phone && (
                 <div>
                   <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Telefon</p>
-                  <a href={`tel:${selected.phone}`} className="text-[#C4907A] hover:underline">
+                  <a href={`tel:${selected.phone}`} className="text-[#B88E64] hover:underline">
                     {selected.phone}
                   </a>
                 </div>
@@ -225,13 +225,13 @@ export default function AdminMessagesPage() {
                   value={adminNotes}
                   onChange={(e) => setAdminNotes(e.target.value)}
                   rows={3}
-                  className="w-full bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm text-[#E8DDD4] outline-none focus:border-[#C4907A]/40 transition-colors resize-none"
+                  className="w-full bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm text-[#E8DDD4] outline-none focus:border-[#B88E64]/40 transition-colors resize-none"
                   placeholder="Interne notater..."
                 />
                 <button
                   onClick={() => saveNotes(selected.id)}
                   disabled={updating}
-                  className="mt-2 text-[11px] text-[#C4907A] hover:underline cursor-pointer disabled:opacity-50"
+                  className="mt-2 text-[11px] text-[#B88E64] hover:underline cursor-pointer disabled:opacity-50"
                 >
                   Lagre notater
                 </button>
@@ -250,7 +250,7 @@ export default function AdminMessagesPage() {
                 )}
                 <a
                   href={`mailto:${selected.email}`}
-                  className="flex-1 bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30 py-2 text-xs uppercase tracking-wider text-center hover:bg-[#C4907A]/20 transition-colors"
+                  className="flex-1 bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30 py-2 text-xs uppercase tracking-wider text-center hover:bg-[#B88E64]/20 transition-colors"
                 >
                   Svar via e-post
                 </a>

@@ -103,15 +103,15 @@ export default function AdminSettingsPage() {
               <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Nytt passord</label>
               <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="Minst 6 tegn"
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40 placeholder:text-[#6B5D52]/40" />
+                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 placeholder:text-[#6B5D52]/40" />
             </div>
             <div>
               <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Bekreft passord</label>
               <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
             </div>
             <button onClick={changePassword} disabled={saving || !newPassword}
-              className="bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30 px-4 py-2 text-xs uppercase tracking-wider hover:bg-[#C4907A]/20 cursor-pointer disabled:opacity-50">
+              className="bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30 px-4 py-2 text-xs uppercase tracking-wider hover:bg-[#B88E64]/20 cursor-pointer disabled:opacity-50">
               {saving ? <span className="flex items-center gap-1.5"><ButtonSpinner />Lagrer...</span> : "Endre passord"}
             </button>
           </div>
@@ -125,21 +125,21 @@ export default function AdminSettingsPage() {
             <div>
               <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Navn</label>
               <input value={adminName} onChange={(e) => setAdminName(e.target.value)}
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
             </div>
             <div>
               <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">E-post</label>
               <input type="email" value={adminEmail} onChange={(e) => setAdminEmail(e.target.value)}
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
             </div>
             <div>
               <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Passord</label>
               <input type="password" value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)}
                 placeholder="Minst 6 tegn"
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40 placeholder:text-[#6B5D52]/40" />
+                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 placeholder:text-[#6B5D52]/40" />
             </div>
             <button onClick={addAdmin} disabled={saving || !adminName || !adminEmail || !adminPassword}
-              className="bg-[#C4907A] text-[#0D0A08] px-4 py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#D4A08A] cursor-pointer disabled:opacity-50">
+              className="bg-[#B88E64] text-[#0D0A08] px-4 py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#D4A876] cursor-pointer disabled:opacity-50">
               {saving ? <span className="flex items-center gap-1.5"><ButtonSpinner />Oppretter...</span> : "Opprett admin"}
             </button>
           </div>
