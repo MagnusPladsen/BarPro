@@ -18,9 +18,9 @@ export function BookingCallout() {
         transition={{ duration: 0.8, ease }}
         className="max-w-5xl mx-auto"
       >
-        <div className="relative border border-gold/20 bg-gold/[0.03] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden">
+        <div className="relative border border-accent/20 bg-accent/[0.03] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-6 overflow-hidden">
           {/* Gold glow */}
-          <div className="absolute top-0 left-1/4 w-[300px] h-[300px] bg-gold/[0.04] blur-[80px] -translate-y-1/2 pointer-events-none" />
+          <div className="absolute top-0 left-1/4 w-[300px] h-[300px] bg-accent/[0.04] blur-[80px] -translate-y-1/2 pointer-events-none" />
 
           <div className="relative z-10 text-center md:text-left">
             <h3 className="font-display font-light text-2xl md:text-3xl text-text-primary mb-2">

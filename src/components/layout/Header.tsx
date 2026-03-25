@@ -58,7 +58,7 @@ export function Header() {
             {/* Logo */}
             <Link
               href="/"
-              className="font-display text-xl tracking-[0.15em] uppercase text-text-primary hover:text-gold transition-colors duration-300"
+              className="font-display text-xl tracking-[0.15em] uppercase text-text-primary hover:text-accent transition-colors duration-300"
             >
               BarPro
             </Link>
@@ -71,7 +71,7 @@ export function Header() {
                   href={link.href}
                   className={`text-[11px] font-medium tracking-[0.2em] uppercase transition-colors duration-300 ${
                     isActive(link.href)
-                      ? "text-gold"
+                      ? "text-accent"
                       : "text-text-muted hover:text-text-primary"
                   }`}
                 >
@@ -110,7 +110,7 @@ export function Header() {
               {/* CTA */}
               <Link
                 href="/bestill"
-                className="bg-gold px-6 py-2.5 text-[11px] font-medium tracking-[0.2em] uppercase text-background transition-all duration-300 hover:bg-gold-hover"
+                className="bg-accent px-6 py-2.5 text-[11px] font-medium tracking-[0.2em] uppercase text-background transition-all duration-300 hover:bg-accent-hover"
               >
                 {t("book")}
               </Link>
@@ -165,8 +165,8 @@ export function Header() {
                     onClick={() => setMobileMenuOpen(false)}
                     className={`font-display text-4xl font-light tracking-wide transition-colors duration-300 ${
                       isActive(link.href)
-                        ? "text-gold"
-                        : "text-text-primary hover:text-gold"
+                        ? "text-accent"
+                        : "text-text-primary hover:text-accent"
                     }`}
                   >
                     {t(link.labelKey)}
@@ -182,7 +182,7 @@ export function Header() {
                 <Link
                   href="/bestill"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="font-display text-4xl font-light tracking-wide text-gold"
+                  className="font-display text-4xl font-light tracking-wide text-accent"
                 >
                   {t("book")}
                 </Link>

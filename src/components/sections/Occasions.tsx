@@ -36,7 +36,7 @@ export function Occasions() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, ease }}
-            className="text-[11px] tracking-[0.25em] uppercase text-gold font-body font-medium mb-6"
+            className="text-[11px] tracking-[0.25em] uppercase text-accent font-body font-medium mb-6"
           >
             {t("label")}
           </motion.p>
@@ -45,7 +45,7 @@ export function Occasions() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, delay: 0.1, ease }}
-            className="font-display font-light text-4xl md:text-5xl lg:text-6xl text-text-primary"
+            className="font-display italic font-light text-4xl md:text-5xl lg:text-6xl text-text-primary"
           >
             {t("heading")}
           </motion.h2>
@@ -70,9 +70,9 @@ export function Occasions() {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-background via-background/40 to-transparent transition-opacity duration-500 group-hover:from-background/95" />
               {/* Top gold accent line on hover */}
-              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-gold/0 to-transparent group-hover:via-gold/60 transition-all duration-700" />
+              <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/0 to-transparent group-hover:via-accent/60 transition-all duration-700" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
-                <div className="w-6 h-px bg-gold mb-4 transition-all duration-500 group-hover:w-12" />
+                <div className="w-6 h-px bg-accent mb-4 transition-all duration-500 group-hover:w-12" />
                 <h3 className="font-display font-light text-2xl md:text-3xl text-text-primary mb-3">
                   {t(`items.${key}.title`)}
                 </h3>

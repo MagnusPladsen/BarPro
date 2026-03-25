@@ -21,7 +21,7 @@ export function Faq() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, ease }}
-            className="text-[11px] tracking-[0.25em] uppercase text-gold font-body font-medium mb-6"
+            className="text-[11px] tracking-[0.25em] uppercase text-accent font-body font-medium mb-6"
           >
             {t("label")}
           </motion.p>
@@ -30,7 +30,7 @@ export function Faq() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.9, delay: 0.1, ease }}
-            className="font-display font-light text-4xl md:text-5xl lg:text-6xl text-text-primary"
+            className="font-display italic font-light text-4xl md:text-5xl lg:text-6xl text-text-primary"
           >
             {t("heading")}
           </motion.h2>
@@ -54,10 +54,10 @@ export function Faq() {
                   className="w-full flex items-center justify-between py-7 text-left cursor-pointer group"
                   aria-expanded={isOpen}
                 >
-                  <span className="font-display font-light text-lg md:text-xl text-text-primary group-hover:text-gold transition-colors duration-300 pr-8">
+                  <span className="font-display font-light text-lg md:text-xl text-text-primary group-hover:text-accent transition-colors duration-300 pr-8">
                     {t(`items.${key}.q`)}
                   </span>
-                  <span className={`text-gold text-xl transition-transform duration-300 shrink-0 ${isOpen ? "rotate-45" : ""}`}>
+                  <span className={`text-accent text-xl transition-transform duration-300 shrink-0 ${isOpen ? "rotate-45" : ""}`}>
                     +
                   </span>
                 </button>

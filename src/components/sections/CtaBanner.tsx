@@ -17,18 +17,18 @@ export function CtaBanner() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1, ease }}
-          className="relative border border-border hover:border-border-gold bg-background-card p-20 md:p-28 overflow-hidden corner-accents transition-colors duration-700"
+          className="relative border border-border hover:border-border-accent bg-background-card p-20 md:p-28 overflow-hidden corner-accents transition-colors duration-700"
         >
           {/* Subtle gold glow behind */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-gold/[0.04] blur-3xl -translate-y-1/2 pointer-events-none" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-accent/[0.04] blur-3xl -translate-y-1/2 pointer-events-none" />
 
           {/* Ambient gold side glows */}
-          <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-[200px] h-[400px] bg-gold/[0.02] blur-[80px] pointer-events-none" />
-          <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 w-[200px] h-[400px] bg-gold/[0.02] blur-[80px] pointer-events-none" />
+          <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/2 w-[200px] h-[400px] bg-accent/[0.02] blur-[80px] pointer-events-none" />
+          <div className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-1/2 w-[200px] h-[400px] bg-accent/[0.02] blur-[80px] pointer-events-none" />
 
           <div className="relative z-10">
-            <div className="w-16 h-px bg-gold mx-auto mb-12" />
-            <h2 className="font-display font-light text-3xl md:text-4xl lg:text-5xl text-text-primary mb-6 leading-[1.1]">
+            <div className="w-16 h-px bg-accent mx-auto mb-12" />
+            <h2 className="font-display italic font-light text-3xl md:text-4xl lg:text-5xl text-text-primary mb-6 leading-[1.1]">
               {t("heading")}
             </h2>
             <p className="text-text-muted text-lg mb-8 max-w-xl mx-auto leading-relaxed">

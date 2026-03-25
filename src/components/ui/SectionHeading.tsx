@@ -21,7 +21,7 @@ export function SectionHeading({
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-          className="text-gold uppercase tracking-[0.25em] text-[11px] font-body font-medium mb-6"
+          className="text-accent uppercase tracking-[0.25em] text-[11px] font-body font-medium mb-6"
         >
           {label}
         </motion.p>
@@ -31,7 +31,7 @@ export function SectionHeading({
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        className="font-display text-4xl md:text-5xl lg:text-6xl text-text-primary font-light leading-[1.1]"
+        className="font-display italic text-4xl md:text-5xl lg:text-6xl text-text-primary font-light leading-[1.1]"
       >
         {heading}
       </motion.h2>
