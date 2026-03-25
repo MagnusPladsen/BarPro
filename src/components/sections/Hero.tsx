@@ -65,106 +65,66 @@ export function Hero() {
         }}
       />
 
-      {/* 3 always-visible color orbs — copper, teal, burgundy */}
+      {/* 3 massive overlapping orbs — fill entire screen, no gaps */}
       <motion.div style={{ y: orbY, scale: orbScale }} className="absolute inset-0 pointer-events-none">
 
-        {/* COPPER — center, largest, always visible */}
+        {/* COPPER — covers center + top-right + bottom, massive */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 0.3 }}
-          className="absolute top-[40%] left-[55%] -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2"
         >
           <motion.div
             animate={{
-              x: [0, 60, -40, 30, -50, 0],
-              y: [0, -35, 25, -20, 15, 0],
-              scale: [1, 1.15, 0.9, 1.1, 0.95, 1],
-              opacity: [0.14, 0.2, 0.1, 0.18, 0.12, 0.14],
+              x: [0, 50, -30, 40, -20, 0],
+              y: [0, -30, 20, -15, 25, 0],
+              scale: [1, 1.1, 0.95, 1.05, 0.98, 1],
+              opacity: [0.14, 0.2, 0.12, 0.18, 0.13, 0.14],
             }}
             transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[450px] h-[450px] md:w-[750px] md:h-[750px] bg-[#B88E64] blur-[110px]"
+            className="w-[120vw] h-[120vh] bg-[#B88E64] blur-[150px]"
             style={{ opacity: 0.14 }}
           />
         </motion.div>
 
-        {/* TEAL — top-left, always visible */}
+        {/* TEAL — covers top-left, overlaps with copper */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 2, delay: 0.6 }}
-          className="absolute top-[20%] left-[20%] -translate-x-1/2 -translate-y-1/2"
+          className="absolute top-[15%] left-[10%] -translate-x-1/4 -translate-y-1/4"
         >
           <motion.div
             animate={{
-              x: [0, -40, 50, -30, 20, 0],
-              y: [0, 30, -25, 40, -15, 0],
-              scale: [1, 1.2, 0.85, 1.1, 0.95, 1],
-              opacity: [0.12, 0.18, 0.08, 0.15, 0.1, 0.12],
+              x: [0, -40, 30, -25, 15, 0],
+              y: [0, 25, -20, 30, -10, 0],
+              scale: [1, 1.15, 0.9, 1.08, 0.95, 1],
+              opacity: [0.1, 0.16, 0.07, 0.13, 0.09, 0.1],
             }}
             transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[350px] h-[350px] md:w-[550px] md:h-[550px] bg-[#3A6B6B] blur-[100px]"
-            style={{ opacity: 0.12 }}
-          />
-        </motion.div>
-
-        {/* BURGUNDY — bottom-right, always visible */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2, delay: 0.9 }}
-          className="absolute top-[65%] left-[75%] -translate-x-1/2 -translate-y-1/2"
-        >
-          <motion.div
-            animate={{
-              x: [0, 35, -55, 45, -20, 0],
-              y: [0, -25, 35, -30, 20, 0],
-              scale: [1, 1.1, 0.9, 1.2, 0.85, 1],
-              opacity: [0.12, 0.17, 0.09, 0.14, 0.1, 0.12],
-            }}
-            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[350px] h-[350px] md:w-[500px] md:h-[500px] bg-[#6B2A35] blur-[95px]"
-            style={{ opacity: 0.12 }}
-          />
-        </motion.div>
-
-        {/* Copper fill — bottom-left corner */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 2.5, delay: 0.4 }}
-          className="absolute bottom-[5%] left-[10%] -translate-x-1/2"
-        >
-          <motion.div
-            animate={{
-              x: [0, 30, -20, 15, 0],
-              y: [0, -20, 15, -10, 0],
-              scale: [1, 1.1, 0.95, 1.05, 1],
-              opacity: [0.1, 0.15, 0.08, 0.12, 0.1],
-            }}
-            transition={{ duration: 17, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#B88E64] blur-[100px]"
+            className="w-[80vw] h-[80vh] bg-[#3A6B6B] blur-[130px]"
             style={{ opacity: 0.1 }}
           />
         </motion.div>
 
-        {/* Copper fill — top-right corner */}
+        {/* BURGUNDY — covers bottom-right, overlaps with copper */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 2.5, delay: 0.7 }}
-          className="absolute top-[8%] right-[5%]"
+          transition={{ duration: 2, delay: 0.9 }}
+          className="absolute bottom-[10%] right-[5%] translate-x-1/4 translate-y-1/4"
         >
           <motion.div
             animate={{
-              x: [0, -25, 20, -15, 0],
-              y: [0, 15, -20, 10, 0],
-              scale: [1, 1.15, 0.9, 1.08, 1],
-              opacity: [0.08, 0.13, 0.06, 0.1, 0.08],
+              x: [0, 30, -40, 20, -30, 0],
+              y: [0, -20, 30, -25, 15, 0],
+              scale: [1, 1.1, 0.92, 1.12, 0.88, 1],
+              opacity: [0.1, 0.15, 0.08, 0.13, 0.09, 0.1],
             }}
-            transition={{ duration: 19, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[250px] h-[250px] md:w-[450px] md:h-[450px] bg-[#B88E64] blur-[90px]"
-            style={{ opacity: 0.08 }}
+            transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
+            className="w-[80vw] h-[80vh] bg-[#6B2A35] blur-[130px]"
+            style={{ opacity: 0.1 }}
           />
         </motion.div>
       </motion.div>
