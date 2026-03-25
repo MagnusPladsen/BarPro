@@ -123,7 +123,7 @@ export default function AdminDashboardPage() {
 
   const packageLabels: Record<string, string> = { basis: "Basis", premium: "Premium", eksklusiv: "Eksklusiv" };
   const statusLabels: Record<string, string> = { pending: "Forespørsel", offer_sent: "Tilbud sendt", confirmed: "Bekreftet", cancelled: "Avlyst", completed: "Fullført" };
-  const statusColors: Record<string, string> = { pending: "text-yellow-400 bg-yellow-400/10", offer_sent: "text-blue-400 bg-blue-400/10", confirmed: "text-green-400 bg-green-400/10", cancelled: "text-red-400 bg-red-400/10", completed: "text-[#6B6B6B] bg-[#6B6B6B]/10" };
+  const statusColors: Record<string, string> = { pending: "text-yellow-400 bg-yellow-400/10", offer_sent: "text-blue-400 bg-blue-400/10", confirmed: "text-green-400 bg-green-400/10", cancelled: "text-red-400 bg-red-400/10", completed: "text-[#6B5D52] bg-[#6B5D52]/10" };
 
   const margin = thisMonth.revenue - thisMonth.labourCost;
   const lastMargin = lastMonth.revenue - lastMonth.labourCost;
@@ -132,7 +132,7 @@ export default function AdminDashboardPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-semibold">Dashboard</h1>
-        <p className="text-[11px] text-[#6B6B6B] tracking-wider">
+        <p className="text-[11px] text-[#6B5D52] tracking-wider">
           {new Date().toLocaleDateString("no-NO", { month: "long", year: "numeric" })}
         </p>
       </div>
@@ -155,20 +155,20 @@ export default function AdminDashboardPage() {
             }, 300);
           }}
           placeholder="Søk etter kunde, booking..."
-          className="w-full bg-[#141414] border border-[#1E1E1E] px-4 py-3 text-sm outline-none focus:border-[#C9A84C]/40 transition-colors placeholder:text-[#6B6B6B]/40"
+          className="w-full bg-[#1A1410] border border-[#1A1410] px-4 py-3 text-sm outline-none focus:border-[#C4907A]/40 transition-colors placeholder:text-[#6B5D52]/40"
         />
         {searchQuery.length >= 2 && (
-          <div className="absolute top-full left-0 right-0 z-10 bg-[#141414] border border-[#1E1E1E] border-t-0 max-h-[300px] overflow-y-auto">
+          <div className="absolute top-full left-0 right-0 z-10 bg-[#1A1410] border border-[#1A1410] border-t-0 max-h-[300px] overflow-y-auto">
             {searching ? (
-              <p className="p-4 text-[#6B6B6B] text-sm">Søker...</p>
+              <p className="p-4 text-[#6B5D52] text-sm">Søker...</p>
             ) : searchResults.length === 0 ? (
-              <p className="p-4 text-[#6B6B6B] text-sm">Ingen treff</p>
+              <p className="p-4 text-[#6B5D52] text-sm">Ingen treff</p>
             ) : searchResults.map((b) => (
               <Link key={b.id} href="/admin/bookinger" onClick={() => setSearchQuery("")}
-                className="flex items-center justify-between p-3 hover:bg-[#1A1A1A] transition-colors border-b border-[#1E1E1E] last:border-0">
+                className="flex items-center justify-between p-3 hover:bg-[#2A211A] transition-colors border-b border-[#1A1410] last:border-0">
                 <div>
                   <p className="text-sm">{b.customer_name}</p>
-                  <p className="text-[10px] text-[#6B6B6B]">{formatDate(b.date)} · {packageLabels[b.package]}</p>
+                  <p className="text-[10px] text-[#6B5D52]">{formatDate(b.date)} · {packageLabels[b.package]}</p>
                 </div>
                 <span className={`text-[10px] tracking-wider uppercase px-2 py-1 ${statusColors[b.status]}`}>{statusLabels[b.status]}</span>
               </Link>
@@ -189,45 +189,45 @@ export default function AdminDashboardPage() {
         ) : (
           <>
             {/* Revenue */}
-            <div className="bg-[#141414] border border-[#1E1E1E] p-5">
+            <div className="bg-[#1A1410] border border-[#1A1410] p-5">
               <div className="flex items-center justify-between mb-1">
-                <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Inntekt</p>
+                <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Inntekt</p>
                 <ChangeIndicator current={thisMonth.revenue} previous={lastMonth.revenue} suffix=" vs forrige" />
               </div>
               <p className="text-2xl font-semibold text-green-400">{formatMoney(thisMonth.revenue)} kr</p>
-              <p className="text-[10px] text-[#6B6B6B] mt-1">Forrige: {formatMoney(lastMonth.revenue)} kr</p>
+              <p className="text-[10px] text-[#6B5D52] mt-1">Forrige: {formatMoney(lastMonth.revenue)} kr</p>
             </div>
 
             {/* Margin */}
-            <div className="bg-[#141414] border border-[#1E1E1E] p-5">
+            <div className="bg-[#1A1410] border border-[#1A1410] p-5">
               <div className="flex items-center justify-between mb-1">
-                <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Margin</p>
+                <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Margin</p>
                 <ChangeIndicator current={margin} previous={lastMargin} />
               </div>
               <p className={`text-2xl font-semibold ${margin >= 0 ? "text-green-400" : "text-red-400"}`}>
                 {formatMoney(margin)} kr
               </p>
-              <p className="text-[10px] text-[#6B6B6B] mt-1">Kostnad: {formatMoney(thisMonth.labourCost)} kr</p>
+              <p className="text-[10px] text-[#6B5D52] mt-1">Kostnad: {formatMoney(thisMonth.labourCost)} kr</p>
             </div>
 
             {/* Bookings */}
-            <div className="bg-[#141414] border border-[#1E1E1E] p-5">
+            <div className="bg-[#1A1410] border border-[#1A1410] p-5">
               <div className="flex items-center justify-between mb-1">
-                <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Bookinger</p>
+                <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Bookinger</p>
                 <ChangeIndicator current={thisMonth.bookings} previous={lastMonth.bookings} />
               </div>
               <p className="text-2xl font-semibold">{thisMonth.bookings}</p>
-              <p className="text-[10px] text-[#6B6B6B] mt-1">Forrige: {lastMonth.bookings}</p>
+              <p className="text-[10px] text-[#6B5D52] mt-1">Forrige: {lastMonth.bookings}</p>
             </div>
 
             {/* Avg value */}
-            <div className="bg-[#141414] border border-[#1E1E1E] p-5">
+            <div className="bg-[#1A1410] border border-[#1A1410] p-5">
               <div className="flex items-center justify-between mb-1">
-                <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Snittverdi</p>
+                <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Snittverdi</p>
                 <ChangeIndicator current={thisMonth.avgValue} previous={lastMonth.avgValue} />
               </div>
               <p className="text-2xl font-semibold">{formatMoney(thisMonth.avgValue)} kr</p>
-              <p className="text-[10px] text-[#6B6B6B] mt-1">Per booking</p>
+              <p className="text-[10px] text-[#6B5D52] mt-1">Per booking</p>
             </div>
           </>
         )}
@@ -244,28 +244,28 @@ export default function AdminDashboardPage() {
           </>
         ) : (
           <>
-            <Link href="/admin/bookinger" className="bg-[#141414] border border-[#1E1E1E] p-5 hover:border-yellow-400/30 transition-colors">
-              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Forespørsler</p>
+            <Link href="/admin/bookinger" className="bg-[#1A1410] border border-[#1A1410] p-5 hover:border-yellow-400/30 transition-colors">
+              <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Forespørsler</p>
               <p className="text-2xl font-semibold text-yellow-400">{pendingCount}</p>
-              <p className="text-[10px] text-[#6B6B6B] mt-1">Venter på behandling</p>
+              <p className="text-[10px] text-[#6B5D52] mt-1">Venter på behandling</p>
             </Link>
 
-            <Link href="/admin/bookinger" className="bg-[#141414] border border-[#1E1E1E] p-5 hover:border-blue-400/30 transition-colors">
-              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Tilbud sendt</p>
+            <Link href="/admin/bookinger" className="bg-[#1A1410] border border-[#1A1410] p-5 hover:border-blue-400/30 transition-colors">
+              <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Tilbud sendt</p>
               <p className="text-2xl font-semibold text-blue-400">{offerSentCount}</p>
-              <p className="text-[10px] text-[#6B6B6B] mt-1">Venter på kundesvar</p>
+              <p className="text-[10px] text-[#6B5D52] mt-1">Venter på kundesvar</p>
             </Link>
 
-            <Link href="/admin/meldinger" className="bg-[#141414] border border-[#1E1E1E] p-5 hover:border-[#C9A84C]/30 transition-colors">
-              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Uleste meldinger</p>
-              <p className="text-2xl font-semibold text-[#C9A84C]">{unreadCount}</p>
-              <p className="text-[10px] text-[#6B6B6B] mt-1">Fra kontaktskjema</p>
+            <Link href="/admin/meldinger" className="bg-[#1A1410] border border-[#1A1410] p-5 hover:border-[#C4907A]/30 transition-colors">
+              <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Uleste meldinger</p>
+              <p className="text-2xl font-semibold text-[#C4907A]">{unreadCount}</p>
+              <p className="text-[10px] text-[#6B5D52] mt-1">Fra kontaktskjema</p>
             </Link>
 
-            <Link href="/admin/ansatte" className="bg-[#141414] border border-[#1E1E1E] p-5 hover:border-[#C9A84C]/30 transition-colors">
-              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Aktive ansatte</p>
+            <Link href="/admin/ansatte" className="bg-[#1A1410] border border-[#1A1410] p-5 hover:border-[#C4907A]/30 transition-colors">
+              <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Aktive ansatte</p>
               <p className="text-2xl font-semibold">{activeEmployees}</p>
-              <p className="text-[10px] text-[#6B6B6B] mt-1">Timer: {thisMonth.hours} t denne mnd</p>
+              <p className="text-[10px] text-[#6B5D52] mt-1">Timer: {thisMonth.hours} t denne mnd</p>
             </Link>
           </>
         )}
@@ -273,32 +273,32 @@ export default function AdminDashboardPage() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Upcoming confirmed */}
-        <div className="bg-[#141414] border border-[#1E1E1E] p-6">
+        <div className="bg-[#1A1410] border border-[#1A1410] p-6">
           <div className="flex items-center justify-between mb-5">
             <h2 className="text-sm font-medium">Kommende arrangementer</h2>
             <div className="flex items-center gap-3">
-              <a href="/api/admin/google-calendar" className="text-[10px] text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors">.ics</a>
-              <Link href="/admin/kalender" className="text-[11px] text-[#C9A84C] hover:underline">Kalender</Link>
+              <a href="/api/admin/google-calendar" className="text-[10px] text-[#6B5D52] hover:text-[#E8DDD4] transition-colors">.ics</a>
+              <Link href="/admin/kalender" className="text-[11px] text-[#C4907A] hover:underline">Kalender</Link>
             </div>
           </div>
           {loading ? (
             <DashboardListSkeleton />
           ) : upcomingBookings.length === 0 ? (
-            <p className="text-[#6B6B6B] text-sm py-4">Ingen kommende arrangementer</p>
+            <p className="text-[#6B5D52] text-sm py-4">Ingen kommende arrangementer</p>
           ) : (
             <div className="space-y-0">
               {upcomingBookings.map((b) => (
                 <Link key={b.id} href={`/admin/bookinger`}
-                  className="flex items-center justify-between py-3 border-b border-[#1E1E1E] last:border-0 hover:bg-[#1A1A1A] -mx-2 px-2 transition-colors">
+                  className="flex items-center justify-between py-3 border-b border-[#1A1410] last:border-0 hover:bg-[#2A211A] -mx-2 px-2 transition-colors">
                   <div>
                     <p className="text-sm">{b.customer_name}</p>
-                    <p className="text-[11px] text-[#6B6B6B]">
+                    <p className="text-[11px] text-[#6B5D52]">
                       {formatDate(b.date)}
                       {b.start_time && ` · ${b.start_time}–${b.end_time}`}
                       {` · ${packageLabels[b.package]}`}
                     </p>
                   </div>
-                  <span className="text-[11px] text-[#6B6B6B]">{b.guest_count}</span>
+                  <span className="text-[11px] text-[#6B5D52]">{b.guest_count}</span>
                 </Link>
               ))}
             </div>
@@ -306,23 +306,23 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Recent bookings */}
-        <div className="bg-[#141414] border border-[#1E1E1E] p-6">
+        <div className="bg-[#1A1410] border border-[#1A1410] p-6">
           <div className="flex items-center justify-between mb-5">
             <h2 className="text-sm font-medium">Siste aktivitet</h2>
-            <Link href="/admin/bookinger" className="text-[11px] text-[#C9A84C] hover:underline">Se alle</Link>
+            <Link href="/admin/bookinger" className="text-[11px] text-[#C4907A] hover:underline">Se alle</Link>
           </div>
           {loading ? (
             <DashboardListSkeleton />
           ) : recentBookings.length === 0 ? (
-            <p className="text-[#6B6B6B] text-sm py-4">Ingen bookinger ennå</p>
+            <p className="text-[#6B5D52] text-sm py-4">Ingen bookinger ennå</p>
           ) : (
             <div className="space-y-0">
               {recentBookings.map((b) => (
                 <Link key={b.id} href={`/admin/bookinger`}
-                  className="flex items-center justify-between py-3 border-b border-[#1E1E1E] last:border-0 hover:bg-[#1A1A1A] -mx-2 px-2 transition-colors">
+                  className="flex items-center justify-between py-3 border-b border-[#1A1410] last:border-0 hover:bg-[#2A211A] -mx-2 px-2 transition-colors">
                   <div>
                     <p className="text-sm">{b.customer_name}</p>
-                    <p className="text-[11px] text-[#6B6B6B]">{formatDate(b.date)} · {packageLabels[b.package]}</p>
+                    <p className="text-[11px] text-[#6B5D52]">{formatDate(b.date)} · {packageLabels[b.package]}</p>
                   </div>
                   <span className={`text-[10px] tracking-wider uppercase px-2 py-1 ${statusColors[b.status]}`}>
                     {statusLabels[b.status]}
@@ -335,24 +335,24 @@ export default function AdminDashboardPage() {
 
         {/* Unread messages */}
         {unreadMessages.length > 0 && (
-          <div className="bg-[#141414] border border-[#1E1E1E] p-6">
+          <div className="bg-[#1A1410] border border-[#1A1410] p-6">
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-sm font-medium">Nye meldinger</h2>
-              <Link href="/admin/meldinger" className="text-[11px] text-[#C9A84C] hover:underline">Se alle</Link>
+              <Link href="/admin/meldinger" className="text-[11px] text-[#C4907A] hover:underline">Se alle</Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {unreadMessages.map((m) => (
                 <Link key={m.id} href="/admin/meldinger"
-                  className="flex items-start gap-3 py-3 px-3 border border-[#1E1E1E] hover:border-[#C9A84C]/20 transition-colors">
-                  <div className="w-2 h-2 bg-[#C9A84C] mt-1.5 shrink-0" />
+                  className="flex items-start gap-3 py-3 px-3 border border-[#1A1410] hover:border-[#C4907A]/20 transition-colors">
+                  <div className="w-2 h-2 bg-[#C4907A] mt-1.5 shrink-0" />
                   <div className="min-w-0">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-medium truncate">{m.name}</p>
-                      <p className="text-[10px] text-[#6B6B6B] shrink-0 ml-2">
+                      <p className="text-[10px] text-[#6B5D52] shrink-0 ml-2">
                         {new Date(m.created_at).toLocaleDateString("no-NO", { day: "numeric", month: "short" })}
                       </p>
                     </div>
-                    <p className="text-[11px] text-[#6B6B6B] line-clamp-1 mt-0.5">{m.message}</p>
+                    <p className="text-[11px] text-[#6B5D52] line-clamp-1 mt-0.5">{m.message}</p>
                   </div>
                 </Link>
               ))}

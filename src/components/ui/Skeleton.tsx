@@ -3,7 +3,7 @@ interface SkeletonProps {
 }
 
 export function Skeleton({ className = "" }: SkeletonProps): React.ReactElement {
-  return <div className={`bg-[#1E1E1E] animate-pulse ${className}`} />;
+  return <div className={`bg-[#1A1410] animate-pulse ${className}`} />;
 }
 
 interface SkeletonTextProps {
@@ -17,7 +17,7 @@ export function SkeletonText({ lines = 3, className = "" }: SkeletonTextProps): 
       {Array.from({ length: lines }).map((_, i) => (
         <div
           key={i}
-          className={`bg-[#1E1E1E] animate-pulse h-3 ${i === lines - 1 ? "w-2/3" : "w-full"}`}
+          className={`bg-[#1A1410] animate-pulse h-3 ${i === lines - 1 ? "w-2/3" : "w-full"}`}
         />
       ))}
     </div>
