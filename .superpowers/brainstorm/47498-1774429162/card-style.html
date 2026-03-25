@@ -1,0 +1,80 @@
+<h2>Card & Component Style</h2>
+<p class="subtitle">How should cards, buttons, and UI elements feel? All use your Espresso + Rose Gold palette with squared edges.</p>
+
+<div class="cards">
+  <!-- Option A: Minimal Lines -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;overflow:hidden;">
+      <div style="background:#0D0A08;padding:32px;min-height:260px;display:flex;flex-direction:column;gap:16px;">
+        <!-- Service card mock -->
+        <div style="border:1px solid rgba(196,144,122,0.12);padding:28px;position:relative;">
+          <p style="color:rgba(196,144,122,0.3);font-family:system-ui;font-size:9px;letter-spacing:0.2em;position:absolute;top:12px;right:16px;">01</p>
+          <div style="width:30px;height:1px;background:#C4907A;margin-bottom:16px;"></div>
+          <p style="color:#E8DDD4;font-family:'Times New Roman',serif;font-size:18px;font-style:italic;margin-bottom:8px;">Bartendere & Service</p>
+          <p style="color:rgba(232,221,212,0.35);font-family:system-ui;font-size:11px;line-height:1.6;">Erfarne bartendere som skaper stemningen.</p>
+        </div>
+        <!-- Button mocks -->
+        <div style="display:flex;gap:10px;margin-top:8px;">
+          <div style="background:#C4907A;padding:10px 24px;font-family:system-ui;font-size:9px;letter-spacing:0.15em;color:#0D0A08;">PRIMARY</div>
+          <div style="border:1px solid rgba(196,144,122,0.3);padding:10px 24px;font-family:system-ui;font-size:9px;letter-spacing:0.15em;color:#C4907A;">OUTLINE</div>
+          <div style="padding:10px 24px;font-family:system-ui;font-size:9px;letter-spacing:0.15em;color:rgba(196,144,122,0.5);">TEXT →</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A: Minimal Lines</h3>
+      <p>Thin 1px borders, very subtle. Cards are almost invisible containers — content breathes. The rose gold accent line is the only decoration. Clean, quiet luxury. Lets photography and text do the talking.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Layered Depth -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;overflow:hidden;">
+      <div style="background:#0D0A08;padding:32px;min-height:260px;display:flex;flex-direction:column;gap:16px;">
+        <!-- Service card mock -->
+        <div style="background:#1A1410;padding:28px;position:relative;box-shadow:0 4px 30px rgba(0,0,0,0.3);">
+          <p style="color:rgba(196,144,122,0.2);font-family:'Times New Roman',serif;font-size:36px;position:absolute;top:8px;right:16px;font-style:italic;">01</p>
+          <div style="width:30px;height:2px;background:#C4907A;margin-bottom:16px;"></div>
+          <p style="color:#E8DDD4;font-family:'Times New Roman',serif;font-size:18px;font-style:italic;margin-bottom:8px;">Bartendere & Service</p>
+          <p style="color:rgba(232,221,212,0.4);font-family:system-ui;font-size:11px;line-height:1.6;">Erfarne bartendere som skaper stemningen.</p>
+        </div>
+        <!-- Button mocks -->
+        <div style="display:flex;gap:10px;margin-top:8px;">
+          <div style="background:#C4907A;padding:12px 28px;font-family:system-ui;font-size:9px;letter-spacing:0.15em;color:#0D0A08;box-shadow:0 2px 15px rgba(196,144,122,0.2);">PRIMARY</div>
+          <div style="background:#1A1410;border:1px solid rgba(196,144,122,0.2);padding:12px 28px;font-family:system-ui;font-size:9px;letter-spacing:0.15em;color:#C4907A;">OUTLINE</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B: Layered Depth</h3>
+      <p>Cards have a visible elevated background (#1A1410 on #0D0A08) with soft shadows. Feels like physical layers. The large italic watermark numbers add character. Primary button has a subtle rose gold glow. More dimensional, more "expensive".</p>
+    </div>
+  </div>
+
+  <!-- Option C: Border Accent -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)">
+    <div class="card-image" style="padding:0;overflow:hidden;">
+      <div style="background:#0D0A08;padding:32px;min-height:260px;display:flex;flex-direction:column;gap:16px;">
+        <!-- Service card mock -->
+        <div style="border:1px solid rgba(196,144,122,0.08);border-left:2px solid #C4907A;padding:24px 28px;background:rgba(26,20,16,0.5);position:relative;">
+          <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:12px;">
+            <p style="color:#E8DDD4;font-family:'Times New Roman',serif;font-size:18px;font-style:italic;">Bartendere & Service</p>
+            <p style="color:rgba(196,144,122,0.3);font-family:system-ui;font-size:9px;letter-spacing:0.2em;">01</p>
+          </div>
+          <p style="color:rgba(232,221,212,0.35);font-family:system-ui;font-size:11px;line-height:1.6;">Erfarne bartendere som skaper stemningen.</p>
+        </div>
+        <!-- Button mocks -->
+        <div style="display:flex;gap:10px;margin-top:8px;">
+          <div style="background:#C4907A;padding:11px 28px;font-family:system-ui;font-size:9px;letter-spacing:0.15em;color:#0D0A08;">SEND FORESPØRSEL →</div>
+          <div style="border:1px solid rgba(196,144,122,0.2);border-bottom:2px solid #C4907A;padding:11px 28px;font-family:system-ui;font-size:9px;letter-spacing:0.15em;color:#C4907A;">SE PRISER</div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C: Border Accent</h3>
+      <p>Left accent border in rose gold as a signature element. Subtle background tint. The accent border carries through to buttons (bottom border on outline variant). Creates a consistent visual language — everything has this "bar" accent. Distinctive and recognizable.</p>
+    </div>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top:2rem;">Click your favorite card/component style.</p>
