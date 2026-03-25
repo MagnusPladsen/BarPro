@@ -1,20 +1,27 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #0A0A0A;
-  --color-background-card: #141414;
-  --color-background-elevated: #1A1A1A;
-  --color-gold: #C9A84C;
-  --color-gold-hover: #D4AF57;
-  --color-gold-dim: #A08A3C;
-  --color-gold-glow: rgba(201, 168, 76, 0.08);
-  --color-text-primary: #F5F0E8;
-  --color-text-muted: #6B6B6B;
-  --color-border: #1E1E1E;
-  --color-border-gold: rgba(201, 168, 76, 0.15);
+  --color-background: #0D0A08;
+  --color-background-card: #1A1410;
+  --color-background-elevated: #2A211A;
+  --color-accent: #C4907A;
+  --color-accent-hover: #D4A08A;
+  --color-accent-dim: #9A6F5C;
+  --color-accent-glow: rgba(196, 144, 122, 0.08);
+  --color-text-primary: #E8DDD4;
+  --color-text-muted: #6B5D52;
+  --color-border: rgba(196, 144, 122, 0.08);
+  --color-border-accent: #C4907A;
 
-  --font-display: "Cormorant Garamond", serif;
-  --font-body: "DM Sans", sans-serif;
+  /* Legacy aliases for gradual migration */
+  --color-gold: #C4907A;
+  --color-gold-hover: #D4A08A;
+  --color-gold-dim: #9A6F5C;
+  --color-gold-glow: rgba(196, 144, 122, 0.08);
+  --color-border-gold: rgba(196, 144, 122, 0.15);
+
+  --font-display: "Cormorant", serif;
+  --font-body: "Space Grotesk", sans-serif;
 }
 
 html {
@@ -30,7 +37,7 @@ body {
 }
 
 ::selection {
-  background-color: var(--color-gold);
+  background-color: var(--color-accent);
   color: var(--color-background);
 }
 
@@ -39,16 +46,16 @@ body {
   border-radius: 0 !important;
 }
 
-/* Gold shimmer sweep for buttons */
+/* Rose gold shimmer sweep for buttons */
 @keyframes shimmer {
   0% { transform: translateX(-100%); }
   100% { transform: translateX(100%); }
 }
 
 /* Subtle pulse glow for featured elements */
-@keyframes pulse-gold {
-  0%, 100% { box-shadow: 0 0 20px rgba(201, 168, 76, 0.05); }
-  50% { box-shadow: 0 0 40px rgba(201, 168, 76, 0.12); }
+@keyframes pulse-accent {
+  0%, 100% { box-shadow: 0 0 20px rgba(196, 144, 122, 0.05); }
+  50% { box-shadow: 0 0 40px rgba(196, 144, 122, 0.12); }
 }
 
 /* Decorative corner accents */
@@ -58,7 +65,7 @@ body {
   position: absolute;
   width: 24px;
   height: 24px;
-  border-color: var(--color-gold);
+  border-color: var(--color-accent);
   opacity: 0.3;
   pointer-events: none;
   transition: opacity 0.5s ease;

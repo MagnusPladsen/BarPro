@@ -15,6 +15,9 @@
   },
   "hero": {
     "tagline": "Your occasion. Our quality.",
+    "tagline1": "Your occasion.",
+    "tagline2": "Our quality.",
+    "heritage": "Est. 2026 — Lillehammer",
     "subtitle": "Tailored event staffing for weddings, private events, and businesses that expect more.",
     "cta": "Contact us",
     "ctaServices": "See services",

@@ -2,7 +2,7 @@ import { NextIntlClientProvider, hasLocale } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
-import { Cormorant_Garamond, DM_Sans } from "next/font/google";
+import { Cormorant, Space_Grotesk } from "next/font/google";
 import type { Metadata } from "next";
 import "../globals.css";
 import { Header } from "@/components/layout/Header";
@@ -43,14 +43,15 @@ export const metadata: Metadata = {
   },
 };
 
-const cormorant = Cormorant_Garamond({
+const cormorant = Cormorant({
   subsets: ["latin"],
   weight: ["300", "400", "500", "600", "700"],
   variable: "--font-display",
   display: "swap",
+  style: ["normal", "italic"],
 });
 
-const dmSans = DM_Sans({
+const spaceGrotesk = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-body",
   display: "swap",
@@ -76,7 +77,7 @@ export default async function LocaleLayout({
   const messages = await getMessages();
 
   return (
-    <html lang={locale} className={`${cormorant.variable} ${dmSans.variable}`}>
+    <html lang={locale} className={`${cormorant.variable} ${spaceGrotesk.variable}`}>
       <body className="bg-background text-text-primary font-body antialiased">
         <NextIntlClientProvider messages={messages}>
           <AnnouncementBar />
