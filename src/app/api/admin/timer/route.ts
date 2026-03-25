@@ -19,7 +19,8 @@ export async function GET(request: Request) {
     query = query.eq("status", status as "pending" | "approved" | "rejected");
   }
 
-  const { data } = await query;
+  const { data, error } = await query;
+  if (error) console.error("Timer fetch error:", error);
   return NextResponse.json({ entries: data ?? [] });
 }
 

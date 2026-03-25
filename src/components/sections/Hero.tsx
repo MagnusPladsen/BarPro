@@ -129,18 +129,6 @@ export function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Decorative corner frame */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1.5, delay: 2.2 }}
-        className="absolute inset-12 md:inset-20 lg:inset-28 z-10 pointer-events-none"
-      >
-        <div className="absolute top-0 left-0 w-12 h-12 md:w-16 md:h-16 border-t border-l border-accent/20" />
-        <div className="absolute top-0 right-0 w-12 h-12 md:w-16 md:h-16 border-t border-r border-accent/20" />
-        <div className="absolute bottom-0 left-0 w-12 h-12 md:w-16 md:h-16 border-b border-l border-accent/20" />
-        <div className="absolute bottom-0 right-0 w-12 h-12 md:w-16 md:h-16 border-b border-r border-accent/20" />
-      </motion.div>
 
       {/* Main content with enhanced parallax */}
       <motion.div
