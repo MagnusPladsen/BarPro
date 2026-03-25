@@ -64,8 +64,8 @@ export default function AdminMessagesPage() {
   };
 
   const statusColors: Record<string, string> = {
-    unread: "text-[#C9A84C] bg-[#C9A84C]/10",
-    read: "text-[#6B6B6B] bg-[#6B6B6B]/10",
+    unread: "text-[#C4907A] bg-[#C4907A]/10",
+    read: "text-[#6B5D52] bg-[#6B5D52]/10",
     replied: "text-green-400 bg-green-400/10",
   };
 
@@ -94,8 +94,8 @@ export default function AdminMessagesPage() {
             onClick={() => setFilter(f.value)}
             className={`px-4 py-2 text-xs tracking-wider uppercase transition-colors cursor-pointer ${
               filter === f.value
-                ? "bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30"
-                : "text-[#6B6B6B] border border-[#1E1E1E] hover:text-[#F5F0E8]"
+                ? "bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30"
+                : "text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4]"
             }`}
           >
             {f.label}
@@ -115,7 +115,7 @@ export default function AdminMessagesPage() {
               <MessageListItemSkeleton />
             </>
           ) : messages.length === 0 ? (
-            <div className="bg-[#141414] border border-[#1E1E1E] p-10 text-center text-[#6B6B6B] text-sm">
+            <div className="bg-[#1A1410] border border-[#1A1410] p-10 text-center text-[#6B5D52] text-sm">
               Ingen meldinger
             </div>
           ) : (
@@ -123,10 +123,10 @@ export default function AdminMessagesPage() {
               <button
                 key={m.id}
                 onClick={() => selectMessage(m)}
-                className={`w-full text-left bg-[#141414] border p-4 transition-colors cursor-pointer ${
+                className={`w-full text-left bg-[#1A1410] border p-4 transition-colors cursor-pointer ${
                   selected?.id === m.id
-                    ? "border-[#C9A84C]/40"
-                    : "border-[#1E1E1E] hover:border-[#C9A84C]/20"
+                    ? "border-[#C4907A]/40"
+                    : "border-[#1A1410] hover:border-[#C4907A]/20"
                 }`}
               >
                 <div className="flex items-center justify-between">
@@ -137,8 +137,8 @@ export default function AdminMessagesPage() {
                     {statusLabels[m.status]}
                   </span>
                 </div>
-                <p className="text-[11px] text-[#6B6B6B] mt-1 line-clamp-1">{m.message}</p>
-                <p className="text-[10px] text-[#6B6B6B]/60 mt-1">
+                <p className="text-[11px] text-[#6B5D52] mt-1 line-clamp-1">{m.message}</p>
+                <p className="text-[10px] text-[#6B5D52]/60 mt-1">
                   {new Date(m.created_at).toLocaleDateString("no-NO", {
                     day: "numeric",
                     month: "short",
@@ -154,12 +154,12 @@ export default function AdminMessagesPage() {
 
         {/* Detail panel */}
         {selected && (
-          <div className="w-1/2 bg-[#141414] border border-[#1E1E1E] p-6 sticky top-8 self-start">
+          <div className="w-1/2 bg-[#1A1410] border border-[#1A1410] p-6 sticky top-8 self-start">
             <div className="flex items-center justify-between mb-6">
               <h2 className="text-lg font-medium">{selected.name}</h2>
               <button
                 onClick={() => setSelected(null)}
-                className="text-[#6B6B6B] hover:text-[#F5F0E8] cursor-pointer"
+                className="text-[#6B5D52] hover:text-[#E8DDD4] cursor-pointer"
               >
                 &times;
               </button>
@@ -167,16 +167,16 @@ export default function AdminMessagesPage() {
 
             <div className="space-y-4 text-sm">
               <div>
-                <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">E-post</p>
-                <a href={`mailto:${selected.email}`} className="text-[#C9A84C] hover:underline">
+                <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">E-post</p>
+                <a href={`mailto:${selected.email}`} className="text-[#C4907A] hover:underline">
                   {selected.email}
                 </a>
               </div>
 
               {selected.phone && (
                 <div>
-                  <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Telefon</p>
-                  <a href={`tel:${selected.phone}`} className="text-[#C9A84C] hover:underline">
+                  <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Telefon</p>
+                  <a href={`tel:${selected.phone}`} className="text-[#C4907A] hover:underline">
                     {selected.phone}
                   </a>
                 </div>
@@ -185,30 +185,30 @@ export default function AdminMessagesPage() {
               <div className="grid grid-cols-2 gap-4">
                 {selected.event_type && (
                   <div>
-                    <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Type</p>
+                    <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Type</p>
                     <p>{selected.event_type}</p>
                   </div>
                 )}
                 {selected.guests && (
                   <div>
-                    <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Gjester</p>
+                    <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Gjester</p>
                     <p>{selected.guests}</p>
                   </div>
                 )}
                 {selected.date && (
                   <div>
-                    <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Dato</p>
+                    <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Dato</p>
                     <p>{selected.date}</p>
                   </div>
                 )}
               </div>
 
-              <div className="border-t border-[#1E1E1E] pt-4">
-                <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-2">Melding</p>
-                <p className="text-[#F5F0E8] whitespace-pre-wrap leading-relaxed">{selected.message}</p>
+              <div className="border-t border-[#1A1410] pt-4">
+                <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-2">Melding</p>
+                <p className="text-[#E8DDD4] whitespace-pre-wrap leading-relaxed">{selected.message}</p>
               </div>
 
-              <p className="text-[10px] text-[#6B6B6B]">
+              <p className="text-[10px] text-[#6B5D52]">
                 Mottatt {new Date(selected.created_at).toLocaleDateString("no-NO", {
                   day: "numeric",
                   month: "long",
@@ -219,26 +219,26 @@ export default function AdminMessagesPage() {
               </p>
 
               {/* Admin notes */}
-              <div className="border-t border-[#1E1E1E] pt-4">
-                <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-2">Admin-notater</p>
+              <div className="border-t border-[#1A1410] pt-4">
+                <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-2">Admin-notater</p>
                 <textarea
                   value={adminNotes}
                   onChange={(e) => setAdminNotes(e.target.value)}
                   rows={3}
-                  className="w-full bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm text-[#F5F0E8] outline-none focus:border-[#C9A84C]/40 transition-colors resize-none"
+                  className="w-full bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm text-[#E8DDD4] outline-none focus:border-[#C4907A]/40 transition-colors resize-none"
                   placeholder="Interne notater..."
                 />
                 <button
                   onClick={() => saveNotes(selected.id)}
                   disabled={updating}
-                  className="mt-2 text-[11px] text-[#C9A84C] hover:underline cursor-pointer disabled:opacity-50"
+                  className="mt-2 text-[11px] text-[#C4907A] hover:underline cursor-pointer disabled:opacity-50"
                 >
                   Lagre notater
                 </button>
               </div>
 
               {/* Actions */}
-              <div className="border-t border-[#1E1E1E] pt-4 flex gap-2">
+              <div className="border-t border-[#1A1410] pt-4 flex gap-2">
                 {selected.status !== "replied" && (
                   <button
                     onClick={() => updateStatus(selected.id, "replied")}
@@ -250,7 +250,7 @@ export default function AdminMessagesPage() {
                 )}
                 <a
                   href={`mailto:${selected.email}`}
-                  className="flex-1 bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 py-2 text-xs uppercase tracking-wider text-center hover:bg-[#C9A84C]/20 transition-colors"
+                  className="flex-1 bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30 py-2 text-xs uppercase tracking-wider text-center hover:bg-[#C4907A]/20 transition-colors"
                 >
                   Svar via e-post
                 </a>

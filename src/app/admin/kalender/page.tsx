@@ -122,19 +122,19 @@ export default function AdminCalendarPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-semibold">Kalender</h1>
-        <p className="text-[11px] text-[#6B6B6B] tracking-wider">Klikk på en dag for detaljer</p>
+        <p className="text-[11px] text-[#6B5D52] tracking-wider">Klikk på en dag for detaljer</p>
       </div>
 
       {/* Month navigation */}
       <div className="flex items-center justify-between mb-6">
-        <button onClick={() => setCurrentMonth(new Date(year, month - 1))} className="text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors cursor-pointer px-3 py-1">&larr;</button>
+        <button onClick={() => setCurrentMonth(new Date(year, month - 1))} className="text-[#6B5D52] hover:text-[#E8DDD4] transition-colors cursor-pointer px-3 py-1">&larr;</button>
         <h2 className="text-lg font-medium">{monthNames[month]} {year}</h2>
-        <button onClick={() => setCurrentMonth(new Date(year, month + 1))} className="text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors cursor-pointer px-3 py-1">&rarr;</button>
+        <button onClick={() => setCurrentMonth(new Date(year, month + 1))} className="text-[#6B5D52] hover:text-[#E8DDD4] transition-colors cursor-pointer px-3 py-1">&rarr;</button>
       </div>
 
       {/* Legend */}
-      <div className="flex items-center gap-6 mb-6 text-[11px] text-[#6B6B6B]">
-        <div className="flex items-center gap-2"><div className="w-3 h-3 bg-transparent border border-[#1E1E1E]" /> Ledig</div>
+      <div className="flex items-center gap-6 mb-6 text-[11px] text-[#6B5D52]">
+        <div className="flex items-center gap-2"><div className="w-3 h-3 bg-transparent border border-[#1A1410]" /> Ledig</div>
         <div className="flex items-center gap-2"><div className="w-3 h-3 bg-red-400/20 border border-red-400/40" /> Blokkert</div>
         <div className="flex items-center gap-2"><div className="w-3 h-3 bg-yellow-400/20 border border-yellow-400/40" /> Ventende</div>
         <div className="flex items-center gap-2"><div className="w-3 h-3 bg-green-400/20 border border-green-400/40" /> Bekreftet</div>
@@ -144,15 +144,15 @@ export default function AdminCalendarPage() {
       {loading ? (
         <CalendarGridSkeleton />
       ) : (
-      <div className="bg-[#141414] border border-[#1E1E1E]">
-        <div className="grid grid-cols-7 border-b border-[#1E1E1E]">
+      <div className="bg-[#1A1410] border border-[#1A1410]">
+        <div className="grid grid-cols-7 border-b border-[#1A1410]">
           {["Man","Tir","Ons","Tor","Fre","Lør","Søn"].map((d) => (
-            <div key={d} className="p-3 text-center text-[11px] tracking-wider uppercase text-[#6B6B6B]">{d}</div>
+            <div key={d} className="p-3 text-center text-[11px] tracking-wider uppercase text-[#6B5D52]">{d}</div>
           ))}
         </div>
         <div className="grid grid-cols-7">
           {days.map((day, i) => {
-            if (!day) return <div key={`e-${i}`} className="p-3 min-h-[80px] border-b border-r border-[#1E1E1E]" />;
+            if (!day) return <div key={`e-${i}`} className="p-3 min-h-[80px] border-b border-r border-[#1A1410]" />;
 
             const dateStr = getDateStr(day);
             const isPast = dateStr < today;
@@ -164,21 +164,21 @@ export default function AdminCalendarPage() {
             if (blocked) bgClass = "bg-red-400/10";
             else if (isBooked && booking.status === "confirmed") bgClass = "bg-green-400/10";
             else if (isBooked && booking.status === "pending") bgClass = "bg-yellow-400/10";
-            else if (isBooked && booking.status === "completed") bgClass = "bg-[#6B6B6B]/10";
+            else if (isBooked && booking.status === "completed") bgClass = "bg-[#6B5D52]/10";
 
             const staffCount = isBooked ? allAssignments.filter((a) => a.booking_id === booking.id).length : 0;
 
             return (
               <button key={day} onClick={() => openDayModal(day)}
-                className={`p-3 min-h-[80px] border-b border-r border-[#1E1E1E] text-left transition-colors duration-200 cursor-pointer hover:bg-[#1A1A1A] ${bgClass} ${isPast ? "opacity-40" : ""}`}>
-                <span className={`text-sm ${dateStr === today ? "text-[#C9A84C] font-semibold" : ""}`}>{day}</span>
+                className={`p-3 min-h-[80px] border-b border-r border-[#1A1410] text-left transition-colors duration-200 cursor-pointer hover:bg-[#2A211A] ${bgClass} ${isPast ? "opacity-40" : ""}`}>
+                <span className={`text-sm ${dateStr === today ? "text-[#C4907A] font-semibold" : ""}`}>{day}</span>
                 {blocked && !isBooked && <p className="text-[9px] text-red-400 mt-1">Blokkert</p>}
                 {isBooked && (
                   <div className="mt-1">
-                    <p className={`text-[10px] truncate ${booking.status === "pending" ? "text-yellow-400" : booking.status === "confirmed" ? "text-green-400" : "text-[#6B6B6B]"}`}>
+                    <p className={`text-[10px] truncate ${booking.status === "pending" ? "text-yellow-400" : booking.status === "confirmed" ? "text-green-400" : "text-[#6B5D52]"}`}>
                       {booking.customer_name}
                     </p>
-                    <p className="text-[9px] text-[#6B6B6B]">{packageLabels[booking.package]} · {staffCount} pers</p>
+                    <p className="text-[9px] text-[#6B5D52]">{packageLabels[booking.package]} · {staffCount} pers</p>
                   </div>
                 )}
               </button>
@@ -191,18 +191,18 @@ export default function AdminCalendarPage() {
       {/* Day modal */}
       {modal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={() => setModal(null)}>
-          <div className="bg-[#141414] border border-[#1E1E1E] w-full max-w-lg max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-[#1A1410] border border-[#1A1410] w-full max-w-lg max-h-[80vh] overflow-y-auto" onClick={(e) => e.stopPropagation()}>
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-[#1E1E1E]">
+            <div className="flex items-center justify-between p-6 border-b border-[#1A1410]">
               <div>
-                <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">
+                <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider">
                   {dayNames[new Date(modal.dateStr + "T00:00:00").getDay()]}
                 </p>
                 <h3 className="text-lg font-medium">
                   {modal.day}. {monthNames[month]} {year}
                 </h3>
               </div>
-              <button onClick={() => setModal(null)} className="text-[#6B6B6B] hover:text-[#F5F0E8] cursor-pointer text-xl">&times;</button>
+              <button onClick={() => setModal(null)} className="text-[#6B5D52] hover:text-[#E8DDD4] cursor-pointer text-xl">&times;</button>
             </div>
 
             <div className="p-6 space-y-6">
@@ -210,39 +210,39 @@ export default function AdminCalendarPage() {
               {modal.booking ? (
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Booking</p>
+                    <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Booking</p>
                     <span className={`text-[10px] tracking-wider uppercase px-2 py-1 ${
                       modal.booking.status === "pending" ? "text-yellow-400 bg-yellow-400/10" :
                       modal.booking.status === "confirmed" ? "text-green-400 bg-green-400/10" :
-                      "text-[#6B6B6B] bg-[#6B6B6B]/10"
+                      "text-[#6B5D52] bg-[#6B5D52]/10"
                     }`}>
                       {modal.booking.status === "pending" ? "Ventende" : modal.booking.status === "confirmed" ? "Bekreftet" : "Fullført"}
                     </span>
                   </div>
 
-                  <div className="bg-[#0A0A0A] border border-[#1E1E1E] p-4 space-y-3">
+                  <div className="bg-[#0D0A08] border border-[#1A1410] p-4 space-y-3">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-medium">{modal.booking.customer_name}</p>
-                      <p className="text-[11px] text-[#C9A84C]">{packageLabels[modal.booking.package]}</p>
+                      <p className="text-[11px] text-[#C4907A]">{packageLabels[modal.booking.package]}</p>
                     </div>
                     <div className="grid grid-cols-2 gap-3 text-[11px]">
                       <div>
-                        <span className="text-[#6B6B6B]">Type: </span>
+                        <span className="text-[#6B5D52]">Type: </span>
                         <span>{eventLabels[modal.booking.event_type]}</span>
                       </div>
                       <div>
-                        <span className="text-[#6B6B6B]">Gjester: </span>
+                        <span className="text-[#6B5D52]">Gjester: </span>
                         <span>{modal.booking.guest_count}</span>
                       </div>
                       {modal.booking.start_time && (
                         <div>
-                          <span className="text-[#6B6B6B]">Tid: </span>
+                          <span className="text-[#6B5D52]">Tid: </span>
                           <span>{modal.booking.start_time} – {modal.booking.end_time}</span>
                         </div>
                       )}
                       {modal.booking.estimated_hours && (
                         <div>
-                          <span className="text-[#6B6B6B]">Timer: </span>
+                          <span className="text-[#6B5D52]">Timer: </span>
                           <span>{modal.booking.estimated_hours} t</span>
                         </div>
                       )}
@@ -252,12 +252,12 @@ export default function AdminCalendarPage() {
                   {/* Assigned staff */}
                   {modal.assignments.length > 0 && (
                     <div>
-                      <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-2">Ansatte ({modal.assignments.length})</p>
+                      <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-2">Ansatte ({modal.assignments.length})</p>
                       <div className="space-y-1">
                         {modal.assignments.map((a) => (
-                          <div key={a.id} className="flex items-center justify-between py-1.5 px-2 bg-[#0A0A0A] border border-[#1E1E1E] text-sm">
+                          <div key={a.id} className="flex items-center justify-between py-1.5 px-2 bg-[#0D0A08] border border-[#1A1410] text-sm">
                             <span>{a.employees?.name ?? "Ukjent"}</span>
-                            <span className="text-[10px] text-[#6B6B6B]">{a.employees?.role}</span>
+                            <span className="text-[10px] text-[#6B5D52]">{a.employees?.role}</span>
                           </div>
                         ))}
                       </div>
@@ -265,28 +265,28 @@ export default function AdminCalendarPage() {
                   )}
 
                   <Link href={`/admin/bookinger?id=${modal.booking.id}`} onClick={() => setModal(null)}
-                    className="block w-full text-center bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C9A84C]/20 transition-colors">
+                    className="block w-full text-center bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C4907A]/20 transition-colors">
                     Åpne booking &rarr;
                   </Link>
                 </div>
               ) : (
-                <p className="text-[#6B6B6B] text-sm">Ingen booking på denne dagen.</p>
+                <p className="text-[#6B5D52] text-sm">Ingen booking på denne dagen.</p>
               )}
 
               {/* Block/unblock */}
-              <div className="border-t border-[#1E1E1E] pt-6">
-                <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-3">Tilgjengelighet</p>
+              <div className="border-t border-[#1A1410] pt-6">
+                <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-3">Tilgjengelighet</p>
 
                 {modal.blocked ? (
                   <div className="space-y-3">
                     <div className="bg-red-400/10 border border-red-400/20 p-3">
                       <p className="text-sm text-red-400">Denne dagen er blokkert</p>
                       {modal.blocked.reason && (
-                        <p className="text-[11px] text-[#6B6B6B] mt-1">{modal.blocked.reason}</p>
+                        <p className="text-[11px] text-[#6B5D52] mt-1">{modal.blocked.reason}</p>
                       )}
                     </div>
                     <button onClick={unblockDate} disabled={saving}
-                      className="w-full border border-[#1E1E1E] py-2 text-xs text-[#6B6B6B] uppercase tracking-wider hover:text-[#F5F0E8] transition-colors cursor-pointer disabled:opacity-50">
+                      className="w-full border border-[#1A1410] py-2 text-xs text-[#6B5D52] uppercase tracking-wider hover:text-[#E8DDD4] transition-colors cursor-pointer disabled:opacity-50">
                       Fjern blokkering
                     </button>
                   </div>
@@ -294,7 +294,7 @@ export default function AdminCalendarPage() {
                   <div className="space-y-3">
                     <input value={blockReason} onChange={(e) => setBlockReason(e.target.value)}
                       placeholder="Grunn (valgfritt, f.eks. 'Ferie', 'Opptatt')"
-                      className="w-full bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40 placeholder:text-[#6B6B6B]/40" />
+                      className="w-full bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40 placeholder:text-[#6B5D52]/40" />
                     <button onClick={blockDate} disabled={saving}
                       className="w-full bg-red-400/10 text-red-400 border border-red-400/30 py-2 text-xs uppercase tracking-wider hover:bg-red-400/20 transition-colors cursor-pointer disabled:opacity-50">
                       {saving ? <span className="flex items-center justify-center gap-1.5"><ButtonSpinner />Lagrer...</span> : "Blokker denne dagen"}

@@ -175,8 +175,8 @@ export default function AnsattePage() {
           <button key={f.value} onClick={() => { setFilter(f.value); setPage(0); }}
             className={`px-4 py-2 text-xs tracking-wider uppercase transition-colors cursor-pointer ${
               filter === f.value
-                ? "bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30"
-                : "text-[#6B6B6B] border border-[#1E1E1E] hover:text-[#F5F0E8]"
+                ? "bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30"
+                : "text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4]"
             }`}>{f.label} ({filter === "all" ? employees.length : employees.filter((e) => f.value === "active" ? e.is_active : f.value === "inactive" ? !e.is_active : true).length})</button>
         ))}
       </div>
@@ -197,18 +197,18 @@ export default function AnsattePage() {
                 <button
                   key={emp.id}
                   onClick={() => selectEmployee(emp)}
-                  className={`w-full text-left flex items-center gap-4 bg-[#141414] border p-4 transition-colors cursor-pointer ${
+                  className={`w-full text-left flex items-center gap-4 bg-[#1A1410] border p-4 transition-colors cursor-pointer ${
                     selected?.id === emp.id
-                      ? "border-[#C9A84C]/40"
-                      : "border-[#1E1E1E] hover:border-[#C9A84C]/20"
+                      ? "border-[#C4907A]/40"
+                      : "border-[#1A1410] hover:border-[#C4907A]/20"
                   }`}
                 >
                   {/* Avatar */}
-                  <div className="w-12 h-12 bg-[#1A1A1A] border border-[#1E1E1E] overflow-hidden shrink-0 relative">
+                  <div className="w-12 h-12 bg-[#2A211A] border border-[#1A1410] overflow-hidden shrink-0 relative">
                     {emp.photo_url ? (
                       <Image src={emp.photo_url} alt={emp.name} fill className="object-cover" sizes="48px" />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-[#C9A84C] text-sm font-medium">
+                      <div className="w-full h-full flex items-center justify-center text-[#C4907A] text-sm font-medium">
                         {emp.name.split(" ").map((n) => n[0]).join("")}
                       </div>
                     )}
@@ -218,17 +218,17 @@ export default function AnsattePage() {
                     <div className="flex items-center gap-2">
                       <p className="text-sm font-medium truncate">{emp.name}</p>
                       {emp.is_owner && (
-                        <span className="text-[9px] tracking-wider uppercase px-1.5 py-0.5 bg-[#C9A84C]/10 text-[#C9A84C]">
+                        <span className="text-[9px] tracking-wider uppercase px-1.5 py-0.5 bg-[#C4907A]/10 text-[#C4907A]">
                           Eier
                         </span>
                       )}
                     </div>
-                    <p className="text-[11px] text-[#6B6B6B]">{emp.role}</p>
+                    <p className="text-[11px] text-[#6B5D52]">{emp.role}</p>
                   </div>
 
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] text-[#6B6B6B]">{emp.hourly_rate} kr/t</span>
-                    <div className={`w-2 h-2 ${emp.is_active ? "bg-green-400" : "bg-[#6B6B6B]/30"}`} />
+                    <span className="text-[11px] text-[#6B5D52]">{emp.hourly_rate} kr/t</span>
+                    <div className={`w-2 h-2 ${emp.is_active ? "bg-green-400" : "bg-[#6B5D52]/30"}`} />
                   </div>
                 </button>
               ))}
@@ -239,30 +239,30 @@ export default function AnsattePage() {
           {totalPages > 1 && (
             <div className="flex items-center justify-center gap-2 pt-4">
               <button onClick={() => setPage(Math.max(0, page - 1))} disabled={page === 0}
-                className="px-3 py-1.5 text-xs text-[#6B6B6B] border border-[#1E1E1E] hover:text-[#F5F0E8] cursor-pointer disabled:opacity-30">&larr;</button>
-              <span className="text-[11px] text-[#6B6B6B]">{page + 1} / {totalPages}</span>
+                className="px-3 py-1.5 text-xs text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4] cursor-pointer disabled:opacity-30">&larr;</button>
+              <span className="text-[11px] text-[#6B5D52]">{page + 1} / {totalPages}</span>
               <button onClick={() => setPage(Math.min(totalPages - 1, page + 1))} disabled={page >= totalPages - 1}
-                className="px-3 py-1.5 text-xs text-[#6B6B6B] border border-[#1E1E1E] hover:text-[#F5F0E8] cursor-pointer disabled:opacity-30">&rarr;</button>
+                className="px-3 py-1.5 text-xs text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4] cursor-pointer disabled:opacity-30">&rarr;</button>
             </div>
           )}
 
           {/* Add employee button */}
           <button onClick={() => setShowAddForm(true)}
-            className="w-full mt-4 border border-dashed border-[#1E1E1E] py-4 text-xs text-[#6B6B6B] uppercase tracking-wider hover:text-[#C9A84C] hover:border-[#C9A84C]/30 transition-colors cursor-pointer">
+            className="w-full mt-4 border border-dashed border-[#1A1410] py-4 text-xs text-[#6B5D52] uppercase tracking-wider hover:text-[#C4907A] hover:border-[#C4907A]/30 transition-colors cursor-pointer">
             + Legg til ansatt
           </button>
         </div>
 
         {/* Detail panel */}
         {selected && (
-          <div className="w-1/2 bg-[#141414] border border-[#1E1E1E] p-6 sticky top-8 self-start max-h-[calc(100vh-6rem)] overflow-y-auto">
+          <div className="w-1/2 bg-[#1A1410] border border-[#1A1410] p-6 sticky top-8 self-start max-h-[calc(100vh-6rem)] overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
               <div className="flex items-center gap-4">
-                <label className="w-16 h-16 bg-[#1A1A1A] border border-[#1E1E1E] overflow-hidden relative shrink-0 cursor-pointer group">
+                <label className="w-16 h-16 bg-[#2A211A] border border-[#1A1410] overflow-hidden relative shrink-0 cursor-pointer group">
                   {selected.photo_url ? (
                     <Image src={selected.photo_url} alt={selected.name} fill className="object-cover" sizes="64px" />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-[#C9A84C] text-lg font-medium">
+                    <div className="w-full h-full flex items-center justify-center text-[#C4907A] text-lg font-medium">
                       {selected.name.split(" ").map((n) => n[0]).join("")}
                     </div>
                   )}
@@ -294,43 +294,43 @@ export default function AnsattePage() {
                 </label>
                 <div>
                   <h2 className="text-lg font-medium">{selected.name}</h2>
-                  <p className="text-[11px] text-[#C9A84C]">{selected.role}</p>
+                  <p className="text-[11px] text-[#C4907A]">{selected.role}</p>
                 </div>
               </div>
-              <button onClick={() => setSelected(null)} className="text-[#6B6B6B] hover:text-[#F5F0E8] cursor-pointer">&times;</button>
+              <button onClick={() => setSelected(null)} className="text-[#6B5D52] hover:text-[#E8DDD4] cursor-pointer">&times;</button>
             </div>
 
             {editing ? (
               <div className="space-y-4 text-sm">
                 <div>
-                  <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Navn</label>
-                  <input value={editName} onChange={(e) => setEditName(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+                  <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Navn</label>
+                  <input value={editName} onChange={(e) => setEditName(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
                 </div>
                 <div>
-                  <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">E-post</label>
-                  <input value={editEmail} onChange={(e) => setEditEmail(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+                  <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">E-post</label>
+                  <input value={editEmail} onChange={(e) => setEditEmail(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
                 </div>
                 <div>
-                  <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Telefon</label>
-                  <input value={editPhone} onChange={(e) => setEditPhone(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+                  <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Telefon</label>
+                  <input value={editPhone} onChange={(e) => setEditPhone(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
                 </div>
                 <div>
-                  <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Rolle</label>
-                  <input value={editRole} onChange={(e) => setEditRole(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+                  <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Rolle</label>
+                  <input value={editRole} onChange={(e) => setEditRole(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
                 </div>
                 <div>
-                  <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Timelønn (kr)</label>
-                  <input type="number" value={editRate} onChange={(e) => setEditRate(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+                  <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Timelønn (kr)</label>
+                  <input type="number" value={editRate} onChange={(e) => setEditRate(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
                 </div>
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" checked={editActive} onChange={(e) => setEditActive(e.target.checked)} className="accent-[#C9A84C]" />
+                  <input type="checkbox" checked={editActive} onChange={(e) => setEditActive(e.target.checked)} className="accent-[#C4907A]" />
                   <span className="text-sm">Aktiv</span>
                 </label>
                 <div className="flex gap-2 pt-2">
-                  <button onClick={saveEmployee} disabled={saving} className="flex-1 bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C9A84C]/20 cursor-pointer disabled:opacity-50">
+                  <button onClick={saveEmployee} disabled={saving} className="flex-1 bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C4907A]/20 cursor-pointer disabled:opacity-50">
                     Lagre
                   </button>
-                  <button onClick={() => setEditing(false)} className="flex-1 border border-[#1E1E1E] py-2 text-xs text-[#6B6B6B] uppercase tracking-wider hover:text-[#F5F0E8] cursor-pointer">
+                  <button onClick={() => setEditing(false)} className="flex-1 border border-[#1A1410] py-2 text-xs text-[#6B5D52] uppercase tracking-wider hover:text-[#E8DDD4] cursor-pointer">
                     Avbryt
                   </button>
                 </div>
@@ -339,50 +339,50 @@ export default function AnsattePage() {
               <div className="space-y-4 text-sm">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">E-post</p>
-                    <a href={`mailto:${selected.email}`} className="text-[#C9A84C] hover:underline text-sm">{selected.email}</a>
+                    <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">E-post</p>
+                    <a href={`mailto:${selected.email}`} className="text-[#C4907A] hover:underline text-sm">{selected.email}</a>
                   </div>
                   <div>
-                    <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Telefon</p>
+                    <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Telefon</p>
                     <p>{selected.phone || "—"}</p>
                   </div>
                   <div>
-                    <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Timelønn</p>
+                    <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Timelønn</p>
                     <p>{selected.hourly_rate} kr/t</p>
                   </div>
                   <div>
-                    <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Status</p>
-                    <p className={selected.is_active ? "text-green-400" : "text-[#6B6B6B]"}>
+                    <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Status</p>
+                    <p className={selected.is_active ? "text-green-400" : "text-[#6B5D52]"}>
                       {selected.is_active ? "Aktiv" : "Inaktiv"}
                     </p>
                   </div>
                 </div>
 
                 {/* Hours summary */}
-                <div className="border-t border-[#1E1E1E] pt-4">
-                  <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-3">Timer</p>
+                <div className="border-t border-[#1A1410] pt-4">
+                  <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-3">Timer</p>
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-[#0A0A0A] border border-[#1E1E1E] p-3">
+                    <div className="bg-[#0D0A08] border border-[#1A1410] p-3">
                       <p className="text-2xl font-semibold">{totalHours}</p>
-                      <p className="text-[10px] text-[#6B6B6B]">Totalt registrert</p>
+                      <p className="text-[10px] text-[#6B5D52]">Totalt registrert</p>
                     </div>
-                    <div className="bg-[#0A0A0A] border border-[#1E1E1E] p-3">
+                    <div className="bg-[#0D0A08] border border-[#1A1410] p-3">
                       <p className="text-2xl font-semibold text-green-400">{approvedHours}</p>
-                      <p className="text-[10px] text-[#6B6B6B]">Godkjent</p>
+                      <p className="text-[10px] text-[#6B5D52]">Godkjent</p>
                     </div>
                   </div>
                 </div>
 
                 {/* Assignments */}
                 {assignments.length > 0 && (
-                  <div className="border-t border-[#1E1E1E] pt-4">
-                    <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-3">Oppdrag</p>
+                  <div className="border-t border-[#1A1410] pt-4">
+                    <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-3">Oppdrag</p>
                     <div className="space-y-2 max-h-[200px] overflow-y-auto">
                       {assignments.map((a) => (
-                        <div key={a.id} className="flex items-center justify-between py-2 border-b border-[#1E1E1E] last:border-0 text-[11px]">
+                        <div key={a.id} className="flex items-center justify-between py-2 border-b border-[#1A1410] last:border-0 text-[11px]">
                           <div>
-                            <p className="text-[#F5F0E8]">{a.bookings?.customer_name ?? "Ukjent"}</p>
-                            <p className="text-[#6B6B6B]">
+                            <p className="text-[#E8DDD4]">{a.bookings?.customer_name ?? "Ukjent"}</p>
+                            <p className="text-[#6B5D52]">
                               {a.bookings?.date ? new Date(a.bookings.date + "T00:00:00").toLocaleDateString("no-NO", { day: "numeric", month: "short" }) : ""}
                             </p>
                           </div>
@@ -414,7 +414,7 @@ export default function AnsattePage() {
                 <div className="flex gap-2 mt-4">
                   <button
                     onClick={() => setEditing(true)}
-                    className="flex-1 bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C9A84C]/20 cursor-pointer"
+                    className="flex-1 bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C4907A]/20 cursor-pointer"
                   >
                     Rediger
                   </button>
@@ -430,7 +430,7 @@ export default function AnsattePage() {
                       }
                       setTimeout(() => setNotification(null), 5000);
                     }}
-                    className="flex-1 border border-[#1E1E1E] text-[#6B6B6B] py-2 text-xs uppercase tracking-wider hover:text-[#F5F0E8] hover:border-[#C9A84C]/20 cursor-pointer"
+                    className="flex-1 border border-[#1A1410] text-[#6B5D52] py-2 text-xs uppercase tracking-wider hover:text-[#E8DDD4] hover:border-[#C4907A]/20 cursor-pointer"
                   >
                     Reset passord
                   </button>
@@ -444,43 +444,43 @@ export default function AnsattePage() {
       {/* Add employee modal */}
       {showAddForm && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={() => setShowAddForm(false)}>
-          <div className="bg-[#141414] border border-[#1E1E1E] p-8 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-[#1A1410] border border-[#1A1410] p-8 w-full max-w-md" onClick={(e) => e.stopPropagation()}>
             <h2 className="text-lg font-medium mb-6">Legg til ansatt</h2>
             <div className="space-y-4">
               <div>
-                <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Navn *</label>
-                <input value={newName} onChange={(e) => setNewName(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+                <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Navn *</label>
+                <input value={newName} onChange={(e) => setNewName(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
               </div>
               <div>
-                <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">E-post *</label>
-                <input type="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+                <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">E-post *</label>
+                <input type="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
               </div>
               <div>
-                <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Telefon</label>
-                <input value={newPhone} onChange={(e) => setNewPhone(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+                <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Telefon</label>
+                <input value={newPhone} onChange={(e) => setNewPhone(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
               </div>
               <div>
-                <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Rolle</label>
-                <input value={newRole} onChange={(e) => setNewRole(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+                <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Rolle</label>
+                <input value={newRole} onChange={(e) => setNewRole(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
               </div>
               <div>
-                <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Timelønn (kr)</label>
-                <input type="number" value={newRate} onChange={(e) => setNewRate(e.target.value)} className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
+                <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Timelønn (kr)</label>
+                <input type="number" value={newRate} onChange={(e) => setNewRate(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
               </div>
               <div>
-                <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Passord (for innlogging)</label>
-                <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="La tom for å opprette uten innlogging" className="w-full mt-1 bg-[#0A0A0A] border border-[#1E1E1E] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40 placeholder:text-[#6B6B6B]/40" />
+                <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Passord (for innlogging)</label>
+                <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="La tom for å opprette uten innlogging" className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40 placeholder:text-[#6B5D52]/40" />
               </div>
               {addError && <p className="text-red-400 text-sm">{addError}</p>}
               <div className="flex gap-2 pt-2">
                 <button
                   onClick={addEmployee}
                   disabled={saving || !newName || !newEmail}
-                  className="flex-1 bg-[#C9A84C] text-[#0A0A0A] py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#D4AF57] cursor-pointer disabled:opacity-50"
+                  className="flex-1 bg-[#C4907A] text-[#0D0A08] py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#D4A08A] cursor-pointer disabled:opacity-50"
                 >
                   {saving ? <span className="flex items-center justify-center gap-1.5"><ButtonSpinner />Lagrer...</span> : "Legg til"}
                 </button>
-                <button onClick={() => setShowAddForm(false)} className="flex-1 border border-[#1E1E1E] py-2 text-xs text-[#6B6B6B] uppercase tracking-wider hover:text-[#F5F0E8] cursor-pointer">
+                <button onClick={() => setShowAddForm(false)} className="flex-1 border border-[#1A1410] py-2 text-xs text-[#6B5D52] uppercase tracking-wider hover:text-[#E8DDD4] cursor-pointer">
                   Avbryt
                 </button>
               </div>

@@ -51,9 +51,9 @@ export default function PortalLayoutClient({ children }: { children: React.React
   if (loading) {
     return (
       <html lang="no">
-        <body className="bg-[#0A0A0A] text-[#F5F0E8] font-sans antialiased">
+        <body className="bg-[#0D0A08] text-[#E8DDD4] font-sans antialiased">
           <div className="min-h-screen flex items-center justify-center">
-            <p className="text-[#6B6B6B] text-sm">Laster...</p>
+            <p className="text-[#6B5D52] text-sm">Laster...</p>
           </div>
         </body>
       </html>
@@ -62,18 +62,18 @@ export default function PortalLayoutClient({ children }: { children: React.React
 
   return (
     <html lang="no">
-      <body className="bg-[#0A0A0A] text-[#F5F0E8] font-sans antialiased">
-        <header className="border-b border-[#1E1E1E] bg-[#111]">
+      <body className="bg-[#0D0A08] text-[#E8DDD4] font-sans antialiased">
+        <header className="border-b border-[#1A1410] bg-[#120E0B]">
           <div className="max-w-5xl mx-auto px-6 flex items-center justify-between h-16">
             <Link href="/portal" className="text-lg tracking-[0.15em] uppercase font-semibold">
-              BarPro <span className="text-[#C9A84C] text-xs font-normal ml-1">Portal</span>
+              BarPro <span className="text-[#C4907A] text-xs font-normal ml-1">Portal</span>
             </Link>
             <div className="flex items-center gap-6">
-              {userName && <span className="text-sm text-[#6B6B6B]">{userName}</span>}
-              <Link href="/portal/hjelp" className="text-sm text-[#6B6B6B] hover:text-[#C9A84C] transition-colors">
+              {userName && <span className="text-sm text-[#6B5D52]">{userName}</span>}
+              <Link href="/portal/hjelp" className="text-sm text-[#6B5D52] hover:text-[#C4907A] transition-colors">
                 Hjelp
               </Link>
-              <button onClick={handleLogout} className="text-sm text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors cursor-pointer">
+              <button onClick={handleLogout} className="text-sm text-[#6B5D52] hover:text-[#E8DDD4] transition-colors cursor-pointer">
                 Logg ut
               </button>
             </div>

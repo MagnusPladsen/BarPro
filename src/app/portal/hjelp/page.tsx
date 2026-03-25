@@ -50,22 +50,22 @@ export default function PortalHelpPage() {
   return (
     <div>
       <h1 className="text-2xl font-semibold mb-2">Hjelp</h1>
-      <p className="text-[#6B6B6B] text-sm mb-8">Guider for vanlige oppgaver</p>
+      <p className="text-[#6B5D52] text-sm mb-8">Guider for vanlige oppgaver</p>
 
       <div className="max-w-2xl space-y-0">
         {sections.map((section, i) => (
-          <div key={i} className="border-b border-[#1E1E1E]">
+          <div key={i} className="border-b border-[#1A1410]">
             <button onClick={() => setOpen(open === i ? null : i)}
               className="w-full flex items-center justify-between py-5 text-left cursor-pointer group">
-              <span className="text-sm font-medium group-hover:text-[#C9A84C] transition-colors">{section.title}</span>
-              <span className={`text-[#C9A84C] text-lg transition-transform ${open === i ? "rotate-45" : ""}`}>+</span>
+              <span className="text-sm font-medium group-hover:text-[#C4907A] transition-colors">{section.title}</span>
+              <span className={`text-[#C4907A] text-lg transition-transform ${open === i ? "rotate-45" : ""}`}>+</span>
             </button>
             {open === i && (
               <div className="pb-5">
                 <ol className="space-y-2 ml-4">
                   {section.steps.map((step, j) => (
-                    <li key={j} className="flex items-start gap-3 text-sm text-[#6B6B6B]">
-                      <span className="text-[#C9A84C] text-[10px] font-semibold mt-1 shrink-0">{j + 1}</span>
+                    <li key={j} className="flex items-start gap-3 text-sm text-[#6B5D52]">
+                      <span className="text-[#C4907A] text-[10px] font-semibold mt-1 shrink-0">{j + 1}</span>
                       {step}
                     </li>
                   ))}
