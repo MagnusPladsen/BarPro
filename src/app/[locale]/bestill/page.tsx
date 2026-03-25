@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useState, useCallback } from "react";
+import { ColorOrbs } from "@/components/ui/ColorOrbs";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -123,8 +124,9 @@ export default function BookingPage() {
   return (
     <>
       {/* Hero */}
-      <section className="pt-48 pb-12 px-6">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="relative pt-48 pb-12 px-6 overflow-hidden">
+        <ColorOrbs size="medium" intensity={0.7} />
+        <div className="relative z-10 max-w-4xl mx-auto text-center">
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
