@@ -155,7 +155,7 @@ export default function AdminDashboardPage() {
             }, 300);
           }}
           placeholder="Søk etter kunde, booking..."
-          className="w-full bg-[#1A1410] border border-[#1A1410] px-4 py-3 text-sm outline-none focus:border-[#C4907A]/40 transition-colors placeholder:text-[#6B5D52]/40"
+          className="w-full bg-[#1A1410] border border-[#1A1410] px-4 py-3 text-sm outline-none focus:border-[#B88E64]/40 transition-colors placeholder:text-[#6B5D52]/40"
         />
         {searchQuery.length >= 2 && (
           <div className="absolute top-full left-0 right-0 z-10 bg-[#1A1410] border border-[#1A1410] border-t-0 max-h-[300px] overflow-y-auto">
@@ -256,13 +256,13 @@ export default function AdminDashboardPage() {
               <p className="text-[10px] text-[#6B5D52] mt-1">Venter på kundesvar</p>
             </Link>
 
-            <Link href="/admin/meldinger" className="bg-[#1A1410] border border-[#1A1410] p-5 hover:border-[#C4907A]/30 transition-colors">
+            <Link href="/admin/meldinger" className="bg-[#1A1410] border border-[#1A1410] p-5 hover:border-[#B88E64]/30 transition-colors">
               <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Uleste meldinger</p>
-              <p className="text-2xl font-semibold text-[#C4907A]">{unreadCount}</p>
+              <p className="text-2xl font-semibold text-[#B88E64]">{unreadCount}</p>
               <p className="text-[10px] text-[#6B5D52] mt-1">Fra kontaktskjema</p>
             </Link>
 
-            <Link href="/admin/ansatte" className="bg-[#1A1410] border border-[#1A1410] p-5 hover:border-[#C4907A]/30 transition-colors">
+            <Link href="/admin/ansatte" className="bg-[#1A1410] border border-[#1A1410] p-5 hover:border-[#B88E64]/30 transition-colors">
               <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Aktive ansatte</p>
               <p className="text-2xl font-semibold">{activeEmployees}</p>
               <p className="text-[10px] text-[#6B5D52] mt-1">Timer: {thisMonth.hours} t denne mnd</p>
@@ -278,7 +278,7 @@ export default function AdminDashboardPage() {
             <h2 className="text-sm font-medium">Kommende arrangementer</h2>
             <div className="flex items-center gap-3">
               <a href="/api/admin/google-calendar" className="text-[10px] text-[#6B5D52] hover:text-[#E8DDD4] transition-colors">.ics</a>
-              <Link href="/admin/kalender" className="text-[11px] text-[#C4907A] hover:underline">Kalender</Link>
+              <Link href="/admin/kalender" className="text-[11px] text-[#B88E64] hover:underline">Kalender</Link>
             </div>
           </div>
           {loading ? (
@@ -309,7 +309,7 @@ export default function AdminDashboardPage() {
         <div className="bg-[#1A1410] border border-[#1A1410] p-6">
           <div className="flex items-center justify-between mb-5">
             <h2 className="text-sm font-medium">Siste aktivitet</h2>
-            <Link href="/admin/bookinger" className="text-[11px] text-[#C4907A] hover:underline">Se alle</Link>
+            <Link href="/admin/bookinger" className="text-[11px] text-[#B88E64] hover:underline">Se alle</Link>
           </div>
           {loading ? (
             <DashboardListSkeleton />
@@ -338,13 +338,13 @@ export default function AdminDashboardPage() {
           <div className="bg-[#1A1410] border border-[#1A1410] p-6">
             <div className="flex items-center justify-between mb-5">
               <h2 className="text-sm font-medium">Nye meldinger</h2>
-              <Link href="/admin/meldinger" className="text-[11px] text-[#C4907A] hover:underline">Se alle</Link>
+              <Link href="/admin/meldinger" className="text-[11px] text-[#B88E64] hover:underline">Se alle</Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
               {unreadMessages.map((m) => (
                 <Link key={m.id} href="/admin/meldinger"
-                  className="flex items-start gap-3 py-3 px-3 border border-[#1A1410] hover:border-[#C4907A]/20 transition-colors">
-                  <div className="w-2 h-2 bg-[#C4907A] mt-1.5 shrink-0" />
+                  className="flex items-start gap-3 py-3 px-3 border border-[#1A1410] hover:border-[#B88E64]/20 transition-colors">
+                  <div className="w-2 h-2 bg-[#B88E64] mt-1.5 shrink-0" />
                   <div className="min-w-0">
                     <div className="flex items-center justify-between">
                       <p className="text-sm font-medium truncate">{m.name}</p>

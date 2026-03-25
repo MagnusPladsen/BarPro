@@ -163,7 +163,7 @@ export default function RapporterPage() {
       head: [headers],
       body: rows.map((r) => r.map(String)),
       theme: "grid",
-      headStyles: { fillColor: [196, 144, 122] },
+      headStyles: { fillColor: [184, 142, 100] },
     });
 
     doc.save(`barpro-rapport-${startDate}-${endDate}.pdf`);
@@ -176,7 +176,7 @@ export default function RapporterPage() {
         <div className="relative">
           <button
             onClick={() => setShowExportMenu(!showExportMenu)}
-            className="border border-[#C4907A]/30 text-[#C4907A] px-4 py-2 text-xs tracking-wider uppercase hover:bg-[#C4907A]/10 transition-colors cursor-pointer"
+            className="border border-[#B88E64]/30 text-[#B88E64] px-4 py-2 text-xs tracking-wider uppercase hover:bg-[#B88E64]/10 transition-colors cursor-pointer"
           >
             Eksporter &darr;
           </button>
@@ -202,7 +202,7 @@ export default function RapporterPage() {
               onClick={() => setPeriod(p)}
               className={`px-4 py-2 text-xs tracking-wider uppercase transition-colors cursor-pointer ${
                 period === p
-                  ? "bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30"
+                  ? "bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30"
                   : "text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4]"
               }`}
             >
@@ -216,14 +216,14 @@ export default function RapporterPage() {
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40"
+              className="bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40"
             />
             <span className="text-[#6B5D52]">—</span>
             <input
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40"
+              className="bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40"
             />
           </div>
         )}
@@ -256,7 +256,7 @@ export default function RapporterPage() {
             </div>
             <div className="bg-[#1A1410] border border-[#1A1410] p-5">
               <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Ventende tilbud</p>
-              <p className="text-2xl font-semibold text-[#C4907A]">{pendingOffers.toLocaleString("no-NO")} kr</p>
+              <p className="text-2xl font-semibold text-[#B88E64]">{pendingOffers.toLocaleString("no-NO")} kr</p>
             </div>
           </>
         )}

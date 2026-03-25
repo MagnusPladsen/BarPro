@@ -266,7 +266,7 @@ export default function AdminBookingsPage() {
         {filters.map((f) => (
           <button key={f.value} onClick={() => setFilter(f.value)}
             className={`px-4 py-2 text-xs tracking-wider uppercase transition-colors cursor-pointer ${
-              filter === f.value ? "bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30" : "text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4]"
+              filter === f.value ? "bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30" : "text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4]"
             }`}>{f.label}</button>
         ))}
       </div>
@@ -287,7 +287,7 @@ export default function AdminBookingsPage() {
           ) : bookings.map((b) => (
             <button key={b.id} onClick={() => selectBooking(b)}
               className={`w-full text-left bg-[#1A1410] border p-4 transition-colors cursor-pointer ${
-                selected?.id === b.id ? "border-[#C4907A]/40" : "border-[#1A1410] hover:border-[#C4907A]/20"
+                selected?.id === b.id ? "border-[#B88E64]/40" : "border-[#1A1410] hover:border-[#B88E64]/20"
               }`}>
               <div className="flex items-center justify-between">
                 <p className="text-sm font-medium">{b.customer_name}</p>
@@ -315,7 +315,7 @@ export default function AdminBookingsPage() {
               {(["details", "chat", "offer", "agreement"] as const).map((t) => (
                 <button key={t} onClick={() => setTab(t)}
                   className={`flex-1 py-3 text-[11px] tracking-wider uppercase text-center transition-colors cursor-pointer ${
-                    tab === t ? "text-[#C4907A] border-b-2 border-[#C4907A]" : "text-[#6B5D52]"
+                    tab === t ? "text-[#B88E64] border-b-2 border-[#B88E64]" : "text-[#6B5D52]"
                   }`}>
                   {t === "details" ? "Detaljer" : t === "chat" ? `Chat (${chatMessages.length})` : t === "offer" ? `Tilbud (${offers.length})` : `Avtaler (${agreements.length})`}
                 </button>
@@ -337,18 +337,18 @@ export default function AdminBookingsPage() {
                     </div>
                     <div>
                       <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">E-post</p>
-                      <a href={`mailto:${selected.customer_email}`} className="text-[#C4907A] hover:underline">{selected.customer_email}</a>
+                      <a href={`mailto:${selected.customer_email}`} className="text-[#B88E64] hover:underline">{selected.customer_email}</a>
                     </div>
                     {selected.customer_phone && (
                       <div>
                         <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Telefon</p>
-                        <a href={`tel:${selected.customer_phone}`} className="text-[#C4907A] hover:underline">{selected.customer_phone}</a>
+                        <a href={`tel:${selected.customer_phone}`} className="text-[#B88E64] hover:underline">{selected.customer_phone}</a>
                       </div>
                     )}
                   </div>
 
                   {selected.wants_callback && (
-                    <div className="bg-[#C4907A]/10 border border-[#C4907A]/20 px-3 py-2 text-[11px] text-[#C4907A]">Kunden ønsker å bli ringt opp</div>
+                    <div className="bg-[#B88E64]/10 border border-[#B88E64]/20 px-3 py-2 text-[11px] text-[#B88E64]">Kunden ønsker å bli ringt opp</div>
                   )}
 
                   {selected.message && (
@@ -366,16 +366,16 @@ export default function AdminBookingsPage() {
                         <div>
                           <label className="text-[10px] text-[#6B5D52]">Fra</label>
                           <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)}
-                            className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                            className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
                         </div>
                         <div>
                           <label className="text-[10px] text-[#6B5D52]">Til</label>
                           <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)}
-                            className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                            className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
                         </div>
                         <div>
                           <label className="text-[10px] text-[#6B5D52]">Timer</label>
-                          <div className="mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm text-[#C4907A]">{calcHours()} t</div>
+                          <div className="mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm text-[#B88E64]">{calcHours()} t</div>
                         </div>
                       </div>
 
@@ -394,7 +394,7 @@ export default function AdminBookingsPage() {
                                       ? [...selectedEmployees, emp.id]
                                       : selectedEmployees.filter((id) => id !== emp.id));
                                   }}
-                                  className="accent-[#C4907A]" />
+                                  className="accent-[#B88E64]" />
                                 <span className="flex-1 text-sm">{emp.name}</span>
                                 {isUnavailable ? (
                                   <span className="text-[10px] text-red-400">Ikke tilgjengelig</span>
@@ -434,15 +434,15 @@ export default function AdminBookingsPage() {
                       {/* Add extra costs */}
                       <div>
                         <button onClick={() => setExtraCosts([...extraCosts, { description: "", amount: "", billable: true }])}
-                          className="text-[11px] text-[#C4907A] hover:underline cursor-pointer">
+                          className="text-[11px] text-[#B88E64] hover:underline cursor-pointer">
                           + Legg til kostnad
                         </button>
                         {extraCosts.map((c, i) => (
                           <div key={i} className="flex gap-2 mt-2">
                             <input value={c.description} onChange={(e) => { const arr = [...extraCosts]; arr[i].description = e.target.value; setExtraCosts(arr); }}
-                              placeholder="Beskrivelse" className="flex-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                              placeholder="Beskrivelse" className="flex-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
                             <input type="number" value={c.amount} onChange={(e) => { const arr = [...extraCosts]; arr[i].amount = e.target.value; setExtraCosts(arr); }}
-                              placeholder="Beløp" className="w-24 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                              placeholder="Beløp" className="w-24 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
                             <button onClick={() => setExtraCosts(extraCosts.filter((_, j) => j !== i))}
                               className="text-red-400 hover:text-red-300 cursor-pointer px-2">&times;</button>
                           </div>
@@ -451,13 +451,13 @@ export default function AdminBookingsPage() {
 
                       {/* Offer price — prominent */}
                       <div className="border-t border-[#1A1410] pt-6">
-                        <div className="bg-[#C4907A]/[0.06] border border-[#C4907A]/20 p-6 text-center">
+                        <div className="bg-[#B88E64]/[0.06] border border-[#B88E64]/20 p-6 text-center">
                           <p className="text-[10px] text-[#6B5D52] uppercase tracking-[0.25em] mb-3">Tilbudspris til kunde</p>
                           <div className="flex items-center justify-center gap-2 mb-2">
                             <input type="number" value={offerPrice || String(defaultOfferPrice())}
                               onChange={(e) => setOfferPrice(e.target.value)}
-                              className="w-40 bg-[#0D0A08] border border-[#C4907A]/30 px-4 py-3 text-2xl font-semibold text-[#C4907A] text-center outline-none focus:border-[#C4907A]/60" />
-                            <span className="text-lg text-[#C4907A]">kr</span>
+                              className="w-40 bg-[#0D0A08] border border-[#B88E64]/30 px-4 py-3 text-2xl font-semibold text-[#B88E64] text-center outline-none focus:border-[#B88E64]/60" />
+                            <span className="text-lg text-[#B88E64]">kr</span>
                           </div>
                           {(() => {
                             const price = parseFloat(offerPrice) || defaultOfferPrice();
@@ -491,7 +491,7 @@ export default function AdminBookingsPage() {
                       {/* Action buttons */}
                       <div className="flex gap-3">
                         <button onClick={saveNotes} disabled={updating}
-                          className="flex-1 border border-[#1A1410] py-3 text-xs text-[#6B5D52] uppercase tracking-wider hover:text-[#E8DDD4] hover:border-[#C4907A]/20 transition-colors cursor-pointer disabled:opacity-50">
+                          className="flex-1 border border-[#1A1410] py-3 text-xs text-[#6B5D52] uppercase tracking-wider hover:text-[#E8DDD4] hover:border-[#B88E64]/20 transition-colors cursor-pointer disabled:opacity-50">
                           Lagre utkast
                         </button>
                         <button onClick={acceptAndOffer} disabled={updating || selectedEmployees.length === 0}
@@ -519,7 +519,7 @@ export default function AdminBookingsPage() {
                   <div className="border-t border-[#1A1410] pt-4">
                     <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-2">Interne notater</p>
                     <textarea value={adminNotes} onChange={(e) => setAdminNotes(e.target.value)} rows={2}
-                      className="w-full bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40 resize-none"
+                      className="w-full bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 resize-none"
                       placeholder="Notater..." />
                   </div>
 
@@ -531,7 +531,7 @@ export default function AdminBookingsPage() {
                   )}
                   {selected.status === "confirmed" && (
                     <button onClick={() => updateStatus(selected.id, "completed")} disabled={updating}
-                      className="w-full bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C4907A]/20 cursor-pointer disabled:opacity-50">
+                      className="w-full bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#B88E64]/20 cursor-pointer disabled:opacity-50">
                       Marker som fullført
                     </button>
                   )}
@@ -548,14 +548,14 @@ export default function AdminBookingsPage() {
                       <div key={msg.id} className={`flex ${msg.sender_type === "admin" ? "justify-end" : "justify-start"}`}>
                         <div className={`max-w-[80%] ${
                           msg.sender_type === "admin"
-                            ? "bg-[#C4907A]/10 border border-[#C4907A]/20"
+                            ? "bg-[#B88E64]/10 border border-[#B88E64]/20"
                             : "bg-[#2A211A] border border-[#1A1410]"
                         } p-3`}>
                           <p className="text-[10px] text-[#6B5D52] mb-1">{msg.sender_name}</p>
                           {msg.message_type === "offer" ? (
                             <div className="flex items-center gap-2">
-                              <span className="text-[#C4907A] text-xs">&#9733;</span>
-                              <p className="text-sm font-medium text-[#C4907A]">{msg.message}</p>
+                              <span className="text-[#B88E64] text-xs">&#9733;</span>
+                              <p className="text-sm font-medium text-[#B88E64]">{msg.message}</p>
                             </div>
                           ) : msg.message_type === "agreement" ? (
                             <div className="flex items-center gap-2">
@@ -576,9 +576,9 @@ export default function AdminBookingsPage() {
                     <input value={chatInput} onChange={(e) => setChatInput(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && sendChatMessage()}
                       placeholder="Skriv en melding..."
-                      className="flex-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                      className="flex-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
                     <button onClick={sendChatMessage} disabled={updating || !chatInput.trim()}
-                      className="bg-[#C4907A] text-[#0D0A08] px-4 py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#D4A08A] cursor-pointer disabled:opacity-50">
+                      className="bg-[#B88E64] text-[#0D0A08] px-4 py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#D4A876] cursor-pointer disabled:opacity-50">
                       Send
                     </button>
                   </div>
@@ -595,7 +595,7 @@ export default function AdminBookingsPage() {
                       <div className="flex items-center justify-between">
                         <span className={`text-[10px] uppercase tracking-wider px-2 py-1 ${
                           o.status === "accepted" ? "text-green-400 bg-green-400/10" :
-                          o.status === "sent" ? "text-[#C4907A] bg-[#C4907A]/10" :
+                          o.status === "sent" ? "text-[#B88E64] bg-[#B88E64]/10" :
                           o.status === "declined" ? "text-red-400 bg-red-400/10" :
                           "text-[#6B5D52] bg-[#6B5D52]/10"
                         }`}>{o.status}</span>
@@ -610,7 +610,7 @@ export default function AdminBookingsPage() {
                         </div>
                         <div>
                           <p className="text-[10px] text-[#6B5D52]">Tilbud</p>
-                          <p className="text-[#C4907A] font-medium">{o.offered_price.toLocaleString("no-NO")} kr</p>
+                          <p className="text-[#B88E64] font-medium">{o.offered_price.toLocaleString("no-NO")} kr</p>
                         </div>
                         <div>
                           <p className="text-[10px] text-[#6B5D52]">Margin</p>
@@ -618,7 +618,7 @@ export default function AdminBookingsPage() {
                         </div>
                       </div>
                       <button onClick={() => setTab("chat")}
-                        className="text-[11px] text-[#C4907A] hover:underline cursor-pointer">
+                        className="text-[11px] text-[#B88E64] hover:underline cursor-pointer">
                         Gå til meldinger &rarr;
                       </button>
                     </div>
@@ -652,7 +652,7 @@ export default function AdminBookingsPage() {
                       )}
                       <div className="flex gap-3">
                         <button onClick={() => setTab("chat")}
-                          className="text-[11px] text-[#C4907A] hover:underline cursor-pointer">
+                          className="text-[11px] text-[#B88E64] hover:underline cursor-pointer">
                           Meldinger &rarr;
                         </button>
                         <button onClick={async () => {
@@ -674,7 +674,7 @@ export default function AdminBookingsPage() {
                             startY: 70, head: [["Beskrivelse", "Beløp"]],
                             body: inv.items.map((it: { description: string; amount: number }) => [it.description, `${it.amount.toLocaleString("no-NO")} kr`]),
                             foot: [["Sum ekskl. mva", `${inv.total.toLocaleString("no-NO")} kr`], ["MVA 25%", `${inv.vat.toLocaleString("no-NO")} kr`], ["Total", `${inv.totalWithVat.toLocaleString("no-NO")} kr`]],
-                            theme: "grid", headStyles: { fillColor: [196, 144, 122] },
+                            theme: "grid", headStyles: { fillColor: [184, 142, 100] },
                           });
                           doc.save(`faktura-${inv.number}.pdf`);
                         }} className="text-[11px] text-[#6B5D52] hover:text-[#E8DDD4] cursor-pointer">

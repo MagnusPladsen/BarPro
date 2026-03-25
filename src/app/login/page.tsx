@@ -54,7 +54,7 @@ export default function LoginPage() {
           <div className="w-full max-w-sm">
             <div className="text-center mb-12">
               <h1 className="text-2xl tracking-[0.15em] uppercase font-semibold mb-2">
-                Bar<span className="text-[#C4907A]">Pro</span>
+                Bar<span className="text-[#B88E64]">Pro</span>
               </h1>
               <p className="text-[#6B5D52] text-sm">Logg inn for ansatte og admin</p>
             </div>
@@ -78,7 +78,7 @@ export default function LoginPage() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="w-full bg-[#1A1410] border border-[#1A1410] px-4 py-3 text-sm text-[#E8DDD4] outline-none focus:border-[#C4907A]/40 transition-colors duration-300 placeholder:text-[#6B5D52]/50"
+                        className="w-full bg-[#1A1410] border border-[#1A1410] px-4 py-3 text-sm text-[#E8DDD4] outline-none focus:border-[#B88E64]/40 transition-colors duration-300 placeholder:text-[#6B5D52]/50"
                         placeholder="din@epost.no"
                       />
                     </div>
@@ -93,7 +93,7 @@ export default function LoginPage() {
                         setLoading(false);
                       }}
                       disabled={loading || !email}
-                      className="w-full bg-[#C4907A] text-[#0D0A08] py-3 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4A08A] transition-colors duration-300 disabled:opacity-50 cursor-pointer"
+                      className="w-full bg-[#B88E64] text-[#0D0A08] py-3 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4A876] transition-colors duration-300 disabled:opacity-50 cursor-pointer"
                     >
                       {loading ? "Sender..." : "Send tilbakestillingslenke"}
                     </button>
@@ -116,7 +116,7 @@ export default function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full bg-[#1A1410] border border-[#1A1410] px-4 py-3 text-sm text-[#E8DDD4] outline-none focus:border-[#C4907A]/40 transition-colors duration-300 placeholder:text-[#6B5D52]/50"
+                    className="w-full bg-[#1A1410] border border-[#1A1410] px-4 py-3 text-sm text-[#E8DDD4] outline-none focus:border-[#B88E64]/40 transition-colors duration-300 placeholder:text-[#6B5D52]/50"
                     placeholder="din@epost.no"
                   />
                 </div>
@@ -132,7 +132,7 @@ export default function LoginPage() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      className="w-full bg-[#1A1410] border border-[#1A1410] px-4 py-3 pr-12 text-sm text-[#E8DDD4] outline-none focus:border-[#C4907A]/40 transition-colors duration-300 placeholder:text-[#6B5D52]/50"
+                      className="w-full bg-[#1A1410] border border-[#1A1410] px-4 py-3 pr-12 text-sm text-[#E8DDD4] outline-none focus:border-[#B88E64]/40 transition-colors duration-300 placeholder:text-[#6B5D52]/50"
                       placeholder="Passord"
                     />
                     <button
@@ -162,13 +162,13 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#C4907A] text-[#0D0A08] py-3 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4A08A] transition-colors duration-300 disabled:opacity-50 cursor-pointer"
+                  className="w-full bg-[#B88E64] text-[#0D0A08] py-3 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4A876] transition-colors duration-300 disabled:opacity-50 cursor-pointer"
                 >
                   {loading ? "Logger inn..." : "Logg inn"}
                 </button>
 
                 <button type="button" onClick={() => { setForgotMode(true); setError(""); }}
-                  className="w-full text-[11px] text-[#6B5D52] hover:text-[#C4907A] transition-colors cursor-pointer">
+                  className="w-full text-[11px] text-[#6B5D52] hover:text-[#B88E64] transition-colors cursor-pointer">
                   Glemt passord?
                 </button>
               </form>

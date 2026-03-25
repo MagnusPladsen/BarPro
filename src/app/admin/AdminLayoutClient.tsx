@@ -143,7 +143,7 @@ export default function AdminLayoutClient({
           {/* Mobile header */}
           <div className="fixed top-0 left-0 right-0 z-50 h-14 bg-[#120E0B] border-b border-[#1A1410] flex items-center justify-between px-4 lg:hidden">
             <Link href="/admin" className="text-sm tracking-[0.15em] uppercase font-semibold">
-              BarPro <span className="text-[#C4907A] text-xs font-normal ml-1">Admin</span>
+              BarPro <span className="text-[#B88E64] text-xs font-normal ml-1">Admin</span>
             </Link>
             <button onClick={() => setSidebarOpen(!sidebarOpen)} className="text-[#6B5D52] hover:text-[#E8DDD4] cursor-pointer">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-6 h-6">
@@ -162,7 +162,7 @@ export default function AdminLayoutClient({
             {/* Logo */}
             <div className="p-6 border-b border-[#1A1410]">
               <Link href="/admin" className="text-lg tracking-[0.15em] uppercase font-semibold">
-                BarPro <span className="text-[#C4907A] text-xs font-normal ml-1">Admin</span>
+                BarPro <span className="text-[#B88E64] text-xs font-normal ml-1">Admin</span>
               </Link>
             </div>
 
@@ -181,14 +181,14 @@ export default function AdminLayoutClient({
                     onClick={() => setSidebarOpen(false)}
                     className={`flex items-center gap-3 px-4 py-3 text-sm transition-colors duration-200 ${
                       isActive
-                        ? "text-[#C4907A] bg-[#C4907A]/10"
+                        ? "text-[#B88E64] bg-[#B88E64]/10"
                         : "text-[#6B5D52] hover:text-[#E8DDD4] hover:bg-[#2A211A]"
                     }`}
                   >
                     <NavIcon icon={item.icon} />
                     <span className="flex-1">{item.label}</span>
                     {badges[item.href] > 0 && (
-                      <span className="bg-[#C4907A] text-[#0D0A08] text-[10px] font-semibold min-w-[18px] h-[18px] flex items-center justify-center px-1">
+                      <span className="bg-[#B88E64] text-[#0D0A08] text-[10px] font-semibold min-w-[18px] h-[18px] flex items-center justify-center px-1">
                         {badges[item.href]}
                       </span>
                     )}
@@ -211,7 +211,7 @@ export default function AdminLayoutClient({
                   const next = !lightMode;
                   setLightMode(next);
                   localStorage.setItem("admin-theme", next ? "light" : "dark");
-                }} className="text-[#6B5D52] hover:text-[#C4907A] transition-colors cursor-pointer" title={lightMode ? "Mørk modus" : "Lys modus"}>
+                }} className="text-[#6B5D52] hover:text-[#B88E64] transition-colors cursor-pointer" title={lightMode ? "Mørk modus" : "Lys modus"}>
                   {lightMode ? (
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-4 h-4"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z" /></svg>
                   ) : (

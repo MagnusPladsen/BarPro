@@ -38,7 +38,7 @@ export default function ActivityLogPage() {
   };
 
   const entityIcons: Record<string, string> = {
-    booking: "text-[#C4907A]",
+    booking: "text-[#B88E64]",
     employee: "text-blue-400",
     time_entry: "text-green-400",
     date: "text-red-400",

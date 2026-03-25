@@ -175,7 +175,7 @@ export default function AnsattePage() {
           <button key={f.value} onClick={() => { setFilter(f.value); setPage(0); }}
             className={`px-4 py-2 text-xs tracking-wider uppercase transition-colors cursor-pointer ${
               filter === f.value
-                ? "bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30"
+                ? "bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30"
                 : "text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4]"
             }`}>{f.label} ({filter === "all" ? employees.length : employees.filter((e) => f.value === "active" ? e.is_active : f.value === "inactive" ? !e.is_active : true).length})</button>
         ))}
@@ -199,8 +199,8 @@ export default function AnsattePage() {
                   onClick={() => selectEmployee(emp)}
                   className={`w-full text-left flex items-center gap-4 bg-[#1A1410] border p-4 transition-colors cursor-pointer ${
                     selected?.id === emp.id
-                      ? "border-[#C4907A]/40"
-                      : "border-[#1A1410] hover:border-[#C4907A]/20"
+                      ? "border-[#B88E64]/40"
+                      : "border-[#1A1410] hover:border-[#B88E64]/20"
                   }`}
                 >
                   {/* Avatar */}
@@ -208,7 +208,7 @@ export default function AnsattePage() {
                     {emp.photo_url ? (
                       <Image src={emp.photo_url} alt={emp.name} fill className="object-cover" sizes="48px" />
                     ) : (
-                      <div className="w-full h-full flex items-center justify-center text-[#C4907A] text-sm font-medium">
+                      <div className="w-full h-full flex items-center justify-center text-[#B88E64] text-sm font-medium">
                         {emp.name.split(" ").map((n) => n[0]).join("")}
                       </div>
                     )}
@@ -218,7 +218,7 @@ export default function AnsattePage() {
                     <div className="flex items-center gap-2">
                       <p className="text-sm font-medium truncate">{emp.name}</p>
                       {emp.is_owner && (
-                        <span className="text-[9px] tracking-wider uppercase px-1.5 py-0.5 bg-[#C4907A]/10 text-[#C4907A]">
+                        <span className="text-[9px] tracking-wider uppercase px-1.5 py-0.5 bg-[#B88E64]/10 text-[#B88E64]">
                           Eier
                         </span>
                       )}
@@ -248,7 +248,7 @@ export default function AnsattePage() {
 
           {/* Add employee button */}
           <button onClick={() => setShowAddForm(true)}
-            className="w-full mt-4 border border-dashed border-[#1A1410] py-4 text-xs text-[#6B5D52] uppercase tracking-wider hover:text-[#C4907A] hover:border-[#C4907A]/30 transition-colors cursor-pointer">
+            className="w-full mt-4 border border-dashed border-[#1A1410] py-4 text-xs text-[#6B5D52] uppercase tracking-wider hover:text-[#B88E64] hover:border-[#B88E64]/30 transition-colors cursor-pointer">
             + Legg til ansatt
           </button>
         </div>
@@ -262,7 +262,7 @@ export default function AnsattePage() {
                   {selected.photo_url ? (
                     <Image src={selected.photo_url} alt={selected.name} fill className="object-cover" sizes="64px" />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-[#C4907A] text-lg font-medium">
+                    <div className="w-full h-full flex items-center justify-center text-[#B88E64] text-lg font-medium">
                       {selected.name.split(" ").map((n) => n[0]).join("")}
                     </div>
                   )}
@@ -294,7 +294,7 @@ export default function AnsattePage() {
                 </label>
                 <div>
                   <h2 className="text-lg font-medium">{selected.name}</h2>
-                  <p className="text-[11px] text-[#C4907A]">{selected.role}</p>
+                  <p className="text-[11px] text-[#B88E64]">{selected.role}</p>
                 </div>
               </div>
               <button onClick={() => setSelected(null)} className="text-[#6B5D52] hover:text-[#E8DDD4] cursor-pointer">&times;</button>
@@ -304,30 +304,30 @@ export default function AnsattePage() {
               <div className="space-y-4 text-sm">
                 <div>
                   <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Navn</label>
-                  <input value={editName} onChange={(e) => setEditName(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                  <input value={editName} onChange={(e) => setEditName(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
                 </div>
                 <div>
                   <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">E-post</label>
-                  <input value={editEmail} onChange={(e) => setEditEmail(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                  <input value={editEmail} onChange={(e) => setEditEmail(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
                 </div>
                 <div>
                   <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Telefon</label>
-                  <input value={editPhone} onChange={(e) => setEditPhone(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                  <input value={editPhone} onChange={(e) => setEditPhone(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
                 </div>
                 <div>
                   <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Rolle</label>
-                  <input value={editRole} onChange={(e) => setEditRole(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                  <input value={editRole} onChange={(e) => setEditRole(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
                 </div>
                 <div>
                   <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Timelønn (kr)</label>
-                  <input type="number" value={editRate} onChange={(e) => setEditRate(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                  <input type="number" value={editRate} onChange={(e) => setEditRate(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
                 </div>
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" checked={editActive} onChange={(e) => setEditActive(e.target.checked)} className="accent-[#C4907A]" />
+                  <input type="checkbox" checked={editActive} onChange={(e) => setEditActive(e.target.checked)} className="accent-[#B88E64]" />
                   <span className="text-sm">Aktiv</span>
                 </label>
                 <div className="flex gap-2 pt-2">
-                  <button onClick={saveEmployee} disabled={saving} className="flex-1 bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C4907A]/20 cursor-pointer disabled:opacity-50">
+                  <button onClick={saveEmployee} disabled={saving} className="flex-1 bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#B88E64]/20 cursor-pointer disabled:opacity-50">
                     Lagre
                   </button>
                   <button onClick={() => setEditing(false)} className="flex-1 border border-[#1A1410] py-2 text-xs text-[#6B5D52] uppercase tracking-wider hover:text-[#E8DDD4] cursor-pointer">
@@ -340,7 +340,7 @@ export default function AnsattePage() {
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">E-post</p>
-                    <a href={`mailto:${selected.email}`} className="text-[#C4907A] hover:underline text-sm">{selected.email}</a>
+                    <a href={`mailto:${selected.email}`} className="text-[#B88E64] hover:underline text-sm">{selected.email}</a>
                   </div>
                   <div>
                     <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Telefon</p>
@@ -414,7 +414,7 @@ export default function AnsattePage() {
                 <div className="flex gap-2 mt-4">
                   <button
                     onClick={() => setEditing(true)}
-                    className="flex-1 bg-[#C4907A]/10 text-[#C4907A] border border-[#C4907A]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C4907A]/20 cursor-pointer"
+                    className="flex-1 bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#B88E64]/20 cursor-pointer"
                   >
                     Rediger
                   </button>
@@ -430,7 +430,7 @@ export default function AnsattePage() {
                       }
                       setTimeout(() => setNotification(null), 5000);
                     }}
-                    className="flex-1 border border-[#1A1410] text-[#6B5D52] py-2 text-xs uppercase tracking-wider hover:text-[#E8DDD4] hover:border-[#C4907A]/20 cursor-pointer"
+                    className="flex-1 border border-[#1A1410] text-[#6B5D52] py-2 text-xs uppercase tracking-wider hover:text-[#E8DDD4] hover:border-[#B88E64]/20 cursor-pointer"
                   >
                     Reset passord
                   </button>
@@ -449,34 +449,34 @@ export default function AnsattePage() {
             <div className="space-y-4">
               <div>
                 <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Navn *</label>
-                <input value={newName} onChange={(e) => setNewName(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                <input value={newName} onChange={(e) => setNewName(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
               </div>
               <div>
                 <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">E-post *</label>
-                <input type="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                <input type="email" value={newEmail} onChange={(e) => setNewEmail(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
               </div>
               <div>
                 <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Telefon</label>
-                <input value={newPhone} onChange={(e) => setNewPhone(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                <input value={newPhone} onChange={(e) => setNewPhone(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
               </div>
               <div>
                 <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Rolle</label>
-                <input value={newRole} onChange={(e) => setNewRole(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                <input value={newRole} onChange={(e) => setNewRole(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
               </div>
               <div>
                 <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Timelønn (kr)</label>
-                <input type="number" value={newRate} onChange={(e) => setNewRate(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40" />
+                <input type="number" value={newRate} onChange={(e) => setNewRate(e.target.value)} className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
               </div>
               <div>
                 <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Passord (for innlogging)</label>
-                <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="La tom for å opprette uten innlogging" className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40 placeholder:text-[#6B5D52]/40" />
+                <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="La tom for å opprette uten innlogging" className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 placeholder:text-[#6B5D52]/40" />
               </div>
               {addError && <p className="text-red-400 text-sm">{addError}</p>}
               <div className="flex gap-2 pt-2">
                 <button
                   onClick={addEmployee}
                   disabled={saving || !newName || !newEmail}
-                  className="flex-1 bg-[#C4907A] text-[#0D0A08] py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#D4A08A] cursor-pointer disabled:opacity-50"
+                  className="flex-1 bg-[#B88E64] text-[#0D0A08] py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#D4A876] cursor-pointer disabled:opacity-50"
                 >
                   {saving ? <span className="flex items-center justify-center gap-1.5"><ButtonSpinner />Lagrer...</span> : "Legg til"}
                 </button>

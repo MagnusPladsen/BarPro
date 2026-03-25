@@ -127,7 +127,7 @@ export default function AdminBloggPage() {
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-semibold">Blogg</h1>
         <button onClick={startNew}
-          className="bg-[#C4907A] text-[#0D0A08] px-4 py-2 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4A08A] cursor-pointer">
+          className="bg-[#B88E64] text-[#0D0A08] px-4 py-2 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4A876] cursor-pointer">
           + Nytt innlegg
         </button>
       </div>
@@ -140,7 +140,7 @@ export default function AdminBloggPage() {
               <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Tittel</label>
               <input value={editTitle}
                 onChange={(e) => { setEditTitle(e.target.value); if (!selected) setEditSlug(slugify(e.target.value)); }}
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-lg font-medium outline-none focus:border-[#C4907A]/40"
+                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-lg font-medium outline-none focus:border-[#B88E64]/40"
                 placeholder="Skriv tittel..." />
             </div>
 
@@ -149,7 +149,7 @@ export default function AdminBloggPage() {
               <div className="flex items-center mt-1">
                 <span className="text-[#6B5D52] text-sm mr-1">/blogg/</span>
                 <input value={editSlug} onChange={(e) => setEditSlug(slugify(e.target.value))}
-                  className="flex-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40"
+                  className="flex-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40"
                   placeholder="auto-generert-fra-tittel" />
               </div>
             </div>
@@ -157,14 +157,14 @@ export default function AdminBloggPage() {
             <div>
               <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Utdrag (vises i liste)</label>
               <textarea value={editExcerpt} onChange={(e) => setEditExcerpt(e.target.value)} rows={2}
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40 resize-none"
+                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 resize-none"
                 placeholder="Kort beskrivelse..." />
             </div>
 
             <div>
               <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Innhold</label>
               <textarea value={editContent} onChange={(e) => setEditContent(e.target.value)} rows={16}
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#C4907A]/40 resize-y leading-relaxed font-mono"
+                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 resize-y leading-relaxed font-mono"
                 placeholder="Skriv innholdet her... (én linje = ett avsnitt)" />
             </div>
 
@@ -189,7 +189,7 @@ export default function AdminBloggPage() {
               Avbryt
             </button>
             <button onClick={savePost} disabled={saving}
-              className="flex-1 bg-[#C4907A] text-[#0D0A08] py-3 text-xs font-medium uppercase tracking-wider hover:bg-[#D4A08A] cursor-pointer disabled:opacity-50">
+              className="flex-1 bg-[#B88E64] text-[#0D0A08] py-3 text-xs font-medium uppercase tracking-wider hover:bg-[#D4A876] cursor-pointer disabled:opacity-50">
               {saving ? <span className="flex items-center justify-center gap-1.5"><ButtonSpinner /> Lagrer...</span> : selected ? "Oppdater" : "Opprett"}
             </button>
           </div>
