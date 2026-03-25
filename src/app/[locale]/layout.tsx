@@ -78,6 +78,44 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} className={`${cormorant.variable} ${spaceGrotesk.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "LocalBusiness",
+              "name": "Barpro DA",
+              "description": "Profesjonell bartender- og eventbemanning for bryllup, bedriftsarrangementer og private feiringer i Innlandet og hele Norge.",
+              "url": "https://barpro.pladsen.dev",
+              "telephone": "+4790225293",
+              "email": "Barproda@gmail.com",
+              "address": {
+                "@type": "PostalAddress",
+                "addressLocality": "Lillehammer",
+                "addressCountry": "NO",
+              },
+              "geo": {
+                "@type": "GeoCoordinates",
+                "latitude": 61.115,
+                "longitude": 10.466,
+              },
+              "openingHours": "Mo-Su",
+              "priceRange": "$$",
+              "serviceType": ["Bartender", "Eventbemanning", "Bar service", "Cocktail catering"],
+              "areaServed": {
+                "@type": "Country",
+                "name": "Norway",
+              },
+              "founder": [
+                { "@type": "Person", "name": "Emil" },
+                { "@type": "Person", "name": "Sofie" },
+              ],
+              "foundingDate": "2026",
+            }),
+          }}
+        />
+      </head>
       <body className="bg-background text-text-primary font-body antialiased">
         <NextIntlClientProvider messages={messages}>
           <AnnouncementBar />

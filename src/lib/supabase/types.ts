@@ -8,6 +8,39 @@ export type AgreementStatus = "active" | "completed" | "cancelled";
 export interface Database {
   public: {
     Tables: {
+      blog_posts: {
+        Row: {
+          id: string;
+          title: string;
+          slug: string;
+          content: string;
+          excerpt: string | null;
+          status: "draft" | "published";
+          author_id: string | null;
+          published_at: string | null;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          title: string;
+          slug: string;
+          content: string;
+          excerpt?: string | null;
+          status?: "draft" | "published";
+          author_id?: string | null;
+          published_at?: string | null;
+        };
+        Update: {
+          title?: string;
+          slug?: string;
+          content?: string;
+          excerpt?: string | null;
+          status?: "draft" | "published";
+          published_at?: string | null;
+        };
+        Relationships: [];
+      };
       activity_log: {
         Row: {
           id: string;

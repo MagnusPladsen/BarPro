@@ -15,6 +15,7 @@ const navItems = [
   { href: "/admin/timer", label: "Timer", icon: "clock" },
   { href: "/admin/rapporter", label: "Rapporter", icon: "chart" },
   { href: "/admin/aktivitet", label: "Aktivitet", icon: "activity" },
+  { href: "/admin/blogg", label: "Blogg", icon: "pen" },
 ];
 
 function NavIcon({ icon }: { icon: string }) {
@@ -69,6 +70,12 @@ function NavIcon({ icon }: { icon: string }) {
       return (
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
           <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+        </svg>
+      );
+    case "pen":
+      return (
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
+          <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
         </svg>
       );
     case "chart":
