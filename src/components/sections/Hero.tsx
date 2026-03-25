@@ -156,6 +156,24 @@ export function Hero() {
             className="w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-accent/[0.1] blur-[100px]"
           />
         </motion.div>
+
+        {/* Sixth orb — top left, warm tone */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2.5, delay: 0.5 }}
+          className="absolute top-[15%] left-[20%] -translate-x-1/2 -translate-y-1/2"
+        >
+          <motion.div
+            animate={{
+              x: [0, -50, 30, -70, 40, 0],
+              y: [0, 40, -30, 20, -50, 0],
+              scale: [1, 1.3, 0.8, 1.1, 0.9, 1],
+            }}
+            transition={{ duration: 19, repeat: Infinity, ease: "easeInOut" }}
+            className="w-[250px] h-[250px] md:w-[400px] md:h-[400px] bg-[#8A6B4A]/20 blur-[90px]"
+          />
+        </motion.div>
       </motion.div>
 
       {/* Decorative corner frame */}
