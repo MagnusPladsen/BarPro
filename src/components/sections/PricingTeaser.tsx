@@ -3,6 +3,7 @@
 import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
+import { ColorOrbs } from "@/components/ui/ColorOrbs";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -46,32 +47,33 @@ export function PricingTeaser() {
                 whileInView={{ opacity: 1, x: 0, y: 0 }}
                 viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.9, delay: i * 0.15, ease }}
-                className={`relative border p-10 lg:p-12 text-center transition-all duration-500 ${
+                className={`relative border text-center transition-all duration-500 overflow-hidden ${
                   isPopular
-                    ? "border-accent/40 bg-background-card shadow-[0_0_60px_rgba(201,168,76,0.06)] hover:shadow-[0_0_80px_rgba(201,168,76,0.1)]"
-                    : "border-border bg-background-card/50 hover:border-border-accent"
+                    ? "border-accent/40 bg-background-card shadow-[0_0_80px_rgba(184,142,100,0.1)] hover:shadow-[0_0_100px_rgba(184,142,100,0.15)] p-12 lg:p-16 scale-[1.05] z-10"
+                    : "border-border bg-background-card/50 hover:border-border-accent p-10 lg:p-12"
                 }`}
               >
+                <ColorOrbs size="small" intensity={isPopular ? 0.5 : 0.2} />
                 {isPopular && (
                   <>
-                    <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent text-background text-[10px] tracking-[0.2em] uppercase font-medium px-5 py-1.5">
+                    <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-accent text-background text-[10px] tracking-[0.2em] uppercase font-medium px-6 py-2">
                       {t("packages.premium.popular")}
                     </span>
-                    {/* Gold top border gradient */}
-                    <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/50 to-transparent" />
+                    <div className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-accent/60 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/30 to-transparent" />
                   </>
                 )}
 
-                <h3 className="font-display font-light text-2xl text-text-primary mb-2">
+                <h3 className={`font-display italic font-light text-text-primary mb-2 relative z-10 ${isPopular ? "text-3xl" : "text-2xl"}`}>
                   {t(`packages.${key}.name`)}
                 </h3>
-                <p className="text-text-muted text-sm mb-6">
+                <p className="text-text-muted text-sm mb-6 relative z-10">
                   {t(`packages.${key}.description`)}
                 </p>
-                <span className="font-display text-3xl lg:text-4xl font-light text-text-primary">
+                <span className={`font-display font-light text-text-primary relative z-10 ${isPopular ? "text-4xl lg:text-5xl text-accent" : "text-3xl lg:text-4xl"}`}>
                   {t(`packages.${key}.price`)}
                 </span>
-                <span className="text-text-muted text-sm ml-2">
+                <span className="text-text-muted text-sm ml-2 relative z-10">
                   {t(`packages.${key}.unit`)}
                 </span>
               </motion.div>
