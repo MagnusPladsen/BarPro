@@ -3,57 +3,56 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 
 /**
- * Blurred gradient orbs that parallax on scroll.
- * Uses z-[5] to sit above section content backgrounds.
- * All orbs are pointer-events-none so they don't block interaction.
+ * Blurred gradient orbs that move with scroll parallax.
+ * Each orb is absolutely positioned and transforms on scroll.
  */
 export function ScrollBackground() {
   const { scrollYProgress } = useScroll();
 
-  const y1 = useTransform(scrollYProgress, [0, 1], [0, -400]);
-  const y2 = useTransform(scrollYProgress, [0, 1], [100, -600]);
-  const y3 = useTransform(scrollYProgress, [0, 1], [50, -300]);
-  const y4 = useTransform(scrollYProgress, [0, 1], [200, -500]);
-  const y5 = useTransform(scrollYProgress, [0, 1], [-50, -350]);
-  const scale1 = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.3, 0.8]);
-  const scale2 = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 0.8, 1.2]);
+  const y1 = useTransform(scrollYProgress, [0, 1], ["0vh", "-60vh"]);
+  const y2 = useTransform(scrollYProgress, [0, 1], ["0vh", "-90vh"]);
+  const y3 = useTransform(scrollYProgress, [0, 1], ["0vh", "-45vh"]);
+  const y4 = useTransform(scrollYProgress, [0, 1], ["0vh", "-75vh"]);
+  const scale1 = useTransform(scrollYProgress, [0, 0.5, 1], [0.9, 1.4, 0.8]);
+  const scale2 = useTransform(scrollYProgress, [0, 0.5, 1], [1.1, 0.7, 1.3]);
 
   return (
     <div className="fixed inset-0 pointer-events-none z-[5] overflow-hidden" aria-hidden="true">
-      {/* Large copper orb — right side */}
-      <motion.div style={{ y: y1, scale: scale1 }}>
-        <div className="absolute top-[30%] right-[-10%] w-[350px] h-[350px] md:w-[600px] md:h-[600px] bg-[#B88E64] opacity-[0.06] blur-[120px]" />
-      </motion.div>
+      {/* Copper orb — right side */}
+      <motion.div
+        style={{ y: y1, scale: scale1 }}
+        className="absolute top-[40vh] right-[-5vw] w-[50vw] h-[50vw] max-w-[600px] max-h-[600px] bg-[#B88E64] opacity-[0.07] blur-[120px]"
+      />
 
-      {/* Warm espresso orb — left side */}
-      <motion.div style={{ y: y2, scale: scale2 }}>
-        <div className="absolute top-[60%] left-[-10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#2A211A] opacity-[0.2] blur-[100px]" />
-      </motion.div>
+      {/* Dark warm orb — left side */}
+      <motion.div
+        style={{ y: y2, scale: scale2 }}
+        className="absolute top-[80vh] left-[-8vw] w-[45vw] h-[45vw] max-w-[500px] max-h-[500px] bg-[#2A211A] opacity-[0.2] blur-[100px]"
+      />
 
-      {/* Bright copper — center-right */}
-      <motion.div style={{ y: y4 }}>
-        <div className="absolute top-[90%] right-[20%] w-[250px] h-[250px] md:w-[450px] md:h-[450px] bg-[#B88E64] opacity-[0.08] blur-[90px]" />
-      </motion.div>
+      {/* Bright copper — center-right, deeper */}
+      <motion.div
+        style={{ y: y4 }}
+        className="absolute top-[130vh] right-[10vw] w-[40vw] h-[40vw] max-w-[450px] max-h-[450px] bg-[#B88E64] opacity-[0.09] blur-[90px]"
+      />
 
-      {/* Deep warm — left */}
-      <motion.div style={{ y: y3 }}>
-        <div className="absolute top-[120%] left-[10%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#1A1410] opacity-[0.25] blur-[110px]" />
-      </motion.div>
+      {/* Espresso glow — left, mid-page */}
+      <motion.div
+        style={{ y: y3 }}
+        className="absolute top-[180vh] left-[5vw] w-[45vw] h-[45vw] max-w-[500px] max-h-[500px] bg-[#1A1410] opacity-[0.25] blur-[110px]"
+      />
 
-      {/* Small bright copper — far down */}
-      <motion.div style={{ y: y5, scale: scale1 }}>
-        <div className="absolute top-[160%] right-[5%] w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-[#B88E64] opacity-[0.07] blur-[80px]" />
-      </motion.div>
+      {/* Small copper accent — far down right */}
+      <motion.div
+        style={{ y: y1, scale: scale2 }}
+        className="absolute top-[240vh] right-[0vw] w-[35vw] h-[35vw] max-w-[400px] max-h-[400px] bg-[#B88E64] opacity-[0.06] blur-[100px]"
+      />
 
-      {/* Deep contrast orb */}
-      <motion.div style={{ y: y2 }}>
-        <div className="absolute top-[200%] left-[30%] w-[350px] h-[350px] md:w-[550px] md:h-[550px] bg-[#2A211A] opacity-[0.15] blur-[100px]" />
-      </motion.div>
-
-      {/* Bottom copper glow */}
-      <motion.div style={{ y: y4, scale: scale2 }}>
-        <div className="absolute top-[250%] right-[15%] w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-[#B88E64] opacity-[0.05] blur-[120px]" />
-      </motion.div>
+      {/* Deep warm — bottom left */}
+      <motion.div
+        style={{ y: y2 }}
+        className="absolute top-[300vh] left-[20vw] w-[50vw] h-[50vw] max-w-[550px] max-h-[550px] bg-[#2A211A] opacity-[0.15] blur-[100px]"
+      />
     </div>
   );
 }
