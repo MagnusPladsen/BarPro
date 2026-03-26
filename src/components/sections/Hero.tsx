@@ -83,7 +83,7 @@ export function Hero() {
               opacity: [0.14, 0.2, 0.12, 0.18, 0.13, 0.14],
             }}
             transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[120vw] h-[120vh] bg-[#B88E64] blur-[150px]"
+            className="w-[120vw] h-[120vh] bg-[#C9A84C] blur-[150px]"
             style={{ opacity: 0.14 }}
           />
         </motion.div>
@@ -103,7 +103,7 @@ export function Hero() {
               opacity: [0.1, 0.16, 0.07, 0.13, 0.09, 0.1],
             }}
             transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[80vw] h-[80vh] bg-[#3A6B6B] blur-[130px]"
+            className="w-[80vw] h-[80vh] bg-[#A08A3C] blur-[130px]"
             style={{ opacity: 0.1 }}
           />
         </motion.div>
@@ -123,7 +123,7 @@ export function Hero() {
               opacity: [0.1, 0.15, 0.08, 0.13, 0.09, 0.1],
             }}
             transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[80vw] h-[80vh] bg-[#6B2A35] blur-[130px]"
+            className="w-[80vw] h-[80vh] bg-[#8B7355] blur-[130px]"
             style={{ opacity: 0.1 }}
           />
         </motion.div>

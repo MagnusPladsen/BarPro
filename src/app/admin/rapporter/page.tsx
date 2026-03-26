@@ -163,7 +163,7 @@ export default function RapporterPage() {
       head: [headers],
       body: rows.map((r) => r.map(String)),
       theme: "grid",
-      headStyles: { fillColor: [184, 142, 100] },
+      headStyles: { fillColor: [201, 168, 76] },
     });
 
     doc.save(`barpro-rapport-${startDate}-${endDate}.pdf`);
@@ -176,18 +176,18 @@ export default function RapporterPage() {
         <div className="relative">
           <button
             onClick={() => setShowExportMenu(!showExportMenu)}
-            className="border border-[#B88E64]/30 text-[#B88E64] px-4 py-2 text-xs tracking-wider uppercase hover:bg-[#B88E64]/10 transition-colors cursor-pointer"
+            className="border border-[#C9A84C]/30 text-[#C9A84C] px-4 py-2 text-xs tracking-wider uppercase hover:bg-[#C9A84C]/10 transition-colors cursor-pointer"
           >
             Eksporter &darr;
           </button>
           {showExportMenu && (
-            <div className="absolute right-0 mt-1 bg-[#1A1410] border border-[#1A1410] z-10 min-w-[140px]">
+            <div className="absolute right-0 mt-1 bg-[#141414] border border-[#141414] z-10 min-w-[140px]">
               <button onClick={() => { exportCSV(); setShowExportMenu(false); }}
-                className="w-full text-left px-4 py-2.5 text-xs text-[#6B5D52] hover:text-[#E8DDD4] hover:bg-[#2A211A] cursor-pointer">CSV</button>
+                className="w-full text-left px-4 py-2.5 text-xs text-[#6B6B6B] hover:text-[#F5F0E8] hover:bg-[#1A1A1A] cursor-pointer">CSV</button>
               <button onClick={() => { exportExcel(); setShowExportMenu(false); }}
-                className="w-full text-left px-4 py-2.5 text-xs text-[#6B5D52] hover:text-[#E8DDD4] hover:bg-[#2A211A] cursor-pointer">Excel</button>
+                className="w-full text-left px-4 py-2.5 text-xs text-[#6B6B6B] hover:text-[#F5F0E8] hover:bg-[#1A1A1A] cursor-pointer">Excel</button>
               <button onClick={() => { exportPDF(); setShowExportMenu(false); }}
-                className="w-full text-left px-4 py-2.5 text-xs text-[#6B5D52] hover:text-[#E8DDD4] hover:bg-[#2A211A] cursor-pointer">PDF</button>
+                className="w-full text-left px-4 py-2.5 text-xs text-[#6B6B6B] hover:text-[#F5F0E8] hover:bg-[#1A1A1A] cursor-pointer">PDF</button>
             </div>
           )}
         </div>
@@ -202,8 +202,8 @@ export default function RapporterPage() {
               onClick={() => setPeriod(p)}
               className={`px-4 py-2 text-xs tracking-wider uppercase transition-colors cursor-pointer ${
                 period === p
-                  ? "bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30"
-                  : "text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4]"
+                  ? "bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30"
+                  : "text-[#6B6B6B] border border-[#141414] hover:text-[#F5F0E8]"
               }`}
             >
               {p === "week" ? "Denne uken" : p === "month" ? "Denne måneden" : "Egendefinert"}
@@ -216,14 +216,14 @@ export default function RapporterPage() {
               type="date"
               value={startDate}
               onChange={(e) => setStartDate(e.target.value)}
-              className="bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40"
+              className="bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40"
             />
-            <span className="text-[#6B5D52]">—</span>
+            <span className="text-[#6B6B6B]">—</span>
             <input
               type="date"
               value={endDate}
               onChange={(e) => setEndDate(e.target.value)}
-              className="bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40"
+              className="bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40"
             />
           </div>
         )}
@@ -240,23 +240,23 @@ export default function RapporterPage() {
           </>
         ) : (
           <>
-            <div className="bg-[#1A1410] border border-[#1A1410] p-5">
-              <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Inntekt</p>
+            <div className="bg-[#141414] border border-[#141414] p-5">
+              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Inntekt</p>
               <p className="text-2xl font-semibold text-green-400">{totalRevenue.toLocaleString("no-NO")} kr</p>
             </div>
-            <div className="bg-[#1A1410] border border-[#1A1410] p-5">
-              <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Lønnskostnad</p>
+            <div className="bg-[#141414] border border-[#141414] p-5">
+              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Lønnskostnad</p>
               <p className="text-2xl font-semibold text-red-400">{totalLabourCost.toLocaleString("no-NO")} kr</p>
             </div>
-            <div className="bg-[#1A1410] border border-[#1A1410] p-5">
-              <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Margin</p>
+            <div className="bg-[#141414] border border-[#141414] p-5">
+              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Margin</p>
               <p className={`text-2xl font-semibold ${totalRevenue - totalLabourCost >= 0 ? "text-green-400" : "text-red-400"}`}>
                 {(totalRevenue - totalLabourCost).toLocaleString("no-NO")} kr
               </p>
             </div>
-            <div className="bg-[#1A1410] border border-[#1A1410] p-5">
-              <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Ventende tilbud</p>
-              <p className="text-2xl font-semibold text-[#B88E64]">{pendingOffers.toLocaleString("no-NO")} kr</p>
+            <div className="bg-[#141414] border border-[#141414] p-5">
+              <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Ventende tilbud</p>
+              <p className="text-2xl font-semibold text-[#C9A84C]">{pendingOffers.toLocaleString("no-NO")} kr</p>
             </div>
           </>
         )}
@@ -271,44 +271,44 @@ export default function RapporterPage() {
         ) : (
           <>
         {/* Booking overview */}
-        <div className="bg-[#1A1410] border border-[#1A1410] p-6">
+        <div className="bg-[#141414] border border-[#141414] p-6">
           <h2 className="text-sm font-medium mb-4">Bookinger</h2>
           <div className="space-y-3 text-sm">
             <div className="flex justify-between">
-              <span className="text-[#6B5D52]">Bekreftet / Fullført</span>
+              <span className="text-[#6B6B6B]">Bekreftet / Fullført</span>
               <span className="text-green-400">{confirmedBookings.length}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#6B5D52]">Ventende</span>
+              <span className="text-[#6B6B6B]">Ventende</span>
               <span className="text-yellow-400">{pendingBookings.length}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#6B5D52]">Avlyst</span>
+              <span className="text-[#6B6B6B]">Avlyst</span>
               <span className="text-red-400">{bookings.filter((b) => b.status === "cancelled").length}</span>
             </div>
-            <div className="flex justify-between border-t border-[#1A1410] pt-3">
-              <span className="text-[#6B5D52]">Totalt</span>
+            <div className="flex justify-between border-t border-[#141414] pt-3">
+              <span className="text-[#6B6B6B]">Totalt</span>
               <span>{bookings.length}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-[#6B5D52]">Timer jobbet</span>
+              <span className="text-[#6B6B6B]">Timer jobbet</span>
               <span>{totalHours} t</span>
             </div>
           </div>
         </div>
 
         {/* Employee hours */}
-        <div className="bg-[#1A1410] border border-[#1A1410] p-6">
+        <div className="bg-[#141414] border border-[#141414] p-6">
           <h2 className="text-sm font-medium mb-4">Ansatt-timer & lønn</h2>
           {employeeStats.length === 0 ? (
-            <p className="text-[#6B5D52] text-sm">Ingen registrerte timer i perioden</p>
+            <p className="text-[#6B6B6B] text-sm">Ingen registrerte timer i perioden</p>
           ) : (
             <div className="space-y-3">
               {employeeStats.map((e) => (
-                <div key={e.id} className="flex items-center justify-between py-2 border-b border-[#1A1410] last:border-0">
+                <div key={e.id} className="flex items-center justify-between py-2 border-b border-[#141414] last:border-0">
                   <div>
                     <p className="text-sm">{e.name}</p>
-                    <p className="text-[10px] text-[#6B5D52]">{e.jobCount} oppdrag · {e.hours} timer</p>
+                    <p className="text-[10px] text-[#6B6B6B]">{e.jobCount} oppdrag · {e.hours} timer</p>
                   </div>
                   <p className="text-sm font-medium">{e.salary.toLocaleString("no-NO")} kr</p>
                 </div>

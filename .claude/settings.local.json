@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cmux rename:*)",
+      "Bash(cmux rename-workspace:*)",
+      "Bash(python3:*)"
+    ]
+  }
+}

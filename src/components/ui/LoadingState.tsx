@@ -2,7 +2,7 @@ import { Skeleton } from "./Skeleton";
 
 export function KPICardSkeleton(): React.ReactElement {
   return (
-    <div className="bg-[#1A1410] border border-[#1A1410] p-5">
+    <div className="bg-[#141414] border border-[#141414] p-5">
       <div className="flex items-center justify-between mb-1">
         <Skeleton className="h-3 w-16" />
         <Skeleton className="h-3 w-20" />
@@ -15,7 +15,7 @@ export function KPICardSkeleton(): React.ReactElement {
 
 export function ListItemSkeleton(): React.ReactElement {
   return (
-    <div className="bg-[#1A1410] border border-[#1A1410] p-4">
+    <div className="bg-[#141414] border border-[#141414] p-4">
       <div className="flex items-center justify-between">
         <Skeleton className="h-4 w-32" />
         <Skeleton className="h-5 w-20" />
@@ -35,7 +35,7 @@ export function TableSkeleton({ rows = 5 }: TableSkeletonProps): React.ReactElem
       {Array.from({ length: rows }).map((_, i) => (
         <div
           key={i}
-          className="bg-[#1A1410] border border-[#1A1410] p-4 flex items-center justify-between"
+          className="bg-[#141414] border border-[#141414] p-4 flex items-center justify-between"
         >
           <div className="flex items-center gap-4">
             <div>
@@ -63,7 +63,7 @@ export function DashboardListSkeleton(): React.ReactElement {
       {Array.from({ length: 5 }).map((_, i) => (
         <div
           key={i}
-          className="flex items-center justify-between py-3 border-b border-[#1A1410] last:border-0"
+          className="flex items-center justify-between py-3 border-b border-[#141414] last:border-0"
         >
           <div>
             <Skeleton className="h-4 w-28" />
@@ -78,8 +78,8 @@ export function DashboardListSkeleton(): React.ReactElement {
 
 export function CalendarGridSkeleton(): React.ReactElement {
   return (
-    <div className="bg-[#1A1410] border border-[#1A1410]">
-      <div className="grid grid-cols-7 border-b border-[#1A1410]">
+    <div className="bg-[#141414] border border-[#141414]">
+      <div className="grid grid-cols-7 border-b border-[#141414]">
         {Array.from({ length: 7 }).map((_, i) => (
           <div key={i} className="p-3 flex justify-center">
             <Skeleton className="h-3 w-8" />
@@ -90,7 +90,7 @@ export function CalendarGridSkeleton(): React.ReactElement {
         {Array.from({ length: 35 }).map((_, i) => (
           <div
             key={i}
-            className="p-3 min-h-[80px] border-b border-r border-[#1A1410]"
+            className="p-3 min-h-[80px] border-b border-r border-[#141414]"
           >
             <Skeleton className="h-4 w-5" />
             {i % 5 === 2 && (
@@ -108,7 +108,7 @@ export function CalendarGridSkeleton(): React.ReactElement {
 
 export function ReportCardSkeleton(): React.ReactElement {
   return (
-    <div className="bg-[#1A1410] border border-[#1A1410] p-6">
+    <div className="bg-[#141414] border border-[#141414] p-6">
       <Skeleton className="h-4 w-24 mb-4" />
       <div className="space-y-3">
         {Array.from({ length: 5 }).map((_, i) => (
@@ -124,7 +124,7 @@ export function ReportCardSkeleton(): React.ReactElement {
 
 export function EmployeeListItemSkeleton(): React.ReactElement {
   return (
-    <div className="bg-[#1A1410] border border-[#1A1410] p-4 flex items-center gap-4">
+    <div className="bg-[#141414] border border-[#141414] p-4 flex items-center gap-4">
       <Skeleton className="w-12 h-12 shrink-0" />
       <div className="flex-1 min-w-0">
         <Skeleton className="h-4 w-28" />
@@ -140,7 +140,7 @@ export function EmployeeListItemSkeleton(): React.ReactElement {
 
 export function MessageListItemSkeleton(): React.ReactElement {
   return (
-    <div className="bg-[#1A1410] border border-[#1A1410] p-4">
+    <div className="bg-[#141414] border border-[#141414] p-4">
       <div className="flex items-center justify-between">
         <Skeleton className="h-4 w-28" />
         <Skeleton className="h-5 w-14" />

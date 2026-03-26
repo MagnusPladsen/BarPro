@@ -97,16 +97,16 @@ export default function AdminTimerPage() {
         </div>
       ) : filter === "pending" && pendingCount > 0 && (
         <div className="grid grid-cols-3 gap-4 mb-6">
-          <div className="bg-[#1A1410] border border-[#1A1410] p-4">
-            <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Ventende</p>
+          <div className="bg-[#141414] border border-[#141414] p-4">
+            <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Ventende</p>
             <p className="text-xl font-semibold text-yellow-400">{pendingCount}</p>
           </div>
-          <div className="bg-[#1A1410] border border-[#1A1410] p-4">
-            <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Timer</p>
+          <div className="bg-[#141414] border border-[#141414] p-4">
+            <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Timer</p>
             <p className="text-xl font-semibold">{totalPendingHours} t</p>
           </div>
-          <div className="bg-[#1A1410] border border-[#1A1410] p-4">
-            <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Estimert kostnad</p>
+          <div className="bg-[#141414] border border-[#141414] p-4">
+            <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Estimert kostnad</p>
             <p className="text-xl font-semibold">{totalPendingCost.toLocaleString("no-NO")} kr</p>
           </div>
         </div>
@@ -117,8 +117,8 @@ export default function AdminTimerPage() {
           <button key={f.value} onClick={() => setFilter(f.value)}
             className={`px-4 py-2 text-xs tracking-wider uppercase transition-colors cursor-pointer ${
               filter === f.value
-                ? "bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30"
-                : "text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4]"
+                ? "bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30"
+                : "text-[#6B6B6B] border border-[#141414] hover:text-[#F5F0E8]"
             }`}>{f.label}</button>
         ))}
       </div>
@@ -126,14 +126,14 @@ export default function AdminTimerPage() {
       <div className="flex items-center gap-3 mb-6">
         <input value={timerSearch} onChange={(e) => setTimerSearch(e.target.value)}
           placeholder="Søk etter ansatt..."
-          className="flex-1 bg-[#1A1410] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 placeholder:text-[#6B5D52]/40" />
+          className="flex-1 bg-[#141414] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40 placeholder:text-[#6B6B6B]/40" />
         <select value={timerSort} onChange={(e) => setTimerSort(e.target.value as "date" | "hours")}
-          className="bg-[#1A1410] border border-[#1A1410] px-3 py-2 text-xs text-[#6B5D52] cursor-pointer">
+          className="bg-[#141414] border border-[#141414] px-3 py-2 text-xs text-[#6B6B6B] cursor-pointer">
           <option value="date">Dato</option>
           <option value="hours">Timer</option>
         </select>
         <button onClick={() => setTimerSortDir(timerSortDir === "desc" ? "asc" : "desc")}
-          className="border border-[#1A1410] px-3 py-2 text-xs text-[#6B5D52] hover:text-[#E8DDD4] cursor-pointer">
+          className="border border-[#141414] px-3 py-2 text-xs text-[#6B6B6B] hover:text-[#F5F0E8] cursor-pointer">
           {timerSortDir === "desc" ? "↓ Nyest" : "↑ Eldst"}
         </button>
       </div>
@@ -148,19 +148,19 @@ export default function AdminTimerPage() {
         return loading ? (
         <TableSkeleton rows={5} />
       ) : sorted.length === 0 ? (
-        <div className="bg-[#1A1410] border border-[#1A1410] p-10 text-center text-[#6B5D52] text-sm">
+        <div className="bg-[#141414] border border-[#141414] p-10 text-center text-[#6B6B6B] text-sm">
           Ingen registreringer
         </div>
       ) : (
         <div className="space-y-2">
           {sorted.map((e) => (
-            <div key={e.id} className="bg-[#1A1410] border border-[#1A1410] p-4 flex items-center justify-between">
+            <div key={e.id} className="bg-[#141414] border border-[#141414] p-4 flex items-center justify-between">
               <div className="flex items-center gap-4">
                 <div>
                   <p className="text-sm font-medium">{e.employees?.name ?? "Ukjent"}</p>
-                  <p className="text-[10px] text-[#6B5D52]">{e.employees?.role}</p>
+                  <p className="text-[10px] text-[#6B6B6B]">{e.employees?.role}</p>
                 </div>
-                <div className="text-[11px] text-[#6B5D52]">
+                <div className="text-[11px] text-[#6B6B6B]">
                   {new Date(e.date + "T00:00:00").toLocaleDateString("no-NO", { weekday: "short", day: "numeric", month: "short" })}
                   {e.start_time && ` · ${e.start_time}–${e.end_time}`}
                 </div>
@@ -169,12 +169,12 @@ export default function AdminTimerPage() {
               <div className="flex items-center gap-4">
                 <div className="text-right">
                   <p className="text-sm font-medium">{e.hours} t</p>
-                  <p className="text-[10px] text-[#6B5D52]">
+                  <p className="text-[10px] text-[#6B6B6B]">
                     {(e.hours * (e.employees?.hourly_rate ?? 0)).toLocaleString("no-NO")} kr
                   </p>
                 </div>
                 {e.description && (
-                  <p className="text-[11px] text-[#6B5D52] max-w-[150px] truncate">{e.description}</p>
+                  <p className="text-[11px] text-[#6B6B6B] max-w-[150px] truncate">{e.description}</p>
                 )}
 
                 {e.status === "pending" ? (
