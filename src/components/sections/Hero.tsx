@@ -103,7 +103,7 @@ export function Hero() {
               opacity: [0.1, 0.16, 0.07, 0.13, 0.09, 0.1],
             }}
             transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[80vw] h-[80vh] bg-[#8B6914] blur-[130px]"
+            className="w-[80vw] h-[80vh] bg-[#3A6B6B] blur-[130px]"
             style={{ opacity: 0.1 }}
           />
         </motion.div>
@@ -123,8 +123,28 @@ export function Hero() {
               opacity: [0.1, 0.15, 0.08, 0.13, 0.09, 0.1],
             }}
             transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[80vw] h-[80vh] bg-[#6B4A2A] blur-[130px]"
+            className="w-[80vw] h-[80vh] bg-[#6B2A35] blur-[130px]"
             style={{ opacity: 0.1 }}
+          />
+        </motion.div>
+
+        {/* GOLD — center, bright accent glow */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 2.5, delay: 0.5 }}
+          className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2"
+        >
+          <motion.div
+            animate={{
+              x: [0, 25, -15, 20, -10, 0],
+              y: [0, -15, 10, -8, 12, 0],
+              scale: [1, 1.12, 0.93, 1.06, 0.97, 1],
+              opacity: [0.08, 0.14, 0.06, 0.11, 0.07, 0.08],
+            }}
+            transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+            className="w-[50vw] h-[50vh] bg-[#C9A84C] blur-[100px]"
+            style={{ opacity: 0.08 }}
           />
         </motion.div>
       </motion.div>
