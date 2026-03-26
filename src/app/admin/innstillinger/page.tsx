@@ -96,50 +96,50 @@ export default function AdminSettingsPage() {
 
       <div className="max-w-lg space-y-8">
         {/* Change password */}
-        <div className="bg-[#1A1410] border border-[#1A1410] p-6">
+        <div className="bg-[#141414] border border-[#141414] p-6">
           <h2 className="text-sm font-medium mb-4">Endre passord</h2>
           <div className="space-y-3">
             <div>
-              <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Nytt passord</label>
+              <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Nytt passord</label>
               <input type="password" value={newPassword} onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="Minst 6 tegn"
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 placeholder:text-[#6B5D52]/40" />
+                className="w-full mt-1 bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40 placeholder:text-[#6B6B6B]/40" />
             </div>
             <div>
-              <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Bekreft passord</label>
+              <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Bekreft passord</label>
               <input type="password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
+                className="w-full mt-1 bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
             </div>
             <button onClick={changePassword} disabled={saving || !newPassword}
-              className="bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30 px-4 py-2 text-xs uppercase tracking-wider hover:bg-[#B88E64]/20 cursor-pointer disabled:opacity-50">
+              className="bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 px-4 py-2 text-xs uppercase tracking-wider hover:bg-[#C9A84C]/20 cursor-pointer disabled:opacity-50">
               {saving ? <span className="flex items-center gap-1.5"><ButtonSpinner />Lagrer...</span> : "Endre passord"}
             </button>
           </div>
         </div>
 
         {/* Add admin */}
-        <div className="bg-[#1A1410] border border-[#1A1410] p-6">
+        <div className="bg-[#141414] border border-[#141414] p-6">
           <h2 className="text-sm font-medium mb-4">Legg til ny admin</h2>
-          <p className="text-[11px] text-[#6B5D52] mb-4">Opprett en ny bruker med admin-tilgang til panelet.</p>
+          <p className="text-[11px] text-[#6B6B6B] mb-4">Opprett en ny bruker med admin-tilgang til panelet.</p>
           <div className="space-y-3">
             <div>
-              <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Navn</label>
+              <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Navn</label>
               <input value={adminName} onChange={(e) => setAdminName(e.target.value)}
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
+                className="w-full mt-1 bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
             </div>
             <div>
-              <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">E-post</label>
+              <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">E-post</label>
               <input type="email" value={adminEmail} onChange={(e) => setAdminEmail(e.target.value)}
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
+                className="w-full mt-1 bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
             </div>
             <div>
-              <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Passord</label>
+              <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Passord</label>
               <input type="password" value={adminPassword} onChange={(e) => setAdminPassword(e.target.value)}
                 placeholder="Minst 6 tegn"
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 placeholder:text-[#6B5D52]/40" />
+                className="w-full mt-1 bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40 placeholder:text-[#6B6B6B]/40" />
             </div>
             <button onClick={addAdmin} disabled={saving || !adminName || !adminEmail || !adminPassword}
-              className="bg-[#B88E64] text-[#0D0A08] px-4 py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#D4A876] cursor-pointer disabled:opacity-50">
+              className="bg-[#C9A84C] text-[#0A0A0A] px-4 py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#D4AF57] cursor-pointer disabled:opacity-50">
               {saving ? <span className="flex items-center gap-1.5"><ButtonSpinner />Oppretter...</span> : "Opprett admin"}
             </button>
           </div>

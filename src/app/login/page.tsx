@@ -49,14 +49,14 @@ export default function LoginPage() {
 
   return (
     <html lang="no">
-      <body className="bg-[#0D0A08] text-[#E8DDD4] font-sans antialiased">
+      <body className="bg-[#0A0A0A] text-[#F5F0E8] font-sans antialiased">
         <div className="min-h-screen flex items-center justify-center px-6">
           <div className="w-full max-w-sm">
             <div className="text-center mb-12">
               <h1 className="text-2xl tracking-[0.15em] uppercase font-semibold mb-2">
-                Bar<span className="text-[#B88E64]">Pro</span>
+                Bar<span className="text-[#C9A84C]">Pro</span>
               </h1>
-              <p className="text-[#6B5D52] text-sm">Logg inn for ansatte og admin</p>
+              <p className="text-[#6B6B6B] text-sm">Logg inn for ansatte og admin</p>
             </div>
 
             {forgotMode ? (
@@ -64,12 +64,12 @@ export default function LoginPage() {
                 {resetSent ? (
                   <div className="text-center">
                     <p className="text-green-400 text-sm mb-4">Tilbakestillingslenke sendt!</p>
-                    <p className="text-[#6B5D52] text-sm">Sjekk e-posten din for en lenke til å tilbakestille passordet.</p>
+                    <p className="text-[#6B6B6B] text-sm">Sjekk e-posten din for en lenke til å tilbakestille passordet.</p>
                   </div>
                 ) : (
                   <>
                     <div>
-                      <label htmlFor="reset-email" className="block text-[11px] tracking-[0.2em] uppercase text-[#6B5D52] mb-2">
+                      <label htmlFor="reset-email" className="block text-[11px] tracking-[0.2em] uppercase text-[#6B6B6B] mb-2">
                         E-post
                       </label>
                       <input
@@ -78,7 +78,7 @@ export default function LoginPage() {
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required
-                        className="w-full bg-[#1A1410] border border-[#1A1410] px-4 py-3 text-sm text-[#E8DDD4] outline-none focus:border-[#B88E64]/40 transition-colors duration-300 placeholder:text-[#6B5D52]/50"
+                        className="w-full bg-[#141414] border border-[#141414] px-4 py-3 text-sm text-[#F5F0E8] outline-none focus:border-[#C9A84C]/40 transition-colors duration-300 placeholder:text-[#6B6B6B]/50"
                         placeholder="din@epost.no"
                       />
                     </div>
@@ -93,21 +93,21 @@ export default function LoginPage() {
                         setLoading(false);
                       }}
                       disabled={loading || !email}
-                      className="w-full bg-[#B88E64] text-[#0D0A08] py-3 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4A876] transition-colors duration-300 disabled:opacity-50 cursor-pointer"
+                      className="w-full bg-[#C9A84C] text-[#0A0A0A] py-3 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4AF57] transition-colors duration-300 disabled:opacity-50 cursor-pointer"
                     >
                       {loading ? "Sender..." : "Send tilbakestillingslenke"}
                     </button>
                   </>
                 )}
                 <button onClick={() => { setForgotMode(false); setResetSent(false); setError(""); }}
-                  className="w-full text-[11px] text-[#6B5D52] hover:text-[#E8DDD4] transition-colors cursor-pointer">
+                  className="w-full text-[11px] text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors cursor-pointer">
                   &larr; Tilbake til innlogging
                 </button>
               </div>
             ) : (
               <form onSubmit={handleLogin} className="space-y-6">
                 <div>
-                  <label htmlFor="email" className="block text-[11px] tracking-[0.2em] uppercase text-[#6B5D52] mb-2">
+                  <label htmlFor="email" className="block text-[11px] tracking-[0.2em] uppercase text-[#6B6B6B] mb-2">
                     E-post
                   </label>
                   <input
@@ -116,13 +116,13 @@ export default function LoginPage() {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    className="w-full bg-[#1A1410] border border-[#1A1410] px-4 py-3 text-sm text-[#E8DDD4] outline-none focus:border-[#B88E64]/40 transition-colors duration-300 placeholder:text-[#6B5D52]/50"
+                    className="w-full bg-[#141414] border border-[#141414] px-4 py-3 text-sm text-[#F5F0E8] outline-none focus:border-[#C9A84C]/40 transition-colors duration-300 placeholder:text-[#6B6B6B]/50"
                     placeholder="din@epost.no"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="password" className="block text-[11px] tracking-[0.2em] uppercase text-[#6B5D52] mb-2">
+                  <label htmlFor="password" className="block text-[11px] tracking-[0.2em] uppercase text-[#6B6B6B] mb-2">
                     Passord
                   </label>
                   <div className="relative">
@@ -132,13 +132,13 @@ export default function LoginPage() {
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       required
-                      className="w-full bg-[#1A1410] border border-[#1A1410] px-4 py-3 pr-12 text-sm text-[#E8DDD4] outline-none focus:border-[#B88E64]/40 transition-colors duration-300 placeholder:text-[#6B5D52]/50"
+                      className="w-full bg-[#141414] border border-[#141414] px-4 py-3 pr-12 text-sm text-[#F5F0E8] outline-none focus:border-[#C9A84C]/40 transition-colors duration-300 placeholder:text-[#6B6B6B]/50"
                       placeholder="Passord"
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6B5D52] hover:text-[#E8DDD4] transition-colors cursor-pointer"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors cursor-pointer"
                     >
                       {showPassword ? (
                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" className="w-5 h-5">
@@ -162,20 +162,20 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#B88E64] text-[#0D0A08] py-3 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4A876] transition-colors duration-300 disabled:opacity-50 cursor-pointer"
+                  className="w-full bg-[#C9A84C] text-[#0A0A0A] py-3 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4AF57] transition-colors duration-300 disabled:opacity-50 cursor-pointer"
                 >
                   {loading ? "Logger inn..." : "Logg inn"}
                 </button>
 
                 <button type="button" onClick={() => { setForgotMode(true); setError(""); }}
-                  className="w-full text-[11px] text-[#6B5D52] hover:text-[#B88E64] transition-colors cursor-pointer">
+                  className="w-full text-[11px] text-[#6B6B6B] hover:text-[#C9A84C] transition-colors cursor-pointer">
                   Glemt passord?
                 </button>
               </form>
             )}
 
             <div className="mt-6 text-center">
-              <a href="/" className="text-[11px] text-[#6B5D52] hover:text-[#E8DDD4] transition-colors">
+              <a href="/" className="text-[11px] text-[#6B6B6B] hover:text-[#F5F0E8] transition-colors">
                 &larr; Tilbake til nettsiden
               </a>
             </div>

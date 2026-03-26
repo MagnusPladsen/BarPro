@@ -38,7 +38,7 @@ export default function ActivityLogPage() {
   };
 
   const entityIcons: Record<string, string> = {
-    booking: "text-[#B88E64]",
+    booking: "text-[#C9A84C]",
     employee: "text-blue-400",
     time_entry: "text-green-400",
     date: "text-red-400",
@@ -50,24 +50,24 @@ export default function ActivityLogPage() {
       <h1 className="text-2xl font-semibold mb-8">Aktivitetslogg</h1>
 
       {entries.length === 0 ? (
-        <div className="bg-[#1A1410] border border-[#1A1410] p-10 text-center text-[#6B5D52] text-sm">
+        <div className="bg-[#141414] border border-[#141414] p-10 text-center text-[#6B6B6B] text-sm">
           Ingen aktivitet registrert
         </div>
       ) : (
         <div className="space-y-0">
           {entries.map((entry) => (
-            <div key={entry.id} className="flex items-start gap-4 py-3 border-b border-[#1A1410]">
-              <div className={`w-2 h-2 mt-1.5 shrink-0 ${entityIcons[entry.entity_type] ?? "text-[#6B5D52]"}`}>
+            <div key={entry.id} className="flex items-start gap-4 py-3 border-b border-[#141414]">
+              <div className={`w-2 h-2 mt-1.5 shrink-0 ${entityIcons[entry.entity_type] ?? "text-[#6B6B6B]"}`}>
                 <div className="w-2 h-2 bg-current" />
               </div>
               <div className="flex-1 min-w-0">
                 <p className="text-sm">
-                  <span className="text-[#E8DDD4]">{actionLabels[entry.action] ?? entry.action}</span>
-                  {entry.details && <span className="text-[#6B5D52]"> — {entry.details}</span>}
+                  <span className="text-[#F5F0E8]">{actionLabels[entry.action] ?? entry.action}</span>
+                  {entry.details && <span className="text-[#6B6B6B]"> — {entry.details}</span>}
                 </p>
-                <p className="text-[10px] text-[#6B5D52] mt-0.5">{entry.user_email}</p>
+                <p className="text-[10px] text-[#6B6B6B] mt-0.5">{entry.user_email}</p>
               </div>
-              <p className="text-[10px] text-[#6B5D52] shrink-0">
+              <p className="text-[10px] text-[#6B6B6B] shrink-0">
                 {new Date(entry.created_at).toLocaleString("no-NO", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
               </p>
             </div>
@@ -78,10 +78,10 @@ export default function ActivityLogPage() {
       {/* Pagination */}
       <div className="flex items-center justify-center gap-2 mt-6">
         <button onClick={() => setPage(Math.max(0, page - 1))} disabled={page === 0}
-          className="px-3 py-1.5 text-xs text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4] cursor-pointer disabled:opacity-30">&larr;</button>
-        <span className="text-[11px] text-[#6B5D52]">Side {page + 1}</span>
+          className="px-3 py-1.5 text-xs text-[#6B6B6B] border border-[#141414] hover:text-[#F5F0E8] cursor-pointer disabled:opacity-30">&larr;</button>
+        <span className="text-[11px] text-[#6B6B6B]">Side {page + 1}</span>
         <button onClick={() => setPage(page + 1)} disabled={entries.length < PAGE_SIZE}
-          className="px-3 py-1.5 text-xs text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4] cursor-pointer disabled:opacity-30">&rarr;</button>
+          className="px-3 py-1.5 text-xs text-[#6B6B6B] border border-[#141414] hover:text-[#F5F0E8] cursor-pointer disabled:opacity-30">&rarr;</button>
       </div>
     </div>
   );

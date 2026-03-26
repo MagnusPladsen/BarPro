@@ -25,7 +25,7 @@ export function FloatingParticles() {
             bottom: "-10px",
             width: `${p.size}px`,
             height: `${p.size}px`,
-            backgroundColor: `rgba(184, 142, 100, ${p.opacity})`,
+            backgroundColor: `rgba(201, 168, 76, ${p.opacity})`,
             animation: `float-up ${p.duration}s ease-in-out ${p.delay}s infinite, sway ${8 + p.id % 4}s ease-in-out ${p.delay}s infinite`,
           }}
         />

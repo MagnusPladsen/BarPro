@@ -33,7 +33,7 @@ export function ColorOrbs({ size = "full", intensity = 1 }: { size?: "full" | "m
           opacity: [baseOpacity, baseOpacity * 1.4, baseOpacity * 0.8, baseOpacity * 1.2, baseOpacity * 0.9, baseOpacity],
         }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        className={`absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 ${s.copper} bg-[#B88E64] ${s.blur}`}
+        className={`absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 ${s.copper} bg-[#C9A84C] ${s.blur}`}
         style={{ opacity: baseOpacity }}
       />
 
@@ -46,7 +46,7 @@ export function ColorOrbs({ size = "full", intensity = 1 }: { size?: "full" | "m
           opacity: [baseOpacity * 0.8, baseOpacity * 1.2, baseOpacity * 0.6, baseOpacity, baseOpacity * 0.7, baseOpacity * 0.8],
         }}
         transition={{ duration: 22, repeat: Infinity, ease: "easeInOut" }}
-        className={`absolute top-[20%] left-[15%] -translate-x-1/4 -translate-y-1/4 ${s.teal} bg-[#3A6B6B] ${s.blur}`}
+        className={`absolute top-[20%] left-[15%] -translate-x-1/4 -translate-y-1/4 ${s.teal} bg-[#A08A3C] ${s.blur}`}
         style={{ opacity: baseOpacity * 0.8 }}
       />
 
@@ -59,7 +59,7 @@ export function ColorOrbs({ size = "full", intensity = 1 }: { size?: "full" | "m
           opacity: [baseOpacity * 0.8, baseOpacity * 1.1, baseOpacity * 0.6, baseOpacity, baseOpacity * 0.7, baseOpacity * 0.8],
         }}
         transition={{ duration: 20, repeat: Infinity, ease: "easeInOut" }}
-        className={`absolute bottom-[15%] right-[10%] translate-x-1/4 translate-y-1/4 ${s.burgundy} bg-[#6B2A35] ${s.blur}`}
+        className={`absolute bottom-[15%] right-[10%] translate-x-1/4 translate-y-1/4 ${s.burgundy} bg-[#8B7355] ${s.blur}`}
         style={{ opacity: baseOpacity * 0.8 }}
       />
     </div>

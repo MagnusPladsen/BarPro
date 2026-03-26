@@ -1,24 +1,24 @@
 @import "tailwindcss";
 
 @theme {
-  --color-background: #0D0A08;
-  --color-background-card: #1A1410;
-  --color-background-elevated: #2A211A;
-  --color-accent: #B88E64;
-  --color-accent-hover: #D4A876;
-  --color-accent-dim: #8A6B4A;
-  --color-accent-glow: rgba(184, 142, 100, 0.08);
-  --color-text-primary: #E8DDD4;
-  --color-text-muted: #6B5D52;
-  --color-border: rgba(184, 142, 100, 0.08);
-  --color-border-accent: #B88E64;
+  --color-background: #0A0A0A;
+  --color-background-card: #141414;
+  --color-background-elevated: #1A1A1A;
+  --color-accent: #C9A84C;
+  --color-accent-hover: #D4AF57;
+  --color-accent-dim: #A08A3C;
+  --color-accent-glow: rgba(201, 168, 76, 0.08);
+  --color-text-primary: #F5F0E8;
+  --color-text-muted: #6B6B6B;
+  --color-border: rgba(201, 168, 76, 0.08);
+  --color-border-accent: #C9A84C;
 
   /* Legacy aliases for gradual migration */
-  --color-gold: #B88E64;
-  --color-gold-hover: #D4A876;
-  --color-gold-dim: #8A6B4A;
-  --color-gold-glow: rgba(184, 142, 100, 0.08);
-  --color-border-gold: rgba(184, 142, 100, 0.15);
+  --color-gold: #C9A84C;
+  --color-gold-hover: #D4AF57;
+  --color-gold-dim: #A08A3C;
+  --color-gold-glow: rgba(201, 168, 76, 0.08);
+  --color-border-gold: rgba(201, 168, 76, 0.15);
 
   --font-display: "Cormorant", serif;
   --font-body: "Space Grotesk", sans-serif;
@@ -75,8 +75,8 @@ body {
 
 /* Subtle pulse glow for featured elements */
 @keyframes pulse-accent {
-  0%, 100% { box-shadow: 0 0 20px rgba(184, 142, 100, 0.05); }
-  50% { box-shadow: 0 0 40px rgba(184, 142, 100, 0.12); }
+  0%, 100% { box-shadow: 0 0 20px rgba(201, 168, 76, 0.05); }
+  50% { box-shadow: 0 0 40px rgba(201, 168, 76, 0.12); }
 }
 
 /* Decorative corner accents */

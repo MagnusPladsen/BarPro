@@ -257,7 +257,7 @@ export default function AdminBookingsPage() {
   const packageLabels: Record<string, string> = { basis: "Basis", premium: "Premium", eksklusiv: "Eksklusiv" };
   const eventLabels: Record<string, string> = { wedding: "Bryllup", corporate: "Bedrift", private: "Privat", other: "Annet" };
   const statusLabels: Record<string, string> = { pending: "Forespørsel", offer_sent: "Tilbud sendt", confirmed: "Bekreftet", cancelled: "Avlyst", completed: "Fullført" };
-  const statusColors: Record<string, string> = { pending: "text-yellow-400 bg-yellow-400/10", offer_sent: "text-blue-400 bg-blue-400/10", confirmed: "text-green-400 bg-green-400/10", cancelled: "text-red-400 bg-red-400/10", completed: "text-[#6B5D52] bg-[#6B5D52]/10" };
+  const statusColors: Record<string, string> = { pending: "text-yellow-400 bg-yellow-400/10", offer_sent: "text-blue-400 bg-blue-400/10", confirmed: "text-green-400 bg-green-400/10", cancelled: "text-red-400 bg-red-400/10", completed: "text-[#6B6B6B] bg-[#6B6B6B]/10" };
 
   const filters: { value: BookingStatus | "all"; label: string }[] = [
     { value: "all", label: "Alle" }, { value: "pending", label: "Forespørsler" },
@@ -273,7 +273,7 @@ export default function AdminBookingsPage() {
         {filters.map((f) => (
           <button key={f.value} onClick={() => setFilter(f.value)}
             className={`px-4 py-2 text-xs tracking-wider uppercase transition-colors cursor-pointer ${
-              filter === f.value ? "bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30" : "text-[#6B5D52] border border-[#1A1410] hover:text-[#E8DDD4]"
+              filter === f.value ? "bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30" : "text-[#6B6B6B] border border-[#141414] hover:text-[#F5F0E8]"
             }`}>{f.label}</button>
         ))}
       </div>
@@ -283,15 +283,15 @@ export default function AdminBookingsPage() {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
           placeholder="Søk etter kunde..."
-          className="flex-1 bg-[#1A1410] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 placeholder:text-[#6B5D52]/40"
+          className="flex-1 bg-[#141414] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40 placeholder:text-[#6B6B6B]/40"
         />
         <select value={sortBy} onChange={(e) => setSortBy(e.target.value as "created_at" | "date")}
-          className="bg-[#1A1410] border border-[#1A1410] px-3 py-2 text-xs text-[#6B5D52] cursor-pointer">
+          className="bg-[#141414] border border-[#141414] px-3 py-2 text-xs text-[#6B6B6B] cursor-pointer">
           <option value="created_at">Sendt dato</option>
           <option value="date">Event dato</option>
         </select>
         <button onClick={() => setSortDir(sortDir === "desc" ? "asc" : "desc")}
-          className="border border-[#1A1410] px-3 py-2 text-xs text-[#6B5D52] hover:text-[#E8DDD4] cursor-pointer">
+          className="border border-[#141414] px-3 py-2 text-xs text-[#6B6B6B] hover:text-[#F5F0E8] cursor-pointer">
           {sortDir === "desc" ? "↓ Nyest" : "↑ Eldst"}
         </button>
       </div>
@@ -308,39 +308,39 @@ export default function AdminBookingsPage() {
               <ListItemSkeleton />
             </>
           ) : filteredBookings.length === 0 ? (
-            <div className="bg-[#1A1410] border border-[#1A1410] p-10 text-center text-[#6B5D52] text-sm">{searchQuery ? "Ingen treff" : "Ingen bookinger"}</div>
+            <div className="bg-[#141414] border border-[#141414] p-10 text-center text-[#6B6B6B] text-sm">{searchQuery ? "Ingen treff" : "Ingen bookinger"}</div>
           ) : filteredBookings.map((b) => (
             <button key={b.id} onClick={() => selectBooking(b)}
-              className={`w-full text-left bg-[#1A1410] border p-4 transition-colors cursor-pointer ${
-                selected?.id === b.id ? "border-[#B88E64]/40" : "border-[#1A1410] hover:border-[#B88E64]/20"
+              className={`w-full text-left bg-[#141414] border p-4 transition-colors cursor-pointer ${
+                selected?.id === b.id ? "border-[#C9A84C]/40" : "border-[#141414] hover:border-[#C9A84C]/20"
               }`}>
               <div className="flex items-center justify-between">
                 <p className="text-sm font-medium">{b.customer_name}</p>
                 <span className={`text-[10px] tracking-wider uppercase px-2 py-1 ${statusColors[b.status]}`}>{statusLabels[b.status]}</span>
               </div>
-              <p className="text-[11px] text-[#6B5D52] mt-1">{formatDate(b.date)} · {packageLabels[b.package]} · {b.guest_count} · Sendt {new Date(b.created_at).toLocaleDateString("no-NO", { day: "numeric", month: "short" })}</p>
+              <p className="text-[11px] text-[#6B6B6B] mt-1">{formatDate(b.date)} · {packageLabels[b.package]} · {b.guest_count} · Sendt {new Date(b.created_at).toLocaleDateString("no-NO", { day: "numeric", month: "short" })}</p>
             </button>
           ))}
         </div>
 
         {/* Detail panel */}
         {selected && (
-          <div className="w-3/5 bg-[#1A1410] border border-[#1A1410] sticky top-8 self-start max-h-[calc(100vh-6rem)] overflow-y-auto">
+          <div className="w-3/5 bg-[#141414] border border-[#141414] sticky top-8 self-start max-h-[calc(100vh-6rem)] overflow-y-auto">
             {/* Header */}
-            <div className="flex items-center justify-between p-6 border-b border-[#1A1410]">
+            <div className="flex items-center justify-between p-6 border-b border-[#141414]">
               <div>
                 <h2 className="text-lg font-medium">{selected.customer_name}</h2>
-                <p className="text-[11px] text-[#6B5D52]">{formatDate(selected.date)} · {packageLabels[selected.package]}</p>
+                <p className="text-[11px] text-[#6B6B6B]">{formatDate(selected.date)} · {packageLabels[selected.package]}</p>
               </div>
-              <button onClick={() => setSelected(null)} className="text-[#6B5D52] hover:text-[#E8DDD4] cursor-pointer text-xl">&times;</button>
+              <button onClick={() => setSelected(null)} className="text-[#6B6B6B] hover:text-[#F5F0E8] cursor-pointer text-xl">&times;</button>
             </div>
 
             {/* Tabs */}
-            <div className="flex border-b border-[#1A1410]">
+            <div className="flex border-b border-[#141414]">
               {(["details", "chat", "offer", "agreement"] as const).map((t) => (
                 <button key={t} onClick={() => setTab(t)}
                   className={`flex-1 py-3 text-[11px] tracking-wider uppercase text-center transition-colors cursor-pointer ${
-                    tab === t ? "text-[#B88E64] border-b-2 border-[#B88E64]" : "text-[#6B5D52]"
+                    tab === t ? "text-[#C9A84C] border-b-2 border-[#C9A84C]" : "text-[#6B6B6B]"
                   }`}>
                   {t === "details" ? "Detaljer" : t === "chat" ? `Chat (${chatMessages.length})` : t === "offer" ? `Tilbud (${offers.length})` : `Avtaler (${agreements.length})`}
                 </button>
@@ -353,65 +353,65 @@ export default function AdminBookingsPage() {
                 <div className="space-y-5 text-sm">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Type</p>
+                      <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Type</p>
                       <p>{eventLabels[selected.event_type]}</p>
                     </div>
                     <div>
-                      <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Gjester</p>
+                      <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Gjester</p>
                       <p>{selected.guest_count}</p>
                     </div>
                     <div>
-                      <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">E-post</p>
-                      <a href={`mailto:${selected.customer_email}`} className="text-[#B88E64] hover:underline">{selected.customer_email}</a>
+                      <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">E-post</p>
+                      <a href={`mailto:${selected.customer_email}`} className="text-[#C9A84C] hover:underline">{selected.customer_email}</a>
                     </div>
                     {selected.customer_phone && (
                       <div>
-                        <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Telefon</p>
-                        <a href={`tel:${selected.customer_phone}`} className="text-[#B88E64] hover:underline">{selected.customer_phone}</a>
+                        <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Telefon</p>
+                        <a href={`tel:${selected.customer_phone}`} className="text-[#C9A84C] hover:underline">{selected.customer_phone}</a>
                       </div>
                     )}
                   </div>
 
                   {selected.wants_callback && (
-                    <div className="bg-[#B88E64]/10 border border-[#B88E64]/20 px-3 py-2 text-[11px] text-[#B88E64]">Kunden ønsker å bli ringt opp</div>
+                    <div className="bg-[#C9A84C]/10 border border-[#C9A84C]/20 px-3 py-2 text-[11px] text-[#C9A84C]">Kunden ønsker å bli ringt opp</div>
                   )}
 
                   {selected.message && (
                     <div>
-                      <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-1">Kundens melding</p>
-                      <p className="text-[#6B5D52]">{selected.message}</p>
+                      <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-1">Kundens melding</p>
+                      <p className="text-[#6B6B6B]">{selected.message}</p>
                     </div>
                   )}
 
                   {/* Time & Staff — shown for pending (acceptance flow) or confirmed */}
                   {(selected.status === "pending" || selected.status === "confirmed") && (
-                    <div className="border-t border-[#1A1410] pt-5 space-y-4">
-                      <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Tid & bemanning</p>
+                    <div className="border-t border-[#141414] pt-5 space-y-4">
+                      <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Tid & bemanning</p>
                       <div className="grid grid-cols-3 gap-3">
                         <div>
-                          <label className="text-[10px] text-[#6B5D52]">Fra</label>
+                          <label className="text-[10px] text-[#6B6B6B]">Fra</label>
                           <input type="time" value={startTime} onChange={(e) => setStartTime(e.target.value)}
-                            className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
+                            className="w-full mt-1 bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
                         </div>
                         <div>
-                          <label className="text-[10px] text-[#6B5D52]">Til</label>
+                          <label className="text-[10px] text-[#6B6B6B]">Til</label>
                           <input type="time" value={endTime} onChange={(e) => setEndTime(e.target.value)}
-                            className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
+                            className="w-full mt-1 bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
                         </div>
                         <div>
-                          <label className="text-[10px] text-[#6B5D52]">Timer</label>
-                          <div className="mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm text-[#B88E64]">{calcHours()} t</div>
+                          <label className="text-[10px] text-[#6B6B6B]">Timer</label>
+                          <div className="mt-1 bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm text-[#C9A84C]">{calcHours()} t</div>
                         </div>
                       </div>
 
                       {/* Employee selection */}
                       <div>
-                        <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-2">Ansatte ({selectedEmployees.length})</p>
+                        <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-2">Ansatte ({selectedEmployees.length})</p>
                         <div className="space-y-1">
                           {employees.map((emp) => {
                             const isUnavailable = employeeBlockedDates.some((d) => d.employee_id === emp.id);
                             return (
-                              <label key={emp.id} className={`flex items-center gap-3 py-1.5 px-2 transition-colors ${isUnavailable ? "opacity-50" : "hover:bg-[#2A211A] cursor-pointer"}`}>
+                              <label key={emp.id} className={`flex items-center gap-3 py-1.5 px-2 transition-colors ${isUnavailable ? "opacity-50" : "hover:bg-[#1A1A1A] cursor-pointer"}`}>
                                 <input type="checkbox" checked={selectedEmployees.includes(emp.id)}
                                   disabled={isUnavailable}
                                   onChange={(e) => {
@@ -419,12 +419,12 @@ export default function AdminBookingsPage() {
                                       ? [...selectedEmployees, emp.id]
                                       : selectedEmployees.filter((id) => id !== emp.id));
                                   }}
-                                  className="accent-[#B88E64]" />
+                                  className="accent-[#C9A84C]" />
                                 <span className="flex-1 text-sm">{emp.name}</span>
                                 {isUnavailable ? (
                                   <span className="text-[10px] text-red-400">Ikke tilgjengelig</span>
                                 ) : (
-                                  <span className="text-[10px] text-[#6B5D52]">{emp.hourly_rate} kr/t</span>
+                                  <span className="text-[10px] text-[#6B6B6B]">{emp.hourly_rate} kr/t</span>
                                 )}
                               </label>
                             );
@@ -436,21 +436,21 @@ export default function AdminBookingsPage() {
 
                   {/* Cost summary — for pending acceptance */}
                   {selected.status === "pending" && (
-                    <div className="border-t border-[#1A1410] pt-5 space-y-4">
-                      <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Kostnadsberegning</p>
+                    <div className="border-t border-[#141414] pt-5 space-y-4">
+                      <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Kostnadsberegning</p>
 
-                      <div className="bg-[#0D0A08] border border-[#1A1410] p-4 space-y-2 text-sm">
+                      <div className="bg-[#0A0A0A] border border-[#141414] p-4 space-y-2 text-sm">
                         <div className="flex justify-between">
-                          <span className="text-[#6B5D52]">Lønn ({selectedEmployees.length} pers × {calcHours()} t)</span>
+                          <span className="text-[#6B6B6B]">Lønn ({selectedEmployees.length} pers × {calcHours()} t)</span>
                           <span>{estimatedLabourCost().toLocaleString("no-NO")} kr</span>
                         </div>
                         {extraCosts.map((c, i) => (
                           <div key={i} className="flex justify-between">
-                            <span className="text-[#6B5D52]">{c.description || "Ekstra kostnad"}</span>
+                            <span className="text-[#6B6B6B]">{c.description || "Ekstra kostnad"}</span>
                             <span>{(parseFloat(c.amount) || 0).toLocaleString("no-NO")} kr</span>
                           </div>
                         ))}
-                        <div className="flex justify-between border-t border-[#1A1410] pt-2 font-medium">
+                        <div className="flex justify-between border-t border-[#141414] pt-2 font-medium">
                           <span>Estimert kostnad</span>
                           <span>{totalEstimatedCost().toLocaleString("no-NO")} kr</span>
                         </div>
@@ -459,15 +459,15 @@ export default function AdminBookingsPage() {
                       {/* Add extra costs */}
                       <div>
                         <button onClick={() => setExtraCosts([...extraCosts, { description: "", amount: "", billable: true }])}
-                          className="text-[11px] text-[#B88E64] hover:underline cursor-pointer">
+                          className="text-[11px] text-[#C9A84C] hover:underline cursor-pointer">
                           + Legg til kostnad
                         </button>
                         {extraCosts.map((c, i) => (
                           <div key={i} className="flex gap-2 mt-2">
                             <input value={c.description} onChange={(e) => { const arr = [...extraCosts]; arr[i].description = e.target.value; setExtraCosts(arr); }}
-                              placeholder="Beskrivelse" className="flex-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
+                              placeholder="Beskrivelse" className="flex-1 bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
                             <input type="number" value={c.amount} onChange={(e) => { const arr = [...extraCosts]; arr[i].amount = e.target.value; setExtraCosts(arr); }}
-                              placeholder="Beløp" className="w-24 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
+                              placeholder="Beløp" className="w-24 bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
                             <button onClick={() => setExtraCosts(extraCosts.filter((_, j) => j !== i))}
                               className="text-red-400 hover:text-red-300 cursor-pointer px-2">&times;</button>
                           </div>
@@ -475,14 +475,14 @@ export default function AdminBookingsPage() {
                       </div>
 
                       {/* Offer price — prominent */}
-                      <div className="border-t border-[#1A1410] pt-6">
-                        <div className="bg-[#B88E64]/[0.06] border border-[#B88E64]/20 p-6 text-center">
-                          <p className="text-[10px] text-[#6B5D52] uppercase tracking-[0.25em] mb-3">Tilbudspris til kunde</p>
+                      <div className="border-t border-[#141414] pt-6">
+                        <div className="bg-[#C9A84C]/[0.06] border border-[#C9A84C]/20 p-6 text-center">
+                          <p className="text-[10px] text-[#6B6B6B] uppercase tracking-[0.25em] mb-3">Tilbudspris til kunde</p>
                           <div className="flex items-center justify-center gap-2 mb-2">
                             <input type="number" value={offerPrice || String(defaultOfferPrice())}
                               onChange={(e) => setOfferPrice(e.target.value)}
-                              className="w-40 bg-[#0D0A08] border border-[#B88E64]/30 px-4 py-3 text-2xl font-semibold text-[#B88E64] text-center outline-none focus:border-[#B88E64]/60" />
-                            <span className="text-lg text-[#B88E64]">kr</span>
+                              className="w-40 bg-[#0A0A0A] border border-[#C9A84C]/30 px-4 py-3 text-2xl font-semibold text-[#C9A84C] text-center outline-none focus:border-[#C9A84C]/60" />
+                            <span className="text-lg text-[#C9A84C]">kr</span>
                           </div>
                           {(() => {
                             const price = parseFloat(offerPrice) || defaultOfferPrice();
@@ -492,17 +492,17 @@ export default function AdminBookingsPage() {
                             return (
                               <div className="mt-3 space-y-1 text-[12px]">
                                 <div className="flex justify-between">
-                                  <span className="text-[#6B5D52]">Kostnad</span>
-                                  <span className="text-[#E8DDD4]">{cost.toLocaleString("no-NO")} kr</span>
+                                  <span className="text-[#6B6B6B]">Kostnad</span>
+                                  <span className="text-[#F5F0E8]">{cost.toLocaleString("no-NO")} kr</span>
                                 </div>
                                 <div className="flex justify-between">
-                                  <span className="text-[#6B5D52]">Inntekt</span>
+                                  <span className="text-[#6B6B6B]">Inntekt</span>
                                   <span className={profit >= 0 ? "text-green-400/80" : "text-red-400/80"}>
                                     {profit >= 0 ? "+" : ""}{profit.toLocaleString("no-NO")} kr
                                   </span>
                                 </div>
-                                <div className="flex justify-between border-t border-[#1A1410] pt-1">
-                                  <span className="text-[#6B5D52]">Margin</span>
+                                <div className="flex justify-between border-t border-[#141414] pt-1">
+                                  <span className="text-[#6B6B6B]">Margin</span>
                                   <span className={margin >= 0 ? "text-green-400/80" : "text-red-400/80"}>
                                     {margin}%
                                   </span>
@@ -516,7 +516,7 @@ export default function AdminBookingsPage() {
                       {/* Action buttons */}
                       <div className="flex gap-3">
                         <button onClick={saveNotes} disabled={updating}
-                          className="flex-1 border border-[#1A1410] py-3 text-xs text-[#6B5D52] uppercase tracking-wider hover:text-[#E8DDD4] hover:border-[#B88E64]/20 transition-colors cursor-pointer disabled:opacity-50">
+                          className="flex-1 border border-[#141414] py-3 text-xs text-[#6B6B6B] uppercase tracking-wider hover:text-[#F5F0E8] hover:border-[#C9A84C]/20 transition-colors cursor-pointer disabled:opacity-50">
                           Lagre utkast
                         </button>
                         <button onClick={acceptAndOffer} disabled={updating || selectedEmployees.length === 0}
@@ -529,11 +529,11 @@ export default function AdminBookingsPage() {
 
                   {/* Existing costs for confirmed bookings */}
                   {costs.length > 0 && selected.status !== "pending" && (
-                    <div className="border-t border-[#1A1410] pt-4">
-                      <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-2">Kostnader</p>
+                    <div className="border-t border-[#141414] pt-4">
+                      <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-2">Kostnader</p>
                       {costs.map((c) => (
                         <div key={c.id} className="flex justify-between text-sm py-1">
-                          <span className="text-[#6B5D52]">{c.description}</span>
+                          <span className="text-[#6B6B6B]">{c.description}</span>
                           <span>{c.amount.toLocaleString("no-NO")} kr</span>
                         </div>
                       ))}
@@ -541,22 +541,22 @@ export default function AdminBookingsPage() {
                   )}
 
                   {/* Admin notes */}
-                  <div className="border-t border-[#1A1410] pt-4">
-                    <p className="text-[10px] text-[#6B5D52] uppercase tracking-wider mb-2">Interne notater</p>
+                  <div className="border-t border-[#141414] pt-4">
+                    <p className="text-[10px] text-[#6B6B6B] uppercase tracking-wider mb-2">Interne notater</p>
                     <textarea value={adminNotes} onChange={(e) => setAdminNotes(e.target.value)} rows={2}
-                      className="w-full bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 resize-none"
+                      className="w-full bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40 resize-none"
                       placeholder="Notater..." />
                   </div>
 
                   {/* Status actions */}
                   {selected.status === "offer_sent" && (
-                    <div className="border-t border-[#1A1410] pt-4">
+                    <div className="border-t border-[#141414] pt-4">
                       <p className="text-[11px] text-blue-400 mb-2">Venter på svar fra kunde</p>
                     </div>
                   )}
                   {selected.status === "confirmed" && (
                     <button onClick={() => updateStatus(selected.id, "completed")} disabled={updating}
-                      className="w-full bg-[#B88E64]/10 text-[#B88E64] border border-[#B88E64]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#B88E64]/20 cursor-pointer disabled:opacity-50">
+                      className="w-full bg-[#C9A84C]/10 text-[#C9A84C] border border-[#C9A84C]/30 py-2 text-xs uppercase tracking-wider hover:bg-[#C9A84C]/20 cursor-pointer disabled:opacity-50">
                       Marker som fullført
                     </button>
                   )}
@@ -568,19 +568,19 @@ export default function AdminBookingsPage() {
                 <div className="flex flex-col h-[500px]">
                   <div className="flex-1 overflow-y-auto space-y-3 mb-4">
                     {chatMessages.length === 0 ? (
-                      <p className="text-[#6B5D52] text-sm text-center py-8">Ingen meldinger ennå</p>
+                      <p className="text-[#6B6B6B] text-sm text-center py-8">Ingen meldinger ennå</p>
                     ) : chatMessages.map((msg) => (
                       <div key={msg.id} className={`flex ${msg.sender_type === "admin" ? "justify-end" : "justify-start"}`}>
                         <div className={`max-w-[80%] ${
                           msg.sender_type === "admin"
-                            ? "bg-[#B88E64]/10 border border-[#B88E64]/20"
-                            : "bg-[#2A211A] border border-[#1A1410]"
+                            ? "bg-[#C9A84C]/10 border border-[#C9A84C]/20"
+                            : "bg-[#1A1A1A] border border-[#141414]"
                         } p-3`}>
-                          <p className="text-[10px] text-[#6B5D52] mb-1">{msg.sender_name}</p>
+                          <p className="text-[10px] text-[#6B6B6B] mb-1">{msg.sender_name}</p>
                           {msg.message_type === "offer" ? (
                             <div className="flex items-center gap-2">
-                              <span className="text-[#B88E64] text-xs">&#9733;</span>
-                              <p className="text-sm font-medium text-[#B88E64]">{msg.message}</p>
+                              <span className="text-[#C9A84C] text-xs">&#9733;</span>
+                              <p className="text-sm font-medium text-[#C9A84C]">{msg.message}</p>
                             </div>
                           ) : msg.message_type === "agreement" ? (
                             <div className="flex items-center gap-2">
@@ -590,7 +590,7 @@ export default function AdminBookingsPage() {
                           ) : (
                             <p className="text-sm">{msg.message}</p>
                           )}
-                          <p className="text-[9px] text-[#6B5D52]/50 mt-1">
+                          <p className="text-[9px] text-[#6B6B6B]/50 mt-1">
                             {new Date(msg.created_at).toLocaleString("no-NO", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" })}
                           </p>
                         </div>
@@ -601,9 +601,9 @@ export default function AdminBookingsPage() {
                     <input value={chatInput} onChange={(e) => setChatInput(e.target.value)}
                       onKeyDown={(e) => e.key === "Enter" && sendChatMessage()}
                       placeholder="Skriv en melding..."
-                      className="flex-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40" />
+                      className="flex-1 bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40" />
                     <button onClick={sendChatMessage} disabled={updating || !chatInput.trim()}
-                      className="bg-[#B88E64] text-[#0D0A08] px-4 py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#D4A876] cursor-pointer disabled:opacity-50">
+                      className="bg-[#C9A84C] text-[#0A0A0A] px-4 py-2 text-xs font-medium uppercase tracking-wider hover:bg-[#D4AF57] cursor-pointer disabled:opacity-50">
                       Send
                     </button>
                   </div>
@@ -614,36 +614,36 @@ export default function AdminBookingsPage() {
               {tab === "offer" && (
                 <div className="space-y-4">
                   {offers.length === 0 ? (
-                    <p className="text-[#6B5D52] text-sm text-center py-8">Ingen tilbud opprettet</p>
+                    <p className="text-[#6B6B6B] text-sm text-center py-8">Ingen tilbud opprettet</p>
                   ) : offers.map((o) => (
-                    <div key={o.id} className="bg-[#0D0A08] border border-[#1A1410] p-4 space-y-2">
+                    <div key={o.id} className="bg-[#0A0A0A] border border-[#141414] p-4 space-y-2">
                       <div className="flex items-center justify-between">
                         <span className={`text-[10px] uppercase tracking-wider px-2 py-1 ${
                           o.status === "accepted" ? "text-green-400 bg-green-400/10" :
-                          o.status === "sent" ? "text-[#B88E64] bg-[#B88E64]/10" :
+                          o.status === "sent" ? "text-[#C9A84C] bg-[#C9A84C]/10" :
                           o.status === "declined" ? "text-red-400 bg-red-400/10" :
-                          "text-[#6B5D52] bg-[#6B5D52]/10"
+                          "text-[#6B6B6B] bg-[#6B6B6B]/10"
                         }`}>{o.status}</span>
-                        <span className="text-[10px] text-[#6B5D52]">
+                        <span className="text-[10px] text-[#6B6B6B]">
                           {new Date(o.created_at).toLocaleDateString("no-NO")}
                         </span>
                       </div>
                       <div className="grid grid-cols-3 gap-4 text-sm">
                         <div>
-                          <p className="text-[10px] text-[#6B5D52]">Kostnad</p>
+                          <p className="text-[10px] text-[#6B6B6B]">Kostnad</p>
                           <p>{o.estimated_cost.toLocaleString("no-NO")} kr</p>
                         </div>
                         <div>
-                          <p className="text-[10px] text-[#6B5D52]">Tilbud</p>
-                          <p className="text-[#B88E64] font-medium">{o.offered_price.toLocaleString("no-NO")} kr</p>
+                          <p className="text-[10px] text-[#6B6B6B]">Tilbud</p>
+                          <p className="text-[#C9A84C] font-medium">{o.offered_price.toLocaleString("no-NO")} kr</p>
                         </div>
                         <div>
-                          <p className="text-[10px] text-[#6B5D52]">Margin</p>
+                          <p className="text-[10px] text-[#6B6B6B]">Margin</p>
                           <p>{o.markup_percent}%</p>
                         </div>
                       </div>
                       <button onClick={() => setTab("chat")}
-                        className="text-[11px] text-[#B88E64] hover:underline cursor-pointer">
+                        className="text-[11px] text-[#C9A84C] hover:underline cursor-pointer">
                         Gå til meldinger &rarr;
                       </button>
                     </div>
@@ -655,29 +655,29 @@ export default function AdminBookingsPage() {
               {tab === "agreement" && (
                 <div className="space-y-4">
                   {agreements.length === 0 ? (
-                    <p className="text-[#6B5D52] text-sm text-center py-8">Ingen avtaler</p>
+                    <p className="text-[#6B6B6B] text-sm text-center py-8">Ingen avtaler</p>
                   ) : agreements.map((a) => (
-                    <div key={a.id} className="bg-[#0D0A08] border border-[#1A1410] p-4 space-y-2">
+                    <div key={a.id} className="bg-[#0A0A0A] border border-[#141414] p-4 space-y-2">
                       <div className="flex items-center justify-between">
                         <span className={`text-[10px] uppercase tracking-wider px-2 py-1 ${
                           a.status === "active" ? "text-green-400 bg-green-400/10" :
-                          a.status === "completed" ? "text-[#6B5D52] bg-[#6B5D52]/10" :
+                          a.status === "completed" ? "text-[#6B6B6B] bg-[#6B6B6B]/10" :
                           "text-red-400 bg-red-400/10"
                         }`}>{a.status === "active" ? "Aktiv" : a.status === "completed" ? "Fullført" : "Kansellert"}</span>
                       </div>
                       <div className="text-sm">
-                        <p className="text-[10px] text-[#6B5D52]">Endelig pris</p>
+                        <p className="text-[10px] text-[#6B6B6B]">Endelig pris</p>
                         <p className="text-lg font-medium text-green-400">{a.final_price.toLocaleString("no-NO")} kr</p>
                       </div>
-                      {a.notes && <p className="text-[11px] text-[#6B5D52]">{a.notes}</p>}
+                      {a.notes && <p className="text-[11px] text-[#6B6B6B]">{a.notes}</p>}
                       {a.signed_at && (
-                        <p className="text-[10px] text-[#6B5D52]">
+                        <p className="text-[10px] text-[#6B6B6B]">
                           Signert {new Date(a.signed_at).toLocaleDateString("no-NO")}
                         </p>
                       )}
                       <div className="flex gap-3">
                         <button onClick={() => setTab("chat")}
-                          className="text-[11px] text-[#B88E64] hover:underline cursor-pointer">
+                          className="text-[11px] text-[#C9A84C] hover:underline cursor-pointer">
                           Meldinger &rarr;
                         </button>
                         <button onClick={async () => {
@@ -699,10 +699,10 @@ export default function AdminBookingsPage() {
                             startY: 70, head: [["Beskrivelse", "Beløp"]],
                             body: inv.items.map((it: { description: string; amount: number }) => [it.description, `${it.amount.toLocaleString("no-NO")} kr`]),
                             foot: [["Sum ekskl. mva", `${inv.total.toLocaleString("no-NO")} kr`], ["MVA 25%", `${inv.vat.toLocaleString("no-NO")} kr`], ["Total", `${inv.totalWithVat.toLocaleString("no-NO")} kr`]],
-                            theme: "grid", headStyles: { fillColor: [184, 142, 100] },
+                            theme: "grid", headStyles: { fillColor: [201, 168, 76] },
                           });
                           doc.save(`faktura-${inv.number}.pdf`);
-                        }} className="text-[11px] text-[#6B5D52] hover:text-[#E8DDD4] cursor-pointer">
+                        }} className="text-[11px] text-[#6B6B6B] hover:text-[#F5F0E8] cursor-pointer">
                           Faktura PDF
                         </button>
                       </div>
@@ -718,12 +718,12 @@ export default function AdminBookingsPage() {
       {/* Price warning modal */}
       {showPriceWarning && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60" onClick={() => setShowPriceWarning(false)}>
-          <div className="bg-[#1A1410] border border-red-400/30 p-8 max-w-sm" onClick={(e) => e.stopPropagation()}>
+          <div className="bg-[#141414] border border-red-400/30 p-8 max-w-sm" onClick={(e) => e.stopPropagation()}>
             <h3 className="text-lg font-medium text-red-400 mb-3">Advarsel: Lav pris</h3>
-            <p className="text-sm text-[#6B5D52] mb-2">
+            <p className="text-sm text-[#6B6B6B] mb-2">
               Tilbudsprisen ({(parseFloat(offerPrice) || defaultOfferPrice()).toLocaleString("no-NO")} kr) er lavere enn estimert kostnad ({totalEstimatedCost().toLocaleString("no-NO")} kr).
             </p>
-            <p className="text-sm text-[#6B5D52] mb-6">Er du sikker på at du vil sende dette tilbudet?</p>
+            <p className="text-sm text-[#6B6B6B] mb-6">Er du sikker på at du vil sende dette tilbudet?</p>
             <div className="flex gap-2">
               <button onClick={() => processAcceptance(parseFloat(offerPrice) || defaultOfferPrice(), totalEstimatedCost())}
                 disabled={updating}
@@ -731,7 +731,7 @@ export default function AdminBookingsPage() {
                 {updating ? <><ButtonSpinner className="inline mr-1.5" />Sender...</> : "Ja, send likevel"}
               </button>
               <button onClick={() => setShowPriceWarning(false)}
-                className="flex-1 border border-[#1A1410] py-2 text-xs text-[#6B5D52] uppercase tracking-wider hover:text-[#E8DDD4] cursor-pointer">
+                className="flex-1 border border-[#141414] py-2 text-xs text-[#6B6B6B] uppercase tracking-wider hover:text-[#F5F0E8] cursor-pointer">
                 Avbryt
               </button>
             </div>

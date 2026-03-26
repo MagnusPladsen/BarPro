@@ -127,7 +127,7 @@ export default function AdminBloggPage() {
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-2xl font-semibold">Blogg</h1>
         <button onClick={startNew}
-          className="bg-[#B88E64] text-[#0D0A08] px-4 py-2 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4A876] cursor-pointer">
+          className="bg-[#C9A84C] text-[#0A0A0A] px-4 py-2 text-xs font-medium tracking-[0.15em] uppercase hover:bg-[#D4AF57] cursor-pointer">
           + Nytt innlegg
         </button>
       </div>
@@ -135,48 +135,48 @@ export default function AdminBloggPage() {
       {editing ? (
         /* Editor */
         <div className="max-w-3xl space-y-5">
-          <div className="bg-[#1A1410] border border-[#1A1410] p-6 space-y-4">
+          <div className="bg-[#141414] border border-[#141414] p-6 space-y-4">
             <div>
-              <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Tittel</label>
+              <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Tittel</label>
               <input value={editTitle}
                 onChange={(e) => { setEditTitle(e.target.value); if (!selected) setEditSlug(slugify(e.target.value)); }}
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-lg font-medium outline-none focus:border-[#B88E64]/40"
+                className="w-full mt-1 bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-lg font-medium outline-none focus:border-[#C9A84C]/40"
                 placeholder="Skriv tittel..." />
             </div>
 
             <div>
-              <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">URL-slug</label>
+              <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">URL-slug</label>
               <div className="flex items-center mt-1">
-                <span className="text-[#6B5D52] text-sm mr-1">/blogg/</span>
+                <span className="text-[#6B6B6B] text-sm mr-1">/blogg/</span>
                 <input value={editSlug} onChange={(e) => setEditSlug(slugify(e.target.value))}
-                  className="flex-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40"
+                  className="flex-1 bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40"
                   placeholder="auto-generert-fra-tittel" />
               </div>
             </div>
 
             <div>
-              <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Utdrag (vises i liste)</label>
+              <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Utdrag (vises i liste)</label>
               <textarea value={editExcerpt} onChange={(e) => setEditExcerpt(e.target.value)} rows={2}
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 resize-none"
+                className="w-full mt-1 bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40 resize-none"
                 placeholder="Kort beskrivelse..." />
             </div>
 
             <div>
-              <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Innhold</label>
+              <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Innhold</label>
               <textarea value={editContent} onChange={(e) => setEditContent(e.target.value)} rows={16}
-                className="w-full mt-1 bg-[#0D0A08] border border-[#1A1410] px-3 py-2 text-sm outline-none focus:border-[#B88E64]/40 resize-y leading-relaxed font-mono"
+                className="w-full mt-1 bg-[#0A0A0A] border border-[#141414] px-3 py-2 text-sm outline-none focus:border-[#C9A84C]/40 resize-y leading-relaxed font-mono"
                 placeholder="Skriv innholdet her... (én linje = ett avsnitt)" />
             </div>
 
             <div className="flex items-center gap-4">
-              <label className="text-[10px] text-[#6B5D52] uppercase tracking-wider">Status</label>
+              <label className="text-[10px] text-[#6B6B6B] uppercase tracking-wider">Status</label>
               <div className="flex gap-2">
                 <button onClick={() => setEditStatus("draft")}
-                  className={`px-3 py-1.5 text-xs tracking-wider uppercase cursor-pointer ${editStatus === "draft" ? "bg-yellow-400/10 text-yellow-400 border border-yellow-400/30" : "text-[#6B5D52] border border-[#1A1410]"}`}>
+                  className={`px-3 py-1.5 text-xs tracking-wider uppercase cursor-pointer ${editStatus === "draft" ? "bg-yellow-400/10 text-yellow-400 border border-yellow-400/30" : "text-[#6B6B6B] border border-[#141414]"}`}>
                   Utkast
                 </button>
                 <button onClick={() => setEditStatus("published")}
-                  className={`px-3 py-1.5 text-xs tracking-wider uppercase cursor-pointer ${editStatus === "published" ? "bg-green-400/10 text-green-400 border border-green-400/30" : "text-[#6B5D52] border border-[#1A1410]"}`}>
+                  className={`px-3 py-1.5 text-xs tracking-wider uppercase cursor-pointer ${editStatus === "published" ? "bg-green-400/10 text-green-400 border border-green-400/30" : "text-[#6B6B6B] border border-[#141414]"}`}>
                   Publisert
                 </button>
               </div>
@@ -185,11 +185,11 @@ export default function AdminBloggPage() {
 
           <div className="flex gap-3">
             <button onClick={() => { setEditing(false); setSelected(null); }}
-              className="flex-1 border border-[#1A1410] py-3 text-xs text-[#6B5D52] uppercase tracking-wider hover:text-[#E8DDD4] cursor-pointer">
+              className="flex-1 border border-[#141414] py-3 text-xs text-[#6B6B6B] uppercase tracking-wider hover:text-[#F5F0E8] cursor-pointer">
               Avbryt
             </button>
             <button onClick={savePost} disabled={saving}
-              className="flex-1 bg-[#B88E64] text-[#0D0A08] py-3 text-xs font-medium uppercase tracking-wider hover:bg-[#D4A876] cursor-pointer disabled:opacity-50">
+              className="flex-1 bg-[#C9A84C] text-[#0A0A0A] py-3 text-xs font-medium uppercase tracking-wider hover:bg-[#D4AF57] cursor-pointer disabled:opacity-50">
               {saving ? <span className="flex items-center justify-center gap-1.5"><ButtonSpinner /> Lagrer...</span> : selected ? "Oppdater" : "Opprett"}
             </button>
           </div>
@@ -200,11 +200,11 @@ export default function AdminBloggPage() {
           {loading ? (
             <><ListItemSkeleton /><ListItemSkeleton /><ListItemSkeleton /></>
           ) : posts.length === 0 ? (
-            <div className="bg-[#1A1410] border border-[#1A1410] p-10 text-center text-[#6B5D52] text-sm">
+            <div className="bg-[#141414] border border-[#141414] p-10 text-center text-[#6B6B6B] text-sm">
               Ingen blogginnlegg. Klikk «+ Nytt innlegg» for å starte.
             </div>
           ) : posts.map((post) => (
-            <div key={post.id} className="bg-[#1A1410] border border-[#1A1410] p-4 flex items-center justify-between">
+            <div key={post.id} className="bg-[#141414] border border-[#141414] p-4 flex items-center justify-between">
               <button onClick={() => startEdit(post)} className="flex-1 text-left cursor-pointer">
                 <div className="flex items-center gap-3">
                   <p className="text-sm font-medium">{post.title}</p>
@@ -212,12 +212,12 @@ export default function AdminBloggPage() {
                     post.status === "published" ? "text-green-400 bg-green-400/10" : "text-yellow-400 bg-yellow-400/10"
                   }`}>{post.status === "published" ? "Publisert" : "Utkast"}</span>
                 </div>
-                <p className="text-[11px] text-[#6B5D52] mt-1">
+                <p className="text-[11px] text-[#6B6B6B] mt-1">
                   /blogg/{post.slug} · {new Date(post.created_at).toLocaleDateString("no-NO", { day: "numeric", month: "short", year: "numeric" })}
                 </p>
               </button>
               <button onClick={() => deletePost(post.id)}
-                className="text-[#6B5D52] hover:text-red-400 cursor-pointer px-3 text-lg">
+                className="text-[#6B6B6B] hover:text-red-400 cursor-pointer px-3 text-lg">
                 &times;
               </button>
             </div>
