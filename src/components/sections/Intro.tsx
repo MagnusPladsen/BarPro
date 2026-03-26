@@ -25,8 +25,8 @@ export function Intro() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
           <div>
             <motion.p
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.9, ease }}
               className="text-[11px] tracking-[0.25em] uppercase text-accent font-body font-medium mb-6"
@@ -34,8 +34,8 @@ export function Intro() {
               {t("label")}
             </motion.p>
             <motion.h2
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.9, delay: 0.1, ease }}
               className="font-display italic font-light text-4xl md:text-5xl lg:text-6xl text-text-primary mb-10 leading-[1.1]"
@@ -71,8 +71,8 @@ export function Intro() {
 
           <motion.div
             ref={imageRef}
-            initial={{ opacity: 0, x: 60, scale: 0.95 }}
-            whileInView={{ opacity: 1, x: 0, scale: 1 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.15 }}
             transition={{ duration: 1, delay: 0.2, ease }}
             className="relative aspect-[4/5] overflow-hidden"

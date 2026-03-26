@@ -80,13 +80,13 @@ export default function PriserPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.8, delay: i * 0.1, ease }}
-                  className={`relative overflow-hidden border p-10 lg:p-12 flex flex-col ${
+                  className={`relative border p-10 lg:p-12 flex flex-col ${
                     isPopular
                       ? "border-gold/40 bg-background-card"
                       : "border-border bg-background-card/50"
                   }`}
                 >
-                  <ColorOrbs size="small" intensity={0.3} />
+                  <div className="absolute inset-0 overflow-hidden"><ColorOrbs size="small" intensity={0.3} /></div>
                   {isPopular && (
                     <span className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gold text-background text-[10px] tracking-[0.2em] uppercase font-medium px-4 py-1.5">
                       {t("packages.premium.popular")}
