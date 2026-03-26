@@ -40,10 +40,10 @@ export function Services() {
           {serviceKeys.map((key, i) => (
             <motion.div
               key={key}
-              initial={{ opacity: 0, x: -40, y: 20 }}
-              whileInView={{ opacity: 1, x: 0, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.9, delay: i * 0.2, ease }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.7, delay: i * 0.12, ease }}
               className="group relative bg-background-card border border-border border-l-2 border-l-accent p-10 hover:border-border-accent hover:shadow-[0_0_60px_rgba(184,142,100,0.06)] transition-all duration-500 overflow-hidden"
             >
               <ColorOrbs size="small" intensity={0.3} />
