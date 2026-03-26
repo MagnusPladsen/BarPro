@@ -20,13 +20,13 @@ export function ScrollBackground() {
       {/* Copper gradient blur — always visible, shifts on scroll */}
       <motion.div
         style={{ x: orbX, y: orbY }}
-        className="absolute top-[30%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vh] bg-[#C9A84C] opacity-[0.04] blur-[200px]"
+        className="absolute top-[30%] left-[50%] -translate-x-1/2 -translate-y-1/2 w-[120vw] h-[120vh] bg-[#B88E64] opacity-[0.04] blur-[200px]"
       />
 
       {/* Second warm orb — bottom */}
       <motion.div
         style={{ x: orbX }}
-        className="absolute top-[70%] right-[-10%] w-[80vw] h-[80vh] bg-[#1A1A1A] opacity-[0.06] blur-[150px]"
+        className="absolute top-[70%] right-[-10%] w-[80vw] h-[80vh] bg-[#2A211A] opacity-[0.06] blur-[150px]"
       />
 
       {/* Rotating geometric pattern */}

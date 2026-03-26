@@ -33,7 +33,7 @@ export function ColorOrbs({ size = "full", intensity = 1 }: { size?: "full" | "m
           opacity: [baseOpacity, baseOpacity * 1.4, baseOpacity * 0.8, baseOpacity * 1.2, baseOpacity * 0.9, baseOpacity],
         }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        className={`absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 ${s.copper} bg-[#C9A84C] ${s.blur}`}
+        className={`absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2 ${s.copper} bg-[#B88E64] ${s.blur}`}
         style={{ opacity: baseOpacity }}
       />
 
