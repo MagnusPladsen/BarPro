@@ -143,7 +143,7 @@ export function Hero() {
               opacity: [0.08, 0.14, 0.06, 0.11, 0.07, 0.08],
             }}
             transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-            className="w-[200px] h-[200px] md:w-[300px] md:h-[300px] rounded-full bg-[#C9A84C] blur-[80px]"
+            className="w-[240px] h-[240px] md:w-[360px] md:h-[360px] rounded-full bg-[#C9A84C] blur-[80px]"
             style={{ opacity: 0.08 }}
           />
         </motion.div>
