@@ -36,8 +36,8 @@ export function Button({
     "overflow-hidden group",
     size === "large" ? "px-12 py-5" : "px-8 py-4",
     variant === "primary"
-      ? "bg-accent text-background hover:bg-accent-hover hover:shadow-[0_0_40px_rgba(201,168,76,0.4)] [&:hover_.shimmer]:animate-[shimmer_0.8s_ease-in-out]"
-      : "bg-transparent border border-accent/40 text-accent hover:border-accent hover:bg-accent/5 hover:shadow-[0_0_30px_rgba(201,168,76,0.2)] [&:hover_.shimmer]:animate-[shimmer_0.8s_ease-in-out]",
+      ? "bg-accent text-background hover:bg-accent-hover hover:shadow-[0_0_40px_rgba(139,74,90,0.4)] [&:hover_.shimmer]:animate-[shimmer_0.8s_ease-in-out]"
+      : "bg-transparent border border-accent/40 text-accent hover:border-accent hover:bg-accent/5 hover:shadow-[0_0_30px_rgba(139,74,90,0.2)] [&:hover_.shimmer]:animate-[shimmer_0.8s_ease-in-out]",
     className,
   ].join(" ");
 
