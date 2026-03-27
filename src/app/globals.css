@@ -4,21 +4,21 @@
   --color-background: #0A0A0A;
   --color-background-card: #141414;
   --color-background-elevated: #1A1A1A;
-  --color-accent: #C9A84C;
-  --color-accent-hover: #D4AF57;
-  --color-accent-dim: #A08A3C;
-  --color-accent-glow: rgba(201, 168, 76, 0.08);
+  --color-accent: #B4AFA0;
+  --color-accent-hover: #C8C3B5;
+  --color-accent-dim: #8A867A;
+  --color-accent-glow: rgba(180, 175, 160, 0.08);
   --color-text-primary: #F5F0E8;
   --color-text-muted: #6B6B6B;
-  --color-border: rgba(201, 168, 76, 0.08);
-  --color-border-accent: #C9A84C;
+  --color-border: rgba(180, 175, 160, 0.08);
+  --color-border-accent: #B4AFA0;
 
   /* Legacy aliases for gradual migration */
-  --color-gold: #C9A84C;
-  --color-gold-hover: #D4AF57;
-  --color-gold-dim: #A08A3C;
-  --color-gold-glow: rgba(201, 168, 76, 0.08);
-  --color-border-gold: rgba(201, 168, 76, 0.15);
+  --color-gold: #B4AFA0;
+  --color-gold-hover: #C8C3B5;
+  --color-gold-dim: #8A867A;
+  --color-gold-glow: rgba(180, 175, 160, 0.08);
+  --color-border-gold: rgba(180, 175, 160, 0.15);
 
   --font-display: "Cormorant", serif;
   --font-body: "Space Grotesk", sans-serif;
@@ -75,8 +75,8 @@ body {
 
 /* Subtle pulse glow for featured elements */
 @keyframes pulse-accent {
-  0%, 100% { box-shadow: 0 0 20px rgba(201, 168, 76, 0.05); }
-  50% { box-shadow: 0 0 40px rgba(201, 168, 76, 0.12); }
+  0%, 100% { box-shadow: 0 0 20px rgba(180, 175, 160, 0.05); }
+  50% { box-shadow: 0 0 40px rgba(180, 175, 160, 0.12); }
 }
 
 /* Decorative corner accents */
