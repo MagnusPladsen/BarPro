@@ -50,7 +50,7 @@ export function Header() {
       <header
         className={`fixed top-[38px] left-0 right-0 z-50 transition-all duration-500 ${
           scrolled
-            ? "overflow-hidden backdrop-blur-xl bg-background/80 border-b border-border shadow-[0_1px_0_rgba(201,168,76,0.08)]"
+            ? "overflow-hidden backdrop-blur-xl bg-background/80 border-b border-border shadow-[0_1px_0_rgba(139,74,90,0.08)]"
             : "bg-transparent"
         }`}
       >
