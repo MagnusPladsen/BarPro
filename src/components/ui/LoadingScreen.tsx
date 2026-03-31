@@ -20,7 +20,8 @@ export function LoadingScreen() {
     const timer = setTimeout(() => {
       setExit(true);
       document.body.style.overflow = "";
-      sessionStorage.setItem("barpro-loaded", "1");
+      // Signal hero after exit animation completes (800ms)
+      setTimeout(() => sessionStorage.setItem("barpro-loaded", "1"), 800);
     }, 2400);
 
     return () => {
