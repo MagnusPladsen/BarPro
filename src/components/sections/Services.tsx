@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { ColorOrbs } from "@/components/ui/ColorOrbs";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 const serviceKeys = ["bartenders", "drinks", "fullService"] as const;
 
@@ -40,24 +41,24 @@ export function Services() {
           {serviceKeys.map((key, i) => (
             <motion.div
               key={key}
-              initial={{ opacity: 0, x: -40, y: 20 }}
-              whileInView={{ opacity: 1, x: 0, y: 0 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.9, delay: i * 0.2, ease }}
-              className="group relative bg-background-card border border-border border-l-2 border-l-accent p-10 hover:border-border-accent hover:shadow-[0_0_60px_rgba(184,142,100,0.06)] transition-all duration-500 overflow-hidden"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ duration: 0.7, delay: i * 0.12, ease }}
             >
-              <ColorOrbs size="small" intensity={0.3} />
-              {/* Step number watermark */}
-              <span className="absolute top-6 right-8 font-display text-5xl text-accent/[0.07] select-none leading-none group-hover:text-accent/[0.12] transition-colors duration-500">
-                {String(i + 1).padStart(2, "0")}
-              </span>
-              <div className="w-8 h-px bg-accent mb-8 group-hover:w-12 transition-all duration-500" />
-              <h3 className="font-display font-light text-2xl text-text-primary mb-5">
-                {t(`items.${key}.title`)}
-              </h3>
-              <p className="text-text-muted leading-relaxed">
-                {t(`items.${key}.description`)}
-              </p>
+              <TiltCard className="group relative bg-background-card border border-border border-l-2 border-l-accent p-10 hover:border-border-accent hover:shadow-[0_0_60px_rgba(160,120,74,0.06)] transition-all duration-500 overflow-hidden">
+                <ColorOrbs size="small" intensity={0.3} />
+                <span className="absolute top-6 right-8 font-display text-5xl text-accent/[0.07] select-none leading-none group-hover:text-accent/[0.12] transition-colors duration-500">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <div className="w-8 h-px bg-accent mb-8 group-hover:w-12 transition-all duration-500" />
+                <h3 className="font-display font-light text-2xl text-text-primary mb-5">
+                  {t(`items.${key}.title`)}
+                </h3>
+                <p className="text-text-muted leading-relaxed">
+                  {t(`items.${key}.description`)}
+                </p>
+              </TiltCard>
             </motion.div>
           ))}
         </div>
