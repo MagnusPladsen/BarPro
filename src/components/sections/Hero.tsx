@@ -16,16 +16,26 @@ const CTA_DELAY = 1.9;
 const SCROLL_DELAY = 2.6;
 const BOTTOM_LINE_DELAY = 2.0;
 
-/** Returns true only on the very first mount across the session. */
+/** Returns true only on the very first mount across the session.
+ *  Waits for the loading screen to finish before triggering. */
 function useIsFirstVisit(): boolean | null {
   const [first, setFirst] = useState<boolean | null>(null);
   useEffect(() => {
-    if (!sessionStorage.getItem("barpro-hero-seen")) {
-      sessionStorage.setItem("barpro-hero-seen", "1");
-      setFirst(true);
-    } else {
+    if (sessionStorage.getItem("barpro-hero-seen")) {
       setFirst(false);
+      return;
     }
+
+    // Wait for loading screen to finish (it sets barpro-loaded after ~2.4s + 0.8s exit)
+    function check() {
+      if (sessionStorage.getItem("barpro-loaded")) {
+        sessionStorage.setItem("barpro-hero-seen", "1");
+        setFirst(true);
+      } else {
+        setTimeout(check, 100);
+      }
+    }
+    check();
   }, []);
   return first;
 }
