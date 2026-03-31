@@ -4,6 +4,7 @@ import { useTranslations } from "next-intl";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/Button";
 import { ColorOrbs } from "@/components/ui/ColorOrbs";
+import { TiltCard } from "@/components/ui/TiltCard";
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
@@ -43,13 +44,14 @@ export function PricingTeaser() {
             return (
               <motion.div
                 key={key}
-                initial={{ opacity: 0, x: 40, y: 20 }}
-                whileInView={{ opacity: 1, x: 0, y: 0 }}
-                viewport={{ once: true, amount: 0.15 }}
-                transition={{ duration: 0.9, delay: i * 0.15, ease }}
-                className={`relative border text-center transition-all duration-500 ${
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{ duration: 0.7, delay: i * 0.12, ease }}
+              >
+              <TiltCard className={`relative border text-center transition-all duration-500 ${
                   isPopular
-                    ? "border-accent/40 bg-background-card shadow-[0_0_80px_rgba(184,142,100,0.1)] hover:shadow-[0_0_100px_rgba(184,142,100,0.15)] p-10 lg:p-14 md:-my-6"
+                    ? "border-accent/40 bg-background-card shadow-[0_0_80px_rgba(160,120,74,0.1)] hover:shadow-[0_0_100px_rgba(160,120,74,0.15)] p-10 lg:p-14 md:-my-6"
                     : "border-border bg-background-card/50 hover:border-border-accent p-10 lg:p-12"
                 }`}
               >
@@ -78,6 +80,7 @@ export function PricingTeaser() {
                     {t(`packages.${key}.unit`)}
                   </span>
                 </div>
+              </TiltCard>
               </motion.div>
             );
           })}

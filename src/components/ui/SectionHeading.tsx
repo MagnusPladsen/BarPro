@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { CinematicReveal } from "@/components/ui/CinematicReveal";
 
 interface SectionHeadingProps {
   label?: string;
@@ -26,15 +27,9 @@ export function SectionHeading({
           {label}
         </motion.p>
       )}
-      <motion.h2
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-        className="font-display italic text-4xl md:text-5xl lg:text-6xl text-text-primary font-light leading-[1.1]"
-      >
+      <CinematicReveal className="font-display italic text-4xl md:text-5xl lg:text-6xl text-text-primary font-light leading-[1.1]">
         {heading}
-      </motion.h2>
+      </CinematicReveal>
     </div>
   );
 }

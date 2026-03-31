@@ -12,6 +12,8 @@ import { FloatingParticles } from "@/components/ui/FloatingParticles";
 import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 import { ScrollBackground } from "@/components/ui/ScrollBackground";
 import { LoadingScreen } from "@/components/ui/LoadingScreen";
+import { PageTransition } from "@/components/ui/PageTransition";
+import { SectionDots } from "@/components/ui/SectionDots";
 
 export const metadata: Metadata = {
   title: {
@@ -128,7 +130,10 @@ export default async function LocaleLayout({
           <ScrollProgressBar />
           <AnnouncementBar />
           <Header />
-          <main className="relative z-[2]">{children}</main>
+          <SectionDots />
+          <main className="relative z-[2]">
+            <PageTransition>{children}</PageTransition>
+          </main>
           <Footer />
         </NextIntlClientProvider>
       </body>
