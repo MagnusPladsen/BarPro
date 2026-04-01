@@ -3,50 +3,11 @@
 import { useTranslations } from "next-intl";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Button } from "@/components/ui/Button";
-import { TextScramble } from "@/components/ui/TextScramble";
-import { useRef, useEffect, useState } from "react";
-
-// -- animation config --
-const LINE_STAGGER = 0.25;
-const LINE_DURATION = 0.8;
-const LINE_INITIAL_Y = 80;
-
-const SUBTITLE_DELAY = 1.4;
-const CTA_DELAY = 1.9;
-const SCROLL_DELAY = 2.6;
-const BOTTOM_LINE_DELAY = 2.0;
-
-/** Returns true only on the very first mount across the session.
- *  Waits for the loading screen to finish before triggering. */
-function useIsFirstVisit(): boolean | null {
-  const [first, setFirst] = useState<boolean | null>(null);
-  useEffect(() => {
-    if (sessionStorage.getItem("barpro-hero-seen")) {
-      setFirst(false);
-      return;
-    }
-
-    // Wait for loading screen to finish (it sets barpro-loaded after ~2.4s + 0.8s exit)
-    function check() {
-      if (sessionStorage.getItem("barpro-loaded")) {
-        sessionStorage.setItem("barpro-hero-seen", "1");
-        setFirst(true);
-      } else {
-        setTimeout(check, 100);
-      }
-    }
-    check();
-  }, []);
-  return first;
-}
+import { useRef } from "react";
 
 export function Hero() {
   const t = useTranslations("hero");
   const sectionRef = useRef<HTMLElement>(null);
-  const firstVisitState = useIsFirstVisit();
-  // null = still checking, treat as "not first" to avoid flash of missing content
-  const firstVisit = firstVisitState === true;
-  const ready = firstVisitState !== null;
 
   const { scrollYProgress } = useScroll({
     target: sectionRef,
@@ -56,14 +17,6 @@ export function Hero() {
   const textOpacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const orbY = useTransform(scrollYProgress, [0, 1], [0, -80]);
   const orbScale = useTransform(scrollYProgress, [0, 1], [1, 1.3]);
-
-  // Animation helpers — skip intro on return visits
-  const noAnim = { initial: { opacity: 1, y: 0 }, animate: { opacity: 1, y: 0 } };
-  const fade = (delay: number) =>
-    firstVisit
-      ? { initial: { opacity: 0, y: 15 }, animate: { opacity: 1, y: 0 }, transition: { duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } }
-      : noAnim;
-
 
   return (
     <section
@@ -80,9 +33,8 @@ export function Hero() {
         }}
       />
 
-      {/* 3 massive overlapping orbs — always animate continuously */}
+      {/* 3 massive overlapping orbs */}
       <motion.div style={{ y: orbY, scale: orbScale }} className="absolute inset-0 pointer-events-none">
-        {/* COPPER */}
         <div className="absolute top-[50%] left-[50%] -translate-x-1/2 -translate-y-1/2">
           <motion.div
             animate={{
@@ -96,8 +48,6 @@ export function Hero() {
             style={{ opacity: 0.14 }}
           />
         </div>
-
-        {/* TEAL */}
         <div className="absolute top-[15%] left-[10%] -translate-x-1/4 -translate-y-1/4">
           <motion.div
             animate={{
@@ -111,8 +61,6 @@ export function Hero() {
             style={{ opacity: 0.1 }}
           />
         </div>
-
-        {/* BURGUNDY */}
         <div className="absolute bottom-[10%] right-[5%] translate-x-1/4 translate-y-1/4">
           <motion.div
             animate={{
@@ -133,74 +81,24 @@ export function Hero() {
         style={{ y: textY, opacity: textOpacity }}
         className="relative z-10 max-w-5xl mx-auto px-6 text-center"
       >
-        {/* Heritage badge */}
-        <motion.p {...fade(0.2)} className="text-accent/40 text-[9px] md:text-[11px] tracking-[0.25em] uppercase font-body font-medium mb-6 md:mb-8">
+        <p className="text-accent/40 text-[9px] md:text-[11px] tracking-[0.25em] uppercase font-body font-medium mb-6 md:mb-8">
           {t("heritage")}
-        </motion.p>
+        </p>
 
-        {/* Tagline */}
-        {firstVisit ? (
-          <motion.h1
-            variants={{
-              hidden: {},
-              visible: { transition: { staggerChildren: LINE_STAGGER, delayChildren: 0.4 } },
-            }}
-            initial="hidden"
-            animate="visible"
-            className="mb-8 md:mb-10"
-          >
-            <span className="block overflow-hidden">
-              <motion.span
-                variants={{
-                  hidden: { opacity: 0, y: LINE_INITIAL_Y },
-                  visible: { opacity: 1, y: 0, transition: { duration: LINE_DURATION, ease: [0.22, 1, 0.36, 1] } },
-                }}
-                className="block font-display italic font-normal text-5xl md:text-7xl xl:text-8xl text-text-primary leading-[1.05]"
-              >
-                <TextScramble text={t("tagline1")} delay={600} speed={20} />
-              </motion.span>
-            </span>
-            <span className="block overflow-hidden">
-              <motion.span
-                variants={{
-                  hidden: { opacity: 0, y: LINE_INITIAL_Y },
-                  visible: { opacity: 1, y: 0, transition: { duration: LINE_DURATION, ease: [0.22, 1, 0.36, 1] } },
-                }}
-                className="block font-body font-extralight text-4xl md:text-6xl xl:text-7xl text-text-primary leading-[1.05] tracking-[0.05em] uppercase"
-              >
-                <TextScramble text={t("tagline2")} delay={900} speed={20} />
-              </motion.span>
-            </span>
-          </motion.h1>
-        ) : (
-          <h1 className="mb-8 md:mb-10">
-            <span className="block font-display italic font-normal text-5xl md:text-7xl xl:text-8xl text-text-primary leading-[1.05]">
-              {t("tagline1")}
-            </span>
-            <span className="block font-body font-extralight text-4xl md:text-6xl xl:text-7xl text-text-primary leading-[1.05] tracking-[0.05em] uppercase">
-              {t("tagline2")}
-            </span>
-          </h1>
-        )}
+        <h1 className="mb-8 md:mb-10">
+          <span className="block font-display italic font-normal text-5xl md:text-7xl xl:text-8xl text-text-primary leading-[1.05]">
+            {t("tagline1")}
+          </span>
+          <span className="block font-body font-extralight text-4xl md:text-6xl xl:text-7xl text-text-primary leading-[1.05] tracking-[0.05em] uppercase">
+            {t("tagline2")}
+          </span>
+        </h1>
 
-        {/* Subtitle */}
-        <motion.p
-          {...fade(SUBTITLE_DELAY)}
-          className="font-body text-text-muted text-lg md:text-xl max-w-2xl mx-auto mb-12 md:mb-14 leading-relaxed"
-        >
+        <p className="font-body text-text-muted text-lg md:text-xl max-w-2xl mx-auto mb-12 md:mb-14 leading-relaxed">
           {t("subtitle")}
-        </motion.p>
+        </p>
 
-        {/* CTA Buttons */}
-        <motion.div
-          {...(firstVisit
-            ? {
-                initial: { opacity: 0, y: 15, scale: 0.95 },
-                animate: { opacity: 1, y: 0, scale: 1 },
-                transition: { duration: 0.7, delay: CTA_DELAY, ease: [0.22, 1, 0.36, 1] },
-              }
-            : { initial: { opacity: 1 }, animate: { opacity: 1 } })}
-        >
+        <div>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button href="/tjenester" size="large">
               {t("ctaServices")}
@@ -209,26 +107,16 @@ export function Hero() {
               {t("ctaPricing")}
             </Button>
           </div>
-          <motion.div
-            {...(firstVisit
-              ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 0.6, delay: CTA_DELAY + 0.5 } }
-              : { initial: { opacity: 1 }, animate: { opacity: 1 } })}
-            className="mt-8"
-          >
+          <div className="mt-8">
             <a href="/kontakt" className="text-text-muted text-sm hover:text-accent transition-colors duration-300">
               {t("cta")} &rarr;
             </a>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </motion.div>
 
       {/* Scroll indicator */}
-      <motion.div
-        {...(firstVisit
-          ? { initial: { opacity: 0 }, animate: { opacity: 1 }, transition: { duration: 1, delay: SCROLL_DELAY } }
-          : { initial: { opacity: 1 }, animate: { opacity: 1 } })}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10"
-      >
+      <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 z-10">
         <span className="font-body text-text-muted text-[10px] uppercase tracking-[0.3em]">
           {t("scroll")}
         </span>
@@ -240,21 +128,16 @@ export function Hero() {
           />
           <div className="absolute inset-0 bg-accent/10" />
         </div>
-      </motion.div>
+      </div>
 
       {/* Bottom accent line */}
-      <motion.div
-        {...(firstVisit
-          ? { initial: { opacity: 0, scaleX: 0 }, animate: { opacity: 1, scaleX: 1 }, transition: { duration: 1.2, delay: BOTTOM_LINE_DELAY, ease: [0.22, 1, 0.36, 1] } }
-          : { initial: { opacity: 1 }, animate: { opacity: 1 } })}
-        className="absolute bottom-0 left-0 right-0 z-10"
-      >
+      <div className="absolute bottom-0 left-0 right-0 z-10">
         <motion.div
           animate={{ opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           className="h-px w-full bg-gradient-to-r from-transparent via-accent/50 to-transparent"
         />
-      </motion.div>
+      </div>
     </section>
   );
 }
